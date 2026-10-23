@@ -41,6 +41,8 @@ def build():
             SQL("""SELECT CAST('42' AS INTEGER) + 1 AS n,
        CAST(3.14159 AS REAL)  AS r,
        typeof(1.0 * 2)        AS t;""", "casting (SQLite flavour: typeof is SQLite only)", run=True),
+            MYSQL("""SELECT CAST('42' AS SIGNED) + 1 AS n,
+       CAST(3.14159 AS DECIMAL(10,5)) AS r;      -- MySQL has no INTEGER/REAL cast targets and no typeof()""", 'MySQL: cast to SIGNED / DECIMAL'),
             PGSQL("""SELECT '42'::int + 1;          -- PostgreSQL shorthand cast
 SELECT CAST('2026-10-23' AS date);
 SELECT now()::date, now() AT TIME ZONE 'Asia/Kolkata';"""),
@@ -208,6 +210,21 @@ INSERT INTO kit VALUES (1,1),(2,2);
 DELETE FROM team WHERE team_id = 1;        -- players survive with NULL team
 DELETE FROM player WHERE player_id = 1;    -- kit 1 disappears with it
 SELECT p.name, p.team_id, (SELECT COUNT(*) FROM kit) AS kits_left FROM player p;""", "SET NULL and CASCADE in action", run=True),
+            MYSQL("""CREATE TABLE team (team_id INT PRIMARY KEY, name VARCHAR(50));
+CREATE TABLE player (
+  player_id INT PRIMARY KEY, name VARCHAR(50), team_id INT,
+  FOREIGN KEY (team_id) REFERENCES team(team_id) ON DELETE SET NULL
+);
+CREATE TABLE kit (
+  kit_id INT PRIMARY KEY, player_id INT,
+  FOREIGN KEY (player_id) REFERENCES player(player_id) ON DELETE CASCADE
+);
+INSERT INTO team VALUES (1,'Blue');
+INSERT INTO player VALUES (1,'Asha',1),(2,'Rohan',1);
+INSERT INTO kit VALUES (1,1),(2,2);
+DELETE FROM team WHERE team_id = 1;
+DELETE FROM player WHERE player_id = 1;
+SELECT p.name, p.team_id, (SELECT COUNT(*) FROM kit) AS kits_left FROM player p;      -- no PRAGMA: InnoDB enforces foreign keys by default""", 'MySQL: no PRAGMA needed'),
             TRAP("Without ON DELETE CASCADE, deleting a parent that has children fails with a foreign key violation. In SQLite foreign keys are OFF unless you run PRAGMA foreign_keys = ON."),
             H("Self-referencing foreign key"),
             SQL("""CREATE TABLE staff (
@@ -333,6 +350,9 @@ ALTER TABLE ticket AUTO_INCREMENT = 1000;"""),
             SQL("""CREATE TABLE note (id INTEGER PRIMARY KEY AUTOINCREMENT, body TEXT);
 INSERT INTO note (body) VALUES ('first'), ('second');
 SELECT last_insert_rowid() AS last_id;""", "SQLite", run=True),
+            MYSQL("""CREATE TABLE note (id INT AUTO_INCREMENT PRIMARY KEY, body VARCHAR(100));
+INSERT INTO note (body) VALUES ('first'), ('second');
+SELECT LAST_INSERT_ID() AS last_id;""", 'MySQL: AUTO_INCREMENT and LAST_INSERT_ID()'),
             H("Why do gaps appear?"),
             P("The counter is not transactional on purpose (otherwise inserts would serialize). A rolled-back insert, a failed insert, or a crash still consumed a number. Gaps are normal; never use an id as a gapless counter (invoice numbers need a separate controlled process)."),
             H("Surrogate vs natural key"),

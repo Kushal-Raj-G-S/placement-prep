@@ -339,3 +339,17 @@ and a Mock OA whenever you want to feel the clock.
 
 Your own notes are in `my notes/`: the four pattern pictures, `Sliding Window.docx`, `Resume n mail writing.docx`,
 and the solved HackerEarth OA.
+
+
+---
+
+## SQL practice on real platforms
+- HackerRank SQL: https://www.hackerrank.com/domains/sql (closest to a real OA; pick MySQL in the language box)
+- LeetCode Database: https://leetcode.com/problemset/database/ (blocks scripts, opens fine in a browser)
+- DataLemur: https://datalemur.com/
+- StrataScratch: https://www.stratascratch.com/
+- SQLZoo: https://sqlzoo.net/
+
+SQL Lab (tool 5) runs SQLite in the page, but accepts the common MySQL functions (CONCAT, IFNULL, YEAR, MONTH, DAY,
+DATEDIFF, DATE_FORMAT, CURDATE, NOW, LEFT, RIGHT, CHAR_LENGTH, LIMIT). Not available there: INTERVAL arithmetic and
+GROUP_CONCAT ... SEPARATOR. Every generic query in the guide now has its MySQL version under it where they differ.

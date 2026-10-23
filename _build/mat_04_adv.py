@@ -128,6 +128,20 @@ END;
 UPDATE employees SET salary = salary + 2000 WHERE dept_id = 3;     -- fires once per row changed (3 rows)
 UPDATE employees SET salary = salary WHERE id = 1;                   -- no real change: WHEN stops it
 SELECT emp_id, old_salary, new_salary FROM salary_audit ORDER BY audit_id;""", "AFTER UPDATE trigger, row level, with WHEN", run=True),
+            MYSQL("""CREATE TABLE salary_audit (
+  audit_id   INT AUTO_INCREMENT PRIMARY KEY,
+  emp_id     INT, old_salary INT, new_salary INT,
+  changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+DELIMITER $$
+CREATE TRIGGER trg_salary_audit AFTER UPDATE ON employees
+FOR EACH ROW
+BEGIN
+  IF OLD.salary <> NEW.salary THEN           -- MySQL has no WHEN clause: test inside the body
+    INSERT INTO salary_audit (emp_id, old_salary, new_salary) VALUES (OLD.id, OLD.salary, NEW.salary);
+  END IF;
+END$$
+DELIMITER ;""", 'MySQL: no WHEN, DELIMITER, IF ... END IF'),
             H("Runnable example: a BEFORE trigger that validates"),
             SQL("""CREATE TRIGGER trg_salary_floor
 BEFORE INSERT ON employees

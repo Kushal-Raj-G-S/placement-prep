@@ -142,7 +142,7 @@
       qb.appendChild(sb);
       if (V.w.schema) qb.appendChild(schemaBox(t.db));
     } else if (t.kind === "ddl") {
-      qb.appendChild(el("div", "dialect", (t.pre ? "These already exist: " + t.pre : "The database starts empty.") + " Write portable SQL (SQLite runs it here); use exact table and column names from the task."));
+      qb.appendChild(el("div", "dialect", (t.pre ? "These already exist: " + t.pre : "The database starts empty.") + " Write portable SQL or MySQL (SQLite runs it here: CONCAT, IFNULL, YEAR, MONTH, DAY, DATEDIFF, DATE_FORMAT, CURDATE, NOW, LEFT, RIGHT, CHAR_LENGTH and LIMIT all work; INTERVAL arithmetic and GROUP_CONCAT ... SEPARATOR do not). Use exact table and column names from the task."));
     } else {
       qb.appendChild(el("div", "dialect", "Paper task: write your answer in the box (or on paper), then reveal the model answer and mark yourself against the checklist."));
     }

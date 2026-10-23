@@ -18,6 +18,7 @@ INSERT INTO gadget (id, name, price, qty) VALUES (1, 'lamp', 499, 10);          
 INSERT INTO gadget (id, name, price) VALUES (2, 'fan', 1899), (3, 'kettle', 999);             -- several rows, qty uses DEFAULT
 INSERT INTO gadget (id, name) SELECT id + 100, name || ' copy' FROM gadget WHERE id <= 2;       -- INSERT ... SELECT
 SELECT * FROM gadget ORDER BY id;""", "column list is optional but always write it", run=True),
+            MYSQL("""INSERT INTO gadget (id, name) SELECT id + 100, CONCAT(name, ' copy') FROM gadget WHERE id <= 2;      -- MySQL: CONCAT instead of ||""", 'MySQL: INSERT ... SELECT with CONCAT'),
             UL("Always list the columns; a bare INSERT INTO t VALUES (...) breaks when the table gains a column.",
                "Omitted columns get their DEFAULT, or NULL, or an error if they are NOT NULL without a default.",
                "PostgreSQL: INSERT INTO t DEFAULT VALUES; also INSERT ... RETURNING id. MySQL: INSERT IGNORE skips rows that violate unique keys; REPLACE INTO deletes the old row then inserts (avoid, it fires delete triggers and breaks FKs).",
@@ -76,6 +77,10 @@ WHEN NOT MATCHED THEN INSERT (sku, qty) VALUES (i.sku, i.qty);"""),
             SQL("""CREATE TABLE stock (sku TEXT PRIMARY KEY, qty INTEGER NOT NULL);
 INSERT INTO stock (sku, qty) VALUES ('C3', 1) RETURNING sku, qty;
 UPDATE stock SET qty = qty + 1 WHERE sku = 'C3' RETURNING *;""", "get changed rows back without a second query", run=True),
+            MYSQL("""INSERT INTO stock (sku, qty) VALUES ('C3', 1);
+SELECT sku, qty FROM stock WHERE sku = 'C3';            -- MySQL has no RETURNING: read the row back
+UPDATE stock SET qty = qty + 1 WHERE sku = 'C3';
+SELECT * FROM stock WHERE sku = 'C3';""", 'MySQL: no RETURNING, so select afterwards'),
             ASK("\"How do you insert if not exists, update otherwise?\" PostgreSQL: INSERT ... ON CONFLICT (key) DO UPDATE. MySQL: INSERT ... ON DUPLICATE KEY UPDATE. Standard: MERGE."),
         ],
         [
@@ -171,6 +176,13 @@ CREATE INDEX CONCURRENTLY idx_big ON big_table (col);                           
     T.append(topic("classics-1", GI, "Classic interview queries, set 1: the basics (12)",
         "These are the queries companies reuse. Each has the problem, a tested solution on the sample database, and the idea to say out loud. " + "Tables: employees(id, name, dept_id, manager_id, salary, hire_date, city), departments(id, name, budget), projects, assignments(emp_id, project_id, hours), logins(emp_id, login_date).",
         [
+            H("Practise on real platforms (verified links)"),
+            TXT("""HackerRank SQL   https://www.hackerrank.com/domains/sql        closest to a real OA; choose MySQL in the language box
+LeetCode DB      https://leetcode.com/problemset/database/    (blocks scripts, opens fine in a browser)
+DataLemur        https://datalemur.com/
+StrataScratch    https://www.stratascratch.com/
+SQLZoo           https://sqlzoo.net/
+In an OA: check which engine the language box says before you write anything, add ORDER BY, and match the output column names exactly."""),
             H("1. Second highest salary"),
             P("Return the second highest distinct salary."),
             SQL("""SELECT MAX(salary) AS second_highest FROM employees WHERE salary < (SELECT MAX(salary) FROM employees);
@@ -237,6 +249,13 @@ GROUP BY a.emp_id HAVING COUNT(DISTINCT p.id) = (SELECT COUNT(*) FROM projects W
 )
 SELECT emp_id, COUNT(*) AS streak, MIN(login_date) AS from_date, MAX(login_date) AS to_date
 FROM x GROUP BY emp_id, grp ORDER BY streak DESC, emp_id;""", "Employee 7 has the longest streak: 4 days", run=True),
+            MYSQL("""WITH x AS (
+  SELECT emp_id, login_date,
+         DATE_SUB(login_date, INTERVAL ROW_NUMBER() OVER (PARTITION BY emp_id ORDER BY login_date) DAY) AS grp
+  FROM logins
+)
+SELECT emp_id, COUNT(*) AS streak, MIN(login_date) AS from_date, MAX(login_date) AS to_date
+FROM x GROUP BY emp_id, grp ORDER BY streak DESC, emp_id;""", 'MySQL 8+: DATE_SUB with an INTERVAL'),
             PGSQL("""-- PostgreSQL form of the same idea
 SELECT emp_id, COUNT(*) AS streak, MIN(login_date), MAX(login_date)
 FROM (SELECT emp_id, login_date, login_date::date - (ROW_NUMBER() OVER (PARTITION BY emp_id ORDER BY login_date))::int AS grp FROM logins) t
@@ -245,6 +264,9 @@ GROUP BY emp_id, grp;"""),
             SQL("""SELECT DISTINCT a.emp_id FROM logins a
 JOIN logins b ON b.emp_id = a.emp_id AND b.login_date = date(a.login_date, '+1 day')
 JOIN logins c ON c.emp_id = a.emp_id AND c.login_date = date(a.login_date, '+2 day');""", "self-join method (employees 2 and 7)", run=True),
+            MYSQL("""SELECT DISTINCT a.emp_id FROM logins a
+JOIN logins b ON b.emp_id = a.emp_id AND b.login_date = DATE_ADD(a.login_date, INTERVAL 1 DAY)
+JOIN logins c ON c.emp_id = a.emp_id AND c.login_date = DATE_ADD(a.login_date, INTERVAL 2 DAY);""", 'MySQL: DATE_ADD ... INTERVAL'),
             H("16. Change versus the previous row"),
             SQL("""SELECT name, hire_date, salary, salary - LAG(salary) OVER (ORDER BY hire_date, id) AS diff_from_previous_hire FROM employees ORDER BY hire_date, id;""", run=True),
             H("17. Pivot rows to columns"),
@@ -281,7 +303,9 @@ FROM employees WHERE dept_id IS NOT NULL ORDER BY dept_id;""", "LAST_VALUE needs
 SELECT * FROM t ORDER BY lvl, id;""", run=True),
             H("23. Hires per year with year-over-year change"),
             SQL("""WITH y AS (SELECT strftime('%Y', hire_date) AS yr, COUNT(*) AS hires FROM employees GROUP BY 1)
-SELECT yr, hires, hires - LAG(hires) OVER (ORDER BY yr) AS change FROM y ORDER BY yr;""", "strftime is SQLite; PostgreSQL uses EXTRACT(YEAR FROM hire_date)", run=True),
+SELECT yr, hires, hires - LAG(hires) OVER (ORDER BY yr) AS diff_from_prev FROM y ORDER BY yr;""", "strftime is SQLite; PostgreSQL uses EXTRACT(YEAR FROM hire_date)", run=True),
+            MYSQL("""WITH y AS (SELECT YEAR(hire_date) AS yr, COUNT(*) AS hires FROM employees GROUP BY YEAR(hire_date))
+SELECT yr, hires, hires - LAG(hires) OVER (ORDER BY yr) AS diff_from_prev FROM y ORDER BY yr;""", 'MySQL 8+: YEAR()'),
             H("24. Projects nobody is assigned to / employees on several projects"),
             SQL("""SELECT p.name FROM projects p WHERE NOT EXISTS (SELECT 1 FROM assignments a WHERE a.project_id = p.id);
 SELECT e.name, COUNT(*) AS projects FROM employees e JOIN assignments a ON a.emp_id = e.id GROUP BY e.id, e.name HAVING COUNT(*) > 1;""", "no idle project; Rohan is on 2", run=True),

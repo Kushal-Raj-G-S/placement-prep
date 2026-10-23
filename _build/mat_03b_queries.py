@@ -60,6 +60,12 @@ SELECT name, salary FROM employees ORDER BY salary DESC LIMIT 3 OFFSET 3;       
        'Dr. ' || name     AS title,       -- || concatenation (PostgreSQL, SQLite); MySQL uses CONCAT()
        1 + 2              AS three
 FROM employees LIMIT 3;""", run=True),
+            MYSQL("""SELECT name,
+       salary * 12        AS annual,
+       salary / 1000.0    AS in_thousands,
+       CONCAT('Dr. ', name) AS title,
+       1 + 2              AS three
+FROM employees LIMIT 3;      -- in MySQL, || means OR by default, so always use CONCAT()""", 'MySQL: use CONCAT, never ||'),
             MY("In MySQL || is logical OR by default; use CONCAT(). Double quotes are string delimiters in MySQL but identifiers in PostgreSQL. Always single-quote strings."),
             ASK("\"Order of execution of a SQL query?\" FROM, WHERE, GROUP BY, HAVING, SELECT, DISTINCT, ORDER BY, LIMIT. This explains why aliases fail in WHERE and why HAVING can use aggregates."),
         ],
@@ -155,6 +161,9 @@ FROM employees;""", run=True),
             SQL("""SELECT name, UPPER(name) AS up, LENGTH(name) AS len, SUBSTR(name, 1, 3) AS first3,
        REPLACE(name, 'a', '@') AS swapped, name || ' (' || city || ')' AS label
 FROM employees LIMIT 4;""", run=True),
+            MYSQL("""SELECT name, UPPER(name) AS up, CHAR_LENGTH(name) AS len, SUBSTRING(name, 1, 3) AS first3,
+       REPLACE(name, 'a', '@') AS swapped, CONCAT(name, ' (', city, ')') AS label
+FROM employees LIMIT 4;      -- LENGTH() in MySQL counts BYTES; CHAR_LENGTH() counts characters""", 'MySQL: CONCAT, CHAR_LENGTH, SUBSTRING'),
             H("Numeric functions"),
             TBL(["Function", "Meaning"],
                 ["ROUND(x, n), CEIL(x), FLOOR(x), TRUNC(x) / TRUNCATE(x, n)", "Rounding; PostgreSQL TRUNC, MySQL TRUNCATE"],
@@ -179,6 +188,11 @@ FROM employees LIMIT 4;""", run=True),
        CAST(julianday('2026-10-23') - julianday(hire_date) AS INTEGER) AS days_employed,
        date(hire_date, '+1 year')                        AS first_anniversary
 FROM employees ORDER BY hire_date LIMIT 4;""", "SQLite date functions, for the live demo", run=True),
+            MYSQL("""SELECT name, hire_date,
+       YEAR(hire_date)                                   AS hire_year,
+       DATEDIFF('2026-10-23', hire_date)                 AS days_employed,
+       DATE_ADD(hire_date, INTERVAL 1 YEAR)              AS first_anniversary
+FROM employees ORDER BY hire_date LIMIT 4;""", 'MySQL: YEAR, DATEDIFF, DATE_ADD'),
             PGSQL("""SELECT name,
        EXTRACT(YEAR FROM hire_date)            AS yr,
        AGE(CURRENT_DATE, hire_date)            AS tenure,
@@ -262,6 +276,7 @@ SELECT dept_id, GROUPING(dept_id) AS is_total_row FROM employees GROUP BY ROLLUP
             SQL("""SELECT COUNT(DISTINCT city) AS cities, COUNT(DISTINCT dept_id) AS depts FROM employees;
 -- average of per-department averages (aggregate of an aggregate needs a subquery)
 SELECT ROUND(AVG(avg_sal)) FROM (SELECT AVG(salary) AS avg_sal FROM employees GROUP BY dept_id);""", run=True),
+            MYSQL("""SELECT dept_id, GROUP_CONCAT(name SEPARATOR ', ') AS people FROM employees GROUP BY dept_id;      -- MySQL puts the separator in a SEPARATOR clause""", 'MySQL: GROUP_CONCAT ... SEPARATOR'),
             TRAP("SELECT dept_id, name, COUNT(*) FROM employees GROUP BY dept_id is invalid (name is neither grouped nor aggregated) in PostgreSQL and in MySQL with ONLY_FULL_GROUP_BY."),
             ASK("\"Difference between WHERE and HAVING?\" WHERE filters rows before grouping and cannot use aggregates. HAVING filters groups after grouping and can."),
         ],
@@ -425,9 +440,11 @@ SELECT city FROM employees WHERE dept_id = 3;""", "6 rows: duplicates kept", run
             SQL("""SELECT id FROM departments
 EXCEPT
 SELECT dept_id FROM employees;      -- departments with no employees""", run=True),
+            MYSQL("""SELECT d.id FROM departments d LEFT JOIN employees e ON e.dept_id = d.id WHERE e.id IS NULL;      -- EXCEPT needs MySQL 8.0.31+; this works on every version""", 'MySQL: EXCEPT without EXCEPT'),
             SQL("""SELECT city FROM employees WHERE dept_id = 1
 INTERSECT
 SELECT city FROM employees WHERE dept_id = 2;      -- cities common to both departments""", run=True),
+            MYSQL("""SELECT DISTINCT city FROM employees WHERE dept_id = 1 AND city IN (SELECT city FROM employees WHERE dept_id = 2);      -- INTERSECT needs MySQL 8.0.31+; this works on every version""", 'MySQL: INTERSECT without INTERSECT'),
             UL("Column names come from the FIRST query.",
                "ORDER BY applies to the whole combined result and goes at the very end.",
                "Precedence: INTERSECT binds tighter than UNION and EXCEPT; use parentheses.",
@@ -476,6 +493,13 @@ SELECT e.name, e.salary FROM employees e JOIN rich_depts r ON r.dept_id = e.dept
   FROM employees e JOIN org o ON e.manager_id = o.id                                                         -- recursive step
 )
 SELECT depth, path FROM org ORDER BY path;""", "everyone under Asha with the reporting chain", run=True),
+            MYSQL("""WITH RECURSIVE org AS (
+  SELECT id, name, manager_id, 0 AS depth, CAST(name AS CHAR(200)) AS path FROM employees WHERE manager_id IS NULL AND id = 1
+  UNION ALL
+  SELECT e.id, e.name, e.manager_id, o.depth + 1, CONCAT(o.path, ' > ', e.name)
+  FROM employees e JOIN org o ON e.manager_id = o.id
+)
+SELECT depth, path FROM org ORDER BY path;      -- CAST gives the path column room to grow, otherwise MySQL errors 'Data too long'""", 'MySQL 8+: CONCAT and a wide CAST'),
             SQL("""-- generate a number series
 WITH RECURSIVE n(x) AS (SELECT 1 UNION ALL SELECT x + 1 FROM n WHERE x < 5)
 SELECT x FROM n;""", "PostgreSQL also has generate_series(1,5)", run=True),

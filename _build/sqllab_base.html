@@ -350,12 +350,39 @@
   function solvedCount() { var n = 0; EX.forEach(function (e) { if (state.solved[e.id]) n++; }); return n; }
 
   /* ---------- engine ---------- */
+  /* MySQL habits that SQLite lacks, so a query written for MySQL also runs in this lab.
+     (CONCAT, IFNULL, LIMIT already work. INTERVAL arithmetic and GROUP_CONCAT ... SEPARATOR are syntax and cannot be added.) */
+  function mysqlFns(SQL) {
+    var Orig = SQL.Database;
+    function dt(x) { var d = new Date(String(x).replace(" ", "T") + (String(x).length <= 10 ? "T00:00:00Z" : "Z")); return isNaN(d) ? null : d; }
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+    SQL.Database = function (data) {
+      var d = data ? new Orig(data) : new Orig();
+      var f = function (n, fn) { try { d.create_function(n, fn); } catch (e) {} };
+      f("YEAR", function (x) { var t = dt(x); return t ? t.getUTCFullYear() : null; });
+      f("MONTH", function (x) { var t = dt(x); return t ? t.getUTCMonth() + 1 : null; });
+      f("DAY", function (x) { var t = dt(x); return t ? t.getUTCDate() : null; });
+      f("DAYOFMONTH", function (x) { var t = dt(x); return t ? t.getUTCDate() : null; });
+      f("CURDATE", function () { var t = new Date(); return t.getUTCFullYear() + "-" + pad(t.getUTCMonth() + 1) + "-" + pad(t.getUTCDate()); });
+      f("NOW", function () { return new Date().toISOString().replace("T", " ").slice(0, 19); });
+      f("DATEDIFF", function (a, b) { var x = dt(a), y = dt(b); return x && y ? Math.round((x - y) / 86400000) : null; });
+      f("CHAR_LENGTH", function (x) { return x == null ? null : String(x).length; });
+      f("LEFT", function (x, n) { return x == null ? null : String(x).slice(0, n); });
+      f("RIGHT", function (x, n) { return x == null ? null : String(x).slice(-n); });
+      f("DATE_FORMAT", function (x, fmt) { var t = dt(x); if (!t) return null;
+        return String(fmt).replace(/%([YymdHis])/g, function (_, c) { return { Y: t.getUTCFullYear(), y: pad(t.getUTCFullYear() % 100), m: pad(t.getUTCMonth() + 1), d: pad(t.getUTCDate()), H: pad(t.getUTCHours()), i: pad(t.getUTCMinutes()), s: pad(t.getUTCSeconds()) }[c]; }); });
+      return d;
+    };
+    SQL.Database.prototype = Orig.prototype;
+  }
+
   function boot() {
     var s = document.createElement("script");
     s.src = "https://cdn.jsdelivr.net/npm/sql.js@1.14.2/dist/sql-asm.js";
     s.onload = function () {
       if (typeof initSqlJs !== "function") { engine = "failed"; render(); return; }
       initSqlJs().then(function (SQL) {
+        mysqlFns(SQL);
         db = new SQL.Database();
         db.run(SEED.sql);
         engine = "ready";
