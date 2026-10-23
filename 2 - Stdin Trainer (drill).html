@@ -1,0 +1,667 @@
+<title>Stdin Trainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#070B11; --bg2:#0C121B; --panel:#121A26; --panel2:#182231; --edge:#1E2A3A; --edge2:#2A3A4E;
+    --txt:#E8EEF6; --dim:#8397AE; --dim2:#5B6E85;
+    --cy:#3FD9EC; --cy-dim:#12333D;
+    --ok:#4BE08B; --ok-dim:#0E2C1D;
+    --no:#FF7A6B; --no-dim:#331612;
+    --am:#FFC44D; --am-dim:#332714;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    --sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  button{font-family:inherit;color:inherit}
+  :focus-visible{outline:2px solid var(--cy);outline-offset:2px;border-radius:4px}
+  .wrap{max-width:840px;margin:0 auto;padding:20px 16px 80px;display:flex;flex-direction:column;gap:16px}
+
+  /* top bar */
+  .bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:11px 14px;background:var(--panel);border:1px solid var(--edge);border-radius:10px}
+  .logo{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--cy)}
+  .bar .sp{flex:1 1 auto}
+  .stat{display:flex;align-items:baseline;gap:5px;font-family:var(--mono)}
+  .stat b{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
+  .stat span{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2)}
+  .stat.fire b{color:var(--am)}
+  .stat.ok b{color:var(--ok)}
+
+  .btn{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+       background:var(--panel2);border:1px solid var(--edge2);border-radius:7px;padding:9px 14px;cursor:pointer;color:var(--txt);
+       transition:transform .08s ease,background .15s ease,border-color .15s ease}
+  .btn:hover{background:var(--edge);border-color:var(--cy)}
+  .btn:active{transform:translateY(1px)}
+  .btn.primary{background:var(--cy);border-color:var(--cy);color:#04222A}
+  .btn.primary:hover{background:#5FE6F5}
+  .btn.ghost{background:transparent}
+  .btn:disabled{opacity:.4;cursor:default}
+
+  /* hero */
+  .hero{padding:26px 22px;background:linear-gradient(160deg,var(--panel) 0%,var(--bg2) 100%);border:1px solid var(--edge);border-radius:14px;display:flex;flex-direction:column;gap:14px}
+  .hero h1{margin:0;font-family:var(--mono);font-weight:700;font-size:clamp(26px,5.5vw,38px);letter-spacing:-.02em;line-height:1.05}
+  .hero h1 em{font-style:normal;color:var(--cy)}
+  .hero p{margin:0;color:var(--dim);max-width:60ch;font-size:14.5px}
+  .cta{display:flex;gap:9px;flex-wrap:wrap;margin-top:2px}
+
+  /* shape grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:9px}
+  .tile{position:relative;text-align:left;background:var(--panel);border:1px solid var(--edge);border-radius:10px;padding:12px;cursor:pointer;
+        display:flex;flex-direction:column;gap:7px;transition:border-color .15s ease,background .15s ease}
+  .tile:hover{border-color:var(--cy);background:var(--panel2)}
+  .tile .n{font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.1em}
+  .tile .t{font-size:13px;font-weight:600;line-height:1.3}
+  .pips{display:flex;gap:3px;margin-top:auto}
+  .pip{width:100%;height:3px;border-radius:2px;background:var(--edge2)}
+  .pip.on{background:var(--ok)}
+  .tile.done{border-color:var(--ok-dim)}
+  .tile.done .t{color:var(--dim)}
+
+  /* drill */
+  .drill{display:flex;flex-direction:column;gap:13px}
+  .crumb{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2)}
+  .crumb .now{color:var(--cy)}
+  .prog{flex:1 1 auto;height:3px;background:var(--edge);border-radius:2px;overflow:hidden}
+  .prog i{display:block;height:100%;background:var(--cy);transition:width .3s cubic-bezier(.4,0,.2,1)}
+
+  .panes{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  .pane{background:var(--panel);border:1px solid var(--edge);border-radius:11px;overflow:hidden;display:flex;flex-direction:column}
+  .pane-h{padding:8px 12px;background:var(--panel2);border-bottom:1px solid var(--edge);
+          font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim2);display:flex;align-items:center;gap:7px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--cy);flex:none}
+  .pane-b{padding:12px;font-family:var(--mono);font-size:12.5px;line-height:1.65;white-space:pre-wrap;overflow-x:auto;flex:1}
+  .pane-b.spec{font-family:var(--sans);font-size:13px;color:var(--dim);white-space:pre-wrap;line-height:1.6}
+  .pane-b .cur{color:var(--cy)}
+
+  .prog-lines{padding:12px;font-family:var(--mono);font-size:12.5px;line-height:1.7;min-height:76px}
+  .pl{color:var(--ok);display:block}
+  .pl.pending{color:var(--dim2)}
+  .pl .blink{display:inline-block;width:8px;height:15px;background:var(--cy);vertical-align:-2px;animation:bl 1s steps(2) infinite}
+  @keyframes bl{0%,50%{opacity:1}51%,100%{opacity:0}}
+
+  .qbox{background:var(--panel);border:1px solid var(--edge);border-radius:11px;padding:14px}
+  .qlab{font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--dim2);margin-bottom:4px}
+  .q{font-size:15px;font-weight:600;margin-bottom:12px}
+  .q em{font-style:italic;color:var(--cy);font-weight:500}
+  .opts{display:flex;flex-direction:column;gap:7px}
+  .opt{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:center;text-align:left;
+       background:var(--bg2);border:1px solid var(--edge);border-radius:8px;padding:11px 12px;cursor:pointer;
+       font-family:var(--mono);font-size:12.5px;transition:border-color .12s ease,background .12s ease;word-break:break-word}
+  .opt:hover:not(:disabled){border-color:var(--cy);background:var(--panel2)}
+  .opt .k{font-size:10px;color:var(--dim2);border:1px solid var(--edge2);border-radius:4px;text-align:center;padding:1px 0}
+  .opt.right{border-color:var(--ok);background:var(--ok-dim)}
+  .opt.right .k{color:var(--ok);border-color:var(--ok)}
+  .opt.wrong{border-color:var(--no);background:var(--no-dim);animation:shk .3s}
+  .opt.wrong .k{color:var(--no);border-color:var(--no)}
+  .opt:disabled{cursor:default}
+  @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  .fb{margin-top:11px;border-radius:9px;padding:12px 13px;font-size:13.5px;line-height:1.55;border:1px solid}
+  .fb.good{background:var(--ok-dim);border-color:var(--ok)}
+  .fb.bad{background:var(--no-dim);border-color:var(--no)}
+  .fb b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+  .fb.good b{color:var(--ok)} .fb.bad b{color:var(--no)}
+  .fb code{font-family:var(--mono);font-size:12px;background:rgba(0,0,0,.35);padding:1px 5px;border-radius:4px}
+  .fbrow{display:flex;gap:8px;align-items:center;margin-top:11px;flex-wrap:wrap}
+
+  .done-card{text-align:center;padding:30px 22px;background:linear-gradient(160deg,var(--panel) 0%,var(--bg2) 100%);border:1px solid var(--ok);border-radius:14px;display:flex;flex-direction:column;gap:12px;align-items:center}
+  .done-card .big{font-family:var(--mono);font-size:44px;font-weight:700;color:var(--ok);line-height:1}
+  .done-card h2{margin:0;font-size:20px}
+  .done-card p{margin:0;color:var(--dim);max-width:52ch;font-size:14px}
+  .out{width:100%;text-align:left;background:var(--bg);border:1px solid var(--edge);border-radius:9px;padding:12px;font-family:var(--mono);font-size:12.5px;white-space:pre-wrap;color:var(--ok)}
+
+  .foot{color:var(--dim2);font-size:12.5px;font-family:var(--mono);text-align:center;padding-top:6px}
+  .foot a{color:var(--dim)}
+  .kbd{font-family:var(--mono);font-size:10px;color:var(--dim2);border:1px solid var(--edge2);border-radius:4px;padding:1px 5px}
+
+  @media(max-width:640px){
+    .panes{grid-template-columns:1fr}
+    .wrap{padding:14px 11px 70px;gap:13px}
+    .hero{padding:20px 16px}
+    .opt{grid-template-columns:20px 1fr;padding:13px 11px}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script type="application/json" id="shapes">
+[
+{"id":"s1","name":"One integer","raw":"5",
+ "spec":"The first line contains a single integer n.",
+ "lines":[{"q":"\"a single integer n\"","correct":"n = int(input())",
+   "options":["n = int(input())","n = input()","n = input().split()","n = int(input().split())"],
+   "hints":{"n = input()":"That gives you the string \"5\", not the number 5. Any arithmetic on it will break or silently concatenate.",
+            "n = input().split()":"split() always returns a LIST. You would get ['5'] where you wanted 5.",
+            "n = int(input().split())":"int() cannot take a list. This raises TypeError."}}],
+ "result":"n = 5"},
+
+{"id":"s2","name":"Count, then that many numbers","raw":"5\n1 2 3 4 5",
+ "spec":"The first line contains an integer n, the size of the array.\nThe second line contains n space-separated integers.",
+ "lines":[{"q":"Line 1 — \"an integer n\"","correct":"n = int(input())",
+   "options":["n = int(input())","n = input()","n = map(int, input())","n = int(input().strip().split())"],
+   "hints":{"n = input()":"A string. You need the number for range() later.",
+            "n = map(int, input())":"That maps over each CHARACTER of the line, not the line as a number.",
+            "n = int(input().strip().split())":"split() returns a list and int() cannot convert a list."}},
+  {"q":"Line 2 — \"n space-separated integers\"","correct":"arr = list(map(int, input().split()))",
+   "options":["arr = list(map(int, input().split()))","arr = [int(input()) for _ in range(n)]","arr = input().split()","arr = list(map(int, input()))"],
+   "hints":{"arr = [int(input()) for _ in range(n)]":"This is THE classic mistake. n numbers on ONE line means ONE read. You just tried to read 5 more lines that do not exist, and crashed on EOF.",
+            "arr = input().split()":"You get ['1','2','3','4','5'] — strings, not ints. Sorting or summing them silently misbehaves.",
+            "arr = list(map(int, input()))":"Without split() you map over characters, and the space character breaks int()."}}],
+ "result":"n = 5\narr = [1, 2, 3, 4, 5]"},
+
+{"id":"s3","name":"Numbers, no count given","raw":"1 2 3 4 5",
+ "spec":"The input contains space-separated integers on a single line.\nThe count is not given.",
+ "lines":[{"q":"The only line","correct":"arr = list(map(int, input().split()))",
+   "options":["arr = list(map(int, input().split()))","n = int(input())","arr = [int(x) for x in input()]","arr = int(input().split())"],
+   "hints":{"n = int(input())":"There is NO count line here. You just consumed the data as if it were a count, and int() crashed on '1 2 3 4 5'. Always check whether the count line actually exists.",
+            "arr = [int(x) for x in input()]":"No split(), so x is each character including the spaces.",
+            "arr = int(input().split())":"int() cannot convert a list."}},
+  {"q":"You need the count too","correct":"n = len(arr)",
+   "options":["n = len(arr)","n = int(input())","n = arr.count()","n = len(input())"],
+   "hints":{"n = int(input())":"There is no second line to read. Derive the count from the data you already have.",
+            "n = arr.count()":"count() needs an argument and counts occurrences, not length.",
+            "n = len(input())":"That reads a line that is not there and measures its characters."}}],
+ "result":"arr = [1, 2, 3, 4, 5]\nn = 5"},
+
+{"id":"s4","name":"Two values on one line","raw":"5 3",
+ "spec":"The first line contains two integers n and k, separated by a space.",
+ "lines":[{"q":"\"two integers n and k\"","correct":"n, k = map(int, input().split())",
+   "options":["n, k = map(int, input().split())","n = int(input())\nk = int(input())","n, k = input().split()","n, k = int(input()), int(input())"],
+   "hints":{"n = int(input())\nk = int(input())":"Two reads for ONE line. The first read swallows \"5 3\" whole and int() crashes on it. Values on the same line always come from a single read plus a split.",
+            "n, k = input().split()":"n and k are now the strings '5' and '3'. Comparisons and arithmetic go wrong quietly.",
+            "n, k = int(input()), int(input())":"Same problem — that is still two separate reads of two separate lines."}}],
+ "result":"n = 5\nk = 3"},
+
+{"id":"s5","name":"Count, then that many lines","raw":"3\napple\nbanana\ncherry",
+ "spec":"The first line contains an integer n.\nEach of the next n lines contains one word.",
+ "lines":[{"q":"Line 1 — \"an integer n\"","correct":"n = int(input())",
+   "options":["n = int(input())","n = input()","n = input().strip()","n = len(input())"],
+   "hints":{"n = input()":"A string. range() will reject it.","n = input().strip()":"Still a string, just tidier.",
+            "n = len(input())":"That measures the characters of \"3\", giving 1."}},
+  {"q":"\"the next n lines contains one word\"","correct":"words = [input().strip() for _ in range(n)]",
+   "options":["words = [input().strip() for _ in range(n)]","words = [input() for _ in range(n)]","words = input().split()","words = input().strip() * n"],
+   "hints":{"words = [input() for _ in range(n)]":"So close. Without strip() every word keeps its newline: 'apple\\n' != 'apple', so every comparison, dict lookup and sort silently misbehaves. This is one of the most common zero-scorers there is.",
+            "words = input().split()":"That reads only ONE line and splits it on spaces. The words are on separate lines.",
+            "words = input().strip() * n":"That repeats one string n times."}}],
+ "result":"n = 3\nwords = ['apple', 'banana', 'cherry']"},
+
+{"id":"s6","name":"T test cases","raw":"2\n3\n1 2 3\n4\n5 6 7 8",
+ "spec":"The first line contains T, the number of test cases.\nEach test case has two lines:\n  an integer n, then n space-separated integers.",
+ "lines":[{"q":"\"the number of test cases\"","correct":"t = int(input())",
+   "options":["t = int(input())","for t in range(int(input())):","t = input()","t, n = map(int, input().split())"],
+   "hints":{"for t in range(int(input())):":"Right idea, wrong step — read T into a variable first, then loop. Combining them works but hides the structure while you are learning it.",
+            "t = input()":"A string; range() will reject it.",
+            "t, n = map(int, input().split())":"There is only one value on this line, so unpacking into two names raises ValueError."}},
+  {"q":"Now repeat the test case","correct":"for _ in range(t):",
+   "options":["for _ in range(t):","for _ in range(t - 1):","while t:","for _ in input():"],
+   "hints":{"for _ in range(t - 1):":"Off by one — that runs T-1 times and silently drops the last test case.",
+            "while t:":"Infinite loop, since nothing decrements t.",
+            "for _ in input():":"That reads another line and iterates its characters."}},
+  {"q":"Inside the loop — the two lines of one case","correct":"    n = int(input())\n    arr = list(map(int, input().split()))",
+   "options":["    n = int(input())\n    arr = list(map(int, input().split()))","    n, arr = map(int, input().split())","    arr = list(map(int, input().split()))","    n = int(input())\n    arr = [int(input()) for _ in range(n)]"],
+   "hints":{"    n, arr = map(int, input().split())":"n and the array are on DIFFERENT lines, so they need two separate reads.",
+            "    arr = list(map(int, input().split()))":"You skipped the count line. It still has to be consumed, or the reads drift out of alignment for every later case.",
+            "    n = int(input())\n    arr = [int(input()) for _ in range(n)]":"The n values are on one line, so one read and a split — not n reads."}}],
+ "result":"t = 2\n  case 1: n = 3, arr = [1, 2, 3]\n  case 2: n = 4, arr = [5, 6, 7, 8]"},
+
+{"id":"s7","name":"A grid of numbers","raw":"3 3\n1 0 1\n0 1 0\n1 1 1",
+ "spec":"The first line contains two integers R and C.\nEach of the next R lines contains C space-separated integers.",
+ "lines":[{"q":"\"two integers R and C\"","correct":"r, c = map(int, input().split())",
+   "options":["r, c = map(int, input().split())","r = int(input())\nc = int(input())","r, c = input().split()","r, c = map(int, input())"],
+   "hints":{"r = int(input())\nc = int(input())":"Both are on one line, so that is one read and a split.",
+            "r, c = input().split()":"Strings. range() will reject them.",
+            "r, c = map(int, input())":"Without split() you map over characters, and the space breaks int()."}},
+  {"q":"\"the next R lines, C integers each\"","correct":"grid = [list(map(int, input().split())) for _ in range(r)]",
+   "options":["grid = [list(map(int, input().split())) for _ in range(r)]","grid = [input().split() for _ in range(r)]","grid = [list(map(int, input().split())) for _ in range(c)]","grid = list(map(int, input().split()))"],
+   "hints":{"grid = [input().split() for _ in range(r)]":"The cells stay strings, so grid[i][j] == 1 is never true.",
+            "grid = [list(map(int, input().split())) for _ in range(c)]":"You looped over C instead of R. Correct here only because the grid is square — on a 3x5 grid it breaks immediately. Rows first.",
+            "grid = list(map(int, input().split()))":"That reads a single row, not R of them."}}],
+ "result":"r = 3, c = 3\ngrid = [[1, 0, 1],\n        [0, 1, 0],\n        [1, 1, 1]]"},
+
+{"id":"s8","name":"A grid of characters","raw":"3 3\n#.#\n.#.\n###",
+ "spec":"The first line contains R and C.\nEach of the next R lines contains C characters with NO spaces.",
+ "lines":[{"q":"\"the next R lines, C characters, no spaces\"","correct":"grid = [input().strip() for _ in range(r)]",
+   "options":["grid = [input().strip() for _ in range(r)]","grid = [input().split() for _ in range(r)]","grid = [list(map(int, input().split())) for _ in range(r)]","grid = input().strip()"],
+   "hints":{"grid = [input().split() for _ in range(r)]":"There are no spaces to split on, so each row becomes a ONE-element list ['#.#']. Then grid[0][1] gives you a whole row instead of a character, and every neighbour check is wrong.",
+            "grid = [list(map(int, input().split())) for _ in range(r)]":"These are characters, not integers. int('#.#') raises ValueError.",
+            "grid = input().strip()":"That reads one row only."}}],
+ "result":"grid = ['#.#',\n        '.#.',\n        '###']\ngrid[0][1] == '.'"},
+
+{"id":"s9","name":"A graph as an edge list","raw":"4 3\n1 2\n2 3\n3 4",
+ "spec":"The first line contains n nodes and m edges.\nEach of the next m lines contains two nodes u and v.\nNodes are numbered from 1 to n.",
+ "lines":[{"q":"Build an empty adjacency list — note nodes start at 1","correct":"adj = [[] for _ in range(n + 1)]",
+   "options":["adj = [[] for _ in range(n + 1)]","adj = [[] for _ in range(n)]","adj = [[]] * (n + 1)","adj = [[] for _ in range(m)]"],
+   "hints":{"adj = [[] for _ in range(n)]":"Nodes run 1..n, so index n is out of range. Size it n+1 and ignore index 0 — far simpler than subtracting 1 everywhere.",
+            "adj = [[]] * (n + 1)":"Nasty one: every slot is the SAME list object, so appending to adj[1] appears in all of them.",
+            "adj = [[] for _ in range(m)]":"m is the edge count, not the node count."}},
+  {"q":"\"the next m lines, two nodes each\" (undirected)","correct":"for _ in range(m):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)",
+   "options":["for _ in range(m):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)","for _ in range(m):\n    u, v = map(int, input().split())\n    adj[u].append(v)","for _ in range(n):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)","for _ in range(m):\n    u = int(input())\n    v = int(input())"],
+   "hints":{"for _ in range(m):\n    u, v = map(int, input().split())\n    adj[u].append(v)":"That builds a DIRECTED graph. For an undirected one you must add both directions, or half your traversals dead-end.",
+            "for _ in range(n):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)":"Looping over n (nodes) instead of m (edges). Here that reads 4 lines when only 3 exist and crashes on EOF.",
+            "for _ in range(m):\n    u = int(input())\n    v = int(input())":"u and v are on the same line — one read, then split."}}],
+ "result":"adj = [[], [2], [1, 3], [2, 4], [3]]\n       ^ index 0 unused"},
+
+{"id":"s10","name":"A string with spaces","raw":"the quick brown fox",
+ "spec":"The input is a single line of text that may contain spaces.\nProcess the line as a whole.",
+ "lines":[{"q":"Read the whole line, spaces intact","correct":"s = input().rstrip('\\n')",
+   "options":["s = input().rstrip('\\n')","s = input().split()","s = list(input())","s = input().strip().split(' ')"],
+   "hints":{"s = input().split()":"That destroys the sentence into a word list. If the task is to reverse or scan the text, you have already lost its structure.",
+            "s = list(input())":"A list of individual characters, including the trailing newline.",
+            "s = input().strip().split(' ')":"Still a list of words, not the line."}}],
+ "result":"s = 'the quick brown fox'"},
+
+{"id":"s11","name":"Mixed types on one line","raw":"Kushal 21 88.5",
+ "spec":"One line contains a name, an age, and a score,\nseparated by spaces.",
+ "lines":[{"q":"Three different types on one line","correct":"name, age, score = input().split()\nage = int(age)\nscore = float(score)",
+   "options":["name, age, score = input().split()\nage = int(age)\nscore = float(score)","name, age, score = map(int, input().split())","name, age, score = input()","name, age, score = map(float, input().split())"],
+   "hints":{"name, age, score = map(int, input().split())":"int('Kushal') raises ValueError. When types differ, split first and cast each field separately.",
+            "name, age, score = input()":"Unpacking a string gives you its first three characters, and then fails because there are more.",
+            "name, age, score = map(float, input().split())":"float('Kushal') fails for the same reason."}}],
+ "result":"name = 'Kushal'\nage = 21\nscore = 88.5"},
+
+{"id":"s12","name":"Read until end of input","raw":"1 2\n3 4\n5 6",
+ "spec":"Each line contains two integers.\nThe number of lines is not given — read until the input ends.",
+ "lines":[{"q":"No count, no sentinel — just keep reading","correct":"import sys\nfor line in sys.stdin:\n    a, b = map(int, line.split())",
+   "options":["import sys\nfor line in sys.stdin:\n    a, b = map(int, line.split())","while True:\n    a, b = map(int, input().split())","n = int(input())\nfor _ in range(n):\n    a, b = map(int, input().split())","for line in input():\n    a, b = map(int, line.split())"],
+   "hints":{"while True:":"input() raises EOFError at the end of the stream, so this crashes rather than stopping. Iterating sys.stdin ends cleanly.",
+            "n = int(input())\nfor _ in range(n):\n    a, b = map(int, input().split())":"There is no count line. You just consumed '1 2' as the count and int() crashed on it.",
+            "for line in input():":"That reads ONE line and iterates its characters."}}],
+ "result":"(1, 2)\n(3, 4)\n(5, 6)"},
+
+{"id":"s13","name":"Heavy input, token stream","raw":"3\n1 2 3\n4 5 6\n7 8 9",
+ "spec":"Large input — up to 10^6 numbers.\nLine-by-line reading would be too slow.",
+ "lines":[{"q":"Read the whole stream at once","correct":"import sys\ndata = sys.stdin.buffer.read().split()",
+   "options":["import sys\ndata = sys.stdin.buffer.read().split()","data = input().split()","import sys\ndata = sys.stdin.readlines()","data = [input() for _ in range(1000000)]"],
+   "hints":{"data = input().split()":"That reads only the first line. read() takes the entire stream.",
+            "import sys\ndata = sys.stdin.readlines()":"Workable, but you still split every line yourself. Reading once and splitting once is faster and ignores line breaks entirely.",
+            "data = [input() for _ in range(1000000)]":"input() in a big loop is exactly the thing that times out."}},
+  {"q":"Now walk the tokens with a pointer","correct":"idx = 0\nn = int(data[idx]); idx += 1","options":["idx = 0\nn = int(data[idx]); idx += 1","n = int(data)","n = int(data[0])\nidx = 1","n = data.pop(0)"],
+   "hints":{"n = int(data)":"data is a list of tokens; int() cannot convert a list.",
+            "n = int(data[0])\nidx = 1":"Correct in effect, but hard-coding indices breaks the moment the format changes. A single moving pointer scales.",
+            "n = data.pop(0)":"pop(0) is O(n) each time, so this turns a fast read into a quadratic one — and it leaves n as bytes, not int."}}],
+ "result":"data = [b'3', b'1', b'2', b'3', ...]\nn = 3   (int() accepts bytes directly)"}
+]
+</script>
+
+<script type="application/json" id="state">
+{"rev":1,"mastery":{},"best":1,"seen":1,"right":1}
+</script>
+
+<script id="code">
+(function () {
+  "use strict";
+  // The cross-tool links in this page are plain .html filenames, so opening the file straight off
+  // disk just works. When the very same page is served over http(s) those relative names cannot
+  // resolve, so there we swap each one for its hosted copy. Local is the default; online adapts.
+  var HOSTED = {
+    "./1%20-%20Twenty%20Weeks%20to%20AC%20%28tracker%29.html": "https://claude.ai/code/artifact/32b165b3-0cee-4121-9470-b0e8d6d17c16",
+    "./2%20-%20Stdin%20Trainer%20%28drill%29.html": "https://claude.ai/code/artifact/00d12bf6-5548-4e56-b449-d0f33193a495",
+    "./3%20-%20Stdin%20Survival%20Kit%20%28manual%29.html": "https://claude.ai/code/artifact/49b64e1a-a87a-4924-b42d-2a7a614ab41a",
+    "./5%20-%20SQL%20Lab%20%28practice%29.html": "https://claude.ai/code/artifact/0f564ee0-0ae9-4f76-b0db-9cbaf04a5664",
+    "./6%20-%20CS%20Core%20Drill%20%28OS%20DBMS%20CN%20OOP%20C%29.html": "https://claude.ai/code/artifact/3a19c5c3-5b45-4744-a980-20f138d77859",
+    "./7%20-%20Aptitude%20Sprint%20%28formulas%20%2B%20practice%29.html": "https://claude.ai/code/artifact/1176c004-05c1-4ebd-bd08-041957dd07f6",
+    "./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html": "https://claude.ai/code/artifact/9c7876de-143f-4f4d-bead-a8204d0f63ad",
+    "./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html": "https://claude.ai/code/artifact/ca3214a6-ec8f-4b10-b757-9c025a98ba47",
+    "./10%20-%20Mock%20OA%20%28timed%20exam%29.html": "https://claude.ai/code/artifact/ea757a13-0226-4bad-9065-96ca4927af42"
+  };
+  function fixToolLinks() {
+    if (location.protocol === "file:") return;
+    Array.prototype.forEach.call(document.querySelectorAll("a[href]"), function (a) {
+      var u = HOSTED[a.getAttribute("href")];
+      if (u) a.setAttribute("href", u);
+    });
+  }
+  if (location.protocol !== "file:") {
+    try {
+      new MutationObserver(function () { fixToolLinks(); })
+        .observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) {}
+    fixToolLinks();
+  }
+
+
+  // An artifact places the authored <title>, font <link>s and <style> BELOW <head>, so
+  // document.head.innerHTML misses them and a self-republish would ship a page with no CSS.
+  // Collect them wherever they sit; platform-injected styles are excluded by marker, which
+  // keeps this idempotent across republish generations.
+  function SHELL() {
+    var out = ['<meta charset="utf-8">',
+               '<meta name="viewport" content="width=device-width,initial-scale=1">'];
+    var t = document.querySelector("title");
+    if (t) out.push(t.outerHTML);
+    Array.prototype.forEach.call(document.querySelectorAll("link"), function (n) {
+      var h = n.getAttribute("href") || "";
+      if (h.indexOf("fonts.googleapis") !== -1 || h.indexOf("fonts.gstatic") !== -1) out.push(n.outerHTML);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("style"), function (n) {
+      var s = n.textContent || "";
+      if (s.indexOf("--f-display") !== -1 || s.indexOf("--mono:") !== -1) out.push(n.outerHTML);
+    });
+    return out.join("\n");
+  }
+
+
+  var SHAPES = JSON.parse(document.getElementById("shapes").textContent);
+  var LS = "stdin-trainer-v1";
+
+  function migrate(s) {
+    if (!s || typeof s !== "object") s = {};
+    if (!s.mastery) s.mastery = {};
+    if (typeof s.rev !== "number") s.rev = 0;
+    if (typeof s.best !== "number") s.best = 0;
+    if (typeof s.seen !== "number") s.seen = 0;
+    if (typeof s.right !== "number") s.right = 0;
+    return s;
+  }
+  var embedded = migrate(JSON.parse(document.getElementById("state").textContent));
+  var state = embedded, local = null;
+  try { var raw = localStorage.getItem(LS); if (raw) local = migrate(JSON.parse(raw)); } catch (e) {}
+  if (local && local.rev > embedded.rev) state = local;
+
+  var app = document.getElementById("app");
+  var api = null, saveT = null;
+
+  // view state
+  var V = { screen: "home", qi: 0, li: 0, order: [], picked: null, streak: 0, sessionRight: 0, sessionSeen: 0 };
+
+  function save() {
+    state.rev++;
+    try { localStorage.setItem(LS, JSON.stringify(state)); } catch (e) {}
+    if (!api) return;
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      var o = "<" + "script", c = "<" + "/" + "script>";
+      api.publish('<!doctype html>\n<html lang="en">\n<head>\n' + SHELL() + '\n</head>\n<body>\n' +
+        '<div class="wrap" id="app"></div>\n' +
+        o + ' type="application/json" id="shapes">' + JSON.stringify(SHAPES) + c + '\n' +
+        o + ' type="application/json" id="state">' + JSON.stringify(state) + c + '\n' +
+        o + ' id="code">' + document.getElementById("code").textContent + c + '\n' +
+        '</body>\n</html>').catch(function () {});
+    }, 1500);
+  }
+
+  function el(t, c, x) { var n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; }
+  function mastery(id) { return state.mastery[id] || 0; }
+  function masteredCount() { var n = 0; SHAPES.forEach(function (s) { if (mastery(s.id) >= 3) n++; }); return n; }
+
+  function shuffle(a, seedStr) {
+    // deterministic-ish shuffle so options do not jump around on re-render
+    var h = 0, i;
+    for (i = 0; i < seedStr.length; i++) h = (h * 31 + seedStr.charCodeAt(i)) >>> 0;
+    var arr = a.slice();
+    for (i = arr.length - 1; i > 0; i--) {
+      h = (h * 1103515245 + 12345) >>> 0;
+      var j = h % (i + 1);
+      var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+    }
+    return arr;
+  }
+
+  /* ---------- chrome ---------- */
+  function bar() {
+    var b = el("div", "bar");
+    b.appendChild(el("div", "logo", "stdin_trainer"));
+    b.appendChild(el("div", "sp"));
+    function stat(v, k, cls) {
+      var s = el("div", "stat" + (cls ? " " + cls : ""));
+      s.appendChild(el("b", null, String(v)));
+      s.appendChild(el("span", null, k));
+      return s;
+    }
+    b.appendChild(stat(masteredCount() + "/" + SHAPES.length, "mastered", "ok"));
+    b.appendChild(stat(V.streak, "streak", V.streak > 2 ? "fire" : ""));
+    b.appendChild(stat(state.best, "best", ""));
+    if (V.screen !== "home") {
+      var h = el("button", "btn ghost", "menu"); h.type = "button";
+      h.addEventListener("click", function () { V.screen = "home"; render(); });
+      b.appendChild(h);
+    }
+    return b;
+  }
+
+  /* ---------- home ---------- */
+  function home() {
+    var f = document.createDocumentFragment();
+
+    var hero = el("div", "hero");
+    var h1 = el("h1");
+    h1.innerHTML = 'Stop losing points<br>before the <em>algorithm</em>.';
+    hero.appendChild(h1);
+    var p = el("p");
+    p.textContent = "Thirteen input shapes an online assessment can hand you. You get the raw stdin and the spec; you pick the line that parses it. Every wrong option is a real mistake people make, and it tells you exactly what breaks.";
+    hero.appendChild(p);
+    var cta = el("div", "cta");
+    var go = el("button", "btn primary", masteredCount() ? "continue drilling" : "start drilling");
+    go.type = "button";
+    go.addEventListener("click", function () { startRun(weakFirst()); });
+    cta.appendChild(go);
+    var rnd = el("button", "btn", "random 5");
+    rnd.type = "button";
+    rnd.addEventListener("click", function () { startRun(shuffle(SHAPES.map(function (s, i) { return i; }), "r" + state.seen).slice(0, 5)); });
+    cta.appendChild(rnd);
+    hero.appendChild(cta);
+    f.appendChild(hero);
+
+    var acc = state.seen ? Math.round((state.right / state.seen) * 100) : 0;
+    var sub = el("div", "foot", state.seen ? (state.right + " / " + state.seen + " correct all time · " + acc + "% accuracy") : "three correct in a row masters a shape");
+    f.appendChild(sub);
+
+    var grid = el("div", "grid");
+    SHAPES.forEach(function (s, i) {
+      var m = mastery(s.id);
+      var t = el("button", "tile" + (m >= 3 ? " done" : ""));
+      t.type = "button";
+      t.appendChild(el("div", "n", String(i + 1).padStart(2, "0")));
+      t.appendChild(el("div", "t", s.name));
+      var pips = el("div", "pips");
+      for (var k = 0; k < 3; k++) pips.appendChild(el("div", "pip" + (k < m ? " on" : "")));
+      t.appendChild(pips);
+      t.addEventListener("click", function () { startRun([i]); });
+      grid.appendChild(t);
+    });
+    f.appendChild(grid);
+
+    var ft = el("div", "foot");
+    ft.innerHTML = 'Companion tools: <a href="./10%20-%20Mock%20OA%20%28timed%20exam%29.html" target="_blank" rel="noopener noreferrer">Mock OA</a> · <a href="./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html" target="_blank" rel="noopener noreferrer">Decoder</a> · <a href="./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html" target="_blank" rel="noopener noreferrer">Pattern Radar</a> &middot; <a href="./1%20-%20Twenty%20Weeks%20to%20AC%20%28tracker%29.html" target="_blank" rel="noopener noreferrer">the plan</a> &middot; <a href="./5%20-%20SQL%20Lab%20%28practice%29.html" target="_blank" rel="noopener noreferrer">SQL Lab</a> &middot; <a href="./6%20-%20CS%20Core%20Drill%20%28OS%20DBMS%20CN%20OOP%20C%29.html" target="_blank" rel="noopener noreferrer">CS Core Drill</a> &middot; <a href="./7%20-%20Aptitude%20Sprint%20%28formulas%20%2B%20practice%29.html" target="_blank" rel="noopener noreferrer">Aptitude Sprint</a> &middot; <a href="./3%20-%20Stdin%20Survival%20Kit%20%28manual%29.html" target="_blank" rel="noopener noreferrer">Stdin Survival Kit</a><br>Full written manual: <a href="./3%20-%20Stdin%20Survival%20Kit%20%28manual%29.html" target="_blank" rel="noopener noreferrer">Stdin Survival Kit</a> · keys <span class="kbd">1</span>–<span class="kbd">4</span> to answer, <span class="kbd">enter</span> to continue';
+    f.appendChild(ft);
+    return f;
+  }
+
+  function weakFirst() {
+    var idx = SHAPES.map(function (s, i) { return i; });
+    idx.sort(function (a, b) { return mastery(SHAPES[a].id) - mastery(SHAPES[b].id); });
+    return idx;
+  }
+
+  function startRun(order) {
+    V.order = order; V.qi = 0; V.li = 0; V.picked = null;
+    V.sessionRight = 0; V.sessionSeen = 0; V.clean = true;
+    V.screen = "drill";
+    render();
+  }
+
+  /* ---------- drill ---------- */
+  function pane(title, body, cls) {
+    var p = el("div", "pane");
+    var h = el("div", "pane-h");
+    h.appendChild(el("span", "dot"));
+    h.appendChild(el("span", null, title));
+    p.appendChild(h);
+    p.appendChild(el("div", "pane-b" + (cls ? " " + cls : ""), body));
+    return p;
+  }
+
+  function drill() {
+    var f = document.createDocumentFragment();
+    var sh = SHAPES[V.order[V.qi]];
+    var line = sh.lines[V.li];
+
+    var crumb = el("div", "crumb");
+    crumb.appendChild(el("span", "now", String(V.qi + 1) + " / " + V.order.length));
+    crumb.appendChild(el("span", null, sh.name));
+    var pr = el("div", "prog"); var pf = el("i");
+    pf.style.width = Math.round(((V.qi + (V.li / sh.lines.length)) / V.order.length) * 100) + "%";
+    pr.appendChild(pf); crumb.appendChild(pr);
+    crumb.appendChild(el("span", null, "line " + (V.li + 1) + "/" + sh.lines.length));
+    f.appendChild(crumb);
+
+    var panes = el("div", "panes");
+    panes.appendChild(pane("raw stdin", sh.raw));
+    panes.appendChild(pane("input format", sh.spec, "spec"));
+    f.appendChild(panes);
+
+    // program so far
+    var prog = el("div", "pane");
+    var ph = el("div", "pane-h");
+    ph.appendChild(el("span", "dot"));
+    ph.appendChild(el("span", null, "your program"));
+    prog.appendChild(ph);
+    var pl = el("div", "prog-lines");
+    for (var i = 0; i < V.li; i++) pl.appendChild(el("code", "pl", sh.lines[i].correct));
+    var pend = el("code", "pl pending");
+    pend.appendChild(el("span", "blink"));
+    pl.appendChild(pend);
+    prog.appendChild(pl);
+    f.appendChild(prog);
+
+    // question
+    var qb = el("div", "qbox");
+    qb.appendChild(el("div", "qlab", "which line parses this?"));
+    var q = el("div", "q");
+    q.innerHTML = line.q.replace(/"([^"]+)"/g, '<em>&ldquo;$1&rdquo;</em>');
+    qb.appendChild(q);
+
+    var opts = el("div", "opts");
+    var ordered = shuffle(line.options, sh.id + ":" + V.li + ":" + mastery(sh.id));
+    ordered.forEach(function (o, k) {
+      var b = el("button", "opt");
+      b.type = "button";
+      b.appendChild(el("span", "k", String(k + 1)));
+      b.appendChild(el("span", null, o));
+      if (V.picked != null) {
+        b.disabled = true;
+        if (o === line.correct) b.className = "opt right";
+        else if (o === V.picked) b.className = "opt wrong";
+      } else {
+        b.addEventListener("click", function () { answer(sh, line, o); });
+      }
+      opts.appendChild(b);
+    });
+    qb.appendChild(opts);
+
+    if (V.picked != null) {
+      var ok = V.picked === line.correct;
+      var fb = el("div", "fb " + (ok ? "good" : "bad"));
+      fb.appendChild(el("b", null, ok ? "accepted" : "wrong answer"));
+      var msg = document.createElement("div");
+      if (ok) {
+        msg.textContent = V.li + 1 === sh.lines.length ? "That completes the parse. Run it and see what the variables hold." : "Correct. Next line.";
+      } else {
+        msg.textContent = (line.hints && line.hints[V.picked]) || "Not this one — compare it against the accepted line above.";
+      }
+      fb.appendChild(msg);
+      var row = el("div", "fbrow");
+      var nx = el("button", "btn primary", V.li + 1 === sh.lines.length ? "run it" : "next line");
+      nx.type = "button"; nx.id = "nextBtn";
+      nx.addEventListener("click", advance);
+      row.appendChild(nx);
+      row.appendChild(el("span", "kbd", "enter"));
+      fb.appendChild(row);
+      qb.appendChild(fb);
+    }
+    f.appendChild(qb);
+    return f;
+  }
+
+  function answer(sh, line, opt) {
+    V.picked = opt;
+    var ok = opt === line.correct;
+    state.seen++; V.sessionSeen++;
+    if (ok) {
+      state.right++; V.sessionRight++;
+      V.streak++;
+      if (V.streak > state.best) state.best = V.streak;
+    } else {
+      V.streak = 0;
+      V.clean = false;
+      state.mastery[sh.id] = 0;
+    }
+    save();
+    render();
+  }
+
+  function advance() {
+    var sh = SHAPES[V.order[V.qi]];
+    V.picked = null;
+    if (V.li + 1 < sh.lines.length) { V.li++; render(); return; }
+    // shape complete — only a run with every line right counts toward mastery
+    if (V.clean) state.mastery[sh.id] = Math.min(3, mastery(sh.id) + 1);
+    save();
+    V.screen = "result";
+    render();
+  }
+
+  function result() {
+    var f = document.createDocumentFragment();
+    var sh = SHAPES[V.order[V.qi]];
+    var card = el("div", "done-card");
+    card.appendChild(el("div", "big", "AC"));
+    card.appendChild(el("h2", null, sh.name));
+    card.appendChild(el("p", null, "This is what your program now holds. Getting to this line — before writing any algorithm — is the whole skill."));
+    card.appendChild(el("div", "out", sh.result));
+    var pips = el("div", "pips"); pips.style.width = "120px";
+    for (var k = 0; k < 3; k++) pips.appendChild(el("div", "pip" + (k < mastery(sh.id) ? " on" : "")));
+    card.appendChild(pips);
+    card.appendChild(el("p", null, mastery(sh.id) >= 3 ? "Mastered — three clean runs." : "Clear it " + (3 - mastery(sh.id)) + " more time(s) to master it."));
+    var row = el("div", "cta");
+    var more = V.qi + 1 < V.order.length;
+    var nx = el("button", "btn primary", more ? "next shape" : "back to menu");
+    nx.type = "button"; nx.id = "nextBtn";
+    nx.addEventListener("click", function () {
+      if (more) { V.qi++; V.li = 0; V.picked = null; V.screen = "drill"; }
+      else V.screen = "home";
+      render();
+    });
+    row.appendChild(nx);
+    var again = el("button", "btn", "redo this one");
+    again.type = "button";
+    again.addEventListener("click", function () { V.li = 0; V.picked = null; V.screen = "drill"; render(); });
+    row.appendChild(again);
+    card.appendChild(row);
+    f.appendChild(card);
+    return f;
+  }
+
+  /* ---------- keys ---------- */
+  document.addEventListener("keydown", function (e) {
+    if (V.screen === "drill" && V.picked == null) {
+      var n = parseInt(e.key, 10);
+      if (n >= 1 && n <= 4) {
+        var btns = document.querySelectorAll(".opt");
+        if (btns[n - 1]) { btns[n - 1].click(); e.preventDefault(); }
+      }
+    } else if (e.key === "Enter") {
+      var b = document.getElementById("nextBtn");
+      if (b) { b.click(); e.preventDefault(); }
+    }
+  });
+
+  function render() {
+    var y = window.scrollY;
+    app.textContent = "";
+    app.appendChild(bar());
+    if (V.screen === "home") app.appendChild(home());
+    else if (V.screen === "drill") app.appendChild(drill());
+    else app.appendChild(result());
+    window.scrollTo(0, V.screen === "home" ? y : 0);
+  }
+
+  render();
+  if (window.claude && window.claude.use) {
+    window.claude.use("artifact").then(function (a) { if (a) api = a; }).catch(function () {});
+  }
+})();
+</script>

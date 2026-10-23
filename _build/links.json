@@ -1,0 +1,5356 @@
+{
+ "variants": {
+  "tp-ends": [
+   {
+    "n": "Two Sum II - Input Array Is Sorted",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/",
+    "s": "LC 167",
+    "note": ""
+   },
+   {
+    "n": "3Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/3sum/",
+    "s": "LC 15",
+    "note": ""
+   },
+   {
+    "n": "3Sum Closest",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/3sum-closest/",
+    "s": "LC 16",
+    "note": ""
+   },
+   {
+    "n": "Container With Most Water",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/container-with-most-water/",
+    "s": "LC 11",
+    "note": ""
+   },
+   {
+    "n": "Trapping Rain Water",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/trapping-rain-water/",
+    "s": "LC 42",
+    "note": ""
+   },
+   {
+    "n": "Valid Palindrome II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/valid-palindrome-ii/",
+    "s": "LC 680",
+    "note": ""
+   },
+   {
+    "n": "Squares of a Sorted Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/squares-of-a-sorted-array/",
+    "s": "LC 977",
+    "note": ""
+   },
+   {
+    "n": "Sherlock and Anagrams",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/sherlock-and-anagrams/problem",
+    "s": ""
+   },
+   {
+    "n": "Pairs",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/pairs/problem",
+    "s": ""
+   },
+   {
+    "n": "Two pointers technique",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/two-pointers-technique/",
+    "s": ""
+   }
+  ],
+  "tp-write": [
+   {
+    "n": "Remove Duplicates from Sorted Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
+    "s": "LC 26",
+    "note": ""
+   },
+   {
+    "n": "Remove Duplicates from Sorted Array II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/",
+    "s": "LC 80",
+    "note": ""
+   },
+   {
+    "n": "Move Zeroes",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/move-zeroes/",
+    "s": "LC 283",
+    "note": ""
+   },
+   {
+    "n": "Merge Sorted Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/merge-sorted-array/",
+    "s": "LC 88",
+    "note": ""
+   },
+   {
+    "n": "Is Subsequence",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/is-subsequence/",
+    "s": "LC 392",
+    "note": ""
+   },
+   {
+    "n": "String Compression",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/string-compression/",
+    "s": "LC 443",
+    "note": ""
+   },
+   {
+    "n": "Move all zeroes to end of array",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/move-zeroes-end-array/",
+    "s": ""
+   },
+   {
+    "n": "Remove duplicates from a sorted array",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/remove-duplicates-sorted-array/",
+    "s": ""
+   }
+  ],
+  "tp-merge": [
+   {
+    "n": "Merge Two Sorted Lists",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/merge-two-sorted-lists/",
+    "s": "LC 21",
+    "note": ""
+   },
+   {
+    "n": "Intersection of Two Arrays II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/intersection-of-two-arrays-ii/",
+    "s": "LC 350",
+    "note": ""
+   },
+   {
+    "n": "Interval List Intersections",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/interval-list-intersections/",
+    "s": "LC 986",
+    "note": ""
+   },
+   {
+    "n": "Median of Two Sorted Arrays",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/median-of-two-sorted-arrays/",
+    "s": "LC 4",
+    "note": "see binary search on partition"
+   },
+   {
+    "n": "Merge two sorted arrays",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/merge-two-sorted-arrays/",
+    "s": ""
+   },
+   {
+    "n": "Find the Median",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/find-the-median/problem",
+    "s": ""
+   }
+  ],
+  "tp-partition": [
+   {
+    "n": "Sort Colors",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/sort-colors/",
+    "s": "LC 75",
+    "note": ""
+   },
+   {
+    "n": "Kth Largest Element in an Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+    "s": "LC 215",
+    "note": "quickselect"
+   },
+   {
+    "n": "Partition Array According to Given Pivot",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/partition-array-according-to-given-pivot/",
+    "s": "LC 2161",
+    "note": ""
+   },
+   {
+    "n": "Sort an array of 0s, 1s and 2s",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/sort-an-array-of-0s-1s-and-2s/",
+    "s": ""
+   },
+   {
+    "n": "Quicksort In-Place",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/quicksort3/problem",
+    "s": ""
+   }
+  ],
+  "sw-fixed": [
+   {
+    "n": "Maximum Average Subarray I",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-average-subarray-i/",
+    "s": "LC 643",
+    "note": ""
+   },
+   {
+    "n": "Find All Anagrams in a String",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-all-anagrams-in-a-string/",
+    "s": "LC 438",
+    "note": ""
+   },
+   {
+    "n": "Permutation in String",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/permutation-in-string/",
+    "s": "LC 567",
+    "note": ""
+   },
+   {
+    "n": "Maximum Number of Vowels in a Substring of Given Length",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/",
+    "s": "LC 1456",
+    "note": ""
+   },
+   {
+    "n": "Find the K-Beauty of a Number",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-the-k-beauty-of-a-number/",
+    "s": "LC 2269",
+    "note": "in your own notes"
+   },
+   {
+    "n": "Maximum Points You Can Obtain from Cards",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/",
+    "s": "LC 1423",
+    "note": ""
+   },
+   {
+    "n": "Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/",
+    "s": "LC 1343",
+    "note": ""
+   },
+   {
+    "n": "Window sliding technique",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/window-sliding-technique/",
+    "s": ""
+   },
+   {
+    "n": "Maximum of all subarrays of size k",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k/",
+    "s": ""
+   }
+  ],
+  "sw-longest": [
+   {
+    "n": "Longest Substring Without Repeating Characters",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+    "s": "LC 3",
+    "note": ""
+   },
+   {
+    "n": "Longest Substring with At Most K Distinct Characters",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/",
+    "s": "LC 340  · premium",
+    "note": ""
+   },
+   {
+    "n": "Longest Repeating Character Replacement",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-repeating-character-replacement/",
+    "s": "LC 424",
+    "note": ""
+   },
+   {
+    "n": "Max Consecutive Ones III",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/max-consecutive-ones-iii/",
+    "s": "LC 1004",
+    "note": ""
+   },
+   {
+    "n": "Fruit Into Baskets",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/fruit-into-baskets/",
+    "s": "LC 904",
+    "note": ""
+   },
+   {
+    "n": "Longest Subarray of 1's After Deleting One Element",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/",
+    "s": "LC 1493",
+    "note": ""
+   },
+   {
+    "n": "Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/",
+    "s": "LC 1438",
+    "note": ""
+   },
+   {
+    "n": "Longest substring with k unique characters",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/find-the-longest-substring-with-k-unique-characters-in-a-given-string/",
+    "s": ""
+   },
+   {
+    "n": "Longest subarray with sum divisible by k",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/longest-subarray-sum-divisible-k/",
+    "s": ""
+   }
+  ],
+  "sw-shortest": [
+   {
+    "n": "Minimum Size Subarray Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-size-subarray-sum/",
+    "s": "LC 209",
+    "note": ""
+   },
+   {
+    "n": "Minimum Window Substring",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-window-substring/",
+    "s": "LC 76",
+    "note": ""
+   },
+   {
+    "n": "Minimum Operations to Reduce X to Zero",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/",
+    "s": "LC 1658",
+    "note": ""
+   },
+   {
+    "n": "Minimum Swaps to Group All 1's Together II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-swaps-to-group-all-1s-together-ii/",
+    "s": "LC 2134",
+    "note": ""
+   },
+   {
+    "n": "Shortest Subarray with Sum at Least K",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/",
+    "s": "LC 862",
+    "note": "has negatives, needs prefix + deque"
+   },
+   {
+    "n": "Smallest window containing all characters of another string",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/find-the-smallest-window-in-a-string-containing-all-characters-of-another-string/",
+    "s": ""
+   },
+   {
+    "n": "Smallest subarray with sum greater than a given value",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/",
+    "s": ""
+   }
+  ],
+  "sw-exact": [
+   {
+    "n": "Subarrays with K Different Integers",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/subarrays-with-k-different-integers/",
+    "s": "LC 992",
+    "note": ""
+   },
+   {
+    "n": "Binary Subarrays With Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/binary-subarrays-with-sum/",
+    "s": "LC 930",
+    "note": "also solvable with prefix + hashmap, in your notes"
+   },
+   {
+    "n": "Count Number of Nice Subarrays",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/count-number-of-nice-subarrays/",
+    "s": "LC 1248",
+    "note": ""
+   },
+   {
+    "n": "Number of Substrings Containing All Three Characters",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/",
+    "s": "LC 1358",
+    "note": ""
+   },
+   {
+    "n": "Count of subarrays having exactly K distinct elements",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/count-of-subarrays-having-exactly-k-distinct-elements/",
+    "s": ""
+   }
+  ],
+  "sw-deque": [
+   {
+    "n": "Sliding Window Maximum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/sliding-window-maximum/",
+    "s": "LC 239",
+    "note": ""
+   },
+   {
+    "n": "Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/",
+    "s": "LC 1438",
+    "note": ""
+   },
+   {
+    "n": "Shortest Subarray with Sum at Least K",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/",
+    "s": "LC 862",
+    "note": ""
+   },
+   {
+    "n": "Jump Game VI",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/jump-game-vi/",
+    "s": "LC 1696",
+    "note": ""
+   },
+   {
+    "n": "Constrained Subsequence Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/constrained-subsequence-sum/",
+    "s": "LC 1425",
+    "note": ""
+   },
+   {
+    "n": "Sliding window maximum with a deque",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k/",
+    "s": ""
+   },
+   {
+    "n": "Deque-STL",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/deque-stl/problem",
+    "s": ""
+   }
+  ],
+  "ps-range": [
+   {
+    "n": "Range Sum Query - Immutable",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/range-sum-query-immutable/",
+    "s": "LC 303",
+    "note": ""
+   },
+   {
+    "n": "Find Pivot Index",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-pivot-index/",
+    "s": "LC 724",
+    "note": ""
+   },
+   {
+    "n": "Running Sum of 1d Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/running-sum-of-1d-array/",
+    "s": "LC 1480",
+    "note": ""
+   },
+   {
+    "n": "Minimum Value to Get Positive Step by Step Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/",
+    "s": "LC 1413",
+    "note": ""
+   },
+   {
+    "n": "Prefix sum array",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/prefix-sum-array-implementation-applications-competitive-programming/",
+    "s": ""
+   },
+   {
+    "n": "Equilibrium index of an array",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/equilibrium-index-of-an-array/",
+    "s": ""
+   }
+  ],
+  "ps-count": [
+   {
+    "n": "Subarray Sum Equals K",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/subarray-sum-equals-k/",
+    "s": "LC 560",
+    "note": "in your own notes"
+   },
+   {
+    "n": "Subarray Sums Divisible by K",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/subarray-sums-divisible-by-k/",
+    "s": "LC 974",
+    "note": ""
+   },
+   {
+    "n": "Binary Subarrays With Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/binary-subarrays-with-sum/",
+    "s": "LC 930",
+    "note": "in your own notes"
+   },
+   {
+    "n": "Count Number of Nice Subarrays",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/count-number-of-nice-subarrays/",
+    "s": "LC 1248",
+    "note": ""
+   },
+   {
+    "n": "Count Subarrays With Score Less Than K",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/count-subarrays-with-score-less-than-k/",
+    "s": "LC 2302",
+    "note": "window, not prefix: compare the two"
+   },
+   {
+    "n": "Subarray with given sum",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/find-subarray-with-given-sum/",
+    "s": ""
+   },
+   {
+    "n": "Count subarrays with sum divisible by k",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/count-sub-arrays-sum-divisible-k/",
+    "s": ""
+   }
+  ],
+  "ps-longest": [
+   {
+    "n": "Contiguous Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/contiguous-array/",
+    "s": "LC 525",
+    "note": "in your own notes"
+   },
+   {
+    "n": "Continuous Subarray Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/continuous-subarray-sum/",
+    "s": "LC 523",
+    "note": "in your own notes"
+   },
+   {
+    "n": "Find Longest Awesome Substring",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-longest-awesome-substring/",
+    "s": "LC 1542",
+    "note": "bitmask prefix"
+   },
+   {
+    "n": "Find the Longest Substring Containing Vowels in Even Counts",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-the-longest-substring-containing-vowels-in-even-counts/",
+    "s": "LC 1371",
+    "note": "in your own notes"
+   },
+   {
+    "n": "Make Sum Divisible by P",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/make-sum-divisible-by-p/",
+    "s": "LC 1590",
+    "note": "in your own notes, shortest variant"
+   },
+   {
+    "n": "Maximum Size Subarray Sum Equals k",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/",
+    "s": "LC 325  · premium",
+    "note": ""
+   },
+   {
+    "n": "Largest subarray with equal number of 0s and 1s",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/largest-subarray-with-equal-number-of-0s-and-1s/",
+    "s": ""
+   },
+   {
+    "n": "Longest subarray with sum k",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/longest-sub-array-sum-k/",
+    "s": ""
+   }
+  ],
+  "ps-2d": [
+   {
+    "n": "Range Sum Query 2D - Immutable",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/range-sum-query-2d-immutable/",
+    "s": "LC 304",
+    "note": ""
+   },
+   {
+    "n": "Number of Submatrices That Sum to Target",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/number-of-submatrices-that-sum-to-target/",
+    "s": "LC 1074",
+    "note": ""
+   },
+   {
+    "n": "Maximum Side Length of a Square with Sum Less than or Equal to Threshold",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/",
+    "s": "LC 1292",
+    "note": ""
+   },
+   {
+    "n": "Matrix Block Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/matrix-block-sum/",
+    "s": "LC 1314",
+    "note": ""
+   },
+   {
+    "n": "Submatrix sum queries",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/submatrix-sum-queries/",
+    "s": ""
+   }
+  ],
+  "ps-diff": [
+   {
+    "n": "Corporate Flight Bookings",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/corporate-flight-bookings/",
+    "s": "LC 1109",
+    "note": ""
+   },
+   {
+    "n": "Car Pooling",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/car-pooling/",
+    "s": "LC 1094",
+    "note": ""
+   },
+   {
+    "n": "Range Addition",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/range-addition/",
+    "s": "LC 370  · premium",
+    "note": ""
+   },
+   {
+    "n": "Shifting Letters II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/shifting-letters-ii/",
+    "s": "LC 2381",
+    "note": ""
+   },
+   {
+    "n": "Difference array, range update in O(1)",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/difference-array-range-update-query-o1/",
+    "s": ""
+   },
+   {
+    "n": "Array Manipulation",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/crush/problem",
+    "s": ""
+   }
+  ],
+  "ps-suffix": [
+   {
+    "n": "Product of Array Except Self",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/product-of-array-except-self/",
+    "s": "LC 238",
+    "note": "in your own notes"
+   },
+   {
+    "n": "Trapping Rain Water",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/trapping-rain-water/",
+    "s": "LC 42",
+    "note": ""
+   },
+   {
+    "n": "Candy",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/candy/",
+    "s": "LC 135",
+    "note": ""
+   },
+   {
+    "n": "Best Time to Buy and Sell Stock III",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/",
+    "s": "LC 123",
+    "note": ""
+   },
+   {
+    "n": "Maximum Sum of Two Non-Overlapping Subarrays",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-sum-of-two-non-overlapping-subarrays/",
+    "s": "LC 1031",
+    "note": ""
+   },
+   {
+    "n": "A product array puzzle",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/a-product-array-puzzle/",
+    "s": ""
+   },
+   {
+    "n": "Trapping rain water",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/trapping-rain-water/",
+    "s": ""
+   }
+  ],
+  "bs-exact": [
+   {
+    "n": "Binary Search",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/binary-search/",
+    "s": "LC 704",
+    "note": ""
+   },
+   {
+    "n": "Search a 2D Matrix",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/search-a-2d-matrix/",
+    "s": "LC 74",
+    "note": ""
+   },
+   {
+    "n": "First Bad Version",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/first-bad-version/",
+    "s": "LC 278",
+    "note": ""
+   },
+   {
+    "n": "Sqrt(x)",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/sqrtx/",
+    "s": "LC 69",
+    "note": ""
+   },
+   {
+    "n": "Binary search",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/binary-search/",
+    "s": ""
+   },
+   {
+    "n": "Ice Cream Parlor",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/icecream-parlor/problem",
+    "s": ""
+   }
+  ],
+  "bs-bound": [
+   {
+    "n": "Find First and Last Position of Element in Sorted Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/",
+    "s": "LC 34",
+    "note": ""
+   },
+   {
+    "n": "Search Insert Position",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/search-insert-position/",
+    "s": "LC 35",
+    "note": ""
+   },
+   {
+    "n": "Find K Closest Elements",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-k-closest-elements/",
+    "s": "LC 658",
+    "note": ""
+   },
+   {
+    "n": "Longest Increasing Subsequence",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-increasing-subsequence/",
+    "s": "LC 300",
+    "note": "the O(n log n) version"
+   },
+   {
+    "n": "Floor in a sorted array",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/floor-in-a-sorted-array/",
+    "s": ""
+   },
+   {
+    "n": "Count occurrences in a sorted array",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/",
+    "s": ""
+   }
+  ],
+  "bs-answer": [
+   {
+    "n": "Koko Eating Bananas",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/koko-eating-bananas/",
+    "s": "LC 875",
+    "note": ""
+   },
+   {
+    "n": "Capacity To Ship Packages Within D Days",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/",
+    "s": "LC 1011",
+    "note": ""
+   },
+   {
+    "n": "Split Array Largest Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/split-array-largest-sum/",
+    "s": "LC 410",
+    "note": ""
+   },
+   {
+    "n": "Minimum Number of Days to Make m Bouquets",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/",
+    "s": "LC 1482",
+    "note": ""
+   },
+   {
+    "n": "Magnetic Force Between Two Balls",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/magnetic-force-between-two-balls/",
+    "s": "LC 1552",
+    "note": ""
+   },
+   {
+    "n": "Kth Smallest Element in a Sorted Matrix",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/",
+    "s": "LC 378",
+    "note": ""
+   },
+   {
+    "n": "Find the Smallest Divisor Given a Threshold",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/",
+    "s": "LC 1283",
+    "note": ""
+   },
+   {
+    "n": "Allocate minimum number of pages",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/allocate-minimum-number-pages/",
+    "s": ""
+   },
+   {
+    "n": "Place k elements so the minimum distance is maximised",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/place-k-elements-such-that-minimum-distance-is-maximized/",
+    "s": ""
+   },
+   {
+    "n": "Binary search tutorial",
+    "p": "HackerEarth",
+    "u": "https://www.hackerearth.com/practice/algorithms/searching/binary-search/tutorial/",
+    "s": ""
+   }
+  ],
+  "bs-rotated": [
+   {
+    "n": "Search in Rotated Sorted Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+    "s": "LC 33",
+    "note": ""
+   },
+   {
+    "n": "Find Minimum in Rotated Sorted Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
+    "s": "LC 153",
+    "note": ""
+   },
+   {
+    "n": "Find Peak Element",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-peak-element/",
+    "s": "LC 162",
+    "note": ""
+   },
+   {
+    "n": "Peak Index in a Mountain Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/peak-index-in-a-mountain-array/",
+    "s": "LC 852",
+    "note": ""
+   },
+   {
+    "n": "Single Element in a Sorted Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/single-element-in-a-sorted-array/",
+    "s": "LC 540",
+    "note": ""
+   },
+   {
+    "n": "Search in a sorted and rotated array",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/",
+    "s": ""
+   },
+   {
+    "n": "Find a peak element",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/find-a-peak-in-a-given-array/",
+    "s": ""
+   }
+  ],
+  "bs-partition": [
+   {
+    "n": "Median of Two Sorted Arrays",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/median-of-two-sorted-arrays/",
+    "s": "LC 4",
+    "note": ""
+   },
+   {
+    "n": "Kth Smallest Element in a Sorted Matrix",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/",
+    "s": "LC 378",
+    "note": ""
+   },
+   {
+    "n": "Median of two sorted arrays of different sizes",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/median-of-two-sorted-arrays-of-different-sizes/",
+    "s": ""
+   }
+  ],
+  "hs-seen": [
+   {
+    "n": "Contains Duplicate",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/contains-duplicate/",
+    "s": "LC 217",
+    "note": ""
+   },
+   {
+    "n": "Contains Duplicate II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/contains-duplicate-ii/",
+    "s": "LC 219",
+    "note": "in your own notes"
+   },
+   {
+    "n": "Longest Consecutive Sequence",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-consecutive-sequence/",
+    "s": "LC 128",
+    "note": ""
+   },
+   {
+    "n": "Happy Number",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/happy-number/",
+    "s": "LC 202",
+    "note": ""
+   },
+   {
+    "n": "Valid Sudoku",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/valid-sudoku/",
+    "s": "LC 36",
+    "note": ""
+   },
+   {
+    "n": "Two Strings",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/two-strings/problem",
+    "s": ""
+   },
+   {
+    "n": "Longest consecutive subsequence",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/longest-consecutive-subsequence/",
+    "s": ""
+   }
+  ],
+  "hs-freq": [
+   {
+    "n": "Valid Anagram",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/valid-anagram/",
+    "s": "LC 242",
+    "note": ""
+   },
+   {
+    "n": "Group Anagrams",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/group-anagrams/",
+    "s": "LC 49",
+    "note": ""
+   },
+   {
+    "n": "Top K Frequent Elements",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/top-k-frequent-elements/",
+    "s": "LC 347",
+    "note": ""
+   },
+   {
+    "n": "First Unique Character in a String",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/first-unique-character-in-a-string/",
+    "s": "LC 387",
+    "note": ""
+   },
+   {
+    "n": "Reorganize String",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/reorganize-string/",
+    "s": "LC 767",
+    "note": ""
+   },
+   {
+    "n": "Longest Palindrome",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-palindrome/",
+    "s": "LC 409",
+    "note": ""
+   },
+   {
+    "n": "Sherlock and Anagrams",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/sherlock-and-anagrams/problem",
+    "s": ""
+   },
+   {
+    "n": "Counting frequencies of array elements",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/counting-frequencies-of-array-elements/",
+    "s": ""
+   },
+   {
+    "n": "Find k numbers with most occurrences",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/find-k-numbers-occurrences-given-array/",
+    "s": ""
+   }
+  ],
+  "hs-index": [
+   {
+    "n": "Two Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/two-sum/",
+    "s": "LC 1",
+    "note": ""
+   },
+   {
+    "n": "Isomorphic Strings",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/isomorphic-strings/",
+    "s": "LC 205",
+    "note": ""
+   },
+   {
+    "n": "Partition Labels",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/partition-labels/",
+    "s": "LC 763",
+    "note": ""
+   },
+   {
+    "n": "LRU Cache",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/lru-cache/",
+    "s": "LC 146",
+    "note": ""
+   },
+   {
+    "n": "Count Triplets",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/count-triplets-1/problem",
+    "s": ""
+   },
+   {
+    "n": "Check if a pair with a given sum exists",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/check-if-pair-with-given-sum-exists-in-array/",
+    "s": ""
+   }
+  ],
+  "hs-group": [
+   {
+    "n": "Group Anagrams",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/group-anagrams/",
+    "s": "LC 49",
+    "note": ""
+   },
+   {
+    "n": "Group Shifted Strings",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/group-shifted-strings/",
+    "s": "LC 249  · premium",
+    "note": ""
+   },
+   {
+    "n": "Find Duplicate Subtrees",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-duplicate-subtrees/",
+    "s": "LC 652",
+    "note": ""
+   },
+   {
+    "n": "Max Points on a Line",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/max-points-on-a-line/",
+    "s": "LC 149",
+    "note": ""
+   },
+   {
+    "n": "Find Duplicate File in System",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-duplicate-file-in-system/",
+    "s": "LC 609",
+    "note": ""
+   },
+   {
+    "n": "Print all anagrams together",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/given-a-sequence-of-words-print-all-anagrams-together/",
+    "s": ""
+   }
+  ],
+  "hs-cyclic": [
+   {
+    "n": "Missing Number",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/missing-number/",
+    "s": "LC 268",
+    "note": ""
+   },
+   {
+    "n": "Find All Numbers Disappeared in an Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/",
+    "s": "LC 448",
+    "note": ""
+   },
+   {
+    "n": "Find All Duplicates in an Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-all-duplicates-in-an-array/",
+    "s": "LC 442",
+    "note": ""
+   },
+   {
+    "n": "First Missing Positive",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/first-missing-positive/",
+    "s": "LC 41",
+    "note": ""
+   },
+   {
+    "n": "Find the Duplicate Number",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-the-duplicate-number/",
+    "s": "LC 287",
+    "note": "fast & slow pointers"
+   },
+   {
+    "n": "Find the missing number",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/find-the-missing-number/",
+    "s": ""
+   },
+   {
+    "n": "Smallest positive missing number",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/find-the-smallest-positive-number-missing-from-an-unsorted-array/",
+    "s": ""
+   }
+  ],
+  "ms-next": [
+   {
+    "n": "Daily Temperatures",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/daily-temperatures/",
+    "s": "LC 739",
+    "note": ""
+   },
+   {
+    "n": "Next Greater Element II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/next-greater-element-ii/",
+    "s": "LC 503",
+    "note": ""
+   },
+   {
+    "n": "Online Stock Span",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/online-stock-span/",
+    "s": "LC 901",
+    "note": ""
+   },
+   {
+    "n": "Sum of Subarray Minimums",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/sum-of-subarray-minimums/",
+    "s": "LC 907",
+    "note": ""
+   },
+   {
+    "n": "Buildings With an Ocean View",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/buildings-with-an-ocean-view/",
+    "s": "LC 1762  · premium",
+    "note": ""
+   },
+   {
+    "n": "132 Pattern",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/132-pattern/",
+    "s": "LC 456",
+    "note": ""
+   },
+   {
+    "n": "Next greater element",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/next-greater-element/",
+    "s": ""
+   },
+   {
+    "n": "The stock span problem",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/the-stock-span-problem/",
+    "s": ""
+   }
+  ],
+  "ms-hist": [
+   {
+    "n": "Largest Rectangle in Histogram",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
+    "s": "LC 84",
+    "note": ""
+   },
+   {
+    "n": "Maximal Rectangle",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximal-rectangle/",
+    "s": "LC 85",
+    "note": ""
+   },
+   {
+    "n": "Trapping Rain Water",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/trapping-rain-water/",
+    "s": "LC 42",
+    "note": ""
+   },
+   {
+    "n": "Sum of Subarray Ranges",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/sum-of-subarray-ranges/",
+    "s": "LC 2104",
+    "note": ""
+   },
+   {
+    "n": "Largest rectangle under a histogram",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/largest-rectangle-under-histogram/",
+    "s": ""
+   },
+   {
+    "n": "Largest Rectangle",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/largest-rectangle/problem",
+    "s": ""
+   }
+  ],
+  "ms-match": [
+   {
+    "n": "Valid Parentheses",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/valid-parentheses/",
+    "s": "LC 20",
+    "note": ""
+   },
+   {
+    "n": "Decode String",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/decode-string/",
+    "s": "LC 394",
+    "note": ""
+   },
+   {
+    "n": "Evaluate Reverse Polish Notation",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/evaluate-reverse-polish-notation/",
+    "s": "LC 150",
+    "note": ""
+   },
+   {
+    "n": "Basic Calculator II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/basic-calculator-ii/",
+    "s": "LC 227",
+    "note": ""
+   },
+   {
+    "n": "Asteroid Collision",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/asteroid-collision/",
+    "s": "LC 735",
+    "note": ""
+   },
+   {
+    "n": "Simplify Path",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/simplify-path/",
+    "s": "LC 71",
+    "note": ""
+   },
+   {
+    "n": "Longest Valid Parentheses",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-valid-parentheses/",
+    "s": "LC 32",
+    "note": ""
+   },
+   {
+    "n": "Balanced Brackets",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/balanced-brackets/problem",
+    "s": ""
+   },
+   {
+    "n": "Check for balanced parentheses",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/check-for-balanced-parentheses-in-an-expression/",
+    "s": ""
+   },
+   {
+    "n": "Maximum Element",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/maximum-element/problem",
+    "s": ""
+   }
+  ],
+  "ms-greedy": [
+   {
+    "n": "Remove K Digits",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/remove-k-digits/",
+    "s": "LC 402",
+    "note": ""
+   },
+   {
+    "n": "Remove Duplicate Letters",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/remove-duplicate-letters/",
+    "s": "LC 316",
+    "note": ""
+   },
+   {
+    "n": "Find the Most Competitive Subsequence",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-the-most-competitive-subsequence/",
+    "s": "LC 1673",
+    "note": ""
+   },
+   {
+    "n": "Create Maximum Number",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/create-maximum-number/",
+    "s": "LC 321",
+    "note": ""
+   },
+   {
+    "n": "Maximum Swap",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-swap/",
+    "s": "LC 670",
+    "note": ""
+   },
+   {
+    "n": "Build the lowest number by removing n digits",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/build-lowest-number-by-removing-n-digits-from-a-given-number/",
+    "s": ""
+   }
+  ],
+  "hp-topk": [
+   {
+    "n": "Kth Largest Element in an Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+    "s": "LC 215",
+    "note": ""
+   },
+   {
+    "n": "Top K Frequent Elements",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/top-k-frequent-elements/",
+    "s": "LC 347",
+    "note": ""
+   },
+   {
+    "n": "K Closest Points to Origin",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/k-closest-points-to-origin/",
+    "s": "LC 973",
+    "note": ""
+   },
+   {
+    "n": "Kth Largest Element in a Stream",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/kth-largest-element-in-a-stream/",
+    "s": "LC 703",
+    "note": ""
+   },
+   {
+    "n": "Last Stone Weight",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/last-stone-weight/",
+    "s": "LC 1046",
+    "note": ""
+   },
+   {
+    "n": "Minimum Cost to Connect Sticks",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-cost-to-connect-sticks/",
+    "s": "LC 1167  · premium",
+    "note": ""
+   },
+   {
+    "n": "Furthest Building You Can Reach",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/furthest-building-you-can-reach/",
+    "s": "LC 1642",
+    "note": ""
+   },
+   {
+    "n": "Jesse and Cookies",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/jesse-and-cookies/problem",
+    "s": ""
+   },
+   {
+    "n": "K largest or smallest elements in an array",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/",
+    "s": ""
+   },
+   {
+    "n": "QHEAP1",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/qheap1/problem",
+    "s": ""
+   }
+  ],
+  "hp-merge": [
+   {
+    "n": "Merge k Sorted Lists",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/merge-k-sorted-lists/",
+    "s": "LC 23",
+    "note": ""
+   },
+   {
+    "n": "Smallest Range Covering Elements from K Lists",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/",
+    "s": "LC 632",
+    "note": ""
+   },
+   {
+    "n": "Find K Pairs with Smallest Sums",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-k-pairs-with-smallest-sums/",
+    "s": "LC 373",
+    "note": ""
+   },
+   {
+    "n": "Kth Smallest Element in a Sorted Matrix",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/",
+    "s": "LC 378",
+    "note": ""
+   },
+   {
+    "n": "Merge k sorted arrays",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/merge-k-sorted-arrays/",
+    "s": ""
+   }
+  ],
+  "hp-two": [
+   {
+    "n": "Find Median from Data Stream",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-median-from-data-stream/",
+    "s": "LC 295",
+    "note": ""
+   },
+   {
+    "n": "Sliding Window Median",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/sliding-window-median/",
+    "s": "LC 480",
+    "note": ""
+   },
+   {
+    "n": "IPO",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/ipo/",
+    "s": "LC 502",
+    "note": ""
+   },
+   {
+    "n": "Find the Running Median",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/find-the-running-median/problem",
+    "s": ""
+   },
+   {
+    "n": "Median in a stream of integers",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/median-of-stream-of-integers-running-integers/",
+    "s": ""
+   }
+  ],
+  "hp-greedy": [
+   {
+    "n": "Meeting Rooms II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/meeting-rooms-ii/",
+    "s": "LC 253  · premium",
+    "note": ""
+   },
+   {
+    "n": "Task Scheduler",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/task-scheduler/",
+    "s": "LC 621",
+    "note": ""
+   },
+   {
+    "n": "Single-Threaded CPU",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/single-threaded-cpu/",
+    "s": "LC 1834",
+    "note": ""
+   },
+   {
+    "n": "Maximum Number of Events That Can Be Attended",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/",
+    "s": "LC 1353",
+    "note": ""
+   },
+   {
+    "n": "Minimum Number of Refueling Stops",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-number-of-refueling-stops/",
+    "s": "LC 871",
+    "note": ""
+   },
+   {
+    "n": "Minimum platforms required for a railway station",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/minimum-number-platforms-required-railwaybus-station/",
+    "s": ""
+   },
+   {
+    "n": "Connect n ropes with minimum cost",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/connect-n-ropes-minimum-cost/",
+    "s": ""
+   }
+  ],
+  "iv-merge": [
+   {
+    "n": "Merge Intervals",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/merge-intervals/",
+    "s": "LC 56",
+    "note": ""
+   },
+   {
+    "n": "Meeting Rooms",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/meeting-rooms/",
+    "s": "LC 252  · premium",
+    "note": ""
+   },
+   {
+    "n": "Interval List Intersections",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/interval-list-intersections/",
+    "s": "LC 986",
+    "note": ""
+   },
+   {
+    "n": "Remove Covered Intervals",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/remove-covered-intervals/",
+    "s": "LC 1288",
+    "note": ""
+   },
+   {
+    "n": "Employee Free Time",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/employee-free-time/",
+    "s": "LC 759  · premium",
+    "note": ""
+   },
+   {
+    "n": "Merging intervals",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/merging-intervals/",
+    "s": ""
+   }
+  ],
+  "iv-insert": [
+   {
+    "n": "Insert Interval",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/insert-interval/",
+    "s": "LC 57",
+    "note": ""
+   },
+   {
+    "n": "My Calendar I",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/my-calendar-i/",
+    "s": "LC 729",
+    "note": ""
+   },
+   {
+    "n": "Data Stream as Disjoint Intervals",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/data-stream-as-disjoint-intervals/",
+    "s": "LC 352",
+    "note": ""
+   },
+   {
+    "n": "Insert into a sorted, non-overlapping interval array",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/insert-in-sorted-and-non-overlapping-interval-array/",
+    "s": ""
+   }
+  ],
+  "iv-greedy": [
+   {
+    "n": "Non-overlapping Intervals",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/non-overlapping-intervals/",
+    "s": "LC 435",
+    "note": ""
+   },
+   {
+    "n": "Minimum Number of Arrows to Burst Balloons",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/",
+    "s": "LC 452",
+    "note": ""
+   },
+   {
+    "n": "Maximum Length of Pair Chain",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-length-of-pair-chain/",
+    "s": "LC 646",
+    "note": ""
+   },
+   {
+    "n": "Video Stitching",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/video-stitching/",
+    "s": "LC 1024",
+    "note": ""
+   },
+   {
+    "n": "Activity selection problem",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/activity-selection-problem-greedy-algo-1/",
+    "s": ""
+   },
+   {
+    "n": "Greedy Florist",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/greedy-florist/problem",
+    "s": ""
+   }
+  ],
+  "iv-sweep": [
+   {
+    "n": "Meeting Rooms II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/meeting-rooms-ii/",
+    "s": "LC 253  · premium",
+    "note": ""
+   },
+   {
+    "n": "Car Pooling",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/car-pooling/",
+    "s": "LC 1094",
+    "note": ""
+   },
+   {
+    "n": "Maximum Population Year",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-population-year/",
+    "s": "LC 1854",
+    "note": ""
+   },
+   {
+    "n": "The Skyline Problem",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/the-skyline-problem/",
+    "s": "LC 218",
+    "note": ""
+   },
+   {
+    "n": "Minimum platforms required for a railway station",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/minimum-number-platforms-required-railwaybus-station/",
+    "s": ""
+   }
+  ],
+  "iv-sortkey": [
+   {
+    "n": "Queue Reconstruction by Height",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/queue-reconstruction-by-height/",
+    "s": "LC 406",
+    "note": ""
+   },
+   {
+    "n": "Largest Number",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/largest-number/",
+    "s": "LC 179",
+    "note": ""
+   },
+   {
+    "n": "Boats to Save People",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/boats-to-save-people/",
+    "s": "LC 881",
+    "note": ""
+   },
+   {
+    "n": "Car Fleet",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/car-fleet/",
+    "s": "LC 853",
+    "note": ""
+   },
+   {
+    "n": "Assign Cookies",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/assign-cookies/",
+    "s": "LC 455",
+    "note": ""
+   },
+   {
+    "n": "Arrange numbers to form the biggest number",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/given-an-array-of-numbers-arrange-the-numbers-to-form-the-biggest-number/",
+    "s": ""
+   },
+   {
+    "n": "Mark and Toys",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/mark-and-toys/problem",
+    "s": ""
+   }
+  ],
+  "bt-xor": [
+   {
+    "n": "Single Number",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/single-number/",
+    "s": "LC 136",
+    "note": ""
+   },
+   {
+    "n": "Single Number II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/single-number-ii/",
+    "s": "LC 137",
+    "note": ""
+   },
+   {
+    "n": "Single Number III",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/single-number-iii/",
+    "s": "LC 260",
+    "note": ""
+   },
+   {
+    "n": "Missing Number",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/missing-number/",
+    "s": "LC 268",
+    "note": ""
+   },
+   {
+    "n": "Maximum XOR of Two Numbers in an Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/",
+    "s": "LC 421",
+    "note": ""
+   },
+   {
+    "n": "XOR Queries of a Subarray",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/xor-queries-of-a-subarray/",
+    "s": "LC 1310",
+    "note": ""
+   },
+   {
+    "n": "Find the number occurring an odd number of times",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/find-the-number-occurring-odd-number-of-times/",
+    "s": ""
+   },
+   {
+    "n": "Lonely Integer",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/lonely-integer/problem",
+    "s": ""
+   },
+   {
+    "n": "Maximum subarray XOR",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/find-the-maximum-subarray-xor-in-a-given-array/",
+    "s": ""
+   },
+   {
+    "n": "Bitwise hacks for competitive programming",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/bitwise-hacks-for-competitive-programming/",
+    "s": ""
+   }
+  ],
+  "bt-subsets": [
+   {
+    "n": "Subsets",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/subsets/",
+    "s": "LC 78",
+    "note": ""
+   },
+   {
+    "n": "Partition to K Equal Sum Subsets",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/partition-to-k-equal-sum-subsets/",
+    "s": "LC 698",
+    "note": ""
+   },
+   {
+    "n": "Maximum Compatibility Score Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-compatibility-score-sum/",
+    "s": "LC 1947",
+    "note": ""
+   },
+   {
+    "n": "Maximum Product of the Length of Two Palindromic Subsequences",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-subsequences/",
+    "s": "LC 2002",
+    "note": ""
+   },
+   {
+    "n": "Power set",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/power-set/",
+    "s": ""
+   },
+   {
+    "n": "Subset sum problem",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/subset-sum-problem-dp-25/",
+    "s": ""
+   }
+  ],
+  "bt-dp": [
+   {
+    "n": "Shortest Path Visiting All Nodes",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/shortest-path-visiting-all-nodes/",
+    "s": "LC 847",
+    "note": ""
+   },
+   {
+    "n": "Number of Ways to Wear Different Hats to Each Other",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/number-of-ways-to-wear-different-hats-to-each-other/",
+    "s": "LC 1434",
+    "note": ""
+   },
+   {
+    "n": "Minimum Number of Work Sessions to Finish the Tasks",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks/",
+    "s": "LC 1986",
+    "note": ""
+   },
+   {
+    "n": "Find Minimum Time to Finish All Jobs",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs/",
+    "s": "LC 1723",
+    "note": ""
+   },
+   {
+    "n": "Travelling salesman problem",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/travelling-salesman-problem-set-1/",
+    "s": ""
+   },
+   {
+    "n": "Bitmasking and dynamic programming",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/bitmasking-and-dynamic-programming-set-1-count-ways-to-assign-unique-cap-to-every-person/",
+    "s": ""
+   }
+  ],
+  "bt-tricks": [
+   {
+    "n": "Number of 1 Bits",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/number-of-1-bits/",
+    "s": "LC 191",
+    "note": ""
+   },
+   {
+    "n": "Counting Bits",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/counting-bits/",
+    "s": "LC 338",
+    "note": ""
+   },
+   {
+    "n": "Reverse Bits",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/reverse-bits/",
+    "s": "LC 190",
+    "note": ""
+   },
+   {
+    "n": "Sum of Two Integers",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/sum-of-two-integers/",
+    "s": "LC 371",
+    "note": ""
+   },
+   {
+    "n": "Bitwise AND of Numbers Range",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/bitwise-and-of-numbers-range/",
+    "s": "LC 201",
+    "note": ""
+   },
+   {
+    "n": "Gray Code",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/gray-code/",
+    "s": "LC 89",
+    "note": ""
+   },
+   {
+    "n": "Bit manipulation, important tactics",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/bits-manipulation-important-tactics/",
+    "s": ""
+   },
+   {
+    "n": "Count set bits in an integer",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/count-set-bits-in-an-integer/",
+    "s": ""
+   },
+   {
+    "n": "Flipping bits",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/flipping-bits/problem",
+    "s": ""
+   }
+  ],
+  "ll-fastslow": [
+   {
+    "n": "Linked List Cycle",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/linked-list-cycle/",
+    "s": "LC 141",
+    "note": ""
+   },
+   {
+    "n": "Linked List Cycle II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/linked-list-cycle-ii/",
+    "s": "LC 142",
+    "note": ""
+   },
+   {
+    "n": "Middle of the Linked List",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/middle-of-the-linked-list/",
+    "s": "LC 876",
+    "note": ""
+   },
+   {
+    "n": "Remove Nth Node From End of List",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+    "s": "LC 19",
+    "note": ""
+   },
+   {
+    "n": "Palindrome Linked List",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/palindrome-linked-list/",
+    "s": "LC 234",
+    "note": ""
+   },
+   {
+    "n": "Find the Duplicate Number",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-the-duplicate-number/",
+    "s": "LC 287",
+    "note": ""
+   },
+   {
+    "n": "Reorder List",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/reorder-list/",
+    "s": "LC 143",
+    "note": ""
+   },
+   {
+    "n": "Detect a loop in a linked list",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/detect-loop-in-a-linked-list/",
+    "s": ""
+   },
+   {
+    "n": "Cycle Detection",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/detect-whether-a-linked-list-contains-a-cycle/problem",
+    "s": ""
+   }
+  ],
+  "ll-reverse": [
+   {
+    "n": "Reverse Linked List",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/reverse-linked-list/",
+    "s": "LC 206",
+    "note": ""
+   },
+   {
+    "n": "Reverse Linked List II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/reverse-linked-list-ii/",
+    "s": "LC 92",
+    "note": ""
+   },
+   {
+    "n": "Reverse Nodes in k-Group",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/reverse-nodes-in-k-group/",
+    "s": "LC 25",
+    "note": ""
+   },
+   {
+    "n": "Swap Nodes in Pairs",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/swap-nodes-in-pairs/",
+    "s": "LC 24",
+    "note": ""
+   },
+   {
+    "n": "Rotate List",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/rotate-list/",
+    "s": "LC 61",
+    "note": ""
+   },
+   {
+    "n": "Add Two Numbers II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/add-two-numbers-ii/",
+    "s": "LC 445",
+    "note": ""
+   },
+   {
+    "n": "Reverse a linked list",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/reverse-a-linked-list/",
+    "s": ""
+   },
+   {
+    "n": "Reverse a Linked List",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/reverse-a-linked-list/problem",
+    "s": ""
+   }
+  ],
+  "ll-dummy": [
+   {
+    "n": "Remove Linked List Elements",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/remove-linked-list-elements/",
+    "s": "LC 203",
+    "note": ""
+   },
+   {
+    "n": "Remove Duplicates from Sorted List II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/",
+    "s": "LC 82",
+    "note": ""
+   },
+   {
+    "n": "Partition List",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/partition-list/",
+    "s": "LC 86",
+    "note": ""
+   },
+   {
+    "n": "Odd Even Linked List",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/odd-even-linked-list/",
+    "s": "LC 328",
+    "note": ""
+   },
+   {
+    "n": "Remove duplicates from a sorted linked list",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/remove-duplicates-from-a-sorted-linked-list/",
+    "s": ""
+   },
+   {
+    "n": "Delete a Node",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/delete-a-node-from-a-linked-list/problem",
+    "s": ""
+   }
+  ],
+  "ll-merge": [
+   {
+    "n": "Merge Two Sorted Lists",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/merge-two-sorted-lists/",
+    "s": "LC 21",
+    "note": ""
+   },
+   {
+    "n": "Merge k Sorted Lists",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/merge-k-sorted-lists/",
+    "s": "LC 23",
+    "note": ""
+   },
+   {
+    "n": "Sort List",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/sort-list/",
+    "s": "LC 148",
+    "note": ""
+   },
+   {
+    "n": "Intersection of Two Linked Lists",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/intersection-of-two-linked-lists/",
+    "s": "LC 160",
+    "note": ""
+   },
+   {
+    "n": "Add Two Numbers",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/add-two-numbers/",
+    "s": "LC 2",
+    "note": ""
+   },
+   {
+    "n": "Merge two sorted linked lists",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/merge-two-sorted-linked-lists/",
+    "s": ""
+   },
+   {
+    "n": "Merge two sorted linked lists",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/merge-two-sorted-linked-lists/problem",
+    "s": ""
+   }
+  ],
+  "td-up": [
+   {
+    "n": "Maximum Depth of Binary Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+    "s": "LC 104",
+    "note": ""
+   },
+   {
+    "n": "Diameter of Binary Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/diameter-of-binary-tree/",
+    "s": "LC 543",
+    "note": ""
+   },
+   {
+    "n": "Balanced Binary Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/balanced-binary-tree/",
+    "s": "LC 110",
+    "note": ""
+   },
+   {
+    "n": "Binary Tree Maximum Path Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+    "s": "LC 124",
+    "note": ""
+   },
+   {
+    "n": "Same Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/same-tree/",
+    "s": "LC 100",
+    "note": ""
+   },
+   {
+    "n": "Symmetric Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/symmetric-tree/",
+    "s": "LC 101",
+    "note": ""
+   },
+   {
+    "n": "Invert Binary Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/invert-binary-tree/",
+    "s": "LC 226",
+    "note": ""
+   },
+   {
+    "n": "House Robber III",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/house-robber-iii/",
+    "s": "LC 337",
+    "note": ""
+   },
+   {
+    "n": "Height of a binary tree",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/write-a-c-program-to-find-the-maximum-depth-or-height-of-a-tree/",
+    "s": ""
+   },
+   {
+    "n": "Diameter of a binary tree",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/diameter-of-a-binary-tree/",
+    "s": ""
+   },
+   {
+    "n": "Height of a Binary Tree",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/tree-height-of-a-binary-tree/problem",
+    "s": ""
+   }
+  ],
+  "td-down": [
+   {
+    "n": "Path Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/path-sum/",
+    "s": "LC 112",
+    "note": ""
+   },
+   {
+    "n": "Path Sum II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/path-sum-ii/",
+    "s": "LC 113",
+    "note": ""
+   },
+   {
+    "n": "Binary Tree Paths",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/binary-tree-paths/",
+    "s": "LC 257",
+    "note": ""
+   },
+   {
+    "n": "Sum Root to Leaf Numbers",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/sum-root-to-leaf-numbers/",
+    "s": "LC 129",
+    "note": ""
+   },
+   {
+    "n": "Count Good Nodes in Binary Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/count-good-nodes-in-binary-tree/",
+    "s": "LC 1448",
+    "note": ""
+   },
+   {
+    "n": "Maximum Difference Between Node and Ancestor",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/",
+    "s": "LC 1026",
+    "note": ""
+   },
+   {
+    "n": "Root to leaf paths",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/given-a-binary-tree-print-all-root-to-leaf-paths/",
+    "s": ""
+   },
+   {
+    "n": "Root to leaf path sum",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/",
+    "s": ""
+   }
+  ],
+  "td-bst": [
+   {
+    "n": "Validate Binary Search Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/validate-binary-search-tree/",
+    "s": "LC 98",
+    "note": ""
+   },
+   {
+    "n": "Kth Smallest Element in a BST",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+    "s": "LC 230",
+    "note": ""
+   },
+   {
+    "n": "Lowest Common Ancestor of a Binary Search Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
+    "s": "LC 235",
+    "note": ""
+   },
+   {
+    "n": "Convert Sorted Array to Binary Search Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/",
+    "s": "LC 108",
+    "note": ""
+   },
+   {
+    "n": "Range Sum of BST",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/range-sum-of-bst/",
+    "s": "LC 938",
+    "note": ""
+   },
+   {
+    "n": "Delete Node in a BST",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/delete-node-in-a-bst/",
+    "s": "LC 450",
+    "note": ""
+   },
+   {
+    "n": "Check if a binary tree is a BST",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/a-program-to-check-if-a-binary-tree-is-bst-or-not/",
+    "s": ""
+   },
+   {
+    "n": "Binary Search Tree: Insertion",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/binary-search-tree-insertion/problem",
+    "s": ""
+   }
+  ],
+  "td-lca": [
+   {
+    "n": "Lowest Common Ancestor of a Binary Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/",
+    "s": "LC 236",
+    "note": ""
+   },
+   {
+    "n": "All Nodes Distance K in Binary Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/",
+    "s": "LC 863",
+    "note": ""
+   },
+   {
+    "n": "Step-By-Step Directions From a Binary Tree Node to Another",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/",
+    "s": "LC 2096",
+    "note": ""
+   },
+   {
+    "n": "Lowest Common Ancestor of Deepest Leaves",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/",
+    "s": "LC 1123",
+    "note": ""
+   },
+   {
+    "n": "Lowest common ancestor in a binary tree",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/lowest-common-ancestor-binary-tree-set-1/",
+    "s": ""
+   },
+   {
+    "n": "BST: Lowest Common Ancestor",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/binary-search-tree-lowest-common-ancestor/problem",
+    "s": ""
+   }
+  ],
+  "tb-levels": [
+   {
+    "n": "Binary Tree Level Order Traversal",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+    "s": "LC 102",
+    "note": ""
+   },
+   {
+    "n": "Binary Tree Zigzag Level Order Traversal",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/",
+    "s": "LC 103",
+    "note": ""
+   },
+   {
+    "n": "Binary Tree Right Side View",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/binary-tree-right-side-view/",
+    "s": "LC 199",
+    "note": ""
+   },
+   {
+    "n": "Minimum Depth of Binary Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-depth-of-binary-tree/",
+    "s": "LC 111",
+    "note": ""
+   },
+   {
+    "n": "Populating Next Right Pointers in Each Node",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/populating-next-right-pointers-in-each-node/",
+    "s": "LC 116",
+    "note": ""
+   },
+   {
+    "n": "Maximum Width of Binary Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-width-of-binary-tree/",
+    "s": "LC 662",
+    "note": ""
+   },
+   {
+    "n": "Average of Levels in Binary Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/average-of-levels-in-binary-tree/",
+    "s": "LC 637",
+    "note": ""
+   },
+   {
+    "n": "Level order traversal",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/level-order-tree-traversal/",
+    "s": ""
+   },
+   {
+    "n": "Tree: Level Order Traversal",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/tree-level-order-traversal/problem",
+    "s": ""
+   },
+   {
+    "n": "Print left view of a binary tree",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/print-left-view-binary-tree/",
+    "s": ""
+   }
+  ],
+  "tr-basic": [
+   {
+    "n": "Implement Trie (Prefix Tree)",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/implement-trie-prefix-tree/",
+    "s": "LC 208",
+    "note": ""
+   },
+   {
+    "n": "Replace Words",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/replace-words/",
+    "s": "LC 648",
+    "note": ""
+   },
+   {
+    "n": "Search Suggestions System",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/search-suggestions-system/",
+    "s": "LC 1268",
+    "note": ""
+   },
+   {
+    "n": "Maximum XOR of Two Numbers in an Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/",
+    "s": "LC 421",
+    "note": ""
+   },
+   {
+    "n": "Longest Common Prefix",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-common-prefix/",
+    "s": "LC 14",
+    "note": ""
+   },
+   {
+    "n": "Trie insert and search",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/trie-insert-and-search/",
+    "s": ""
+   },
+   {
+    "n": "Contacts",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/contacts/problem",
+    "s": ""
+   }
+  ],
+  "tr-search": [
+   {
+    "n": "Word Search II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/word-search-ii/",
+    "s": "LC 212",
+    "note": ""
+   },
+   {
+    "n": "Design Add and Search Words Data Structure",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/design-add-and-search-words-data-structure/",
+    "s": "LC 211",
+    "note": ""
+   },
+   {
+    "n": "Word Break II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/word-break-ii/",
+    "s": "LC 140",
+    "note": ""
+   },
+   {
+    "n": "Stream of Characters",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/stream-of-characters/",
+    "s": "LC 1032",
+    "note": ""
+   },
+   {
+    "n": "Concatenated Words",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/concatenated-words/",
+    "s": "LC 472",
+    "note": ""
+   },
+   {
+    "n": "Word break problem, trie solution",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/word-break-problem-trie-solution/",
+    "s": ""
+   },
+   {
+    "n": "No Prefix Set",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/no-prefix-set/problem",
+    "s": ""
+   }
+  ],
+  "gr-flood": [
+   {
+    "n": "Number of Islands",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/number-of-islands/",
+    "s": "LC 200",
+    "note": ""
+   },
+   {
+    "n": "Max Area of Island",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/max-area-of-island/",
+    "s": "LC 695",
+    "note": ""
+   },
+   {
+    "n": "Flood Fill",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/flood-fill/",
+    "s": "LC 733",
+    "note": ""
+   },
+   {
+    "n": "Surrounded Regions",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/surrounded-regions/",
+    "s": "LC 130",
+    "note": ""
+   },
+   {
+    "n": "Pacific Atlantic Water Flow",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
+    "s": "LC 417",
+    "note": ""
+   },
+   {
+    "n": "Number of Closed Islands",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/number-of-closed-islands/",
+    "s": "LC 1254",
+    "note": ""
+   },
+   {
+    "n": "Making A Large Island",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/making-a-large-island/",
+    "s": "LC 827",
+    "note": ""
+   },
+   {
+    "n": "Find the number of islands",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/find-number-of-islands/",
+    "s": ""
+   },
+   {
+    "n": "Flood fill algorithm",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/flood-fill-algorithm-implement-fill-paint/",
+    "s": ""
+   },
+   {
+    "n": "Connected Cells in a Grid",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/connected-cell-in-a-grid/problem",
+    "s": ""
+   }
+  ],
+  "gr-bfs": [
+   {
+    "n": "Shortest Path in Binary Matrix",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/shortest-path-in-binary-matrix/",
+    "s": "LC 1091",
+    "note": ""
+   },
+   {
+    "n": "Word Ladder",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/word-ladder/",
+    "s": "LC 127",
+    "note": ""
+   },
+   {
+    "n": "Open the Lock",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/open-the-lock/",
+    "s": "LC 752",
+    "note": ""
+   },
+   {
+    "n": "Shortest Path in a Grid with Obstacles Elimination",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/",
+    "s": "LC 1293",
+    "note": ""
+   },
+   {
+    "n": "Nearest Exit from Entrance in Maze",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/",
+    "s": "LC 1926",
+    "note": ""
+   },
+   {
+    "n": "Sliding Puzzle",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/sliding-puzzle/",
+    "s": "LC 773",
+    "note": ""
+   },
+   {
+    "n": "Shortest path in a binary maze",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/shortest-path-in-a-binary-maze/",
+    "s": ""
+   },
+   {
+    "n": "BFS: Shortest Reach in a Graph",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/bfsshortreach/problem",
+    "s": ""
+   },
+   {
+    "n": "Breadth first search tutorial",
+    "p": "HackerEarth",
+    "u": "https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/tutorial/",
+    "s": ""
+   }
+  ],
+  "gr-multi": [
+   {
+    "n": "Rotting Oranges",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/rotting-oranges/",
+    "s": "LC 994",
+    "note": ""
+   },
+   {
+    "n": "01 Matrix",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/01-matrix/",
+    "s": "LC 542",
+    "note": ""
+   },
+   {
+    "n": "Walls and Gates",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/walls-and-gates/",
+    "s": "LC 286  · premium",
+    "note": ""
+   },
+   {
+    "n": "As Far from Land as Possible",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/as-far-from-land-as-possible/",
+    "s": "LC 1162",
+    "note": ""
+   },
+   {
+    "n": "Shortest Bridge",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/shortest-bridge/",
+    "s": "LC 934",
+    "note": ""
+   },
+   {
+    "n": "Map of Highest Peak",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/map-of-highest-peak/",
+    "s": "LC 1765",
+    "note": ""
+   },
+   {
+    "n": "Minimum time to rot all oranges",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/minimum-time-required-so-that-all-oranges-become-rotten/",
+    "s": ""
+   },
+   {
+    "n": "Distance of the nearest cell having 1",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/distance-nearest-cell-1-binary-matrix/",
+    "s": ""
+   }
+  ],
+  "to-kahn": [
+   {
+    "n": "Course Schedule",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/course-schedule/",
+    "s": "LC 207",
+    "note": ""
+   },
+   {
+    "n": "Course Schedule II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/course-schedule-ii/",
+    "s": "LC 210",
+    "note": ""
+   },
+   {
+    "n": "Alien Dictionary",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/alien-dictionary/",
+    "s": "LC 269  · premium",
+    "note": ""
+   },
+   {
+    "n": "Minimum Height Trees",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-height-trees/",
+    "s": "LC 310",
+    "note": ""
+   },
+   {
+    "n": "Parallel Courses",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/parallel-courses/",
+    "s": "LC 1136  · premium",
+    "note": ""
+   },
+   {
+    "n": "Sort Items by Groups Respecting Dependencies",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/sort-items-by-groups-respecting-dependencies/",
+    "s": "LC 1203",
+    "note": ""
+   },
+   {
+    "n": "Topological sorting",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/topological-sorting/",
+    "s": ""
+   },
+   {
+    "n": "Kahn's algorithm, indegree based",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/",
+    "s": ""
+   },
+   {
+    "n": "Topological sort tutorial",
+    "p": "HackerEarth",
+    "u": "https://www.hackerearth.com/practice/algorithms/graphs/topological-sort/tutorial/",
+    "s": ""
+   }
+  ],
+  "to-dfs": [
+   {
+    "n": "Course Schedule II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/course-schedule-ii/",
+    "s": "LC 210",
+    "note": ""
+   },
+   {
+    "n": "Find Eventual Safe States",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-eventual-safe-states/",
+    "s": "LC 802",
+    "note": ""
+   },
+   {
+    "n": "Longest Path With Different Adjacent Characters",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-path-with-different-adjacent-characters/",
+    "s": "LC 2246",
+    "note": ""
+   },
+   {
+    "n": "Reconstruct Itinerary",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/reconstruct-itinerary/",
+    "s": "LC 332",
+    "note": ""
+   },
+   {
+    "n": "Detect a cycle in a directed graph",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/detect-cycle-in-a-graph/",
+    "s": ""
+   }
+  ],
+  "sp-dijkstra": [
+   {
+    "n": "Network Delay Time",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/network-delay-time/",
+    "s": "LC 743",
+    "note": ""
+   },
+   {
+    "n": "Path with Maximum Probability",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/path-with-maximum-probability/",
+    "s": "LC 1514",
+    "note": ""
+   },
+   {
+    "n": "Path With Minimum Effort",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/path-with-minimum-effort/",
+    "s": "LC 1631",
+    "note": ""
+   },
+   {
+    "n": "Swim in Rising Water",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/swim-in-rising-water/",
+    "s": "LC 778",
+    "note": ""
+   },
+   {
+    "n": "Minimum Cost to Reach Destination in Time",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-cost-to-reach-destination-in-time/",
+    "s": "LC 1928",
+    "note": ""
+   },
+   {
+    "n": "Number of Ways to Arrive at Destination",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/",
+    "s": "LC 1976",
+    "note": ""
+   },
+   {
+    "n": "Dijkstra's shortest path algorithm",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/",
+    "s": ""
+   },
+   {
+    "n": "Dijkstra: Shortest Reach 2",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/dijkstrashortreach/problem",
+    "s": ""
+   },
+   {
+    "n": "Shortest path algorithms tutorial",
+    "p": "HackerEarth",
+    "u": "https://www.hackerearth.com/practice/algorithms/graphs/shortest-path-algorithms/tutorial/",
+    "s": ""
+   }
+  ],
+  "sp-bellman": [
+   {
+    "n": "Cheapest Flights Within K Stops",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/cheapest-flights-within-k-stops/",
+    "s": "LC 787",
+    "note": ""
+   },
+   {
+    "n": "Network Delay Time",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/network-delay-time/",
+    "s": "LC 743",
+    "note": "compare with the Dijkstra version"
+   },
+   {
+    "n": "Bellman-Ford algorithm",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/",
+    "s": ""
+   }
+  ],
+  "sp-floyd": [
+   {
+    "n": "Find the City With the Smallest Number of Neighbors at a Threshold Distance",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/",
+    "s": "LC 1334",
+    "note": ""
+   },
+   {
+    "n": "Course Schedule IV",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/course-schedule-iv/",
+    "s": "LC 1462",
+    "note": ""
+   },
+   {
+    "n": "Minimum Cost to Convert String I",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-cost-to-convert-string-i/",
+    "s": "LC 2976",
+    "note": ""
+   },
+   {
+    "n": "Evaluate Division",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/evaluate-division/",
+    "s": "LC 399",
+    "note": ""
+   },
+   {
+    "n": "Floyd-Warshall algorithm",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/",
+    "s": ""
+   },
+   {
+    "n": "Floyd : City of Blinding Lights",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/floyd-city-of-blinding-lights/problem",
+    "s": ""
+   }
+  ],
+  "dsu-connect": [
+   {
+    "n": "Number of Provinces",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/number-of-provinces/",
+    "s": "LC 547",
+    "note": ""
+   },
+   {
+    "n": "Number of Islands II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/number-of-islands-ii/",
+    "s": "LC 305  · premium",
+    "note": ""
+   },
+   {
+    "n": "Accounts Merge",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/accounts-merge/",
+    "s": "LC 721",
+    "note": ""
+   },
+   {
+    "n": "Satisfiability of Equality Equations",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/satisfiability-of-equality-equations/",
+    "s": "LC 990",
+    "note": ""
+   },
+   {
+    "n": "The Earliest Moment When Everyone Become Friends",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/the-earliest-moment-when-everyone-become-friends/",
+    "s": "LC 1101  · premium",
+    "note": ""
+   },
+   {
+    "n": "Number of Operations to Make Network Connected",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/number-of-operations-to-make-network-connected/",
+    "s": "LC 1319",
+    "note": ""
+   },
+   {
+    "n": "Disjoint set union (union-find)",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/introduction-to-disjoint-set-data-structure-or-union-find-algorithm/",
+    "s": ""
+   },
+   {
+    "n": "Components in a graph",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/components-in-graph/problem",
+    "s": ""
+   }
+  ],
+  "dsu-cycle": [
+   {
+    "n": "Redundant Connection",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/redundant-connection/",
+    "s": "LC 684",
+    "note": ""
+   },
+   {
+    "n": "Graph Valid Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/graph-valid-tree/",
+    "s": "LC 261  · premium",
+    "note": ""
+   },
+   {
+    "n": "Number of Operations to Make Network Connected",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/number-of-operations-to-make-network-connected/",
+    "s": "LC 1319",
+    "note": ""
+   },
+   {
+    "n": "Remove Max Number of Edges to Keep Graph Fully Traversable",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable/",
+    "s": "LC 1579",
+    "note": ""
+   },
+   {
+    "n": "Union-find and cycle detection",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/union-find/",
+    "s": ""
+   }
+  ],
+  "dsu-kruskal": [
+   {
+    "n": "Min Cost to Connect All Points",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/min-cost-to-connect-all-points/",
+    "s": "LC 1584",
+    "note": ""
+   },
+   {
+    "n": "Connecting Cities With Minimum Cost",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/connecting-cities-with-minimum-cost/",
+    "s": "LC 1135  · premium",
+    "note": ""
+   },
+   {
+    "n": "Optimize Water Distribution in a Village",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/optimize-water-distribution-in-a-village/",
+    "s": "LC 1168  · premium",
+    "note": ""
+   },
+   {
+    "n": "Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/",
+    "s": "LC 1489",
+    "note": ""
+   },
+   {
+    "n": "Kruskal's minimum spanning tree algorithm",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/",
+    "s": ""
+   },
+   {
+    "n": "Kruskal (MST): Really Special Subtree",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/kruskalmstrsub/problem",
+    "s": ""
+   }
+  ],
+  "dp-linear": [
+   {
+    "n": "Climbing Stairs",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/climbing-stairs/",
+    "s": "LC 70",
+    "note": ""
+   },
+   {
+    "n": "Min Cost Climbing Stairs",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/min-cost-climbing-stairs/",
+    "s": "LC 746",
+    "note": ""
+   },
+   {
+    "n": "House Robber",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/house-robber/",
+    "s": "LC 198",
+    "note": ""
+   },
+   {
+    "n": "House Robber II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/house-robber-ii/",
+    "s": "LC 213",
+    "note": ""
+   },
+   {
+    "n": "Decode Ways",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/decode-ways/",
+    "s": "LC 91",
+    "note": ""
+   },
+   {
+    "n": "Delete and Earn",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/delete-and-earn/",
+    "s": "LC 740",
+    "note": ""
+   },
+   {
+    "n": "Best Time to Buy and Sell Stock with Cooldown",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/",
+    "s": "LC 309",
+    "note": ""
+   },
+   {
+    "n": "Count ways to reach the n-th stair",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/count-ways-reach-nth-stair/",
+    "s": ""
+   },
+   {
+    "n": "Maximum sum with no two adjacent",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/find-maximum-possible-stolen-value-houses/",
+    "s": ""
+   },
+   {
+    "n": "Dynamic programming tutorial",
+    "p": "HackerEarth",
+    "u": "https://www.hackerearth.com/practice/algorithms/dynamic-programming/introduction-to-dynamic-programming-1/tutorial/",
+    "s": ""
+   }
+  ],
+  "dp-kadane": [
+   {
+    "n": "Maximum Subarray",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-subarray/",
+    "s": "LC 53",
+    "note": ""
+   },
+   {
+    "n": "Maximum Product Subarray",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-product-subarray/",
+    "s": "LC 152",
+    "note": ""
+   },
+   {
+    "n": "Maximum Sum Circular Subarray",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-sum-circular-subarray/",
+    "s": "LC 918",
+    "note": ""
+   },
+   {
+    "n": "Best Time to Buy and Sell Stock",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+    "s": "LC 121",
+    "note": ""
+   },
+   {
+    "n": "Maximum Absolute Sum of Any Subarray",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/",
+    "s": "LC 1749",
+    "note": ""
+   },
+   {
+    "n": "Largest sum contiguous subarray (Kadane)",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/",
+    "s": ""
+   },
+   {
+    "n": "The Maximum Subarray",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/maxsubarray/problem",
+    "s": ""
+   }
+  ],
+  "dp-coin": [
+   {
+    "n": "Coin Change",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/coin-change/",
+    "s": "LC 322",
+    "note": ""
+   },
+   {
+    "n": "Coin Change II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/coin-change-ii/",
+    "s": "LC 518",
+    "note": ""
+   },
+   {
+    "n": "Combination Sum IV",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/combination-sum-iv/",
+    "s": "LC 377",
+    "note": ""
+   },
+   {
+    "n": "Perfect Squares",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/perfect-squares/",
+    "s": "LC 279",
+    "note": ""
+   },
+   {
+    "n": "Word Break",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/word-break/",
+    "s": "LC 139",
+    "note": ""
+   },
+   {
+    "n": "Integer Break",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/integer-break/",
+    "s": "LC 343",
+    "note": ""
+   },
+   {
+    "n": "Minimum number of coins that make a change",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/",
+    "s": ""
+   },
+   {
+    "n": "Coin change, count the ways",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/coin-change-dp-7/",
+    "s": ""
+   },
+   {
+    "n": "The Coin Change Problem",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/coin-change/problem",
+    "s": ""
+   }
+  ],
+  "dp-lis": [
+   {
+    "n": "Longest Increasing Subsequence",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-increasing-subsequence/",
+    "s": "LC 300",
+    "note": ""
+   },
+   {
+    "n": "Number of Longest Increasing Subsequence",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/number-of-longest-increasing-subsequence/",
+    "s": "LC 673",
+    "note": ""
+   },
+   {
+    "n": "Russian Doll Envelopes",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/russian-doll-envelopes/",
+    "s": "LC 354",
+    "note": ""
+   },
+   {
+    "n": "Longest String Chain",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-string-chain/",
+    "s": "LC 1048",
+    "note": ""
+   },
+   {
+    "n": "Maximum Length of Pair Chain",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-length-of-pair-chain/",
+    "s": "LC 646",
+    "note": ""
+   },
+   {
+    "n": "Longest Arithmetic Subsequence",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-arithmetic-subsequence/",
+    "s": "LC 1027",
+    "note": ""
+   },
+   {
+    "n": "Longest increasing subsequence",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/longest-increasing-subsequence-dp-3/",
+    "s": ""
+   },
+   {
+    "n": "LIS in O(n log n)",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/",
+    "s": ""
+   }
+  ],
+  "dp-grid": [
+   {
+    "n": "Unique Paths",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/unique-paths/",
+    "s": "LC 62",
+    "note": ""
+   },
+   {
+    "n": "Unique Paths II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/unique-paths-ii/",
+    "s": "LC 63",
+    "note": ""
+   },
+   {
+    "n": "Minimum Path Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-path-sum/",
+    "s": "LC 64",
+    "note": ""
+   },
+   {
+    "n": "Triangle",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/triangle/",
+    "s": "LC 120",
+    "note": ""
+   },
+   {
+    "n": "Maximal Square",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximal-square/",
+    "s": "LC 221",
+    "note": ""
+   },
+   {
+    "n": "Dungeon Game",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/dungeon-game/",
+    "s": "LC 174",
+    "note": ""
+   },
+   {
+    "n": "Minimum Falling Path Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-falling-path-sum/",
+    "s": "LC 931",
+    "note": ""
+   },
+   {
+    "n": "Count all possible paths in a matrix",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/count-possible-paths-top-left-bottom-right-nxm-matrix/",
+    "s": ""
+   },
+   {
+    "n": "Minimum cost path in a matrix",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/min-cost-path-dp-6/",
+    "s": ""
+   }
+  ],
+  "dp-twostring": [
+   {
+    "n": "Longest Common Subsequence",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-common-subsequence/",
+    "s": "LC 1143",
+    "note": ""
+   },
+   {
+    "n": "Edit Distance",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/edit-distance/",
+    "s": "LC 72",
+    "note": ""
+   },
+   {
+    "n": "Distinct Subsequences",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/distinct-subsequences/",
+    "s": "LC 115",
+    "note": ""
+   },
+   {
+    "n": "Regular Expression Matching",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/regular-expression-matching/",
+    "s": "LC 10",
+    "note": ""
+   },
+   {
+    "n": "Wildcard Matching",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/wildcard-matching/",
+    "s": "LC 44",
+    "note": ""
+   },
+   {
+    "n": "Interleaving String",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/interleaving-string/",
+    "s": "LC 97",
+    "note": ""
+   },
+   {
+    "n": "Longest Palindromic Subsequence",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-palindromic-subsequence/",
+    "s": "LC 516",
+    "note": ""
+   },
+   {
+    "n": "Longest common subsequence",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/longest-common-subsequence-dp-4/",
+    "s": ""
+   },
+   {
+    "n": "Edit distance",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/edit-distance-dp-5/",
+    "s": ""
+   },
+   {
+    "n": "Common Child",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/common-child/problem",
+    "s": ""
+   }
+  ],
+  "dp-knapsack": [
+   {
+    "n": "Partition Equal Subset Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/partition-equal-subset-sum/",
+    "s": "LC 416",
+    "note": ""
+   },
+   {
+    "n": "Target Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/target-sum/",
+    "s": "LC 494",
+    "note": ""
+   },
+   {
+    "n": "Last Stone Weight II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/last-stone-weight-ii/",
+    "s": "LC 1049",
+    "note": ""
+   },
+   {
+    "n": "Ones and Zeroes",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/ones-and-zeroes/",
+    "s": "LC 474",
+    "note": ""
+   },
+   {
+    "n": "Profitable Schemes",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/profitable-schemes/",
+    "s": "LC 879",
+    "note": ""
+   },
+   {
+    "n": "0-1 knapsack problem",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/",
+    "s": ""
+   },
+   {
+    "n": "Partition problem, equal sum subsets",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/partition-problem-dp-18/",
+    "s": ""
+   }
+  ],
+  "dp-interval": [
+   {
+    "n": "Burst Balloons",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/burst-balloons/",
+    "s": "LC 312",
+    "note": ""
+   },
+   {
+    "n": "Palindrome Partitioning II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/palindrome-partitioning-ii/",
+    "s": "LC 132",
+    "note": ""
+   },
+   {
+    "n": "Longest Palindromic Subsequence",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-palindromic-subsequence/",
+    "s": "LC 516",
+    "note": ""
+   },
+   {
+    "n": "Minimum Score Triangulation of Polygon",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-score-triangulation-of-polygon/",
+    "s": "LC 1039",
+    "note": ""
+   },
+   {
+    "n": "Minimum Cost to Cut a Stick",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-cost-to-cut-a-stick/",
+    "s": "LC 1547",
+    "note": ""
+   },
+   {
+    "n": "Stone Game",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/stone-game/",
+    "s": "LC 877",
+    "note": ""
+   },
+   {
+    "n": "Matrix chain multiplication",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/",
+    "s": ""
+   },
+   {
+    "n": "Palindrome partitioning, minimum cuts",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/palindrome-partitioning-dp-17/",
+    "s": ""
+   }
+  ],
+  "bk-subsets": [
+   {
+    "n": "Subsets",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/subsets/",
+    "s": "LC 78",
+    "note": ""
+   },
+   {
+    "n": "Subsets II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/subsets-ii/",
+    "s": "LC 90",
+    "note": ""
+   },
+   {
+    "n": "Combination Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/combination-sum/",
+    "s": "LC 39",
+    "note": ""
+   },
+   {
+    "n": "Combination Sum II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/combination-sum-ii/",
+    "s": "LC 40",
+    "note": ""
+   },
+   {
+    "n": "Palindrome Partitioning",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/palindrome-partitioning/",
+    "s": "LC 131",
+    "note": ""
+   },
+   {
+    "n": "Generate Parentheses",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/generate-parentheses/",
+    "s": "LC 22",
+    "note": ""
+   },
+   {
+    "n": "Letter Combinations of a Phone Number",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/",
+    "s": "LC 17",
+    "note": ""
+   },
+   {
+    "n": "Power set",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/power-set/",
+    "s": ""
+   },
+   {
+    "n": "Combinational sum",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/combinational-sum/",
+    "s": ""
+   },
+   {
+    "n": "Recursion and backtracking tutorial",
+    "p": "HackerEarth",
+    "u": "https://www.hackerearth.com/practice/basic-programming/recursion/recursion-and-backtracking/tutorial/",
+    "s": ""
+   }
+  ],
+  "bk-perms": [
+   {
+    "n": "Permutations",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/permutations/",
+    "s": "LC 46",
+    "note": ""
+   },
+   {
+    "n": "Permutations II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/permutations-ii/",
+    "s": "LC 47",
+    "note": ""
+   },
+   {
+    "n": "Next Permutation",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/next-permutation/",
+    "s": "LC 31",
+    "note": ""
+   },
+   {
+    "n": "Letter Case Permutation",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/letter-case-permutation/",
+    "s": "LC 784",
+    "note": ""
+   },
+   {
+    "n": "Matchsticks to Square",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/matchsticks-to-square/",
+    "s": "LC 473",
+    "note": ""
+   },
+   {
+    "n": "Print all permutations of a string",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/",
+    "s": ""
+   }
+  ],
+  "bk-board": [
+   {
+    "n": "N-Queens",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/n-queens/",
+    "s": "LC 51",
+    "note": ""
+   },
+   {
+    "n": "N-Queens II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/n-queens-ii/",
+    "s": "LC 52",
+    "note": ""
+   },
+   {
+    "n": "Sudoku Solver",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/sudoku-solver/",
+    "s": "LC 37",
+    "note": ""
+   },
+   {
+    "n": "Word Search",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/word-search/",
+    "s": "LC 79",
+    "note": ""
+   },
+   {
+    "n": "Unique Paths III",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/unique-paths-iii/",
+    "s": "LC 980",
+    "note": ""
+   },
+   {
+    "n": "N-Queen problem",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/n-queen-problem-backtracking-3/",
+    "s": ""
+   },
+   {
+    "n": "Sudoku solver using backtracking",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/sudoku-backtracking-7/",
+    "s": ""
+   },
+   {
+    "n": "Rat in a maze",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/rat-in-a-maze-backtracking-2/",
+    "s": ""
+   }
+  ],
+  "gr-reach": [
+   {
+    "n": "Jump Game",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/jump-game/",
+    "s": "LC 55",
+    "note": ""
+   },
+   {
+    "n": "Jump Game II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/jump-game-ii/",
+    "s": "LC 45",
+    "note": ""
+   },
+   {
+    "n": "Gas Station",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/gas-station/",
+    "s": "LC 134",
+    "note": ""
+   },
+   {
+    "n": "Minimum Number of Taps to Open to Water a Garden",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/",
+    "s": "LC 1326",
+    "note": ""
+   },
+   {
+    "n": "Video Stitching",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/video-stitching/",
+    "s": "LC 1024",
+    "note": ""
+   },
+   {
+    "n": "Minimum Number of Refueling Stops",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimum-number-of-refueling-stops/",
+    "s": "LC 871",
+    "note": ""
+   },
+   {
+    "n": "Minimum number of jumps to reach the end",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/minimum-number-of-jumps-to-reach-end-of-a-given-array/",
+    "s": ""
+   },
+   {
+    "n": "Find a tour that visits all petrol pumps",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/find-a-tour-that-visits-all-stations/",
+    "s": ""
+   }
+  ],
+  "gr-pair": [
+   {
+    "n": "Boats to Save People",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/boats-to-save-people/",
+    "s": "LC 881",
+    "note": ""
+   },
+   {
+    "n": "Assign Cookies",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/assign-cookies/",
+    "s": "LC 455",
+    "note": ""
+   },
+   {
+    "n": "Minimize Maximum Pair Sum in Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/minimize-maximum-pair-sum-in-array/",
+    "s": "LC 1877",
+    "note": ""
+   },
+   {
+    "n": "Two City Scheduling",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/two-city-scheduling/",
+    "s": "LC 1029",
+    "note": ""
+   },
+   {
+    "n": "Advantage Shuffle",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/advantage-shuffle/",
+    "s": "LC 870",
+    "note": ""
+   },
+   {
+    "n": "Greedy algorithms tutorial",
+    "p": "HackerEarth",
+    "u": "https://www.hackerearth.com/practice/algorithms/greedy/basics-of-greedy-algorithms/tutorial/",
+    "s": ""
+   },
+   {
+    "n": "Minimum product subset of an array",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/minimum-product-subset-array/",
+    "s": ""
+   }
+  ],
+  "gr-local": [
+   {
+    "n": "Maximum Number of Events That Can Be Attended",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/",
+    "s": "LC 1353",
+    "note": ""
+   },
+   {
+    "n": "Task Scheduler",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/task-scheduler/",
+    "s": "LC 621",
+    "note": ""
+   },
+   {
+    "n": "IPO",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/ipo/",
+    "s": "LC 502",
+    "note": ""
+   },
+   {
+    "n": "Course Schedule III",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/course-schedule-iii/",
+    "s": "LC 630",
+    "note": ""
+   },
+   {
+    "n": "Maximum Performance of a Team",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/maximum-performance-of-a-team/",
+    "s": "LC 1383",
+    "note": ""
+   },
+   {
+    "n": "Candy",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/candy/",
+    "s": "LC 135",
+    "note": ""
+   },
+   {
+    "n": "Activity selection problem",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/activity-selection-problem-greedy-algo-1/",
+    "s": ""
+   },
+   {
+    "n": "Job sequencing problem",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/job-sequencing-problem/",
+    "s": ""
+   },
+   {
+    "n": "Greedy Florist",
+    "p": "HackerRank",
+    "u": "https://www.hackerrank.com/challenges/greedy-florist/problem",
+    "s": ""
+   }
+  ]
+ },
+ "patterns": {
+  "two-pointers": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/data-structures/arrays/1-d/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/arrays/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/two-pointers-technique/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/arrays"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/two-pointers/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=two+pointers"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Sereja and Dima",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/381/A",
+     "s": "CF 381A  · 800"
+    },
+    {
+     "n": "Prepend and Append",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1791/C",
+     "s": "CF 1791C  · 800"
+    },
+    {
+     "n": "Books",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/279/B",
+     "s": "CF 279B  · 1400"
+    },
+    {
+     "n": "BerSU Ball",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/489/B",
+     "s": "CF 489B  · 1200"
+    },
+    {
+     "n": "Ski Resort",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1840/C",
+     "s": "CF 1840C  · 1000"
+    },
+    {
+     "n": "Black and White Stripe",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1690/D",
+     "s": "CF 1690D  · 1000"
+    }
+   ]
+  },
+  "sliding-window": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/data-structures/arrays/1-d/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/arrays/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/window-sliding-technique/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/arrays"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/arrays/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=two+pointers"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Sereja and Dima",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/381/A",
+     "s": "CF 381A  · 800"
+    },
+    {
+     "n": "Prepend and Append",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1791/C",
+     "s": "CF 1791C  · 800"
+    },
+    {
+     "n": "Books",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/279/B",
+     "s": "CF 279B  · 1400"
+    },
+    {
+     "n": "BerSU Ball",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/489/B",
+     "s": "CF 489B  · 1200"
+    },
+    {
+     "n": "Ski Resort",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1840/C",
+     "s": "CF 1840C  · 1000"
+    },
+    {
+     "n": "Black and White Stripe",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1690/D",
+     "s": "CF 1690D  · 1000"
+    }
+   ]
+  },
+  "prefix-sum": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/data-structures/arrays/1-d/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/arrays/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/prefix-sum-array-implementation-applications-competitive-programming/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/arrays"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/arrays/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=dp"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Hit the Lottery",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/996/A",
+     "s": "CF 996A  · 800"
+    },
+    {
+     "n": "Kefa and First Steps",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/580/A",
+     "s": "CF 580A  · 900"
+    },
+    {
+     "n": "Interesting drink",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/706/B",
+     "s": "CF 706B  · 1100"
+    },
+    {
+     "n": "Cut Ribbon",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/189/A",
+     "s": "CF 189A  · 1300"
+    },
+    {
+     "n": "Boredom",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/455/A",
+     "s": "CF 455A  · 1500"
+    },
+    {
+     "n": "Fence",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/363/B",
+     "s": "CF 363B  · 1100"
+    }
+   ]
+  },
+  "binary-search": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/algorithms/searching/binary-search/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/search/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/binary-search/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/binary-search"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/binary-search/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=binary+search"
+    }
+   ],
+   "cf": [
+    {
+     "n": "T-primes",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/230/B",
+     "s": "CF 230B  · 1300"
+    },
+    {
+     "n": "New Year and Hurry",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/750/A",
+     "s": "CF 750A  · 800"
+    },
+    {
+     "n": "Vanya and Lanterns",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/492/B",
+     "s": "CF 492B  · 1200"
+    },
+    {
+     "n": "Interesting drink",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/706/B",
+     "s": "CF 706B  · 1100"
+    },
+    {
+     "n": "Books",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/279/B",
+     "s": "CF 279B  · 1400"
+    },
+    {
+     "n": "K-th Not Divisible by n",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1352/C",
+     "s": "CF 1352C  · 1200"
+    }
+   ]
+  },
+  "hashing": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/data-structures/hash-tables/basics-of-hash-tables/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/dictionaries-hashmaps/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/hashing-data-structure/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/strings"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/hashing/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=hashing"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Registration System",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/4/C",
+     "s": "CF 4C  · 1300"
+    },
+    {
+     "n": "Same Differences",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1520/D",
+     "s": "CF 1520D  · 1200"
+    },
+    {
+     "n": "Sublime Sequence",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/2148/A",
+     "s": "CF 2148A  · 800"
+    },
+    {
+     "n": "Winner",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/2/A",
+     "s": "CF 2A  · 1500"
+    },
+    {
+     "n": "Remove Two Letters",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1800/D",
+     "s": "CF 1800D  · 1200"
+    },
+    {
+     "n": "Password",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/126/B",
+     "s": "CF 126B  · 1700"
+    }
+   ]
+  },
+  "monotonic-stack": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/data-structures/stacks/basics-of-stacks/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/stacks-queues/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/next-greater-element/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/stacks-and-queues"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/stacks-and-queues/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=data+structures"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Registration System",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/4/C",
+     "s": "CF 4C  · 1300"
+    },
+    {
+     "n": "Same Differences",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1520/D",
+     "s": "CF 1520D  · 1200"
+    },
+    {
+     "n": "ICPC Balloons",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1703/B",
+     "s": "CF 1703B  · 800"
+    },
+    {
+     "n": "Odd Queries",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1807/D",
+     "s": "CF 1807D  · 900"
+    },
+    {
+     "n": "Sereja and Suffixes",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/368/B",
+     "s": "CF 368B  · 1100"
+    },
+    {
+     "n": "Advantage",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1760/C",
+     "s": "CF 1760C  · 800"
+    }
+   ]
+  },
+  "heap": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/data-structures/trees/heapspriority-queues/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/domains/data-structures"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/heap-data-structure/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/heaps"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/heaps-and-maps/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=data+structures"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Registration System",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/4/C",
+     "s": "CF 4C  · 1300"
+    },
+    {
+     "n": "Same Differences",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1520/D",
+     "s": "CF 1520D  · 1200"
+    },
+    {
+     "n": "ICPC Balloons",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1703/B",
+     "s": "CF 1703B  · 800"
+    },
+    {
+     "n": "Odd Queries",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1807/D",
+     "s": "CF 1807D  · 900"
+    },
+    {
+     "n": "Sereja and Suffixes",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/368/B",
+     "s": "CF 368B  · 1100"
+    },
+    {
+     "n": "Advantage",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1760/C",
+     "s": "CF 1760C  · 800"
+    }
+   ]
+  },
+  "intervals": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/algorithms/sorting/merge-sort/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/sorting/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/merging-intervals/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/sorting"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/greedy-algorithm/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=sortings"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Helpful Maths",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/339/A",
+     "s": "CF 339A  · 800"
+    },
+    {
+     "n": "Twins",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/160/A",
+     "s": "CF 160A  · 900"
+    },
+    {
+     "n": "Gravity Flip",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/405/A",
+     "s": "CF 405A  · 900"
+    },
+    {
+     "n": "Amusing Joke",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/141/A",
+     "s": "CF 141A  · 800"
+    },
+    {
+     "n": "The New Year: Meeting Friends",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/723/A",
+     "s": "CF 723A  · 800"
+    },
+    {
+     "n": "Dragons",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/230/A",
+     "s": "CF 230A  · 1000"
+    }
+   ]
+  },
+  "bits": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/basic-programming/bit-manipulation/basics-of-bit-manipulation/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/miscellaneous/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/bits-manipulation-important-tactics/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/bit-manipulation"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/bit-manipulation/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=bitmasks"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Odd One Out",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1915/A",
+     "s": "CF 1915A  · 800"
+    },
+    {
+     "n": "Raising Bacteria",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/579/A",
+     "s": "CF 579A  · 1000"
+    },
+    {
+     "n": "Not Quite Latin Square",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1915/B",
+     "s": "CF 1915B  · 800"
+    },
+    {
+     "n": "Mocha and Math",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1559/A",
+     "s": "CF 1559A  · 900"
+    },
+    {
+     "n": "We Need the Zero",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1805/A",
+     "s": "CF 1805A  · 800"
+    },
+    {
+     "n": "Fedor and New Game",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/467/B",
+     "s": "CF 467B  · 1100"
+    }
+   ]
+  },
+  "linked-list": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/data-structures/linked-list/singly-linked-list/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/linked-lists/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/data-structures/linked-list/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/linked-lists"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/linked-lists/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=implementation"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Bit++",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/282/A",
+     "s": "CF 282A  · 800"
+    },
+    {
+     "n": "Next Round",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/158/A",
+     "s": "CF 158A  · 800"
+    },
+    {
+     "n": "Beautiful Matrix",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/263/A",
+     "s": "CF 263A  · 800"
+    },
+    {
+     "n": "Petya and Strings",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/112/A",
+     "s": "CF 112A  · 800"
+    },
+    {
+     "n": "Boy or Girl",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/236/A",
+     "s": "CF 236A  · 800"
+    },
+    {
+     "n": "Helpful Maths",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/339/A",
+     "s": "CF 339A  · 800"
+    }
+   ]
+  },
+  "tree-dfs": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/data-structures/trees/binary-search-tree/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/trees/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/binary-tree-data-structure/"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/trees/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=dfs+and+similar"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Two Buttons",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/520/B",
+     "s": "CF 520B  · 1400"
+    },
+    {
+     "n": "New Year Transportation",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/500/A",
+     "s": "CF 500A  · 1000"
+    },
+    {
+     "n": "Kefa and Park",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/580/C",
+     "s": "CF 580C  · 1500"
+    },
+    {
+     "n": "BerSU Ball",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/489/B",
+     "s": "CF 489B  · 1200"
+    },
+    {
+     "n": "Party",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/115/A",
+     "s": "CF 115A  · 900"
+    },
+    {
+     "n": "Make it Divisible by 25",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1593/B",
+     "s": "CF 1593B  · 900"
+    }
+   ]
+  },
+  "tree-bfs": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/trees/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/level-order-tree-traversal/"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/trees/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=trees"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Kefa and Park",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/580/C",
+     "s": "CF 580C  · 1500"
+    },
+    {
+     "n": "Party",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/115/A",
+     "s": "CF 115A  · 900"
+    },
+    {
+     "n": "Sum in Binary Tree",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1843/C",
+     "s": "CF 1843C  · 800"
+    },
+    {
+     "n": "Yet Another Card Deck",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1511/C",
+     "s": "CF 1511C  · 1100"
+    },
+    {
+     "n": "Xenia and Bit Operations",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/339/D",
+     "s": "CF 339D  · 1700"
+    },
+    {
+     "n": "Strong Vertices",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1857/D",
+     "s": "CF 1857D  · 1300"
+    }
+   ]
+  },
+  "trie": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/data-structures/advanced-data-structures/trie-keyword-tree/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/domains/data-structures"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/trie-insert-and-search/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/strings"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/trees/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=strings"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Way Too Long Words",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/71/A",
+     "s": "CF 71A  · 800"
+    },
+    {
+     "n": "Petya and Strings",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/112/A",
+     "s": "CF 112A  · 800"
+    },
+    {
+     "n": "Boy or Girl",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/236/A",
+     "s": "CF 236A  · 800"
+    },
+    {
+     "n": "Helpful Maths",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/339/A",
+     "s": "CF 339A  · 800"
+    },
+    {
+     "n": "Word Capitalization",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/281/A",
+     "s": "CF 281A  · 800"
+    },
+    {
+     "n": "Word",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/59/A",
+     "s": "CF 59A  · 800"
+    }
+   ]
+  },
+  "grid": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/algorithms/graphs/depth-first-search/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/graphs/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/find-number-of-islands/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/graph"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/graph-data-structure-algorithms/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=dfs+and+similar"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Two Buttons",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/520/B",
+     "s": "CF 520B  · 1400"
+    },
+    {
+     "n": "New Year Transportation",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/500/A",
+     "s": "CF 500A  · 1000"
+    },
+    {
+     "n": "Kefa and Park",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/580/C",
+     "s": "CF 580C  · 1500"
+    },
+    {
+     "n": "BerSU Ball",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/489/B",
+     "s": "CF 489B  · 1200"
+    },
+    {
+     "n": "Party",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/115/A",
+     "s": "CF 115A  · 900"
+    },
+    {
+     "n": "Make it Divisible by 25",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1593/B",
+     "s": "CF 1593B  · 900"
+    }
+   ]
+  },
+  "toposort": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/algorithms/graphs/topological-sort/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/graphs/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/topological-sorting/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/graph"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/graph-data-structure-algorithms/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=graphs"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Two Buttons",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/520/B",
+     "s": "CF 520B  · 1400"
+    },
+    {
+     "n": "New Year Transportation",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/500/A",
+     "s": "CF 500A  · 1000"
+    },
+    {
+     "n": "Kefa and Park",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/580/C",
+     "s": "CF 580C  · 1500"
+    },
+    {
+     "n": "Party",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/115/A",
+     "s": "CF 115A  · 900"
+    },
+    {
+     "n": "Long Jumps",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1472/C",
+     "s": "CF 1472C  · 1100"
+    },
+    {
+     "n": "Mortal Kombat Tower",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1418/C",
+     "s": "CF 1418C  · 1500"
+    }
+   ]
+  },
+  "shortest-path": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/graphs/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/graph"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/graph-data-structure-algorithms/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=shortest+paths"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Queue at the School",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/266/B",
+     "s": "CF 266B  · 800"
+    },
+    {
+     "n": "Two Buttons",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/520/B",
+     "s": "CF 520B  · 1400"
+    },
+    {
+     "n": "Mortal Kombat Tower",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1418/C",
+     "s": "CF 1418C  · 1500"
+    },
+    {
+     "n": "2D Traveling",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1869/B",
+     "s": "CF 1869B  · 1100"
+    },
+    {
+     "n": "Polygon",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1360/E",
+     "s": "CF 1360E  · 1300"
+    },
+    {
+     "n": "Shortest path of the king",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/3/A",
+     "s": "CF 3A  · 1000"
+    }
+   ]
+  },
+  "dsu": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/data-structures/disjoint-data-strutures/basics-of-disjoint-data-structures/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/graphs/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/introduction-to-disjoint-set-data-structure-or-union-find-algorithm/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/graph"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/graph-data-structure-algorithms/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=dsu"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Find the Different Ones!",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1927/D",
+     "s": "CF 1927D  · 1300"
+    },
+    {
+     "n": "News Distribution",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1167/C",
+     "s": "CF 1167C  · 1400"
+    },
+    {
+     "n": "The Lakes",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1829/E",
+     "s": "CF 1829E  · 1100"
+    },
+    {
+     "n": "Cyclic Components",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/977/E",
+     "s": "CF 977E  · 1500"
+    },
+    {
+     "n": "Ice Skating",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/217/A",
+     "s": "CF 217A  · 1200"
+    },
+    {
+     "n": "Sakurako's Hobby",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/2008/D",
+     "s": "CF 2008D  · 1100"
+    }
+   ]
+  },
+  "dp-1d": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/algorithms/dynamic-programming/introduction-to-dynamic-programming-1/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/dynamic-programming/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/dynamic-programming/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/dynamic-programming"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/dynamic-programming/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=dp"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Hit the Lottery",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/996/A",
+     "s": "CF 996A  · 800"
+    },
+    {
+     "n": "Kefa and First Steps",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/580/A",
+     "s": "CF 580A  · 900"
+    },
+    {
+     "n": "Interesting drink",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/706/B",
+     "s": "CF 706B  · 1100"
+    },
+    {
+     "n": "Cut Ribbon",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/189/A",
+     "s": "CF 189A  · 1300"
+    },
+    {
+     "n": "Boredom",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/455/A",
+     "s": "CF 455A  · 1500"
+    },
+    {
+     "n": "Fence",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/363/B",
+     "s": "CF 363B  · 1100"
+    }
+   ]
+  },
+  "dp-2d": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/algorithms/dynamic-programming/2-dimensional/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/dynamic-programming/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/longest-common-subsequence-dp-4/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/dynamic-programming"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/dynamic-programming/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=dp"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Hit the Lottery",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/996/A",
+     "s": "CF 996A  · 800"
+    },
+    {
+     "n": "Kefa and First Steps",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/580/A",
+     "s": "CF 580A  · 900"
+    },
+    {
+     "n": "Interesting drink",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/706/B",
+     "s": "CF 706B  · 1100"
+    },
+    {
+     "n": "Cut Ribbon",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/189/A",
+     "s": "CF 189A  · 1300"
+    },
+    {
+     "n": "Boredom",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/455/A",
+     "s": "CF 455A  · 1500"
+    },
+    {
+     "n": "Fence",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/363/B",
+     "s": "CF 363B  · 1100"
+    }
+   ]
+  },
+  "backtracking": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/basic-programming/recursion/recursion-and-backtracking/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/recursion-backtracking/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/backtracking-algorithms/"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/backtracking/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=brute+force"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Watermelon",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/4/A",
+     "s": "CF 4A  · 800"
+    },
+    {
+     "n": "Team",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/231/A",
+     "s": "CF 231A  · 800"
+    },
+    {
+     "n": "Boy or Girl",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/236/A",
+     "s": "CF 236A  · 800"
+    },
+    {
+     "n": "Soldier and Bananas",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/546/A",
+     "s": "CF 546A  · 800"
+    },
+    {
+     "n": "Beautiful Year",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/271/A",
+     "s": "CF 271A  · 800"
+    },
+    {
+     "n": "Lucky Division",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/122/A",
+     "s": "CF 122A  · 1000"
+    }
+   ]
+  },
+  "greedy": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/algorithms/greedy/basics-of-greedy-algorithms/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/greedy-algorithms/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/greedy-algorithms/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/greedy-algorithms"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/greedy-algorithm/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=greedy"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Team",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/231/A",
+     "s": "CF 231A  · 800"
+    },
+    {
+     "n": "Domino piling",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/50/A",
+     "s": "CF 50A  · 800"
+    },
+    {
+     "n": "Helpful Maths",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/339/A",
+     "s": "CF 339A  · 800"
+    },
+    {
+     "n": "Chat room",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/58/A",
+     "s": "CF 58A  · 1000"
+    },
+    {
+     "n": "Twins",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/160/A",
+     "s": "CF 160A  · 900"
+    },
+    {
+     "n": "Gravity Flip",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/405/A",
+     "s": "CF 405A  · 900"
+    }
+   ]
+  }
+ }
+}

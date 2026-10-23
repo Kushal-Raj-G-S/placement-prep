@@ -1,0 +1,1560 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Twenty Weeks to AC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground:#F4F6F8; --surface:#FFFFFF; --surface-alt:#ECEFF3; --surface-hi:#E3E8ED;
+    --ink:#0F1720; --ink-mid:#3E4A58; --ink-dim:#6B7887;
+    --line:#D8DFE7; --line-soft:#E6EBF0;
+    --accent:#0B7C8C; --accent-soft:#D6EEF1; --accent-ink:#065A66;
+    --gate:#8A4FBF; --gate-soft:#EDE2F7;
+    --easy:#157F3D; --med:#A96208; --hard:#B3261E;
+    --easy-bg:#E4F4E9; --med-bg:#FBF0DC; --hard-bg:#FBE6E4;
+    --track:#D3DBE3;
+    --f-display:"IBM Plex Sans Condensed","Helvetica Neue",Arial,sans-serif;
+    --f-body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+    --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+    --r:3px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#0E1319; --surface:#151C24; --surface-alt:#1C242E; --surface-hi:#232C37;
+      --ink:#E4EAF1; --ink-mid:#AEB9C6; --ink-dim:#7C8895;
+      --line:#29323D; --line-soft:#212932;
+      --accent:#2FD3E8; --accent-soft:#123840; --accent-ink:#8CE9F7;
+      --gate:#C79BF0; --gate-soft:#2A1E3A;
+      --easy:#4ADE80; --med:#FBBF24; --hard:#F87171;
+      --easy-bg:#13291C; --med-bg:#2E2410; --hard-bg:#2E1717;
+      --track:#2A333E;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#0E1319; --surface:#151C24; --surface-alt:#1C242E; --surface-hi:#232C37;
+    --ink:#E4EAF1; --ink-mid:#AEB9C6; --ink-dim:#7C8895;
+    --line:#29323D; --line-soft:#212932;
+    --accent:#2FD3E8; --accent-soft:#123840; --accent-ink:#8CE9F7;
+    --gate:#C79BF0; --gate-soft:#2A1E3A;
+    --easy:#4ADE80; --med:#FBBF24; --hard:#F87171;
+    --easy-bg:#13291C; --med-bg:#2E2410; --hard-bg:#2E1717;
+    --track:#2A333E;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:var(--f-body); font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1080px; margin:0 auto; padding:32px 22px 96px; display:flex; flex-direction:column; gap:32px; }
+  a { color:var(--accent); }
+  :focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
+  button { font-family:inherit; }
+  .line { display:flex; align-items:center; gap:8px; flex-wrap:wrap; min-width:0; }
+  .src { font-family:var(--f-mono); font-size:10.5px; color:var(--ink-dim); }
+  .plain { font-size:14px; color:var(--ink); }
+  .eyebrow { font-family:var(--f-mono); font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim); }
+
+  .mast { display:flex; flex-direction:column; gap:14px; }
+  .mast h1 { font-family:var(--f-display); font-weight:700; font-size:clamp(30px,5.2vw,46px); line-height:1.03; letter-spacing:-.015em; margin:0; text-wrap:balance; }
+  .mast .lede { margin:0; max-width:66ch; color:var(--ink-mid); font-size:15.5px; }
+
+  .readout { display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r); overflow:hidden; }
+  .readout .cell { background:var(--surface); padding:11px 13px; display:flex; flex-direction:column; gap:3px; }
+  .readout .k { font-family:var(--f-mono); font-size:9.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-dim); }
+  .readout .v { font-family:var(--f-mono); font-size:19px; font-weight:600; font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+  .readout .v small { font-size:12px; font-weight:400; color:var(--ink-dim); }
+  .readout .cell.hi .v { color:var(--accent); }
+  .readout .cell.warn .v { color:var(--med); }
+
+  .today { display:grid; grid-template-columns:1fr 1fr auto; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r); overflow:hidden; }
+  .today .pane { background:var(--surface); padding:13px 15px; display:flex; flex-direction:column; gap:6px; min-width:0; }
+  .today .pane .k { font-family:var(--f-mono); font-size:9.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-dim); }
+  .today .pane a { font-weight:500; text-decoration:none; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:100%; }
+  .today .pane a:hover { text-decoration:underline; }
+  .today .pane .none { color:var(--ink-dim); font-size:14px; }
+  .timer { background:var(--surface); padding:11px 15px; display:flex; align-items:center; gap:11px; }
+  .clock { font-family:var(--f-mono); font-size:25px; font-weight:600; font-variant-numeric:tabular-nums; letter-spacing:-.02em; min-width:86px; }
+  .clock.run { color:var(--accent); } .clock.out { color:var(--hard); }
+  .timer .btns { display:flex; flex-direction:column; gap:4px; }
+  .tbtn { font-family:var(--f-mono); font-size:10.5px; letter-spacing:.05em; background:var(--surface-alt); color:var(--ink-mid); border:1px solid var(--line); border-radius:2px; padding:4px 8px; cursor:pointer; white-space:nowrap; }
+  .tbtn:hover { background:var(--surface-hi); color:var(--ink); }
+  .tbtn.on { background:var(--accent-soft); border-color:var(--accent); color:var(--accent-ink); }
+
+  .sec-head { display:flex; align-items:baseline; gap:13px; margin-bottom:14px; flex-wrap:wrap; }
+  .sec-head h2 { font-family:var(--f-display); font-weight:600; font-size:23px; letter-spacing:-.01em; margin:0; }
+  .sec-head .note { color:var(--ink-dim); font-size:13.5px; }
+
+  .verdict-box { border:1px solid var(--med); background:var(--med-bg); border-radius:var(--r); padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .verdict-box h2 { font-family:var(--f-display); font-weight:600; font-size:20px; margin:0; }
+  .verdict-box p { margin:0; color:var(--ink-mid); font-size:14.5px; max-width:74ch; }
+  .verdict-box strong { color:var(--ink); font-weight:600; }
+
+  .findings { display:flex; flex-direction:column; gap:13px; }
+  .finding { border-left:2px solid var(--accent); padding-left:15px; max-width:72ch; }
+  .finding.gate { border-left-color:var(--gate); }
+  .finding b { display:block; font-family:var(--f-mono); font-size:11.5px; font-weight:600; letter-spacing:.04em; color:var(--accent); margin-bottom:1px; }
+  .finding.gate b { color:var(--gate); }
+  .finding span { color:var(--ink-mid); font-size:14.5px; }
+
+  .toolbar { position:sticky; top:0; z-index:20; display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; padding:10px 13px; background:var(--surface-alt); border:1px solid var(--line); border-radius:var(--r); }
+  .toolbar input[type="search"] { font-family:var(--f-body); font-size:13px; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:2px; padding:6px 9px; min-width:170px; flex:1 1 170px; }
+  .toolbar input[type="date"] { font-family:var(--f-mono); font-size:12px; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:2px; padding:4px 6px; }
+  .fgroup { display:flex; gap:3px; }
+  .fbtn { font-family:var(--f-mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; background:var(--surface); color:var(--ink-dim); border:1px solid var(--line); border-radius:2px; padding:5px 8px; cursor:pointer; }
+  .fbtn:hover { color:var(--ink); }
+  .fbtn.on { background:var(--accent-soft); border-color:var(--accent); color:var(--accent-ink); }
+  .tool-lab { font-family:var(--f-mono); font-size:10px; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-dim); }
+  .toolbar .spacer { flex:1 1 auto; }
+  #saveState { font-family:var(--f-mono); font-size:11px; color:var(--ink-dim); white-space:nowrap; }
+  #saveState[data-s="saving"] { color:var(--accent); }
+  #saveState[data-s="error"] { color:var(--hard); }
+  #saveState[data-s="local"] { color:var(--med); }
+
+  .trackhd { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin:10px 0 -6px; }
+  .trackhd h3 { font-family:var(--f-display); font-weight:700; font-size:17px; margin:0; letter-spacing:.01em; text-transform:uppercase; }
+  .trackhd .sub { color:var(--ink-dim); font-size:13.5px; max-width:70ch; }
+
+  .phases { display:flex; flex-direction:column; gap:16px; }
+  .phase { background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden; }
+  .phase.now { border-color:var(--accent); }
+  .phase.gate { border-left:3px solid var(--gate); }
+  .phase-hd { display:flex; align-items:center; gap:11px; flex-wrap:wrap; padding:12px 16px; background:var(--surface-alt); border-bottom:1px solid var(--line); }
+  .phase-hd .tag { font-family:var(--f-mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-dim); border:1px solid var(--line); border-radius:2px; padding:2px 6px; white-space:nowrap; }
+  .phase.now .phase-hd .tag { color:var(--accent-ink); border-color:var(--accent); background:var(--accent-soft); }
+  .phase.gate .phase-hd .tag { color:var(--gate); border-color:var(--gate); background:var(--gate-soft); }
+  .phase-hd h3 { font-family:var(--f-display); font-weight:600; font-size:18px; margin:0; }
+  .phase-hd .wk { font-family:var(--f-mono); font-size:11.5px; color:var(--ink-dim); }
+  .phase-hd .tally { margin-left:auto; font-family:var(--f-mono); font-size:11.5px; font-variant-numeric:tabular-nums; color:var(--ink-dim); }
+  .phase-note { padding:10px 16px; color:var(--ink-mid); font-size:13.5px; border-bottom:1px solid var(--line-soft); max-width:78ch; }
+
+  .block { border-bottom:1px solid var(--line-soft); }
+  .block:last-child { border-bottom:0; }
+  .block-hd { width:100%; text-align:left; display:grid; grid-template-columns:14px 1fr auto; gap:11px; align-items:center; padding:12px 16px; background:none; border:0; cursor:pointer; color:inherit; }
+  .block-hd:hover { background:var(--surface-alt); }
+  .caret { font-family:var(--f-mono); font-size:11px; color:var(--ink-dim); transition:transform .15s ease; display:inline-block; }
+  .block.open .caret { transform:rotate(90deg); }
+  .block-name { font-weight:600; font-size:15px; display:flex; align-items:baseline; gap:7px; flex-wrap:wrap; }
+  .pill { font-family:var(--f-mono); font-size:9.5px; letter-spacing:.05em; border-radius:2px; padding:1px 5px; font-weight:500; }
+  .pill.star { color:var(--accent); border:1px solid var(--accent); }
+  .pill.opt { color:var(--ink-dim); border:1px solid var(--line); }
+  .pill.new { color:var(--gate); border:1px solid var(--gate); }
+  .block-meta { display:flex; align-items:center; gap:9px; }
+  .minibar { width:70px; height:5px; background:var(--track); border-radius:999px; overflow:hidden; }
+  .minibar i { display:block; height:100%; background:var(--accent); transition:width .3s ease; }
+  .block-count { font-family:var(--f-mono); font-size:11.5px; font-variant-numeric:tabular-nums; color:var(--ink-dim); min-width:42px; text-align:right; }
+  .items { display:none; padding:0 16px 14px 41px; }
+  .block.open .items { display:block; }
+  .block-why { color:var(--ink-dim); font-size:13.5px; max-width:74ch; padding:2px 0 10px; }
+
+  .item { display:grid; grid-template-columns:40px 1fr auto; gap:10px; align-items:center; padding:5px 0; border-bottom:1px solid var(--line-soft); }
+  .item:last-child { border-bottom:0; }
+  .item a { text-decoration:none; color:var(--ink); font-size:14px; }
+  .item a:hover { color:var(--accent); text-decoration:underline; }
+  .item.ac a, .item.ac .plain { color:var(--ink-dim); }
+
+  .mark { font-family:var(--f-mono); font-size:9.5px; font-weight:600; letter-spacing:.06em; border:1px solid var(--line); border-radius:2px; padding:5px 0; width:38px; text-align:center; background:var(--surface); color:var(--ink-dim); cursor:pointer; }
+  .mark:hover { border-color:var(--ink-dim); color:var(--ink); }
+  .mark.ac { color:var(--easy); border-color:var(--easy); background:var(--easy-bg); }
+  .mark.tle { color:var(--med); border-color:var(--med); background:var(--med-bg); }
+
+  .right { display:flex; align-items:center; gap:8px; }
+  .diff { font-family:var(--f-mono); font-size:9.5px; font-weight:600; letter-spacing:.06em; border-radius:2px; padding:2px 5px; }
+  .diff.E { color:var(--easy); background:var(--easy-bg); }
+  .diff.M { color:var(--med); background:var(--med-bg); }
+  .diff.H { color:var(--hard); background:var(--hard-bg); }
+  .ago { font-family:var(--f-mono); font-size:10.5px; color:var(--ink-dim); font-variant-numeric:tabular-nums; min-width:42px; text-align:right; }
+  .ago.stale { color:var(--med); }
+
+  .refs { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px; align-items:start; }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:19px; display:flex; flex-direction:column; gap:11px; }
+  .card h3 { font-family:var(--f-display); font-weight:600; font-size:17px; margin:0; }
+  .card .sub { margin:-5px 0 0; font-size:13px; color:var(--ink-dim); }
+  .card.wide { grid-column:1 / -1; }
+
+  .revlist { display:flex; flex-direction:column; }
+  .rev { display:grid; grid-template-columns:1fr auto auto; gap:10px; align-items:center; padding:7px 0; border-bottom:1px solid var(--line-soft); }
+  .rev:last-child { border-bottom:0; }
+  .rev a { text-decoration:none; font-size:14px; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .rev a:hover { color:var(--accent); text-decoration:underline; }
+  .redo { font-family:var(--f-mono); font-size:10px; letter-spacing:.05em; background:var(--surface-alt); border:1px solid var(--line); border-radius:2px; padding:4px 7px; cursor:pointer; color:var(--ink-mid); white-space:nowrap; }
+  .redo:hover { border-color:var(--accent); color:var(--accent); }
+
+  .tbl-scroll { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  th { font-family:var(--f-mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-dim); text-align:left; font-weight:500; padding:0 12px 7px 0; border-bottom:1px solid var(--line); white-space:nowrap; }
+  td { padding:7px 12px 7px 0; border-bottom:1px solid var(--line-soft); vertical-align:top; color:var(--ink-mid); }
+  tr:last-child td { border-bottom:0; }
+  td.n,td.o { font-family:var(--f-mono); font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap; }
+  td.o { color:var(--accent); }
+  td.t1 { color:var(--easy); font-family:var(--f-mono); font-size:11px; white-space:nowrap; }
+  td.t2 { color:var(--med); font-family:var(--f-mono); font-size:11px; white-space:nowrap; }
+  td.t3 { color:var(--hard); font-family:var(--f-mono); font-size:11px; white-space:nowrap; }
+  td.tx { color:var(--ink-dim); font-family:var(--f-mono); font-size:11px; white-space:nowrap; }
+  td.pay { font-family:var(--f-mono); font-size:11.5px; color:var(--ink); white-space:nowrap; font-variant-numeric:tabular-nums; }
+  tr.below td { opacity:.55; }
+
+  ol.play { margin:0; padding-left:19px; display:flex; flex-direction:column; gap:9px; }
+  ol.play li { color:var(--ink-mid); font-size:14px; }
+  ol.play li::marker { font-family:var(--f-mono); font-size:12px; color:var(--ink-dim); }
+  ol.play b { color:var(--ink); font-weight:600; }
+  ul.kit { margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  ul.kit li { list-style:none; font-size:14px; color:var(--ink-mid); }
+  code { font-family:var(--f-mono); font-size:12.5px; background:var(--surface-alt); border:1px solid var(--line-soft); border-radius:2px; padding:1px 4px; color:var(--ink); }
+  .flag { background:var(--accent-soft); border:1px solid var(--accent); border-radius:var(--r); padding:12px 14px; font-size:14px; color:var(--ink); }
+  .flag.warn { background:var(--med-bg); border-color:var(--med); }
+  .flag b { font-weight:600; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; }
+  .chips span { font-family:var(--f-mono); font-size:11.5px; background:var(--surface-alt); border:1px solid var(--line); border-radius:2px; padding:3px 7px; color:var(--ink-mid); }
+
+  footer { border-top:1px solid var(--line); padding-top:18px; color:var(--ink-dim); font-size:13px; max-width:74ch; display:flex; flex-direction:column; gap:10px; }
+  footer .row2 { display:flex; gap:8px; flex-wrap:wrap; }
+
+  @media (max-width:860px) {
+    .readout { grid-template-columns:repeat(3,1fr); }
+    .today { grid-template-columns:1fr; }
+  }
+  @media (max-width:620px) {
+    .readout { grid-template-columns:repeat(2,1fr); }
+    .wrap { padding:22px 13px 72px; gap:26px; }
+    .items { padding-left:16px; }
+    .item { grid-template-columns:44px 1fr; row-gap:2px; padding:7px 0; }
+    .item .right { grid-column:2; justify-content:flex-start; }
+    .mark { width:44px; padding:8px 0; }
+    .block-hd { padding:14px 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition:none !important; animation:none !important; } }
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script type="application/json" id="plan">
+{
+  "tracks": [
+    {
+      "id":"t0","name":"Track 0 — Bench setup","sub":"Week 1. None of this is an algorithm. All of it is a way to lose points that has nothing to do with whether you can solve the problem.",
+      "phases":[
+        {
+          "id":"p0","tag":"Week 1","weeks":"before anything else","wk":[1,1],"title":"Format, not algorithms","gate":true,
+          "note":"Your 97 LeetCode solves have taught you zero stdin parsing, because LeetCode hands you a parsed function signature. Roughly half of the companies you will apply to hand you a blank editor instead. A correct algorithm that prints \"Output: 5\" instead of \"5\" scores zero.",
+          "blocks":[
+            {"id":"s1","name":"stdin / stdout drill","core":true,"star":true,"isNew":true,"why":"You have a dedicated manual for this now — the Stdin Survival Kit, linked as the first item. Work through it, then do these reps. Re-solve problems you have ALREADY solved, as standalone console programs, run with python sol.py < in.txt. The algorithm is not the point; turning a novel input spec into variables under a clock is the point.","items":[
+              {"t":"Read the Stdin Survival Kit end to end — the method and the 14 shapes","u":"./3%20-%20Stdin%20Survival%20Kit%20%28manual%29.html","d":""},
+              {"t":"CodeChef online compiler: paste each raw sample into the Input box and parse it","u":"https://www.codechef.com/python-online-compiler","d":""},
+              {"t":"HackerRank 30 Days of Code, Day 0 — reading one line from stdin IS the task","u":"https://www.hackerrank.com/challenges/30-hello-world/problem","d":""},
+              {"t":"HackerRank Python — Introduction (blank editor, no stub)","u":"https://www.hackerrank.com/domains/python/py-introduction","d":""},
+              {"t":"CodeChef Practice Python path — modules 4, 5 and 14 are literally input/output","u":"https://www.codechef.com/practice/python","d":""},
+              {"t":"HackerEarth Basics of Input/Output — 20 problems, pure stdin","u":"https://www.hackerearth.com/practice/basic-programming/input-output/basics-of-input-output/practice-problems/","d":""},
+              {"t":"Shape A: read n, then n space-separated ints on one line","u":"","d":""},
+              {"t":"Shape B: read T, then loop T test cases","u":"","d":""},
+              {"t":"Shape C: read R and C, then R lines of a grid","u":"","d":""},
+              {"t":"Shape D: read n and m, then m edge pairs into an adjacency list","u":"","d":""},
+              {"t":"Re-solve Two Sum as a console program, piped input","u":"https://leetcode.com/problems/two-sum/","d":"E"},
+              {"t":"Re-solve Maximum Subarray as a console program","u":"https://leetcode.com/problems/maximum-subarray/","d":"M"},
+              {"t":"Re-solve Number of Islands as a console program (grid input)","u":"https://leetcode.com/problems/number-of-islands/","d":"M"},
+              {"t":"Re-solve Course Schedule as a console program (edge-list input)","u":"https://leetcode.com/problems/course-schedule/","d":"M"},
+              {"t":"Print a list space-separated with NO trailing text or label","u":"","d":""},
+              {"t":"Multi-line output via '\\n'.join, one flush at the end","u":"","d":""},
+              {"t":"Solve 3 problems on HackerRank in console mode, not LeetCode","u":"https://www.hackerrank.com/","d":""},
+              {"t":"Solve 2 problems on HackerEarth in console mode","u":"https://www.hackerearth.com/","d":""}
+            ]},
+            {"id":"s2","name":"Python hazards that never show up on LeetCode","core":true,"isNew":true,"why":"LeetCode's limits are generous and its driver handles I/O, so none of these have ever bitten you. On HackerEarth and Mettl at full constraints, each one is a zero.","items":[
+              {"t":"Default read is sys.stdin.buffer.read().split(), never input() in a loop","u":"","d":""},
+              {"t":"sys.setrecursionlimit(300000) as a reflex before any DFS","u":"","d":""},
+              {"t":"Rewrite one recursive DFS iteratively, on a deep tree","u":"","d":""},
+              {"t":"Deliberate TLE experiment: run a passing LeetCode solution on HackerEarth at full constraints and watch it fail","u":"","d":""},
+              {"t":"Minimum viable Java or C++ for OAs — Capgemini and Deloitte do not accept Python","u":"","d":""},
+              {"t":"Re-implement 4 solved Phase 1 problems in that second language","u":"","d":""}
+            ]},
+            {"id":"s3","name":"Rules of engagement","core":true,"why":"Read these once, then keep the two reference cards below open during a real assessment.","items":[
+              {"t":"Memorise the constraint-to-complexity ladder","u":"","d":""},
+              {"t":"Learn the partial-credit protocol (card below) — it is not \"solve 2 fully\"","u":"","d":""},
+              {"t":"Pin the edge-case checklist somewhere visible","u":"","d":""},
+              {"t":"Take one cold 90-minute mock and score it honestly","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Set your start date in the toolbar above","u":"","d":""},
+              {"t":"Get your college placement cell's actual recruiter list and tier it","u":"","d":""}
+            ]}
+          ]
+        }
+      ]
+    },
+    {
+      "id":"tg","name":"Track G — The MCQ gates that still apply","sub":"Weeks 1-20, in parallel, now about 20-25 minutes a day rather than 45. Your 10-12 LPA floor cut this track roughly in half. The heavy quant-verbal batteries belong to TCS Ninja, Infosys SE, Wipro Elite, Cognizant GenC, Accenture ASE, Capgemini and HCL — every one of which pays 3.5 to 7 LPA and is therefore off your list. What survives is the CS-fundamentals side, because that is the live gate at Walmart, Oracle, Cisco, Qualcomm, Nutanix, ServiceNow, SAP and Adobe, and all of those clear your floor.",
+      "phases":[
+        {
+          "id":"pg","tag":"Parallel","weeks":"weeks 1-20, ~20-25 min/day","wk":[1,20],"title":"CS fundamentals and the MCQ gates","gate":true,
+          "note":"Rescoped for a 10-12 LPA floor. CS fundamentals, SQL and code-tracing stay core: Walmart runs 22 technical MCQs in 35 minutes before you get 40 minutes of coding, Oracle's fresher assessment is often MCQ-only across 92 questions, and ServiceNow gives you 10-15 MCQs alongside a single coding problem. Quant and logical stay, trimmed, because Adobe adds 45 aptitude questions, Amazon runs a 24-question logical block, and DE Shaw and Arcesium use maths aptitude with negative marking. Verbal and the English essays drop to optional — those belong to the tier you are not targeting.",
+          "blocks":[
+            {"id":"g1","name":"Quantitative aptitude, trimmed","core":true,"isNew":true,"why":"Cut from 20 items to 11 by the CTC retarget. You are no longer preparing for a TCS Foundation battery, so drop the exhaustive coverage. What remains is what product companies actually reuse: Adobe's 45-question set, Amazon's logical block, and the maths aptitude at DE Shaw and Arcesium (which carries 0.25 negative marking, so accuracy beats coverage there). Drill shortcuts, not derivations.","items":[
+              {"t":"Percentages, profit and loss","u":"","d":""},{"t":"Ratio, proportion, averages","u":"","d":""},
+              {"t":"Time, speed and distance","u":"","d":""},{"t":"Time and work","u":"","d":""},
+              {"t":"Permutations and combinations","u":"","d":""},{"t":"Probability","u":"","d":""},
+              {"t":"Number system, HCF and LCM, divisibility","u":"","d":""},
+              {"t":"Data interpretation — tables, bars, pie charts","u":"","d":""},
+              {"t":"Progressions and series","u":"","d":""},
+              {"t":"Timed set 1 — 20 questions in 25 minutes","u":"","d":""},{"t":"Timed set 2 — 20 in 25","u":"","d":""}
+            ]},
+            {"id":"g2","name":"Logical reasoning","core":true,"isNew":true,"why":"Its own section at TCS, Infosys, Wipro, Cognizant, HCL and Amazon (24 Q / 35 min).","items":[
+              {"t":"Series — number and letter","u":"","d":""},{"t":"Syllogisms","u":"","d":""},
+              {"t":"Blood relations","u":"","d":""},{"t":"Directions and distance","u":"","d":""},
+              {"t":"Seating arrangement, linear and circular","u":"","d":""},{"t":"Puzzles and grid-based logic","u":"","d":""},
+              {"t":"Coding-decoding","u":"","d":""},{"t":"Statement and conclusion / assumption","u":"","d":""},
+              {"t":"Data sufficiency","u":"","d":""},{"t":"Cubes, dice, figure series","u":"","d":""},
+              {"t":"Timed set 1 — 20 in 25 minutes","u":"","d":""},{"t":"Timed set 2 — 20 in 25","u":"","d":""},
+              {"t":"Timed set 3 — 20 in 25","u":"","d":""},{"t":"Timed set 4 — 20 in 25","u":"","d":""}
+            ]},
+            {"id":"g3","name":"Verbal ability","core":false,"isNew":true,"why":"Demoted to optional by the CTC retarget. A 25-question verbal section is a TCS, Wipro and Cognizant device, and all three sit below your floor. No product company on your list scores verbal separately. Do this only if you decide to keep a mass recruiter as a safety net.","items":[
+              {"t":"Reading comprehension, timed","u":"","d":""},{"t":"Sentence correction and grammar","u":"","d":""},
+              {"t":"Para jumbles","u":"","d":""},{"t":"Synonyms, antonyms, vocabulary in context","u":"","d":""},
+              {"t":"Sentence completion and cloze","u":"","d":""},{"t":"Error spotting","u":"","d":""},
+              {"t":"Timed set 1 — 25 in 25 minutes","u":"","d":""},{"t":"Timed set 2 — 25 in 25","u":"","d":""},
+              {"t":"Timed set 3 — 25 in 25","u":"","d":""}
+            ]},
+            {"id":"g4","name":"CS fundamentals MCQ","core":true,"star":true,"isNew":true,"why":"Now the anchor of this whole track, and the single highest points-per-hour block on the page. Every company it gates clears your 10-12 LPA floor: Walmart (22 MCQ in 35 minutes, then only 40 for two coding problems), Oracle (92 questions across four sections, often no free coding at all for freshers), Cisco, Qualcomm, Nutanix, ServiceNow and SAP. You write Python, so the C/C++ output-prediction questions are a genuine blind spot — treat them as a reading skill, not a reason to switch languages.","items":[
+              {"t":"OS — processes vs threads, context switching","u":"","d":""},{"t":"OS — CPU scheduling algorithms","u":"","d":""},
+              {"t":"OS — deadlock: conditions, prevention, avoidance","u":"","d":""},{"t":"OS — paging, segmentation, virtual memory","u":"","d":""},
+              {"t":"DBMS — normalisation 1NF through BCNF","u":"","d":""},{"t":"DBMS — ACID and transactions","u":"","d":""},
+              {"t":"DBMS — indexing, B+ trees","u":"","d":""},{"t":"DBMS — keys and ER modelling","u":"","d":""},
+              {"t":"CN — OSI and TCP/IP layers","u":"","d":""},{"t":"CN — TCP vs UDP, the three-way handshake","u":"","d":""},
+              {"t":"CN — HTTP methods and status codes, DNS","u":"","d":""},{"t":"CN — IP addressing and subnetting","u":"","d":""},
+              {"t":"OOP — the four pillars, with real examples","u":"","d":""},{"t":"OOP — overloading vs overriding, virtual dispatch","u":"","d":""},
+              {"t":"C/C++ output prediction — pointer arithmetic","u":"","d":""},{"t":"C/C++ output prediction — pre/post increment","u":"","d":""},
+              {"t":"C/C++ output prediction — sizeof, arrays vs pointers","u":"","d":""},{"t":"Complexity MCQs — best/worst case of the standard algorithms","u":"","d":""}
+            ]},
+            {"id":"g5","name":"SQL","core":true,"isNew":true,"why":"Separately scored at Cognizant (Cluster 2 is ~60% SQL) and Deloitte, and it turns up as a bonus question in Razorpay-style OAs.","items":[
+              {"t":"SELECT, WHERE, ORDER BY, LIMIT","u":"","d":""},{"t":"INNER, LEFT, RIGHT and SELF joins","u":"","d":""},
+              {"t":"GROUP BY and HAVING","u":"","d":""},{"t":"Subqueries and correlated subqueries","u":"","d":""},
+              {"t":"Aggregate functions and NULL handling","u":"","d":""},{"t":"Window functions — ROW_NUMBER, RANK","u":"","d":""},
+              {"t":"Nth highest salary — the canonical OA question","u":"","d":""},{"t":"10 mixed query problems, timed","u":"","d":""}
+            ]},
+            {"id":"g6","name":"Pseudocode and output tracing","core":true,"isNew":true,"why":"A named, scored section at Infosys SE, Capgemini (25 Q / 25 min) and Accenture, plus Cognizant's Automata Fix and Amazon's 7-question debugging block. It is a reading skill in C/Java-flavoured syntax — as a Python-only solver you are at a real disadvantage with ++ operators and C-style for loops.","items":[
+              {"t":"Trace a C-style for loop with ++ and -- operators","u":"","d":""},
+              {"t":"Trace nested loops and predict the output","u":"","d":""},
+              {"t":"Trace arrays and pointer notation","u":"","d":""},
+              {"t":"Trace recursion by hand","u":"","d":""},
+              {"t":"Find the deliberate bug — off-by-one","u":"","d":""},
+              {"t":"Find the deliberate bug — wrong condition or operator","u":"","d":""},
+              {"t":"Infosys pseudocode set, timed","u":"","d":""},
+              {"t":"Capgemini pseudocode set, timed","u":"","d":""},
+              {"t":"Amazon-style debugging: 7 questions in 20 minutes","u":"","d":""},
+              {"t":"Automata Fix style: given failing code, repair it","u":"","d":""}
+            ]},
+            {"id":"g7","name":"Written and spoken English","core":false,"isNew":true,"why":"Effectively dropped by the CTC retarget. The scored essay and AI-graded speaking rounds are Wipro, Accenture, Capgemini and Cognizant devices — all below your floor. Keep it here only as a safety net. The communication that will actually decide your outcome is the interview after the OA, which is a different skill and not drilled by timed essays.","items":[
+              {"t":"Timed essay — AI and employment","u":"","d":""},{"t":"Timed essay — social media's impact","u":"","d":""},
+              {"t":"Timed essay — online vs classroom education","u":"","d":""},{"t":"Timed essay — digital payments in India","u":"","d":""},
+              {"t":"Timed essay — climate and technology","u":"","d":""},{"t":"Write a professional email (a TCS NQT question type)","u":"","d":""},
+              {"t":"Record yourself answering 5 spoken prompts, 60 seconds each","u":"","d":""}
+            ]}
+          ]
+        }
+      ]
+    },
+    {
+      "id":"tc","name":"Track C — The clock","sub":"Weeks 2-20, running in parallel. This was the single worst decision in the first version of this plan: contests were parked at week 16. Your entire measured deficit is performance under a clock, and campus drives will not wait.",
+      "phases":[
+        {
+          "id":"pc","tag":"Parallel","weeks":"weeks 2-20, one Sunday a week","wk":[2,20],"title":"Timed practice from week 2","gate":false,
+          "note":"A LeetCode weekly is 4 problems in 90 minutes, which is the OA format almost exactly. Real OA time budgets are tighter than you think: Accenture gives ~22 minutes per problem, Deloitte ~17. Go every week including the weeks you only know 40% of the material — especially those.",
+          "blocks":[
+            {"id":"c1","name":"Weekly contest, live, from week 2","core":true,"why":"Non-negotiable. Sunday mornings. The point is not your rating, it is learning to read three statements fast, rank them, and abandon a sunk thirty minutes.","items":[
+              {"t":"Weekly contest 1","u":"https://leetcode.com/contest/","d":""},{"t":"Weekly contest 2","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Weekly contest 3","u":"https://leetcode.com/contest/","d":""},{"t":"Weekly contest 4","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Weekly contest 5","u":"https://leetcode.com/contest/","d":""},{"t":"Weekly contest 6","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Weekly contest 7","u":"https://leetcode.com/contest/","d":""},{"t":"Weekly contest 8","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Weekly contest 9","u":"https://leetcode.com/contest/","d":""},{"t":"Weekly contest 10","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Weekly contest 11","u":"https://leetcode.com/contest/","d":""},{"t":"Weekly contest 12","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Weekly contest 13","u":"https://leetcode.com/contest/","d":""},{"t":"Weekly contest 14","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Weekly contest 15","u":"https://leetcode.com/contest/","d":""},{"t":"Weekly contest 16","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Weekly contest 17","u":"https://leetcode.com/contest/","d":""},{"t":"Weekly contest 18","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Weekly contest 19","u":"https://leetcode.com/contest/","d":""}
+            ]},
+            {"id":"c5","name":"Post-mortem after every contest","core":true,"why":"One paragraph: which problem could I have solved with better time allocation, and what did I misread? More of your improvement comes from this than from any single pattern.","items":[
+              {"t":"Post-mortem 1","u":"","d":""},{"t":"Post-mortem 2","u":"","d":""},{"t":"Post-mortem 3","u":"","d":""},
+              {"t":"Post-mortem 4","u":"","d":""},{"t":"Post-mortem 5","u":"","d":""},{"t":"Post-mortem 6","u":"","d":""},
+              {"t":"Post-mortem 7","u":"","d":""},{"t":"Post-mortem 8","u":"","d":""},{"t":"Post-mortem 9","u":"","d":""},
+              {"t":"Post-mortem 10","u":"","d":""},{"t":"Post-mortem 11","u":"","d":""},{"t":"Post-mortem 12","u":"","d":""},
+              {"t":"Post-mortem 13","u":"","d":""},{"t":"Post-mortem 14","u":"","d":""},{"t":"Post-mortem 15","u":"","d":""}
+            ]},
+            {"id":"c6","name":"Full OA simulation, from week 6","core":true,"isNew":true,"why":"The endurance of a 130-190 minute multi-section sitting is itself untrained. Do the aptitude section timed, then the coding section timed, in one sitting, no breaks.","items":[
+              {"t":"Take a full Mock OA sitting — hard 20-min-per-question lock, then bring your written plans here to review","u":"./10%20-%20Mock%20OA%20%28timed%20exam%29.html","d":""},
+              {"t":"Simulation 1 — TCS NQT shape: 65 aptitude then 2 coding","u":"","d":""},
+              {"t":"Simulation 2 — Wipro shape: sectional cutoffs, then 2 coding / 60 min","u":"","d":""},
+              {"t":"Simulation 3 — Walmart shape: 22 MCQ / 35 min, 2 coding / 40 min","u":"","d":""},
+              {"t":"Simulation 4 — Amazon shape: debugging, 2 coding / 70 min, reasoning","u":"","d":""},
+              {"t":"Simulation 5 — Infosys SP shape: 3 coding, 3 hours, no aptitude","u":"","d":""},
+              {"t":"Simulation 6 — free choice, your top target's exact shape","u":"","d":""}
+            ]},
+            {"id":"c3","name":"Virtual contests from the archive","core":false,"why":"From week 10, twice a week on top of the live one. Same rules: no editorials, hard stop at 90 minutes, use the timer at the top of this page.","items":[
+              {"t":"Virtual 1","u":"https://leetcode.com/contest/","d":""},{"t":"Virtual 2","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Virtual 3","u":"https://leetcode.com/contest/","d":""},{"t":"Virtual 4","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Virtual 5","u":"https://leetcode.com/contest/","d":""},{"t":"Virtual 6","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Virtual 7","u":"https://leetcode.com/contest/","d":""},{"t":"Virtual 8","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Virtual 9","u":"https://leetcode.com/contest/","d":""},{"t":"Virtual 10","u":"https://leetcode.com/contest/","d":""},
+              {"t":"Virtual 11","u":"https://leetcode.com/contest/","d":""},{"t":"Virtual 12","u":"https://leetcode.com/contest/","d":""}
+            ]},
+            {"id":"c4","name":"Company-tagged sets, from week 8","core":true,"why":"These companies visibly reuse their banks — Groww's two observed OA questions were near-verbatim LeetCode 'Best Time to Buy and Sell Stock IV' and 'Minimum Cost For Tickets'. Work the tagged set for your actual shortlist.","items":[
+              {"t":"Target company 1 — tagged set","u":"https://leetcode.com/problemset/","d":""},
+              {"t":"Target company 2 — tagged set","u":"https://leetcode.com/problemset/","d":""},
+              {"t":"Target company 3 — tagged set","u":"https://leetcode.com/problemset/","d":""},
+              {"t":"Target company 4 — tagged set","u":"https://leetcode.com/problemset/","d":""},
+              {"t":"Target company 5 — tagged set","u":"https://leetcode.com/problemset/","d":""}
+            ]}
+          ]
+        }
+      ]
+    },
+    {
+      "id":"td","name":"Track D — Data structures and algorithms","sub":"The pattern work. Phase 1 was audited as close to optimal and is unchanged. Phase 2 has been reordered — the highest-frequency OA topics now come first, and backtracking, which barely appears in assessments, has been cut and moved back.",
+      "phases":[
+        {
+          "id":"p1","tag":"Phase 1","weeks":"weeks 2-6","wk":[2,6],"title":"Lock the guaranteed solve",
+          "note":"Audited and left alone: these eight blocks map almost exactly onto what OAs actually ask — roughly 30% arrays and hashing, 15% two pointers, 10% binary search. For the mass recruiters this is not just the start of the syllabus, it is nearly all of it.",
+          "blocks":[
+            {"id":"pr","name":"Pattern recognition — do this before block a1","core":true,"star":true,"isNew":true,"why":"The skill underneath every problem below: read a statement, glance at the constraints, and name the pattern inside a minute. That is what the first two minutes of a real assessment actually test, and getting it wrong costs you the whole session on the wrong approach. Work the Pattern Radar drill alongside Phase 1 rather than after it — the tells for hashing, two pointers, sliding window, prefix sum and binary search are exactly the eight blocks that follow. Then move to the Decoder for the harder half of the skill: reading a long, padded, contextual statement and stripping it to its bare core.","items":[
+              {"t":"Read the tells table and the constraint-to-complexity ladder","u":"./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html","d":""},
+              {"t":"Drill all 34 statements in Pattern Radar once","u":"./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html","d":""},
+              {"t":"Re-drill everything you missed, until the redo pile is empty","u":"./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html","d":""},
+              {"t":"Reach 75%+ on a full pass, with most answers inside the target time","u":"./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html","d":""},
+              {"t":"Then drill the Decoder — 140 wordy, story-wrapped statements; strip each to its core and name the pattern","u":"./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html","d":""},
+              {"t":"On every Decoder miss, read the why-NOT-the-others notes — that is the fix for second-guessing the clue","u":"./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html","d":""},
+              {"t":"Habit: on every problem from here on, name the pattern and the complexity BEFORE writing code","u":"","d":""},
+              {"t":"Habit: read the constraints before the statement — the bound shortlists the algorithm","u":"","d":""}
+            ]},
+            {"id":"a1","name":"Hashing and frequency maps","core":true,"why":"Counting, grouping, seen-sets. The free hundred percent on most assessments.","items":[
+              {"t":"Two Sum","u":"https://leetcode.com/problems/two-sum/","d":"E"},
+              {"t":"Valid Anagram","u":"https://leetcode.com/problems/valid-anagram/","d":"E"},
+              {"t":"Contains Duplicate","u":"https://leetcode.com/problems/contains-duplicate/","d":"E"},
+              {"t":"Ransom Note","u":"https://leetcode.com/problems/ransom-note/","d":"E"},
+              {"t":"Isomorphic Strings","u":"https://leetcode.com/problems/isomorphic-strings/","d":"E"},
+              {"t":"Group Anagrams","u":"https://leetcode.com/problems/group-anagrams/","d":"M"},
+              {"t":"Top K Frequent Elements","u":"https://leetcode.com/problems/top-k-frequent-elements/","d":"M"},
+              {"t":"Longest Consecutive Sequence","u":"https://leetcode.com/problems/longest-consecutive-sequence/","d":"M"},
+              {"t":"Find All Anagrams in a String","u":"https://leetcode.com/problems/find-all-anagrams-in-a-string/","d":"M"},
+              {"t":"4Sum II","u":"https://leetcode.com/problems/4sum-ii/","d":"M"}
+            ]},
+            {"id":"a2","name":"Two pointers, medium tier","core":true,"why":"The pattern you already know from 32 solves, one difficulty up. Trapping Rain Water is the one Hard here — leave it until the other nine are done.","items":[
+              {"t":"Two Sum II - Input Array Is Sorted","u":"https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/","d":"M"},
+              {"t":"Valid Palindrome II","u":"https://leetcode.com/problems/valid-palindrome-ii/","d":"E"},
+              {"t":"3Sum","u":"https://leetcode.com/problems/3sum/","d":"M"},
+              {"t":"3Sum Closest","u":"https://leetcode.com/problems/3sum-closest/","d":"M"},
+              {"t":"4Sum","u":"https://leetcode.com/problems/4sum/","d":"M"},
+              {"t":"Container With Most Water","u":"https://leetcode.com/problems/container-with-most-water/","d":"M"},
+              {"t":"Sort Colors","u":"https://leetcode.com/problems/sort-colors/","d":"M"},
+              {"t":"Remove Duplicates from Sorted Array II","u":"https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/","d":"M"},
+              {"t":"Boats to Save People","u":"https://leetcode.com/problems/boats-to-save-people/","d":"M"},
+              {"t":"Trapping Rain Water","u":"https://leetcode.com/problems/trapping-rain-water/","d":"H"}
+            ]},
+            {"id":"a3","name":"Sliding window, fixed then variable","core":true,"why":"Fixed size first, then variable with a shrink condition, then the at-most-K trick that turns exactly-K into two cheap passes. The three Hards at the end are optional on a first pass.","items":[
+              {"t":"Maximum Average Subarray I","u":"https://leetcode.com/problems/maximum-average-subarray-i/","d":"E"},
+              {"t":"Maximum Points You Can Obtain from Cards","u":"https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/","d":"M"},
+              {"t":"Longest Substring Without Repeating Characters","u":"https://leetcode.com/problems/longest-substring-without-repeating-characters/","d":"M"},
+              {"t":"Longest Repeating Character Replacement","u":"https://leetcode.com/problems/longest-repeating-character-replacement/","d":"M"},
+              {"t":"Permutation in String","u":"https://leetcode.com/problems/permutation-in-string/","d":"M"},
+              {"t":"Minimum Size Subarray Sum","u":"https://leetcode.com/problems/minimum-size-subarray-sum/","d":"M"},
+              {"t":"Max Consecutive Ones III","u":"https://leetcode.com/problems/max-consecutive-ones-iii/","d":"M"},
+              {"t":"Longest Subarray of 1's After Deleting One Element","u":"https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/","d":"M"},
+              {"t":"Fruit Into Baskets","u":"https://leetcode.com/problems/fruit-into-baskets/","d":"M"},
+              {"t":"Number of Substrings Containing All Three Characters","u":"https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/","d":"M"},
+              {"t":"Binary Subarrays With Sum","u":"https://leetcode.com/problems/binary-subarrays-with-sum/","d":"M"},
+              {"t":"Count Number of Nice Subarrays","u":"https://leetcode.com/problems/count-number-of-nice-subarrays/","d":"M"},
+              {"t":"Subarrays with K Different Integers","u":"https://leetcode.com/problems/subarrays-with-k-different-integers/","d":"H"},
+              {"t":"Minimum Window Substring","u":"https://leetcode.com/problems/minimum-window-substring/","d":"H"},
+              {"t":"Sliding Window Maximum","u":"https://leetcode.com/problems/sliding-window-maximum/","d":"H"}
+            ]},
+            {"id":"a4","name":"Prefix sum, and prefix plus hashmap","core":true,"star":true,"why":"Directly attested: Subarray Sum Equals K is among the most frequently appearing OA problems of 2024-25. Collapses an O(n squared) scan into one pass.","items":[
+              {"t":"Running Sum of 1d Array","u":"https://leetcode.com/problems/running-sum-of-1d-array/","d":"E"},
+              {"t":"Find Pivot Index","u":"https://leetcode.com/problems/find-pivot-index/","d":"E"},
+              {"t":"Find the Highest Altitude","u":"https://leetcode.com/problems/find-the-highest-altitude/","d":"E"},
+              {"t":"Range Sum Query - Immutable","u":"https://leetcode.com/problems/range-sum-query-immutable/","d":"E"},
+              {"t":"Product of Array Except Self","u":"https://leetcode.com/problems/product-of-array-except-self/","d":"M"},
+              {"t":"Subarray Sum Equals K","u":"https://leetcode.com/problems/subarray-sum-equals-k/","d":"M"},
+              {"t":"Continuous Subarray Sum","u":"https://leetcode.com/problems/continuous-subarray-sum/","d":"M"},
+              {"t":"Subarray Sums Divisible by K","u":"https://leetcode.com/problems/subarray-sums-divisible-by-k/","d":"M"},
+              {"t":"Contiguous Array","u":"https://leetcode.com/problems/contiguous-array/","d":"M"},
+              {"t":"Range Sum Query 2D - Immutable","u":"https://leetcode.com/problems/range-sum-query-2d-immutable/","d":"M"}
+            ]},
+            {"id":"a5","name":"Sorting, custom comparators, intervals","core":true,"why":"Half of greedy is really just deciding what to sort by first. Uber and Flipkart both surface intervals together with heaps, so this block feeds directly into the heap block.","items":[
+              {"t":"Merge Intervals","u":"https://leetcode.com/problems/merge-intervals/","d":"M"},
+              {"t":"Insert Interval","u":"https://leetcode.com/problems/insert-interval/","d":"M"},
+              {"t":"Interval List Intersections","u":"https://leetcode.com/problems/interval-list-intersections/","d":"M"},
+              {"t":"Non-overlapping Intervals","u":"https://leetcode.com/problems/non-overlapping-intervals/","d":"M"},
+              {"t":"Minimum Number of Arrows to Burst Balloons","u":"https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/","d":"M"},
+              {"t":"Car Pooling","u":"https://leetcode.com/problems/car-pooling/","d":"M"},
+              {"t":"Meeting Rooms III style — Task Scheduler","u":"https://leetcode.com/problems/task-scheduler/","d":"M"},
+              {"t":"Largest Number","u":"https://leetcode.com/problems/largest-number/","d":"M"},
+              {"t":"Sort Characters By Frequency","u":"https://leetcode.com/problems/sort-characters-by-frequency/","d":"M"},
+              {"t":"Custom Sort String","u":"https://leetcode.com/problems/custom-sort-string/","d":"M"},
+              {"t":"H-Index","u":"https://leetcode.com/problems/h-index/","d":"M"}
+            ]},
+            {"id":"a6","name":"Binary search, on the array and on the answer","core":true,"star":true,"why":"The highest-return block on this page, and the audit confirmed it independently. Amazon's September 2025 reported questions included Capacity To Ship Packages Within D Days — the canonical binary-search-on-answer problem. You have 11 binary search solves against 52 array solves, so this is also your largest gap-to-value ratio. Never skim this block.","items":[
+              {"t":"Binary Search","u":"https://leetcode.com/problems/binary-search/","d":"E"},
+              {"t":"Search Insert Position","u":"https://leetcode.com/problems/search-insert-position/","d":"E"},
+              {"t":"First Bad Version","u":"https://leetcode.com/problems/first-bad-version/","d":"E"},
+              {"t":"Find First and Last Position of Element in Sorted Array","u":"https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/","d":"M"},
+              {"t":"Search a 2D Matrix","u":"https://leetcode.com/problems/search-a-2d-matrix/","d":"M"},
+              {"t":"Find Peak Element","u":"https://leetcode.com/problems/find-peak-element/","d":"M"},
+              {"t":"Find Minimum in Rotated Sorted Array","u":"https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/","d":"M"},
+              {"t":"Search in Rotated Sorted Array","u":"https://leetcode.com/problems/search-in-rotated-sorted-array/","d":"M"},
+              {"t":"Search in Rotated Sorted Array II","u":"https://leetcode.com/problems/search-in-rotated-sorted-array-ii/","d":"M"},
+              {"t":"Koko Eating Bananas","u":"https://leetcode.com/problems/koko-eating-bananas/","d":"M"},
+              {"t":"Capacity To Ship Packages Within D Days","u":"https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/","d":"M"},
+              {"t":"Minimum Number of Days to Make m Bouquets","u":"https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/","d":"M"},
+              {"t":"Magnetic Force Between Two Balls (aggressive cows)","u":"https://leetcode.com/problems/magnetic-force-between-two-balls/","d":"M"},
+              {"t":"Split Array Largest Sum","u":"https://leetcode.com/problems/split-array-largest-sum/","d":"H"},
+              {"t":"Median of Two Sorted Arrays","u":"https://leetcode.com/problems/median-of-two-sorted-arrays/","d":"H"}
+            ]},
+            {"id":"a7","name":"Stack and monotonic stack","core":true,"why":"Once you see that a monotonic stack answers every next-greater question, a whole family collapses into one template. Sum of Subarray Minimums is labelled Medium but behaves like a Hard — leave it for last.","items":[
+              {"t":"Valid Parentheses","u":"https://leetcode.com/problems/valid-parentheses/","d":"E"},
+              {"t":"Remove All Adjacent Duplicates In String","u":"https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/","d":"E"},
+              {"t":"Next Greater Element I","u":"https://leetcode.com/problems/next-greater-element-i/","d":"E"},
+              {"t":"Min Stack","u":"https://leetcode.com/problems/min-stack/","d":"M"},
+              {"t":"Next Greater Element II","u":"https://leetcode.com/problems/next-greater-element-ii/","d":"M"},
+              {"t":"Daily Temperatures","u":"https://leetcode.com/problems/daily-temperatures/","d":"M"},
+              {"t":"Asteroid Collision","u":"https://leetcode.com/problems/asteroid-collision/","d":"M"},
+              {"t":"Remove K Digits","u":"https://leetcode.com/problems/remove-k-digits/","d":"M"},
+              {"t":"Sum of Subarray Minimums","u":"https://leetcode.com/problems/sum-of-subarray-minimums/","d":"M"},
+              {"t":"Largest Rectangle in Histogram","u":"https://leetcode.com/problems/largest-rectangle-in-histogram/","d":"H"}
+            ]},
+            {"id":"a8","name":"String parsing and simulation","core":true,"why":"Assessments love messy input handling because it is easy to write and hard to get fully right. This block pairs naturally with the stdin drill from week 1.","items":[
+              {"t":"Roman to Integer","u":"https://leetcode.com/problems/roman-to-integer/","d":"E"},
+              {"t":"Longest Common Prefix","u":"https://leetcode.com/problems/longest-common-prefix/","d":"E"},
+              {"t":"Add Binary","u":"https://leetcode.com/problems/add-binary/","d":"E"},
+              {"t":"Reverse Words in a String","u":"https://leetcode.com/problems/reverse-words-in-a-string/","d":"M"},
+              {"t":"String to Integer (atoi)","u":"https://leetcode.com/problems/string-to-integer-atoi/","d":"M"},
+              {"t":"Integer to Roman","u":"https://leetcode.com/problems/integer-to-roman/","d":"M"},
+              {"t":"String Compression","u":"https://leetcode.com/problems/string-compression/","d":"M"},
+              {"t":"Zigzag Conversion","u":"https://leetcode.com/problems/zigzag-conversion/","d":"M"},
+              {"t":"Multiply Strings","u":"https://leetcode.com/problems/multiply-strings/","d":"M"},
+              {"t":"Text Justification","u":"https://leetcode.com/problems/text-justification/","d":"H"}
+            ]}
+          ]
+        },
+        {
+          "id":"p2","tag":"Phase 2","weeks":"weeks 7-14","wk":[7,14],"title":"The OA-frequency core, reordered",
+          "note":"Reordered on the audit's finding: backtracking used to open this phase despite being the lowest-frequency OA topic in it, while trees, grids, heaps and the DP core sat behind it. Those now come first, roughly three weeks earlier — inside the window where campus drives actually happen.",
+          "blocks":[
+            {"id":"b2","name":"Trees: DFS-return, BFS-levels, BST","core":true,"why":"Only two skeletons exist. A DFS that returns a value upward, and a BFS that walks level by level. Everything else is bookkeeping on top of those two.","items":[
+              {"t":"Binary Tree Inorder Traversal","u":"https://leetcode.com/problems/binary-tree-inorder-traversal/","d":"E"},
+              {"t":"Maximum Depth of Binary Tree","u":"https://leetcode.com/problems/maximum-depth-of-binary-tree/","d":"E"},
+              {"t":"Invert Binary Tree","u":"https://leetcode.com/problems/invert-binary-tree/","d":"E"},
+              {"t":"Symmetric Tree","u":"https://leetcode.com/problems/symmetric-tree/","d":"E"},
+              {"t":"Balanced Binary Tree","u":"https://leetcode.com/problems/balanced-binary-tree/","d":"E"},
+              {"t":"Diameter of Binary Tree","u":"https://leetcode.com/problems/diameter-of-binary-tree/","d":"E"},
+              {"t":"Binary Tree Level Order Traversal","u":"https://leetcode.com/problems/binary-tree-level-order-traversal/","d":"M"},
+              {"t":"Binary Tree Zigzag Level Order Traversal","u":"https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/","d":"M"},
+              {"t":"Binary Tree Right Side View","u":"https://leetcode.com/problems/binary-tree-right-side-view/","d":"M"},
+              {"t":"Path Sum II","u":"https://leetcode.com/problems/path-sum-ii/","d":"M"},
+              {"t":"Path Sum III","u":"https://leetcode.com/problems/path-sum-iii/","d":"M"},
+              {"t":"Lowest Common Ancestor of a Binary Tree","u":"https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/","d":"M"},
+              {"t":"Validate Binary Search Tree","u":"https://leetcode.com/problems/validate-binary-search-tree/","d":"M"},
+              {"t":"Kth Smallest Element in a BST","u":"https://leetcode.com/problems/kth-smallest-element-in-a-bst/","d":"M"},
+              {"t":"Construct Binary Tree from Preorder and Inorder Traversal","u":"https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/","d":"M"},
+              {"t":"Binary Tree Maximum Path Sum","u":"https://leetcode.com/problems/binary-tree-maximum-path-sum/","d":"H"}
+            ]},
+            {"id":"n1","name":"Linked lists","core":true,"isNew":true,"why":"Added by the audit. There were zero linked-list problems in the old plan, yet Merge k Sorted Lists in the heap block requires them, Wipro's published topic list names them, and they are the single most common first-interview-round topic. Small block, high leverage.","items":[
+              {"t":"Reverse Linked List","u":"https://leetcode.com/problems/reverse-linked-list/","d":"E"},
+              {"t":"Middle of the Linked List","u":"https://leetcode.com/problems/middle-of-the-linked-list/","d":"E"},
+              {"t":"Linked List Cycle","u":"https://leetcode.com/problems/linked-list-cycle/","d":"E"},
+              {"t":"Merge Two Sorted Lists","u":"https://leetcode.com/problems/merge-two-sorted-lists/","d":"E"},
+              {"t":"Remove Nth Node From End of List","u":"https://leetcode.com/problems/remove-nth-node-from-end-of-list/","d":"M"},
+              {"t":"Add Two Numbers","u":"https://leetcode.com/problems/add-two-numbers/","d":"M"},
+              {"t":"Reorder List","u":"https://leetcode.com/problems/reorder-list/","d":"M"},
+              {"t":"Copy List with Random Pointer","u":"https://leetcode.com/problems/copy-list-with-random-pointer/","d":"M"},
+              {"t":"Reverse Nodes in k-Group","u":"https://leetcode.com/problems/reverse-nodes-in-k-group/","d":"H"}
+            ]},
+            {"id":"b5","name":"Graphs I: grids, BFS and DFS","core":true,"star":true,"why":"Most assessment graph questions are not given as graphs, they are given as grids. Shortest path on an unweighted grid is just BFS; from many starts at once it is multi-source BFS. Moved forward — this is one of the two highest-frequency Phase 2 blocks.","items":[
+              {"t":"Flood Fill","u":"https://leetcode.com/problems/flood-fill/","d":"E"},
+              {"t":"Number of Islands","u":"https://leetcode.com/problems/number-of-islands/","d":"M"},
+              {"t":"Max Area of Island","u":"https://leetcode.com/problems/max-area-of-island/","d":"M"},
+              {"t":"Rotting Oranges","u":"https://leetcode.com/problems/rotting-oranges/","d":"M"},
+              {"t":"01 Matrix","u":"https://leetcode.com/problems/01-matrix/","d":"M"},
+              {"t":"Surrounded Regions","u":"https://leetcode.com/problems/surrounded-regions/","d":"M"},
+              {"t":"Number of Enclaves","u":"https://leetcode.com/problems/number-of-enclaves/","d":"M"},
+              {"t":"Pacific Atlantic Water Flow","u":"https://leetcode.com/problems/pacific-atlantic-water-flow/","d":"M"},
+              {"t":"Shortest Path in Binary Matrix","u":"https://leetcode.com/problems/shortest-path-in-binary-matrix/","d":"M"},
+              {"t":"Clone Graph","u":"https://leetcode.com/problems/clone-graph/","d":"M"},
+              {"t":"Number of Provinces","u":"https://leetcode.com/problems/number-of-provinces/","d":"M"},
+              {"t":"Is Graph Bipartite?","u":"https://leetcode.com/problems/is-graph-bipartite/","d":"M"},
+              {"t":"Keys and Rooms","u":"https://leetcode.com/problems/keys-and-rooms/","d":"M"},
+              {"t":"Open the Lock","u":"https://leetcode.com/problems/open-the-lock/","d":"M"},
+              {"t":"Word Ladder","u":"https://leetcode.com/problems/word-ladder/","d":"H"}
+            ]},
+            {"id":"b3","name":"Heap, top-K, k-way merge","core":true,"why":"Any question with the word K in it, plus streaming medians. heapq with tuples, and push negatives when you need a max-heap. Do this after linked lists, since Merge k Sorted Lists depends on them.","items":[
+              {"t":"Last Stone Weight","u":"https://leetcode.com/problems/last-stone-weight/","d":"E"},
+              {"t":"Kth Largest Element in a Stream","u":"https://leetcode.com/problems/kth-largest-element-in-a-stream/","d":"E"},
+              {"t":"Kth Largest Element in an Array","u":"https://leetcode.com/problems/kth-largest-element-in-an-array/","d":"M"},
+              {"t":"Top K Frequent Words","u":"https://leetcode.com/problems/top-k-frequent-words/","d":"M"},
+              {"t":"K Closest Points to Origin","u":"https://leetcode.com/problems/k-closest-points-to-origin/","d":"M"},
+              {"t":"Reorganize String","u":"https://leetcode.com/problems/reorganize-string/","d":"M"},
+              {"t":"Furthest Building You Can Reach","u":"https://leetcode.com/problems/furthest-building-you-can-reach/","d":"M"},
+              {"t":"Merge k Sorted Lists","u":"https://leetcode.com/problems/merge-k-sorted-lists/","d":"H"},
+              {"t":"Find Median from Data Stream","u":"https://leetcode.com/problems/find-median-from-data-stream/","d":"H"}
+            ]},
+            {"id":"b7","name":"DP: 1D linear","core":true,"star":true,"why":"Pulled forward from week 12 to here. With b8, this is the compulsory DP core — these two blocks carry almost all of DP's OA frequency between them. Get comfortable with dp[i] depending only on the last one or two states.","items":[
+              {"t":"Fibonacci Number","u":"https://leetcode.com/problems/fibonacci-number/","d":"E"},
+              {"t":"Climbing Stairs","u":"https://leetcode.com/problems/climbing-stairs/","d":"E"},
+              {"t":"Min Cost Climbing Stairs","u":"https://leetcode.com/problems/min-cost-climbing-stairs/","d":"E"},
+              {"t":"House Robber","u":"https://leetcode.com/problems/house-robber/","d":"M"},
+              {"t":"House Robber II","u":"https://leetcode.com/problems/house-robber-ii/","d":"M"},
+              {"t":"Decode Ways","u":"https://leetcode.com/problems/decode-ways/","d":"M"},
+              {"t":"Delete and Earn","u":"https://leetcode.com/problems/delete-and-earn/","d":"M"},
+              {"t":"Maximum Product Subarray","u":"https://leetcode.com/problems/maximum-product-subarray/","d":"M"}
+            ]},
+            {"id":"b8","name":"DP: 0/1 knapsack and subset sum","core":true,"star":true,"why":"The single most-tested DP family in assessments. Pick or skip, with a capacity. Learn to spot it when it is disguised as coins, targets or partitions. Write the recursion, add @cache, then convert if you have time.","items":[
+              {"t":"Partition Equal Subset Sum","u":"https://leetcode.com/problems/partition-equal-subset-sum/","d":"M"},
+              {"t":"Target Sum","u":"https://leetcode.com/problems/target-sum/","d":"M"},
+              {"t":"Last Stone Weight II","u":"https://leetcode.com/problems/last-stone-weight-ii/","d":"M"},
+              {"t":"Coin Change","u":"https://leetcode.com/problems/coin-change/","d":"M"},
+              {"t":"Coin Change II","u":"https://leetcode.com/problems/coin-change-ii/","d":"M"},
+              {"t":"Combination Sum IV","u":"https://leetcode.com/problems/combination-sum-iv/","d":"M"},
+              {"t":"Ones and Zeroes","u":"https://leetcode.com/problems/ones-and-zeroes/","d":"M"},
+              {"t":"Perfect Squares","u":"https://leetcode.com/problems/perfect-squares/","d":"M"},
+              {"t":"Word Break","u":"https://leetcode.com/problems/word-break/","d":"M"},
+              {"t":"Minimum Cost For Tickets","u":"https://leetcode.com/problems/minimum-cost-for-tickets/","d":"M"}
+            ]},
+            {"id":"b4","name":"Greedy","core":true,"why":"Sort first, then one pass. The hard part is never the code, it is convincing yourself the greedy choice is safe — check each one with an exchange argument before you trust it.","items":[
+              {"t":"Assign Cookies","u":"https://leetcode.com/problems/assign-cookies/","d":"E"},
+              {"t":"Lemonade Change","u":"https://leetcode.com/problems/lemonade-change/","d":"E"},
+              {"t":"Best Time to Buy and Sell Stock II","u":"https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/","d":"M"},
+              {"t":"Maximum Subarray","u":"https://leetcode.com/problems/maximum-subarray/","d":"M"},
+              {"t":"Jump Game","u":"https://leetcode.com/problems/jump-game/","d":"M"},
+              {"t":"Jump Game II","u":"https://leetcode.com/problems/jump-game-ii/","d":"M"},
+              {"t":"Gas Station","u":"https://leetcode.com/problems/gas-station/","d":"M"},
+              {"t":"Partition Labels","u":"https://leetcode.com/problems/partition-labels/","d":"M"},
+              {"t":"Valid Parenthesis String","u":"https://leetcode.com/problems/valid-parenthesis-string/","d":"M"},
+              {"t":"Two City Scheduling","u":"https://leetcode.com/problems/two-city-scheduling/","d":"M"},
+              {"t":"Minimum Deletions to Make Character Frequencies Unique","u":"https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique/","d":"M"},
+              {"t":"Wiggle Subsequence","u":"https://leetcode.com/problems/wiggle-subsequence/","d":"M"},
+              {"t":"Queue Reconstruction by Height","u":"https://leetcode.com/problems/queue-reconstruction-by-height/","d":"M"},
+              {"t":"Candy","u":"https://leetcode.com/problems/candy/","d":"H"}
+            ]},
+            {"id":"n2","name":"Matrix and 2-D simulation","core":true,"isNew":true,"why":"Added by the audit — there were zero of these. Implementation-gated rather than insight-gated, which is exactly what produces a FULL solve under a clock. These are the problems you can be certain of finishing.","items":[
+              {"t":"Transpose Matrix","u":"https://leetcode.com/problems/transpose-matrix/","d":"E"},
+              {"t":"Spiral Matrix","u":"https://leetcode.com/problems/spiral-matrix/","d":"M"},
+              {"t":"Spiral Matrix II","u":"https://leetcode.com/problems/spiral-matrix-ii/","d":"M"},
+              {"t":"Rotate Image","u":"https://leetcode.com/problems/rotate-image/","d":"M"},
+              {"t":"Set Matrix Zeroes","u":"https://leetcode.com/problems/set-matrix-zeroes/","d":"M"},
+              {"t":"Diagonal Traverse","u":"https://leetcode.com/problems/diagonal-traverse/","d":"M"},
+              {"t":"Search a 2D Matrix II","u":"https://leetcode.com/problems/search-a-2d-matrix-ii/","d":"M"},
+              {"t":"Game of Life","u":"https://leetcode.com/problems/game-of-life/","d":"M"}
+            ]},
+            {"id":"n3","name":"Cyclic sort and index-as-hash","core":true,"isNew":true,"why":"Added by the audit. A tiny pattern with disproportionate OA frequency: anything phrased as find the missing or duplicate number in 1..n. Six problems and you own the whole family.","items":[
+              {"t":"Missing Number","u":"https://leetcode.com/problems/missing-number/","d":"E"},
+              {"t":"Find All Numbers Disappeared in an Array","u":"https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/","d":"E"},
+              {"t":"Set Mismatch","u":"https://leetcode.com/problems/set-mismatch/","d":"E"},
+              {"t":"Find All Duplicates in an Array","u":"https://leetcode.com/problems/find-all-duplicates-in-an-array/","d":"M"},
+              {"t":"Find the Duplicate Number","u":"https://leetcode.com/problems/find-the-duplicate-number/","d":"M"},
+              {"t":"First Missing Positive","u":"https://leetcode.com/problems/first-missing-positive/","d":"H"}
+            ]},
+            {"id":"b13","name":"Bit manipulation and number theory","core":true,"why":"Cheap points that turn up more often than people expect, and usually as the fast first problem in a set.","items":[
+              {"t":"Number of 1 Bits","u":"https://leetcode.com/problems/number-of-1-bits/","d":"E"},
+              {"t":"Counting Bits","u":"https://leetcode.com/problems/counting-bits/","d":"E"},
+              {"t":"Reverse Bits","u":"https://leetcode.com/problems/reverse-bits/","d":"E"},
+              {"t":"Single Number","u":"https://leetcode.com/problems/single-number/","d":"E"},
+              {"t":"Power of Two","u":"https://leetcode.com/problems/power-of-two/","d":"E"},
+              {"t":"Single Number II","u":"https://leetcode.com/problems/single-number-ii/","d":"M"},
+              {"t":"Single Number III","u":"https://leetcode.com/problems/single-number-iii/","d":"M"},
+              {"t":"Bitwise AND of Numbers Range","u":"https://leetcode.com/problems/bitwise-and-of-numbers-range/","d":"M"},
+              {"t":"Pow(x, n)","u":"https://leetcode.com/problems/powx-n/","d":"M"},
+              {"t":"Count Primes","u":"https://leetcode.com/problems/count-primes/","d":"M"}
+            ]},
+            {"id":"b1","name":"Recursion and backtracking","core":true,"why":"Cut from 15 to 8 and moved here from the front of the phase. Auto-graded platforms under-use backtracking because enumeration is slow to write in a 35-minute box and awkward to grade — it is an interview topic more than an OA topic. Learn the choose / recurse / un-choose skeleton once; these eight cover it.","items":[
+              {"t":"Subsets","u":"https://leetcode.com/problems/subsets/","d":"M"},
+              {"t":"Subsets II","u":"https://leetcode.com/problems/subsets-ii/","d":"M"},
+              {"t":"Permutations","u":"https://leetcode.com/problems/permutations/","d":"M"},
+              {"t":"Combination Sum","u":"https://leetcode.com/problems/combination-sum/","d":"M"},
+              {"t":"Letter Combinations of a Phone Number","u":"https://leetcode.com/problems/letter-combinations-of-a-phone-number/","d":"M"},
+              {"t":"Generate Parentheses","u":"https://leetcode.com/problems/generate-parentheses/","d":"M"},
+              {"t":"Palindrome Partitioning","u":"https://leetcode.com/problems/palindrome-partitioning/","d":"M"},
+              {"t":"Word Search","u":"https://leetcode.com/problems/word-search/","d":"M"}
+            ]}
+          ]
+        },
+        {
+          "id":"p3","tag":"Phase 3","weeks":"weeks 15-20","wk":[15,20],"title":"Required for a 10-12 LPA offer",
+          "note":"This phase used to be marked optional, on the reasoning that TCS, Wipro, Cognizant and Accenture never ask any of it. That reasoning is now void: those companies pay 3.5 to 7 LPA and are below your floor. Every company that clears 10 LPA does ask this. Uber's own prep guidance names binary search on the answer alongside heaps, graphs and Dijkstra. Flipkart and Razorpay assessments are described as graph or DP heavy. Media.net sets a DP-with-bitmask problem. Infosys Power Programmer and SP, the two Infosys tracks that reach your range, are pure DSA with no aptitude section at all. Treat this phase as compulsory, not as a stretch.",
+          "blocks":[
+            {"id":"b6","name":"Graphs II: topological sort, Dijkstra, union-find","core":true,"why":"The three named algorithms that actually appear at the product tier. You already have four union-find solves to build on.","items":[
+              {"t":"Course Schedule","u":"https://leetcode.com/problems/course-schedule/","d":"M"},
+              {"t":"Course Schedule II","u":"https://leetcode.com/problems/course-schedule-ii/","d":"M"},
+              {"t":"Find Eventual Safe States","u":"https://leetcode.com/problems/find-eventual-safe-states/","d":"M"},
+              {"t":"Minimum Height Trees","u":"https://leetcode.com/problems/minimum-height-trees/","d":"M"},
+              {"t":"Network Delay Time","u":"https://leetcode.com/problems/network-delay-time/","d":"M"},
+              {"t":"Cheapest Flights Within K Stops","u":"https://leetcode.com/problems/cheapest-flights-within-k-stops/","d":"M"},
+              {"t":"Path with Maximum Probability","u":"https://leetcode.com/problems/path-with-maximum-probability/","d":"M"},
+              {"t":"Path With Minimum Effort","u":"https://leetcode.com/problems/path-with-minimum-effort/","d":"M"},
+              {"t":"Redundant Connection","u":"https://leetcode.com/problems/redundant-connection/","d":"M"},
+              {"t":"Number of Operations to Make Network Connected","u":"https://leetcode.com/problems/number-of-operations-to-make-network-connected/","d":"M"},
+              {"t":"Accounts Merge","u":"https://leetcode.com/problems/accounts-merge/","d":"M"},
+              {"t":"Most Stones Removed with Same Row or Column","u":"https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/","d":"M"},
+              {"t":"Satisfiability of Equality Equations","u":"https://leetcode.com/problems/satisfiability-of-equality-equations/","d":"M"},
+              {"t":"Min Cost to Connect All Points","u":"https://leetcode.com/problems/min-cost-to-connect-all-points/","d":"M"},
+              {"t":"Swim in Rising Water","u":"https://leetcode.com/problems/swim-in-rising-water/","d":"H"}
+            ]},
+            {"id":"b9","name":"DP: grid paths","core":true,"why":"The easiest DP family to picture, and the bridge to string DP.","items":[
+              {"t":"Unique Paths","u":"https://leetcode.com/problems/unique-paths/","d":"M"},
+              {"t":"Unique Paths II","u":"https://leetcode.com/problems/unique-paths-ii/","d":"M"},
+              {"t":"Minimum Path Sum","u":"https://leetcode.com/problems/minimum-path-sum/","d":"M"},
+              {"t":"Triangle","u":"https://leetcode.com/problems/triangle/","d":"M"},
+              {"t":"Minimum Falling Path Sum","u":"https://leetcode.com/problems/minimum-falling-path-sum/","d":"M"},
+              {"t":"Maximal Square","u":"https://leetcode.com/problems/maximal-square/","d":"M"},
+              {"t":"Dungeon Game","u":"https://leetcode.com/problems/dungeon-game/","d":"H"},
+              {"t":"Cherry Pickup II","u":"https://leetcode.com/problems/cherry-pickup-ii/","d":"H"}
+            ]},
+            {"id":"b10","name":"DP: strings","core":true,"why":"Two indices, one table. Once LCS and edit distance are automatic, most string DP is a variation on one of them.","items":[
+              {"t":"Longest Common Subsequence","u":"https://leetcode.com/problems/longest-common-subsequence/","d":"M"},
+              {"t":"Longest Palindromic Substring","u":"https://leetcode.com/problems/longest-palindromic-substring/","d":"M"},
+              {"t":"Palindromic Substrings","u":"https://leetcode.com/problems/palindromic-substrings/","d":"M"},
+              {"t":"Longest Palindromic Subsequence","u":"https://leetcode.com/problems/longest-palindromic-subsequence/","d":"M"},
+              {"t":"Delete Operation for Two Strings","u":"https://leetcode.com/problems/delete-operation-for-two-strings/","d":"M"},
+              {"t":"Minimum ASCII Delete Sum for Two Strings","u":"https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/","d":"M"},
+              {"t":"Interleaving String","u":"https://leetcode.com/problems/interleaving-string/","d":"M"},
+              {"t":"Edit Distance","u":"https://leetcode.com/problems/edit-distance/","d":"M"},
+              {"t":"Distinct Subsequences","u":"https://leetcode.com/problems/distinct-subsequences/","d":"H"},
+              {"t":"Regular Expression Matching","u":"https://leetcode.com/problems/regular-expression-matching/","d":"H"}
+            ]},
+            {"id":"b12","name":"DP: stock and state machines","core":true,"why":"Kept despite being lower-yield, for one concrete reason: a Groww OA question was observed to be Best Time to Buy and Sell Stock IV essentially verbatim. One state table covers the whole set.","items":[
+              {"t":"Best Time to Buy and Sell Stock","u":"https://leetcode.com/problems/best-time-to-buy-and-sell-stock/","d":"E"},
+              {"t":"Best Time to Buy and Sell Stock with Cooldown","u":"https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/","d":"M"},
+              {"t":"Best Time to Buy and Sell Stock with Transaction Fee","u":"https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/","d":"M"},
+              {"t":"Best Time to Buy and Sell Stock III","u":"https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/","d":"H"},
+              {"t":"Best Time to Buy and Sell Stock IV","u":"https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/","d":"H"},
+              {"t":"Maximum Profit in Job Scheduling","u":"https://leetcode.com/problems/maximum-profit-in-job-scheduling/","d":"H"}
+            ]},
+            {"id":"b11","name":"DP: longest increasing subsequence family","core":false,"why":"Lowest yield per hour on the page. Maximum Length of Pair Chain was removed as a duplicate of Non-overlapping Intervals in a5 — they are the same problem. Do this block only if everything else is done.","items":[
+              {"t":"Increasing Triplet Subsequence","u":"https://leetcode.com/problems/increasing-triplet-subsequence/","d":"M"},
+              {"t":"Longest Increasing Subsequence","u":"https://leetcode.com/problems/longest-increasing-subsequence/","d":"M"},
+              {"t":"Number of Longest Increasing Subsequence","u":"https://leetcode.com/problems/number-of-longest-increasing-subsequence/","d":"M"},
+              {"t":"Largest Divisible Subset","u":"https://leetcode.com/problems/largest-divisible-subset/","d":"M"},
+              {"t":"Longest String Chain","u":"https://leetcode.com/problems/longest-string-chain/","d":"M"},
+              {"t":"Best Team With No Conflicts","u":"https://leetcode.com/problems/best-team-with-no-conflicts/","d":"M"},
+              {"t":"Russian Doll Envelopes","u":"https://leetcode.com/problems/russian-doll-envelopes/","d":"H"}
+            ]},
+            {"id":"z1","name":"After the OA — what round two asks","core":false,"isNew":true,"why":"Scope boundary, so you find out here rather than in an interview. None of this appears in OAs; all of it appears in the first technical round.","items":[
+              {"t":"LRU Cache — the canonical design question","u":"https://leetcode.com/problems/lru-cache/","d":"M"},
+              {"t":"Implement Trie (Prefix Tree)","u":"https://leetcode.com/problems/implement-trie-prefix-tree/","d":"M"},
+              {"t":"Serialize and Deserialize Binary Tree","u":"https://leetcode.com/problems/serialize-and-deserialize-binary-tree/","d":"H"},
+              {"t":"Min Stack — revisit as a design question","u":"https://leetcode.com/problems/min-stack/","d":"M"},
+              {"t":"OOP design: describe a parking lot / elevator system","u":"","d":""},
+              {"t":"Explain your own projects in 3 minutes, out loud","u":"","d":""}
+            ]}
+          ]
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script type="application/json" id="state">
+{"v":3,"rev":3,"s":{"s2:0":"ac","s1:0":"tle"},"d":{"s2:0":"2026-09-06","s1:0":"2026-09-07"},"log":{"2026-09-06":1,"2026-09-07":1},"start":""}
+</script>
+
+<script id="code">
+(function () {
+  "use strict";
+  // The cross-tool links in this page are plain .html filenames, so opening the file straight off
+  // disk just works. When the very same page is served over http(s) those relative names cannot
+  // resolve, so there we swap each one for its hosted copy. Local is the default; online adapts.
+  var HOSTED = {
+    "./1%20-%20Twenty%20Weeks%20to%20AC%20%28tracker%29.html": "https://claude.ai/code/artifact/32b165b3-0cee-4121-9470-b0e8d6d17c16",
+    "./2%20-%20Stdin%20Trainer%20%28drill%29.html": "https://claude.ai/code/artifact/00d12bf6-5548-4e56-b449-d0f33193a495",
+    "./3%20-%20Stdin%20Survival%20Kit%20%28manual%29.html": "https://claude.ai/code/artifact/49b64e1a-a87a-4924-b42d-2a7a614ab41a",
+    "./5%20-%20SQL%20Lab%20%28practice%29.html": "https://claude.ai/code/artifact/0f564ee0-0ae9-4f76-b0db-9cbaf04a5664",
+    "./6%20-%20CS%20Core%20Drill%20%28OS%20DBMS%20CN%20OOP%20C%29.html": "https://claude.ai/code/artifact/3a19c5c3-5b45-4744-a980-20f138d77859",
+    "./7%20-%20Aptitude%20Sprint%20%28formulas%20%2B%20practice%29.html": "https://claude.ai/code/artifact/1176c004-05c1-4ebd-bd08-041957dd07f6",
+    "./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html": "https://claude.ai/code/artifact/9c7876de-143f-4f4d-bead-a8204d0f63ad",
+    "./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html": "https://claude.ai/code/artifact/ca3214a6-ec8f-4b10-b757-9c025a98ba47",
+    "./10%20-%20Mock%20OA%20%28timed%20exam%29.html": "https://claude.ai/code/artifact/ea757a13-0226-4bad-9065-96ca4927af42"
+  };
+  function fixToolLinks() {
+    if (location.protocol === "file:") return;
+    Array.prototype.forEach.call(document.querySelectorAll("a[href]"), function (a) {
+      var u = HOSTED[a.getAttribute("href")];
+      if (u) a.setAttribute("href", u);
+    });
+  }
+  if (location.protocol !== "file:") {
+    try {
+      new MutationObserver(function () { fixToolLinks(); })
+        .observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) {}
+    fixToolLinks();
+  }
+
+
+  // An artifact places the authored <title>, font <link>s and <style> BELOW <head>, so
+  // document.head.innerHTML misses them and a self-republish would ship a page with no CSS.
+  // Collect them wherever they sit; platform-injected styles are excluded by marker, which
+  // keeps this idempotent across republish generations.
+  function SHELL() {
+    var out = ['<meta charset="utf-8">',
+               '<meta name="viewport" content="width=device-width,initial-scale=1">'];
+    var t = document.querySelector("title");
+    if (t) out.push(t.outerHTML);
+    Array.prototype.forEach.call(document.querySelectorAll("link"), function (n) {
+      var h = n.getAttribute("href") || "";
+      if (h.indexOf("fonts.googleapis") !== -1 || h.indexOf("fonts.gstatic") !== -1) out.push(n.outerHTML);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("style"), function (n) {
+      var s = n.textContent || "";
+      if (s.indexOf("--f-display") !== -1 || s.indexOf("--mono:") !== -1) out.push(n.outerHTML);
+    });
+    return out.join("\n");
+  }
+
+
+  var PLAN = JSON.parse(document.getElementById("plan").textContent);
+  var embedded = JSON.parse(document.getElementById("state").textContent);
+  var LS_KEY = "oa-tracker-state-v3";
+
+  function migrate(s) {
+    if (!s || typeof s !== "object") s = {};
+    if (!s.s) s.s = {}; if (!s.d) s.d = {}; if (!s.log) s.log = {};
+    if (typeof s.start !== "string") s.start = "";
+    if (typeof s.rev !== "number") s.rev = 0;
+    s.v = 3;
+    return s;
+  }
+  embedded = migrate(embedded);
+
+  var state = embedded;
+  var localCopy = null;
+  try {
+    var raw = window.localStorage.getItem(LS_KEY);
+    if (raw) localCopy = migrate(JSON.parse(raw));
+  } catch (e) { localCopy = null; }
+  if (localCopy && localCopy.rev > embedded.rev) state = localCopy;
+
+  var STALE_DAYS = 21;
+  var app = document.getElementById("app");
+  var artifactApi = null;
+  var saveTimer = null;
+  var ui = { q: "", status: "all", diff: { E: true, M: true, H: true }, coreOnly: false, open: null };
+
+  var BLOCKS = [], PHASES = [];
+  PLAN.tracks.forEach(function (t) {
+    t.phases.forEach(function (p) {
+      p._track = t; PHASES.push(p);
+      p.blocks.forEach(function (b) { b._phase = p; BLOCKS.push(b); });
+    });
+  });
+  var TOTAL = BLOCKS.reduce(function (s, b) { return s + b.items.length; }, 0);
+  var CORE_TOTAL = BLOCKS.reduce(function (s, b) { return s + (b.core ? b.items.length : 0); }, 0);
+
+  function key(b, i) { return b.id + ":" + i; }
+  function st(k) { return state.s[k] || ""; }
+  function ymd(d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+  function today() { return ymd(new Date()); }
+  function daysSince(s) {
+    if (!s) return null;
+    var p = s.split("-"), t = new Date(+p[0], +p[1] - 1, +p[2]), n = new Date();
+    n = new Date(n.getFullYear(), n.getMonth(), n.getDate());
+    return Math.round((n - t) / 86400000);
+  }
+
+  function counts() {
+    var c = { ac: 0, tle: 0, coreAc: 0, E: 0, M: 0, H: 0, stale: 0 };
+    BLOCKS.forEach(function (b) {
+      b.items.forEach(function (it, i) {
+        var k = key(b, i), s = st(k);
+        if (s === "ac") {
+          c.ac++; if (b.core) c.coreAc++;
+          if (it.d) c[it.d]++;
+          var ds = daysSince(state.d[k]);
+          if (ds != null && ds >= STALE_DAYS) c.stale++;
+        } else if (s === "tle") c.tle++;
+      });
+    });
+    return c;
+  }
+  function blockStats(b) {
+    var done = 0;
+    b.items.forEach(function (it, i) { if (st(key(b, i)) === "ac") done++; });
+    return { done: done, total: b.items.length };
+  }
+  function streak() {
+    var n = 0, d = new Date();
+    if (!state.log[ymd(d)]) d.setDate(d.getDate() - 1);
+    while (state.log[ymd(d)]) { n++; d.setDate(d.getDate() - 1); }
+    return n;
+  }
+  function currentWeek() {
+    if (!state.start) return null;
+    var p = state.start.split("-"), t0 = new Date(+p[0], +p[1] - 1, +p[2]);
+    if (isNaN(t0.getTime())) return null;
+    return Math.max(1, Math.floor(Math.floor((Date.now() - t0.getTime()) / 86400000) / 7) + 1);
+  }
+  function revisionQueue() {
+    var out = [];
+    BLOCKS.forEach(function (b) {
+      b.items.forEach(function (it, i) {
+        var k = key(b, i), s = st(k);
+        if (!it.u) return;
+        if (s === "tle") out.push({ b: b, it: it, k: k, why: "marked TLE", age: 9999 });
+        else if (s === "ac") {
+          var ds = daysSince(state.d[k]);
+          if (ds != null && ds >= STALE_DAYS) out.push({ b: b, it: it, k: k, why: ds + "d since", age: ds });
+        }
+      });
+    });
+    out.sort(function (x, y) { return y.age - x.age; });
+    return out;
+  }
+  function nextUp() {
+    for (var i = 0; i < BLOCKS.length; i++) {
+      var b = BLOCKS[i];
+      if (ui.coreOnly && !b.core) continue;
+      for (var j = 0; j < b.items.length; j++) if (st(key(b, j)) !== "ac") return { b: b, i: j, it: b.items[j], k: key(b, j) };
+    }
+    return null;
+  }
+
+  function markSaved(s, msg) {
+    var n = document.getElementById("saveState");
+    if (n) { n.dataset.s = s; n.textContent = msg; }
+  }
+  function saveLocal() {
+    try { window.localStorage.setItem(LS_KEY, JSON.stringify(state)); return true; } catch (e) { return false; }
+  }
+  function scheduleSave() {
+    state.rev = (state.rev || 0) + 1;
+    var okLocal = saveLocal();
+    if (!artifactApi) { markSaved(okLocal ? "local" : "error", okLocal ? "saved on this device only" : "NOT SAVED"); return; }
+    markSaved("saving", "saving…");
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(commit, 1500);
+  }
+  function planReplacer(k, v) { return (k === "_phase" || k === "_track") ? undefined : v; }
+  function buildDoc() {
+    var o = "<" + "script", c = "<" + "/" + "script>";
+    return '<!doctype html>\n<html lang="en">\n<head>\n' + SHELL() + '\n</head>\n<body>\n' +
+      '<div class="wrap" id="app"></div>\n' +
+      o + ' type="application/json" id="plan">' + JSON.stringify(PLAN, planReplacer) + c + '\n' +
+      o + ' type="application/json" id="state">' + JSON.stringify(state) + c + '\n' +
+      o + ' id="code">' + document.getElementById("code").textContent + c + '\n' +
+      '</body>\n</html>';
+  }
+  function commit() {
+    if (!artifactApi) return;
+    artifactApi.publish(buildDoc()).then(function () { markSaved("ok", "saved"); })
+      .catch(function (e) {
+        var code = (e && e.code) || "";
+        if (code === "conflict") { markSaved("ok", "newer version — reloading"); return; }
+        markSaved("local", "cloud save failed — kept on this device");
+      });
+  }
+
+  function cycle(b, i) {
+    var k = key(b, i), s = st(k);
+    if (s === "") { state.s[k] = "ac"; state.d[k] = today(); state.log[today()] = (state.log[today()] || 0) + 1; }
+    else if (s === "ac") { state.s[k] = "tle"; }
+    else { delete state.s[k]; delete state.d[k]; }
+    render(); scheduleSave();
+  }
+  function redo(k) {
+    state.s[k] = "ac"; state.d[k] = today();
+    state.log[today()] = (state.log[today()] || 0) + 1;
+    render(); scheduleSave();
+  }
+
+  var timer = { left: 0, total: 0, id: null, running: false };
+  function fmt(s) { if (s < 0) s = 0; return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); }
+  function paintClock() {
+    var n = document.getElementById("clock");
+    if (!n) return;
+    n.textContent = fmt(timer.left);
+    n.className = "clock" + (timer.left === 0 && timer.total > 0 ? " out" : (timer.running ? " run" : ""));
+    var t = document.getElementById("t-toggle");
+    if (t) t.textContent = timer.running ? "pause" : "start";
+  }
+  function stopTick() { if (timer.id) { clearInterval(timer.id); timer.id = null; } }
+  function setTimer(mins) { stopTick(); timer.running = false; timer.total = mins * 60; timer.left = mins * 60; paintClock(); }
+  function tick() { timer.left--; if (timer.left <= 0) { timer.left = 0; stopTick(); timer.running = false; } paintClock(); }
+  function toggleTimer() {
+    if (timer.total === 0) setTimer(25);
+    if (timer.running) { stopTick(); timer.running = false; }
+    else { if (timer.left === 0) timer.left = timer.total; timer.running = true; stopTick(); timer.id = setInterval(tick, 1000); }
+    paintClock();
+  }
+
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function link(u, t) { var a = document.createElement("a"); a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer"; a.textContent = t; return a; }
+  function matches(b, it, i) {
+    if (ui.coreOnly && !b.core) return false;
+    var s = st(key(b, i));
+    if (ui.status === "todo" && s !== "") return false;
+    if (ui.status === "ac" && s !== "ac") return false;
+    if (ui.status === "tle" && s !== "tle") return false;
+    if (it.d && !ui.diff[it.d]) return false;
+    if (ui.q) {
+      var q = ui.q.toLowerCase();
+      if (it.t.toLowerCase().indexOf(q) === -1 && b.name.toLowerCase().indexOf(q) === -1) return false;
+    }
+    return true;
+  }
+  function filtering() { return ui.q !== "" || ui.status !== "all" || !ui.diff.E || !ui.diff.M || !ui.diff.H || ui.coreOnly; }
+  function markBtn(b, i, big) {
+    var k = key(b, i), s = st(k);
+    var mk = el("button", "mark" + (s ? " " + s : ""), s === "ac" ? "AC" : (s === "tle" ? "TLE" : "—"));
+    mk.type = "button";
+    mk.title = "unsolved → AC (solved clean) → TLE (needs another pass)";
+    mk.setAttribute("data-fk", "mark:" + k);
+    mk.setAttribute("aria-label", b.items[i].t + " — status " + (s || "unsolved"));
+    mk.addEventListener("click", function () { cycle(b, i); });
+    return mk;
+  }
+
+  function masthead() {
+    var c = counts(), wk = currentWeek();
+    var m = el("header", "mast");
+    m.appendChild(el("div", "eyebrow", "Online assessment training plan · Kushal Raj G S · v3, retargeted to 10-12 LPA"));
+    m.appendChild(el("h1", null, "Twenty weeks to a 10-12 LPA callback"));
+    var p = el("p", "lede");
+    p.textContent = "Four tracks running in parallel, not one after another. " + TOTAL + " items, " + CORE_TOTAL + " of them core. Your salary floor rules out the mass recruiters, which cuts the aptitude work roughly in half and makes the whole DSA back half compulsory rather than optional — the companies that pay what you want are the ones that ask the harder questions.";
+    m.appendChild(p);
+
+    var r = el("div", "readout");
+    [
+      ["core done", c.coreAc + "", "/ " + CORE_TOTAL, "hi"],
+      ["all items", c.ac + "", "/ " + TOTAL, ""],
+      ["needs revision", (c.tle + c.stale) + "", c.tle + " TLE · " + c.stale + " stale", (c.tle + c.stale) > 0 ? "warn" : ""],
+      ["by difficulty", c.E + "·" + c.M + "·" + c.H, "E · M · H", ""],
+      ["streak", streak() + "", "days", ""],
+      ["week", wk ? String(wk) : "—", wk ? "of 20" : "set start date", ""]
+    ].forEach(function (x) {
+      var cell = el("div", "cell" + (x[3] ? " " + x[3] : ""));
+      cell.appendChild(el("div", "k", x[0]));
+      var v = el("div", "v");
+      v.appendChild(document.createTextNode(x[1] + " "));
+      v.appendChild(el("small", null, x[2]));
+      cell.appendChild(v); r.appendChild(cell);
+    });
+    m.appendChild(r);
+    return m;
+  }
+
+  function todayStrip() {
+    var w = el("div", "today");
+    var n = nextUp();
+    var p1 = el("div", "pane");
+    p1.appendChild(el("div", "k", "next up"));
+    if (n) {
+      var l1 = el("div", "line");
+      l1.appendChild(markBtn(n.b, n.i));
+      l1.appendChild(n.it.u ? link(n.it.u, n.it.t) : el("span", "plain", n.it.t));
+      if (n.it.d) l1.appendChild(el("span", "diff " + n.it.d, n.it.d));
+      p1.appendChild(l1);
+      p1.appendChild(el("div", "src", n.b.name));
+    } else p1.appendChild(el("div", "none", "Everything logged. Go run a contest."));
+
+    var q = revisionQueue();
+    var p2 = el("div", "pane");
+    p2.appendChild(el("div", "k", "one revision, daily"));
+    if (q.length) {
+      var l2 = el("div", "line");
+      l2.appendChild(link(q[0].it.u, q[0].it.t));
+      if (q[0].it.d) l2.appendChild(el("span", "diff " + q[0].it.d, q[0].it.d));
+      p2.appendChild(l2);
+      var l2b = el("div", "line");
+      l2b.appendChild(el("span", "src", q[0].why + " · " + q[0].b.name));
+      var done = el("button", "redo", "did it again");
+      done.type = "button";
+      done.addEventListener("click", function () { redo(q[0].k); });
+      l2b.appendChild(done);
+      p2.appendChild(l2b);
+    } else p2.appendChild(el("div", "none", "Nothing due. Fills as solves age past " + STALE_DAYS + " days."));
+
+    var t = el("div", "timer");
+    var clock = el("div", "clock", fmt(timer.left)); clock.id = "clock";
+    t.appendChild(clock);
+    var btns = el("div", "btns");
+    var row1 = el("div", "line");
+    [["25", 25], ["90", 90]].forEach(function (x) {
+      var b = el("button", "tbtn" + (timer.total === x[1] * 60 ? " on" : ""), x[0] + " min");
+      b.type = "button"; b.addEventListener("click", function () { setTimer(x[1]); });
+      row1.appendChild(b);
+    });
+    btns.appendChild(row1);
+    var row2 = el("div", "line");
+    var tog = el("button", "tbtn", timer.running ? "pause" : "start"); tog.type = "button"; tog.id = "t-toggle";
+    tog.addEventListener("click", toggleTimer);
+    var rst = el("button", "tbtn", "reset"); rst.type = "button";
+    rst.addEventListener("click", function () { setTimer(timer.total ? timer.total / 60 : 25); });
+    row2.appendChild(tog); row2.appendChild(rst);
+    btns.appendChild(row2); t.appendChild(btns);
+
+    w.appendChild(p1); w.appendChild(p2); w.appendChild(t);
+    return w;
+  }
+
+  function verdictBox() {
+    var s = el("section");
+    var b = el("div", "verdict-box");
+    b.appendChild(el("h2", null, "Your 10-12 LPA floor changed the plan again"));
+    var p1 = el("p");
+    p1.innerHTML = "This is the most consequential thing you have told me, and it <strong>reverses part of the previous version</strong>. That version was built around a real finding: at TCS, Infosys SE, Wipro, Cognizant, Accenture, Capgemini and HCL, an aptitude battery with its own sectional cutoff sits in front of the coding round, so a strong coder can be eliminated without his code ever being graded. All true — and now largely <em>irrelevant to you</em>, because those companies pay roughly <strong>3.5 to 7 LPA</strong>. TCS Ninja is about 3.5-3.9. Infosys SE about 3.6. Wipro Elite about 3.5. Cognizant GenC about 4. Accenture ASE 4.5-6.5. Every one sits under your floor.";
+    b.appendChild(p1);
+    var p2 = el("p");
+    p2.innerHTML = "So the aptitude track has been cut roughly in half. <strong>Quant trimmed from 20 items to 11, verbal and the English essays demoted to optional</strong> — those exist to pass companies you do not want. What stayed core is <strong>CS fundamentals, SQL and code tracing</strong>, because those gate Walmart, Oracle, Cisco, Qualcomm, Nutanix, ServiceNow, SAP and Adobe, and every one of those clears 10 LPA. Walmart is the sharpest example: 22 technical MCQs in 35 minutes, and only then 40 minutes for two coding problems.";
+    b.appendChild(p2);
+    var p3 = el("p");
+    p3.innerHTML = "The bigger change is on the DSA side. <strong>Phase 3 was marked optional and is now compulsory.</strong> It was optional because TCS, Wipro and Cognizant never ask graphs, Dijkstra, union-find or string DP — but at your target those companies do not matter, and every company that does pay 10-12 LPA asks exactly this material. The three earlier fixes all still stand: contests from week 2, stdin as a real block, and Phase 2 reordered so trees, grids and the DP core come first.";
+    b.appendChild(p3);
+    var p4 = el("p");
+    p4.innerHTML = "<strong>One piece of arithmetic you should see rather than discover in week five.</strong> Raising the target raised the workload: the core is now " + CORE_TOTAL + " items across 20 weeks, which is about " + Math.round(CORE_TOTAL / 20) + " a week. Last year you had 41 active days — roughly three a month. This plan is asking for something closer to five a week, sustained, for five months. That gap is the single most likely reason this fails, and it will not be closed by wanting it more. Two honest options: give it two focused hours a day and hold the milestones, or accept that 10-12 LPA takes more than 20 weeks from where you are. Both are fine. Pretending the 20 weeks is enough at three days a month is not. If a week goes badly, switch on <strong>core only</strong> in the toolbar and work the nine GO NOW companies — that is the shortest honest path to your number.";
+    b.appendChild(p4);
+    s.appendChild(b);
+    return s;
+  }
+
+  function findings() {
+    var s = el("section");
+    var hd = el("div", "sec-head");
+    hd.appendChild(el("h2", null, "The four things that will actually decide this"));
+    hd.appendChild(el("span", "note", "ranked by how much each one moves your odds"));
+    s.appendChild(hd);
+    var box = el("div", "findings");
+    [
+      ["gate", "The aptitude gate", "A majority of your realistic targets eliminate per section, before the coding round. Wipro needs ~70% in every section. Accenture's communication and cognitive tests are each individually eliminatory and both run before coding. Deloitte wants the 75th percentile on computer fundamentals. Thirty to forty-five minutes a day on Track G is the highest points-per-hour work on this page."],
+      ["", "Submission format", "Amazon, Microsoft, Uber, Adobe and Salesforce give you a function stub, so your habit transfers. Flipkart, Swiggy, Razorpay, Sprinklr, Walmart, Navi and every mass recruiter give you stdin and stdout. A correct algorithm that prints \"Output: 5\" instead of \"5\" scores zero out of seven."],
+      ["", "Partial credit changes the play", "Nearly every platform scores per test case, not pass/fail. Walmart's actual 2024 bar was students who solved \"one complete and one partial\". So the goal is not \"fully solve two\" — it is: solve the easier one completely in the first 25 minutes, then deliberately ship a brute force on the second to bank the small-constraint cases, then optimise on top of it. Never leave one blank; never delete a working brute force."],
+      ["", "The clock, from week 2", "Real budgets are tighter than LeetCode teaches: Accenture gives about 22 minutes per problem, Deloitte about 17, DE Shaw uses hard non-reversible per-question boxes. You have zero contests across 281 submissions. That is the gap, and four weeks of contests at the end could not have closed it."]
+    ].forEach(function (f) {
+      var d = el("div", "finding" + (f[0] ? " " + f[0] : ""));
+      d.appendChild(el("b", null, f[1]));
+      d.appendChild(el("span", null, f[2]));
+      box.appendChild(d);
+    });
+    s.appendChild(box);
+    return s;
+  }
+
+  function toolbar() {
+    var t = el("div", "toolbar");
+    var search = document.createElement("input");
+    search.type = "search"; search.id = "q"; search.setAttribute("data-fk", "search");
+    search.placeholder = "Search problems or blocks…"; search.value = ui.q;
+    search.addEventListener("input", function () { ui.q = search.value; render(); });
+    t.appendChild(search);
+
+    var g1 = el("div", "fgroup");
+    [["all", "all"], ["todo", "unsolved"], ["ac", "AC"], ["tle", "TLE"]].forEach(function (x) {
+      var b = el("button", "fbtn" + (ui.status === x[0] ? " on" : ""), x[1]);
+      b.type = "button"; b.addEventListener("click", function () { ui.status = x[0]; render(); });
+      g1.appendChild(b);
+    });
+    t.appendChild(g1);
+
+    var g2 = el("div", "fgroup");
+    ["E", "M", "H"].forEach(function (d) {
+      var b = el("button", "fbtn" + (ui.diff[d] ? " on" : ""), d);
+      b.type = "button"; b.addEventListener("click", function () { ui.diff[d] = !ui.diff[d]; render(); });
+      g2.appendChild(b);
+    });
+    t.appendChild(g2);
+
+    var core = el("button", "fbtn" + (ui.coreOnly ? " on" : ""), "core only");
+    core.type = "button";
+    core.addEventListener("click", function () { ui.coreOnly = !ui.coreOnly; render(); });
+    t.appendChild(core);
+
+    var ex = el("button", "fbtn", "expand all");
+    ex.type = "button";
+    ex.addEventListener("click", function () {
+      var allOpen = ui.open && ui.open.size === BLOCKS.length;
+      ui.open = new Set();
+      if (!allOpen) BLOCKS.forEach(function (b) { ui.open.add(b.id); });
+      render();
+    });
+    t.appendChild(ex);
+
+    t.appendChild(el("span", "spacer"));
+    t.appendChild(el("span", "tool-lab", "started"));
+    var dt = document.createElement("input");
+    dt.type = "date"; dt.value = state.start || "";
+    dt.addEventListener("change", function () { state.start = dt.value; render(); scheduleSave(); });
+    t.appendChild(dt);
+    var save = el("span", null, artifactApi ? "saved" : "saved on this device");
+    save.id = "saveState"; save.dataset.s = "ok";
+    t.appendChild(save);
+    return t;
+  }
+
+  function itemRow(b, i) {
+    var it = b.items[i], k = key(b, i), s = st(k);
+    var row = el("div", "item" + (s === "ac" ? " ac" : ""));
+    row.appendChild(markBtn(b, i));
+    row.appendChild(it.u ? link(it.u, it.t) : el("span", "plain", it.t));
+    var right = el("div", "right");
+    var ds = daysSince(state.d[k]);
+    right.appendChild(el("span", "ago" + (s === "ac" && ds != null && ds >= STALE_DAYS ? " stale" : ""),
+      s === "ac" && ds != null ? (ds === 0 ? "today" : ds + "d") : ""));
+    if (it.d) right.appendChild(el("span", "diff " + it.d, it.d));
+    row.appendChild(right);
+    return row;
+  }
+
+  function blockNode(b) {
+    var s = blockStats(b), visible = [];
+    b.items.forEach(function (it, i) { if (matches(b, it, i)) visible.push(i); });
+    if (filtering() && visible.length === 0) return null;
+    var open = filtering() ? true : ui.open.has(b.id);
+    var node = el("div", "block" + (open ? " open" : ""));
+
+    var hd = el("button", "block-hd");
+    hd.type = "button";
+    hd.setAttribute("data-fk", "blk:" + b.id);
+    hd.setAttribute("aria-expanded", open ? "true" : "false");
+    hd.appendChild(el("span", "caret", "▸"));
+    var nm = el("div", "block-name");
+    nm.appendChild(document.createTextNode(b.name));
+    if (b.star) nm.appendChild(el("span", "pill star", "highest return"));
+    if (b.isNew) nm.appendChild(el("span", "pill new", "added by audit"));
+    if (!b.core) nm.appendChild(el("span", "pill opt", "optional"));
+    hd.appendChild(nm);
+    var meta = el("div", "block-meta");
+    var bar = el("div", "minibar"); var fill = el("i");
+    fill.style.width = (s.total ? Math.round((s.done / s.total) * 100) : 0) + "%";
+    bar.appendChild(fill); meta.appendChild(bar);
+    meta.appendChild(el("span", "block-count", s.done + "/" + s.total));
+    hd.appendChild(meta);
+    hd.addEventListener("click", function () {
+      if (filtering()) return;
+      if (ui.open.has(b.id)) ui.open.delete(b.id); else ui.open.add(b.id);
+      render();
+    });
+    node.appendChild(hd);
+
+    var box = el("div", "items");
+    box.appendChild(el("div", "block-why", b.why));
+    visible.forEach(function (i) { box.appendChild(itemRow(b, i)); });
+    node.appendChild(box);
+    return node;
+  }
+
+  function tracksSection() {
+    var s = el("section");
+    var hd = el("div", "sec-head");
+    hd.appendChild(el("h2", null, "The plan"));
+    hd.appendChild(el("span", "note", "click a status box to cycle it: unsolved → AC → TLE"));
+    s.appendChild(hd);
+    s.appendChild(toolbar());
+
+    var wk = currentWeek(), anyShown = false;
+    PLAN.tracks.forEach(function (t) {
+      var phaseNodes = [];
+      t.phases.forEach(function (p) {
+        var nodes = [];
+        p.blocks.forEach(function (b) { var n = blockNode(b); if (n) nodes.push(n); });
+        if (!nodes.length) return;
+        var isNow = wk != null && wk >= p.wk[0] && wk <= p.wk[1];
+        var sec = el("div", "phase" + (isNow ? " now" : "") + (p.gate ? " gate" : ""));
+        var h = el("div", "phase-hd");
+        h.appendChild(el("span", "tag", isNow ? p.tag + " · now" : p.tag));
+        h.appendChild(el("h3", null, p.title));
+        h.appendChild(el("span", "wk", p.weeks));
+        var tot = 0, dn = 0;
+        p.blocks.forEach(function (b) { var x = blockStats(b); tot += x.total; dn += x.done; });
+        h.appendChild(el("span", "tally", dn + " / " + tot));
+        sec.appendChild(h);
+        sec.appendChild(el("div", "phase-note", p.note));
+        nodes.forEach(function (n) { sec.appendChild(n); });
+        phaseNodes.push(sec);
+      });
+      if (!phaseNodes.length) return;
+      anyShown = true;
+      var th = el("div", "trackhd");
+      th.appendChild(el("h3", null, t.name));
+      th.appendChild(el("span", "sub", t.sub));
+      s.appendChild(th);
+      var box = el("div", "phases");
+      phaseNodes.forEach(function (n) { box.appendChild(n); });
+      s.appendChild(box);
+    });
+    if (!anyShown) s.appendChild(el("p", "sub", "Nothing matches those filters."));
+    return s;
+  }
+
+  function tbl(cols, rows, classer) {
+    var scroll = el("div", "tbl-scroll"), t = document.createElement("table");
+    var thead = document.createElement("thead"), htr = document.createElement("tr");
+    cols.forEach(function (x) { var th = document.createElement("th"); th.textContent = x; htr.appendChild(th); });
+    thead.appendChild(htr); t.appendChild(thead);
+    var tb = document.createElement("tbody");
+    rows.forEach(function (r) {
+      var tr = document.createElement("tr");
+      r.forEach(function (cell, ci) {
+        var td = document.createElement("td");
+        td.textContent = cell;
+        var cl = classer ? classer(ci, cell) : "";
+        if (cl) td.className = cl;
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+    t.appendChild(tb); scroll.appendChild(t); return scroll;
+  }
+
+  function companyCard() {
+    var c = el("div", "card wide");
+    c.appendChild(el("h3", null, "What each company's assessment actually is"));
+    c.appendChild(el("p", "sub", "Re-sorted by pay against your 10-12 LPA floor. CTC figures are approximate entry-level ranges and move every cycle, by campus and by role — treat them as ballpark, and verify against your placement cell. Formats also vary per drive; the invite email is the only binding statement. GO NOW is winnable at your current level, BY WK 12 needs Phase 2 done, WK 20+ is a wasted attempt before then, and BELOW FLOOR means the offer would not meet your number."));
+    c.appendChild(tbl(
+      ["company", "typical CTC", "platform", "coding", "input", "non-coding sections", "when"],
+      [
+        ["Walmart", "19-24", "HirePro", "2 / 40 min", "stdin", "22 technical MCQ / 35 min — the real gate", "GO NOW"],
+        ["Oracle", "12-16", "in-house", "MCQ only", "—", "92 Q / 4 sections; freshers often get no free coding", "GO NOW"],
+        ["ServiceNow", "15-20", "HackerRank", "1 / 60-75 min", "stub", "10-15 MCQ on DSA, OS, DBMS", "GO NOW"],
+        ["Salesforce", "15-25", "HackerRank", "2, easy-med", "stub", "10 MCQ", "GO NOW"],
+        ["Amazon", "16-24", "own platform", "2 / 70 min", "stub", "7-Q debugging, 24-Q logical, Work Styles", "GO NOW"],
+        ["Cisco", "12-18", "in-house", "with MCQ", "stdin", "50 Q / 60 min aptitude + technical", "GO NOW"],
+        ["SAP Labs", "12-20", "HackerRank", "with MCQ", "stub", "~15 CS MCQ", "GO NOW"],
+        ["Nutanix", "18-25", "in-house", "varies", "stdin", "45-50 MCQ: networking, OS, Linux, architecture", "GO NOW"],
+        ["Qualcomm", "15-25", "HirePro", "light", "stdin", "~60 Q / 90 min, largely non-DSA", "GO NOW"],
+        ["Infosys PP / SP", "9-12", "Wingspan", "3 / ~3 hrs", "stdin", "none — pure DSA, no aptitude at all", "BY WK 12"],
+        ["TCS Prime", "9-11", "TCS iON", "advanced part", "stdin", "must clear the Foundation aptitude first", "BY WK 12"],
+        ["Cognizant Elevate", "9-12", "AMCAT", "4 / 60 min", "stdin", "moderate-to-high difficulty", "BY WK 12"],
+        ["Microsoft", "20-45", "Codility", "2 / 90-100 min", "stub", "none", "BY WK 12"],
+        ["Adobe", "18-30", "HackerRank", "3 / 90 min", "stub", "45 aptitude / 45 min + C/C++ output MCQ", "BY WK 12"],
+        ["Flipkart", "18-32", "HackerEarth", "2-3 / 90 min", "stdin", "—", "BY WK 12"],
+        ["Swiggy / Zomato", "15-25", "HackerEarth", "2-3 / 90-120 min", "stdin", "debugging problems", "BY WK 12"],
+        ["Groww", "18-25", "—", "2", "stdin", "12 MCQ; both coding Qs were verbatim LeetCode DP", "BY WK 12"],
+        ["Razorpay", "15-25", "HackerEarth", "2-3 / 60-90 min", "stdin", "sometimes SQL", "BY WK 12"],
+        ["Uber", "25-45", "CodeSignal", "4 / 70 min", "stub", "GCA score, ~540 competitive", "WK 20+"],
+        ["Sprinklr", "20-30", "HackerEarth", "3 / 60-90 min", "stdin", "bar is ~1.5 solved", "WK 20+"],
+        ["Media.net", "25-35", "—", "3 / 90 min", "stdin", "genuinely hard; bar is 2 of 3", "WK 20+"],
+        ["DE Shaw / Arcesium", "25-40", "HackerRank", "3 / 95 min", "stdin", "maths aptitude, 0.25 negative marking", "WK 20+"],
+        ["TCS Ninja", "3.5-3.9", "TCS iON", "2-3 / 90 min", "stdin", "scored on aptitude alone", "BELOW FLOOR"],
+        ["Infosys SE", "3.6", "Wingspan", "—", "stdin", "5 sections, each individually eliminatory", "BELOW FLOOR"],
+        ["Wipro Elite", "3.5", "Automata", "2 / 60 min", "stdin", "~70% per section + 20-min essay", "BELOW FLOOR"],
+        ["Cognizant GenC", "4", "AMCAT", "1-2 / 30 min", "stdin", "communication first, sectional cutoffs", "BELOW FLOOR"],
+        ["Accenture ASE", "4.5-6.5", "Mettl-class", "2 / 45 min", "stdin", "AI speaking + cognitive, both eliminatory", "BELOW FLOOR"],
+        ["Capgemini", "4.25-7.5", "—", "separate stage", "stdin", "cognitive games + essay; no Python", "BELOW FLOOR"],
+        ["Deloitte", "7-8", "—", "2 / ~35 min", "stdin", "70/70/75/75 percentile gates; no Python", "BELOW FLOOR"]
+      ],
+      function (ci, cell) {
+        if (ci === 6) return cell === "GO NOW" ? "t1" : (cell === "BY WK 12" ? "t2" : (cell === "WK 20+" ? "t3" : "tx"));
+        if (ci === 1) return "pay";
+        if (ci === 3 || ci === 4) return "n";
+        return "";
+      }
+    ));
+    var f = el("div", "flag warn");
+    f.innerHTML = "<b>The nine GO NOW rows are the point of this table.</b> They clear your floor, their coding rounds are easy-to-medium, and most of them gate on a CS-fundamentals MCQ section rather than on hard algorithms — which is a section you can be ready for in weeks, not months. That is the fastest realistic route to a 10-12 LPA callback, and it runs through Track G, not through grinding more Hards.";
+    c.appendChild(f);
+    return c;
+  }
+
+  function protocolCard() {
+    var c = el("div", "card");
+    c.appendChild(el("h3", null, "The 90-minute protocol"));
+    c.appendChild(el("p", "sub", "Nearly every platform scores per test case. This is the sequence that maximises points, which is not the same as the sequence that feels best."));
+    var f = el("div", "flag");
+    f.innerHTML = "<b>The rule that beats every other tactic:</b> a working brute force that passes 40% of cases outranks an elegant half-finished optimal solution. Never delete a passing brute force to try an optimisation — copy it, then optimise the copy.";
+    c.appendChild(f);
+    var ol = el("ol", "play");
+    [
+      ["Minutes 0-5, read everything.", " Every problem, every constraint, before writing a line. Rank by your own confidence. Never start with problem one just because it is first."],
+      ["Minutes 5-25, bank one full solve.", " Take your highest-confidence problem all the way to green, edge cases included."],
+      ["Minutes 25-35, ship a brute force on the second.", " The obvious O(n²). Submit it. That banks every small-constraint hidden case while you still have time."],
+      ["Minutes 35-80, optimise on top of it.", " You now have points on the board and a reference implementation to diff against."],
+      ["Last 10 minutes, re-read your accepted code.", " n = 1, empty input, all equal, duplicates, negatives, and the exact output format."],
+      ["Never submit nothing.", " Blank scores zero and there is always a partial to be had."]
+    ].forEach(function (p) {
+      var li = document.createElement("li");
+      li.appendChild(el("b", null, p[0]));
+      li.appendChild(document.createTextNode(p[1]));
+      ol.appendChild(li);
+    });
+    c.appendChild(ol);
+    return c;
+  }
+
+  function ladderCard() {
+    var c = el("div", "card");
+    c.appendChild(el("h3", null, "Constraint to complexity"));
+    c.appendChild(el("p", "sub", "Read the constraints before the statement. The bound names the algorithm family, which turns \"no idea\" into a shortlist."));
+    c.appendChild(tbl(["input size", "budget", "so it must be"], [
+      ["n ≤ 12", "O(n!)", "full permutations, brute backtracking"],
+      ["n ≤ 25", "O(2ⁿ)", "subsets, bitmask, meet in the middle"],
+      ["n ≤ 100", "O(n³)", "Floyd–Warshall, interval DP"],
+      ["n ≤ 5,000", "O(n²)", "2-D DP, LCS, edit distance"],
+      ["n ≤ 10⁵", "O(n log n)", "sort, heap, binary search, sliding window"],
+      ["n ≤ 10⁷", "O(n)", "hashing, prefix sums, two pointers"],
+      ["n ≥ 10⁹", "O(log n)", "binary search on the answer, maths, bit tricks"]
+    ], function (ci) { return ci === 0 ? "n" : (ci === 1 ? "o" : ""); }));
+    return c;
+  }
+
+  function pythonCard() {
+    var c = el("div", "card");
+    c.appendChild(el("h3", null, "Python assessment kit"));
+    c.appendChild(el("p", "sub", "97 of your 98 solves are in Python. Keep it — but two companies on the table above will not accept it, and three of these hazards have never had a chance to bite you on LeetCode."));
+    var f = el("div", "flag");
+    f.innerHTML = "<b>Highest-leverage habit on this card:</b> write the plain recursive brute force, then put <code>@cache</code> above it. That is a working DP. With six DP solves, recursion plus memo is far more reliable under a clock than building a bottom-up table.";
+    c.appendChild(f);
+    var w = el("div", "flag warn");
+    w.innerHTML = "<b>Python's recursion limit is 1000.</b> A correct DFS crashes on a 10⁵-node tree or a large grid. <code>sys.setrecursionlimit(300000)</code> before any DFS, and know the iterative rewrite. This never happens on LeetCode and will happen on HackerEarth.";
+    c.appendChild(w);
+    var ul = el("ul", "kit");
+    [
+      'Read with <code>sys.stdin.buffer.read().split()</code> and an index pointer. <code>input()</code> in a loop times out past ~10⁵ lines.',
+      'Output exactly what is asked — no labels, no prompts. <code>print("Output:", x)</code> scores zero on seven test cases.',
+      '<code>collections.deque</code> for BFS, <code>heapq</code> for top-K (push negatives for a max-heap).',
+      'Build strings with a list and <code>"".join(parts)</code>. Repeated <code>s += x</code> in a loop is quadratic.',
+      'Python ints never overflow — but read the statement for <code>% (10**9 + 7)</code> and apply it as you go.',
+      'Sort with <code>key=</code> (C speed), never <code>cmp_to_key</code>.',
+      'On HackerEarth at full constraints, a correct Python solution can still TLE where C++ passes. Keep the hot loop free of per-element function calls.'
+    ].forEach(function (h) { var li = document.createElement("li"); li.innerHTML = h; ul.appendChild(li); });
+    c.appendChild(ul);
+    return c;
+  }
+
+  function edgeCard() {
+    var c = el("div", "card");
+    c.appendChild(el("h3", null, "Edge cases that fail the last test"));
+    c.appendChild(el("p", "sub", "Run this list against every solution before submitting."));
+    var chips = el("div", "chips");
+    ["empty input", "n = 1", "all elements equal", "all negative", "duplicates present", "already sorted",
+     "reverse sorted", "target absent", "single-node tree", "fully skewed tree", "disconnected graph",
+     "self-loop", "cycle present", "k larger than n", "missing the modulus", "trailing newline",
+     "extra label in output"].forEach(function (x) { chips.appendChild(el("span", null, x)); });
+    c.appendChild(chips);
+    var p = el("p", "sub"); p.style.marginTop = "4px";
+    p.textContent = "When only sample cases are given, write a ten-line brute force plus a random generator and diff the two. It catches more than re-reading your own code ever will.";
+    c.appendChild(p);
+    return c;
+  }
+
+  function milestoneCard() {
+    var c = el("div", "card");
+    c.appendChild(el("h3", null, "How you know it is working"));
+    c.appendChild(el("p", "sub", "If a checkpoint slips, hold and repeat rather than moving on. Order matters more than dates."));
+    c.appendChild(tbl(["by", "you can"], [
+      ["week 2", "solve a known problem from stdin, first try, correct output format"],
+      ["week 6", "any easy under 10 min; 60%+ on a timed aptitude set; 5 contests done"],
+      ["week 10", "contest Q1 + Q2 inside 40 min; a full OA simulation end to end"],
+      ["week 15", "contest Q1+Q2+Q3; rating past 1500; aptitude comfortably above cutoff"],
+      ["week 20", "rating past 1600; one complete + one partial in a cold 90-minute mock"]
+    ], function (ci) { return ci === 0 ? "n" : ""; }));
+    var p = el("p", "sub"); p.style.marginTop = "4px";
+    p.textContent = "Calibration: a contest rating around 1500 clears most service-company and mid-tier product assessments. 1600-1700 clears most product-company ones.";
+    c.appendChild(p);
+    return c;
+  }
+
+  function revisionCard() {
+    var q = revisionQueue();
+    var c = el("div", "card wide");
+    c.appendChild(el("h3", null, "Revision queue"));
+    c.appendChild(el("p", "sub", "Anything marked TLE, plus anything solved more than " + STALE_DAYS + " days ago. Take the top one each day, oldest first."));
+    if (!q.length) { c.appendChild(el("p", "sub", "Empty for now — it fills itself as your solves age.")); return c; }
+    var list = el("div", "revlist");
+    q.slice(0, 14).forEach(function (r) {
+      var row = el("div", "rev");
+      row.appendChild(link(r.it.u, r.it.t));
+      row.appendChild(el("span", "src", r.why));
+      var btn = el("button", "redo", "did it again"); btn.type = "button";
+      btn.addEventListener("click", function () { redo(r.k); });
+      row.appendChild(btn);
+      list.appendChild(row);
+    });
+    c.appendChild(list);
+    if (q.length > 14) c.appendChild(el("p", "sub", (q.length - 14) + " more behind these."));
+    return c;
+  }
+
+  function refsSection() {
+    var s = el("section");
+    var hd = el("div", "sec-head");
+    hd.appendChild(el("h2", null, "Reference"));
+    hd.appendChild(el("span", "note", "keep the protocol and the ladder open during a real assessment"));
+    s.appendChild(hd);
+    var g = el("div", "refs");
+    g.appendChild(companyCard());
+    g.appendChild(protocolCard());
+    g.appendChild(ladderCard());
+    g.appendChild(pythonCard());
+    g.appendChild(edgeCard());
+    g.appendChild(milestoneCard());
+    g.appendChild(revisionCard());
+    s.appendChild(g);
+    return s;
+  }
+
+  function footerNode() {
+    var f = document.createElement("footer");
+    var p = document.createElement("p"); p.style.margin = "0";
+    p.textContent = "Problem sources stay yours — the patterns cheat sheet and Striver's A2Z for the per-pattern lists, your usual channels for the explanation before each block. For the aptitude and CS-fundamentals track, IndiaBix and PrepInsta company-wise sets are what most Indian students use. Company formats vary per drive; verify against your placement cell's actual recruiter list before tiering your shortlist.";
+    f.appendChild(p);
+    var tools = el("div", "companion-row");
+    tools.style.marginTop = "4px";
+    tools.innerHTML = 'The practice tools: <a href="./10%20-%20Mock%20OA%20%28timed%20exam%29.html" target="_blank" rel="noopener noreferrer">Mock OA</a> · <a href="./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html" target="_blank" rel="noopener noreferrer">Decoder</a> · <a href="./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html" target="_blank" rel="noopener noreferrer">Pattern Radar</a> · <a href="./2%20-%20Stdin%20Trainer%20%28drill%29.html" target="_blank" rel="noopener noreferrer">Stdin Trainer</a> · <a href="./3%20-%20Stdin%20Survival%20Kit%20%28manual%29.html" target="_blank" rel="noopener noreferrer">Stdin Survival Kit</a> · <a href="./5%20-%20SQL%20Lab%20%28practice%29.html" target="_blank" rel="noopener noreferrer">SQL Lab</a> · <a href="./6%20-%20CS%20Core%20Drill%20%28OS%20DBMS%20CN%20OOP%20C%29.html" target="_blank" rel="noopener noreferrer">CS Core Drill</a> · <a href="./7%20-%20Aptitude%20Sprint%20%28formulas%20%2B%20practice%29.html" target="_blank" rel="noopener noreferrer">Aptitude Sprint</a>';
+    f.appendChild(tools);
+    var row = el("div", "row2");
+    var cp = el("button", "redo", "copy progress as JSON"); cp.type = "button";
+    cp.addEventListener("click", function () {
+      var txt = JSON.stringify(state);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(function () {
+          cp.textContent = "copied"; setTimeout(function () { cp.textContent = "copy progress as JSON"; }, 1600);
+        });
+      }
+    });
+    row.appendChild(cp);
+    f.appendChild(row);
+    return f;
+  }
+
+  function seedOpen() {
+    ui.open = new Set();
+    var first = null;
+    BLOCKS.forEach(function (b) {
+      var s = blockStats(b);
+      if (s.done > 0 && s.done < s.total) ui.open.add(b.id);
+      if (first === null && s.done < s.total) first = b.id;
+    });
+    if (first) ui.open.add(first);
+    if (!ui.open.size && BLOCKS.length) ui.open.add(BLOCKS[0].id);
+  }
+
+  function render() {
+    var y = window.scrollY;
+    var active = document.activeElement;
+    var fk = active && active.getAttribute ? active.getAttribute("data-fk") : null;
+    var caret = (active && active.tagName === "INPUT" && active.selectionStart != null) ? active.selectionStart : null;
+
+    app.textContent = "";
+    app.appendChild(masthead());
+    app.appendChild(todayStrip());
+    app.appendChild(verdictBox());
+    app.appendChild(findings());
+    app.appendChild(tracksSection());
+    app.appendChild(refsSection());
+    app.appendChild(footerNode());
+
+    paintClock();
+    window.scrollTo(0, y);
+    if (fk) {
+      var back = document.querySelector('[data-fk="' + fk + '"]');
+      if (back) {
+        back.focus();
+        if (caret != null && back.setSelectionRange) { try { back.setSelectionRange(caret, caret); } catch (e) {} }
+      }
+    }
+  }
+
+  seedOpen();
+  setTimer(25);
+  render();
+  if (state === localCopy) markSaved("local", "restored from this device");
+
+  if (window.claude && window.claude.use) {
+    window.claude.use("artifact").then(function (api) {
+      if (!api) return;
+      artifactApi = api;
+      markSaved("ok", "progress saves automatically");
+    }).catch(function () {});
+  }
+})();
+</script>
+
+</body></html>

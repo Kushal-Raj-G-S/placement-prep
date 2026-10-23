@@ -1,0 +1,845 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Stdin Survival Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground:#F4F6F8; --surface:#FFFFFF; --surface-alt:#ECEFF3; --surface-hi:#E3E8ED;
+    --ink:#0F1720; --ink-mid:#3E4A58; --ink-dim:#6B7887;
+    --line:#D8DFE7; --line-soft:#E6EBF0;
+    --accent:#0B7C8C; --accent-soft:#D6EEF1; --accent-ink:#065A66;
+    --danger:#B3261E; --danger-bg:#FBE6E4;
+    --good:#157F3D; --good-bg:#E4F4E9;
+    --warn:#A96208; --warn-bg:#FBF0DC;
+    --code-bg:#F2F5F8; --code-line:#DFE6EC;
+    --f-display:"IBM Plex Sans Condensed","Helvetica Neue",Arial,sans-serif;
+    --f-body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+    --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+    --r:3px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#0E1319; --surface:#151C24; --surface-alt:#1C242E; --surface-hi:#232C37;
+      --ink:#E4EAF1; --ink-mid:#AEB9C6; --ink-dim:#7C8895;
+      --line:#29323D; --line-soft:#212932;
+      --accent:#2FD3E8; --accent-soft:#123840; --accent-ink:#8CE9F7;
+      --danger:#F87171; --danger-bg:#2E1717;
+      --good:#4ADE80; --good-bg:#13291C;
+      --warn:#FBBF24; --warn-bg:#2E2410;
+      --code-bg:#111820; --code-line:#232C37;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#0E1319; --surface:#151C24; --surface-alt:#1C242E; --surface-hi:#232C37;
+    --ink:#E4EAF1; --ink-mid:#AEB9C6; --ink-dim:#7C8895;
+    --line:#29323D; --line-soft:#212932;
+    --accent:#2FD3E8; --accent-soft:#123840; --accent-ink:#8CE9F7;
+    --danger:#F87171; --danger-bg:#2E1717;
+    --good:#4ADE80; --good-bg:#13291C;
+    --warn:#FBBF24; --warn-bg:#2E2410;
+    --code-bg:#111820; --code-line:#232C37;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:var(--f-body); font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:900px; margin:0 auto; padding:34px 22px 96px; display:flex; flex-direction:column; gap:34px; }
+  a { color:var(--accent); }
+  :focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
+  button { font-family:inherit; }
+
+  .eyebrow { font-family:var(--f-mono); font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim); }
+  h1 { font-family:var(--f-display); font-weight:700; font-size:clamp(31px,5.4vw,46px); line-height:1.03; letter-spacing:-.015em; margin:0; text-wrap:balance; }
+  h2 { font-family:var(--f-display); font-weight:600; font-size:24px; letter-spacing:-.01em; margin:0; }
+  h3 { font-family:var(--f-display); font-weight:600; font-size:17px; margin:0; }
+  .lede { margin:0; max-width:66ch; color:var(--ink-mid); font-size:16px; }
+  p { margin:0; }
+  section { display:flex; flex-direction:column; gap:14px; }
+  .sec-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; }
+  .sec-head .note { color:var(--ink-dim); font-size:13.5px; }
+  .prose { color:var(--ink-mid); max-width:72ch; }
+  .prose strong { color:var(--ink); font-weight:600; }
+
+  pre { margin:0; background:var(--code-bg); border:1px solid var(--code-line); border-radius:var(--r); padding:13px 15px; overflow-x:auto; font-family:var(--f-mono); font-size:13px; line-height:1.6; color:var(--ink); }
+  code { font-family:var(--f-mono); font-size:12.8px; background:var(--surface-alt); border:1px solid var(--line-soft); border-radius:2px; padding:1px 4px; }
+  pre code { background:none; border:0; padding:0; font-size:inherit; }
+  .cmt { color:var(--ink-dim); }
+  .kw { color:var(--accent); }
+
+  .codewrap { position:relative; }
+  .copy { position:absolute; top:7px; right:7px; font-family:var(--f-mono); font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; background:var(--surface); border:1px solid var(--line); border-radius:2px; padding:3px 7px; color:var(--ink-dim); cursor:pointer; opacity:.7; }
+  .codewrap:hover .copy { opacity:1; }
+  .copy:hover { color:var(--accent); border-color:var(--accent); }
+
+  .callout { border-radius:var(--r); padding:14px 16px; display:flex; flex-direction:column; gap:8px; }
+  .callout.hero { background:var(--accent-soft); border:1px solid var(--accent); }
+  .callout.bad { background:var(--danger-bg); border:1px solid var(--danger); }
+  .callout.warn { background:var(--warn-bg); border:1px solid var(--warn); }
+  .callout h3 { font-size:16px; }
+  .callout p { color:var(--ink-mid); font-size:14.5px; max-width:72ch; }
+  .callout strong { color:var(--ink); font-weight:600; }
+
+  .shape { background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden; }
+  .shape-hd { display:grid; grid-template-columns:26px 1fr auto; gap:11px; align-items:center; padding:12px 15px; background:var(--surface-alt); border-bottom:1px solid var(--line); }
+  .shape-n { font-family:var(--f-mono); font-size:12px; font-weight:600; color:var(--ink-dim); }
+  .shape-hd h3 { font-size:16px; }
+  .know { font-family:var(--f-mono); font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; border:1px solid var(--line); border-radius:2px; padding:4px 8px; background:var(--surface); color:var(--ink-dim); cursor:pointer; white-space:nowrap; }
+  .know:hover { border-color:var(--ink-dim); color:var(--ink); }
+  .know.on { background:var(--good-bg); border-color:var(--good); color:var(--good); }
+  .shape-body { padding:14px 15px; display:grid; grid-template-columns:minmax(150px,0.85fr) 1.6fr; gap:14px; align-items:start; }
+  .lab { font-family:var(--f-mono); font-size:9.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-dim); margin-bottom:5px; }
+  .reveal { width:100%; text-align:left; background:var(--code-bg); border:1px dashed var(--line); border-radius:var(--r); padding:13px 15px; color:var(--ink-dim); font-family:var(--f-mono); font-size:12.5px; cursor:pointer; }
+  .reveal:hover { border-color:var(--accent); color:var(--accent); }
+  .shape-foot { padding:0 15px 14px; color:var(--ink-dim); font-size:13.5px; max-width:74ch; }
+  .shape-hd.wt { grid-template-columns:1fr; }
+  .wt-step { padding:9px 0; border-bottom:1px solid var(--line-soft); }
+  .wt-step:last-child { border-bottom:0; }
+  .wt-en { font-size:13px; color:var(--ink); font-style:italic; margin-bottom:5px; }
+  .wt-why { font-size:12.5px; color:var(--ink-dim); margin-top:5px; }
+  .shape-foot b { color:var(--warn); font-weight:600; }
+
+  table { border-collapse:collapse; width:100%; font-size:13.5px; }
+  th { font-family:var(--f-mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-dim); text-align:left; font-weight:500; padding:0 12px 7px 0; border-bottom:1px solid var(--line); white-space:nowrap; }
+  td { padding:8px 12px 8px 0; border-bottom:1px solid var(--line-soft); vertical-align:top; color:var(--ink-mid); }
+  tr:last-child td { border-bottom:0; }
+  td.mono { font-family:var(--f-mono); color:var(--ink); white-space:nowrap; font-size:12.5px; }
+  td.no { color:var(--danger); font-family:var(--f-mono); font-size:12.5px; }
+  td.yes { color:var(--good); font-family:var(--f-mono); font-size:12.5px; }
+  .tbl-scroll { overflow-x:auto; }
+
+  ol.checks { margin:0; padding-left:20px; display:flex; flex-direction:column; gap:9px; }
+  ol.checks li { color:var(--ink-mid); }
+  ol.checks li::marker { font-family:var(--f-mono); font-size:12px; color:var(--ink-dim); }
+  ol.checks b { color:var(--ink); font-weight:600; }
+  ul.plain { margin:0; padding:0; display:flex; flex-direction:column; gap:9px; }
+  ul.plain li { list-style:none; color:var(--ink-mid); padding-left:16px; position:relative; }
+  ul.plain li::before { content:"—"; position:absolute; left:0; color:var(--ink-dim); font-family:var(--f-mono); }
+
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:19px; display:flex; flex-direction:column; gap:12px; }
+  .step { font-family:var(--f-mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); }
+  ul.links { margin:0; padding:0; display:flex; flex-direction:column; gap:0; }
+  ul.links li { list-style:none; padding:10px 0; border-bottom:1px solid var(--line-soft); }
+  ul.links li:last-child { border-bottom:0; }
+  ul.links li:first-child { padding-top:2px; }
+  ul.links a { font-weight:500; text-decoration:none; font-size:14.5px; }
+  ul.links a:hover { text-decoration:underline; }
+  ul.links .why { color:var(--ink-dim); font-size:13px; margin-top:2px; max-width:70ch; }
+  .progress { display:flex; align-items:center; gap:12px; font-family:var(--f-mono); font-size:12px; color:var(--ink-dim); }
+  .bar { flex:1 1 auto; height:6px; background:var(--line); border-radius:999px; overflow:hidden; }
+  .bar i { display:block; height:100%; background:var(--good); transition:width .3s ease; }
+
+  footer { border-top:1px solid var(--line); padding-top:18px; color:var(--ink-dim); font-size:13px; max-width:72ch; }
+
+  @media (max-width:680px) {
+    .wrap { padding:24px 14px 72px; gap:26px; }
+    .shape-body { grid-template-columns:1fr; }
+    .know { padding:7px 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition:none !important; } }
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script type="application/json" id="shapes">
+[
+  {
+    "id":"s1","title":"One integer","raw":"5",
+    "code":"n = int(input())",
+    "note":"The simplest possible case. int() ignores the trailing newline for you, so no strip needed."
+  },
+  {
+    "id":"s2","title":"A count, then that many numbers on one line","raw":"5\n1 2 3 4 5",
+    "code":"n = int(input())\narr = list(map(int, input().split()))",
+    "note":"The single most common shape in Indian OAs. Note that n is often redundant — len(arr) gives you the same thing — but you MUST still read that first line or everything after it shifts by one."
+  },
+  {
+    "id":"s3","title":"Numbers on one line, no count given","raw":"1 2 3 4 5",
+    "code":"arr = list(map(int, input().split()))\nn = len(arr)",
+    "note":"If you assume a count line that is not there, your first value gets eaten and every answer is wrong. Read the sample input character by character before you write anything."
+  },
+  {
+    "id":"s4","title":"Two or three values on one line","raw":"5 3",
+    "code":"n, k = map(int, input().split())",
+    "note":"Unpacking straight from map() is the idiom. For three values: n, m, k = map(int, input().split())"
+  },
+  {
+    "id":"s5","title":"A count, then that many separate lines","raw":"3\napple\nbanana\ncherry",
+    "code":"n = int(input())\nitems = [input().strip() for _ in range(n)]",
+    "note":"strip() is not optional here. Without it every string ends in \\n, so 'apple\\n' != 'apple' and your comparisons silently fail. This is one of the most common zero-scorers."
+  },
+  {
+    "id":"s6","title":"T test cases","raw":"2\n3\n1 2 3\n4\n5 6 7 8",
+    "code":"t = int(input())\nfor _ in range(t):\n    n = int(input())\n    arr = list(map(int, input().split()))\n    print(solve(n, arr))",
+    "note":"Very common on CodeChef, HackerEarth and TCS. Print the answer for each case as you go, or collect them and join once at the end — the second is faster when T is large."
+  },
+  {
+    "id":"s7","title":"A grid of numbers","raw":"3 3\n1 0 1\n0 1 0\n1 1 1",
+    "code":"r, c = map(int, input().split())\ngrid = [list(map(int, input().split())) for _ in range(r)]",
+    "note":"Every matrix and island problem arrives like this. Watch the row/column order: it is almost always rows first, but read the statement rather than assuming."
+  },
+  {
+    "id":"s8","title":"A grid of characters","raw":"3 3\n#.#\n.#.\n###",
+    "code":"r, c = map(int, input().split())\ngrid = [input().strip() for _ in range(r)]",
+    "note":"No split() here — the characters are not separated by spaces. Using split() would give you one string per row inside a list, which quietly breaks grid[i][j] indexing."
+  },
+  {
+    "id":"s9","title":"A graph as an edge list","raw":"4 3\n1 2\n2 3\n3 4",
+    "code":"n, m = map(int, input().split())\nadj = [[] for _ in range(n + 1)]\nfor _ in range(m):\n    u, v = map(int, input().split())\n    adj[u].append(v)\n    adj[v].append(u)   # drop this line if directed",
+    "note":"Size the list n+1 because these problems are almost always 1-indexed. For a weighted graph read u, v, w and append (v, w). Getting 1-indexing wrong is the classic off-by-one in every graph OA."
+  },
+  {
+    "id":"s10","title":"A string that contains spaces","raw":"the quick brown fox",
+    "code":"s = input().rstrip('\\n')",
+    "note":"Do NOT call split() here — it would destroy the sentence you were asked to process. If you used sys.stdin.readline you must strip, because readline keeps the newline."
+  },
+  {
+    "id":"s11","title":"Mixed types on one line","raw":"Kushal 21 88.5",
+    "code":"parts = input().split()\nname = parts[0]\nage = int(parts[1])\nscore = float(parts[2])",
+    "note":"map(int, ...) would crash on the name. Split first, then cast each field individually."
+  },
+  {
+    "id":"s12","title":"Read until end of input","raw":"1 2\n3 4\n5 6",
+    "code":"import sys\n\nfor line in sys.stdin:\n    line = line.strip()\n    if not line:\n        continue\n    a, b = map(int, line.split())\n    print(a + b)",
+    "note":"No count, no sentinel — just keep reading until the stream ends. Guard against blank trailing lines or you crash on the last iteration."
+  },
+  {
+    "id":"s13","title":"Read until a sentinel value","raw":"5\n7\n9\n-1",
+    "code":"import sys\n\nnums = []\nfor line in sys.stdin:\n    x = int(line)\n    if x == -1:\n        break\n    nums.append(x)",
+    "note":"The sentinel is not part of the data. Break before appending, not after."
+  },
+  {
+    "id":"s14","title":"Everything at once (the heavy-input template)","raw":"3\n1 2 3\n4 5 6\n7 8 9",
+    "code":"import sys\n\ndata = sys.stdin.buffer.read().split()\nidx = 0\n\ndef nxt():\n    global idx\n    idx += 1\n    return data[idx - 1]\n\nn = int(nxt())\nrows = [[int(nxt()) for _ in range(3)] for _ in range(n)]",
+    "note":"When input is huge (10^5 lines or more) and line-by-line reading times out, read the whole stream once and walk a token pointer. This ignores line breaks entirely, which is usually fine and sometimes essential. Note buffer.read() gives bytes — int() handles them, but strings need .decode()."
+  }
+]
+</script>
+
+<script type="application/json" id="state">
+{"rev":0,"known":{}}
+</script>
+
+<script id="code">
+(function () {
+  "use strict";
+  // The cross-tool links in this page are plain .html filenames, so opening the file straight off
+  // disk just works. When the very same page is served over http(s) those relative names cannot
+  // resolve, so there we swap each one for its hosted copy. Local is the default; online adapts.
+  var HOSTED = {
+    "./1%20-%20Twenty%20Weeks%20to%20AC%20%28tracker%29.html": "https://claude.ai/code/artifact/32b165b3-0cee-4121-9470-b0e8d6d17c16",
+    "./2%20-%20Stdin%20Trainer%20%28drill%29.html": "https://claude.ai/code/artifact/00d12bf6-5548-4e56-b449-d0f33193a495",
+    "./3%20-%20Stdin%20Survival%20Kit%20%28manual%29.html": "https://claude.ai/code/artifact/49b64e1a-a87a-4924-b42d-2a7a614ab41a",
+    "./5%20-%20SQL%20Lab%20%28practice%29.html": "https://claude.ai/code/artifact/0f564ee0-0ae9-4f76-b0db-9cbaf04a5664",
+    "./6%20-%20CS%20Core%20Drill%20%28OS%20DBMS%20CN%20OOP%20C%29.html": "https://claude.ai/code/artifact/3a19c5c3-5b45-4744-a980-20f138d77859",
+    "./7%20-%20Aptitude%20Sprint%20%28formulas%20%2B%20practice%29.html": "https://claude.ai/code/artifact/1176c004-05c1-4ebd-bd08-041957dd07f6",
+    "./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html": "https://claude.ai/code/artifact/9c7876de-143f-4f4d-bead-a8204d0f63ad",
+    "./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html": "https://claude.ai/code/artifact/ca3214a6-ec8f-4b10-b757-9c025a98ba47",
+    "./10%20-%20Mock%20OA%20%28timed%20exam%29.html": "https://claude.ai/code/artifact/ea757a13-0226-4bad-9065-96ca4927af42"
+  };
+  function fixToolLinks() {
+    if (location.protocol === "file:") return;
+    Array.prototype.forEach.call(document.querySelectorAll("a[href]"), function (a) {
+      var u = HOSTED[a.getAttribute("href")];
+      if (u) a.setAttribute("href", u);
+    });
+  }
+  if (location.protocol !== "file:") {
+    try {
+      new MutationObserver(function () { fixToolLinks(); })
+        .observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) {}
+    fixToolLinks();
+  }
+
+
+  // An artifact places the authored <title>, font <link>s and <style> BELOW <head>, so
+  // document.head.innerHTML misses them and a self-republish would ship a page with no CSS.
+  // Collect them wherever they sit; platform-injected styles are excluded by marker, which
+  // keeps this idempotent across republish generations.
+  function SHELL() {
+    var out = ['<meta charset="utf-8">',
+               '<meta name="viewport" content="width=device-width,initial-scale=1">'];
+    var t = document.querySelector("title");
+    if (t) out.push(t.outerHTML);
+    Array.prototype.forEach.call(document.querySelectorAll("link"), function (n) {
+      var h = n.getAttribute("href") || "";
+      if (h.indexOf("fonts.googleapis") !== -1 || h.indexOf("fonts.gstatic") !== -1) out.push(n.outerHTML);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("style"), function (n) {
+      var s = n.textContent || "";
+      if (s.indexOf("--f-display") !== -1 || s.indexOf("--mono:") !== -1) out.push(n.outerHTML);
+    });
+    return out.join("\n");
+  }
+
+
+  var SHAPES = JSON.parse(document.getElementById("shapes").textContent);
+  var LS = "stdin-kit-v1";
+
+  function migrate(s) {
+    if (!s || typeof s !== "object") s = {};
+    if (!s.known) s.known = {};
+    if (typeof s.rev !== "number") s.rev = 0;
+    return s;
+  }
+  var embedded = migrate(JSON.parse(document.getElementById("state").textContent));
+  var state = embedded, localCopy = null;
+  try { var raw = window.localStorage.getItem(LS); if (raw) localCopy = migrate(JSON.parse(raw)); } catch (e) {}
+  if (localCopy && localCopy.rev > embedded.rev) state = localCopy;
+
+  var app = document.getElementById("app");
+  var api = null, timer = null;
+  var shown = {};
+
+  function el(t, c, x) { var n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; }
+  function save() {
+    state.rev++;
+    try { window.localStorage.setItem(LS, JSON.stringify(state)); } catch (e) {}
+    if (!api) return;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      var o = "<" + "script", c = "<" + "/" + "script>";
+      var doc = '<!doctype html>\n<html lang="en">\n<head>\n' + SHELL() + '\n</head>\n<body>\n' +
+        '<div class="wrap" id="app"></div>\n' +
+        o + ' type="application/json" id="shapes">' + JSON.stringify(SHAPES) + c + '\n' +
+        o + ' type="application/json" id="state">' + JSON.stringify(state) + c + '\n' +
+        o + ' id="code">' + document.getElementById("code").textContent + c + '\n' +
+        '</body>\n</html>';
+      api.publish(doc).catch(function () {});
+    }, 1500);
+  }
+
+  function codeBlock(text) {
+    var w = el("div", "codewrap");
+    var pre = document.createElement("pre");
+    var cd = document.createElement("code");
+    cd.textContent = text;
+    pre.appendChild(cd); w.appendChild(pre);
+    var b = el("button", "copy", "copy"); b.type = "button";
+    b.addEventListener("click", function () {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          b.textContent = "copied"; setTimeout(function () { b.textContent = "copy"; }, 1400);
+        });
+      }
+    });
+    w.appendChild(b);
+    return w;
+  }
+
+  function header() {
+    var s = el("section");
+    s.appendChild(el("div", "eyebrow", "Companion to the 20-week plan · Python 3"));
+    s.appendChild(el("h1", null, "Stdin Survival Kit"));
+    var p = el("p", "lede");
+    p.textContent = "How to read an Input Format and turn it into working Python, every time, without guessing. One idea, one four-step method, three worked walkthroughs, then every input shape an assessment can hand you as a lookup table.";
+    s.appendChild(p);
+
+    var prog = el("div", "progress");
+    var done = SHAPES.filter(function (x) { return state.known[x.id]; }).length;
+    prog.appendChild(el("span", null, done + " / " + SHAPES.length + " shapes marked known"));
+    var bar = el("div", "bar"); var fill = el("i");
+    fill.style.width = Math.round((done / SHAPES.length) * 100) + "%";
+    bar.appendChild(fill); prog.appendChild(bar);
+    s.appendChild(prog);
+    return s;
+  }
+
+  function theOneTemplate() {
+    var s = el("section");
+    s.appendChild(el("h2", null, "The ninety percent template"));
+    var p = el("p", "prose");
+    p.innerHTML = "If you remember nothing else, remember these three lines. They cover the large majority of assessment problems, and you can type them from memory in under ten seconds.";
+    s.appendChild(p);
+    s.appendChild(codeBlock("import sys\ninput = sys.stdin.readline    # faster; keeps the trailing newline\n\nn = int(input())\narr = list(map(int, input().split()))"));
+    var c = el("div", "callout hero");
+    c.appendChild(el("h3", null, "The habit that finds every bug before the grader does"));
+    var q = el("p");
+    q.innerHTML = "Put the sample input in a file called <code>in.txt</code>, then run your solution the way the grader runs it:";
+    c.appendChild(q);
+    c.appendChild(codeBlock("python sol.py < in.txt"));
+    var q2 = el("p");
+    q2.innerHTML = "If you never do this, you are testing your code by typing input by hand, which hides newline and format bugs completely. <strong>Every practice problem, every time.</strong>";
+    c.appendChild(q2);
+    s.appendChild(c);
+    return s;
+  }
+
+  function mentalModel() {
+    var s = el("section");
+    s.appendChild(el("h2", null, "The one idea everything else follows from"));
+    var p = el("p", "prose");
+    p.innerHTML = "<strong>Standard input is a queue of lines.</strong> The whole input sits in front of your program in order, and each call to <code>input()</code> removes exactly one line from the front and hands it to you as a string. That line is then gone — the next call gives you the one after it.";
+    s.appendChild(p);
+    s.appendChild(codeBlock("stdin, before your program runs:\n\n    +-------------+\n    | 5           |  <- input() takes this one\n    | 1 2 3 4 5   |  <- then this one\n    +-------------+\n\nn   = int(input())                    # consumed line 1 -> \"5\"\narr = list(map(int, input().split())) # consumed line 2 -> \"1 2 3 4 5\""));
+    var p2 = el("p", "prose");
+    p2.innerHTML = "That is genuinely the entire concept. Everything else on this page is a consequence of it:";
+    s.appendChild(p2);
+    var ul = el("ul", "plain");
+    [
+      "You must read the same number of lines the problem says, in the same order. Read one too few and everything after it shifts up; read one too many and you crash or get an empty string.",
+      "A line comes to you as one string. If several values sit on that line, you take the line once and then split it — you do not call input() twice.",
+      "input() has no idea what type you want. Everything arrives as text, so you cast it yourself.",
+      "Reading is destructive and one-directional. You cannot go back, so if you need a value twice, store it in a variable."
+    ].forEach(function (x) { ul.appendChild(el("li", null, x)); });
+    s.appendChild(ul);
+
+    var c = el("div", "callout warn");
+    c.appendChild(el("h3", null, "One line about versions, then never again"));
+    var q = el("p");
+    q.innerHTML = "If the language dropdown offers both <strong>Python</strong> and <strong>Python 3</strong>, pick <strong>Python 3</strong>. That is the whole rule. Everything on this page is Python 3.";
+    c.appendChild(q);
+    s.appendChild(c);
+    return s;
+  }
+
+  function theMethod() {
+    var s = el("section");
+    s.appendChild(el("h2", null, "The method: turning an Input Format into code"));
+    var p = el("p", "prose");
+    p.innerHTML = "Every problem statement has an <strong>Input Format</strong> block. It is not decoration — it is a line-by-line specification of the queue, written in English. Your job is to translate it downward, one line of English into one line of Python. Do this the same way every time and you never have to think about it again.";
+    s.appendChild(p);
+
+    var steps = [
+      ["Number the lines the statement describes.", "Literally count them. \"The first line contains n\" is line 1. \"The second line contains n integers\" is line 2. If it says \"the next R lines\", that is a loop of R lines, not one line."],
+      ["Write one read per line, top to bottom.", "In the same order. Do not skip ahead to the interesting part — the reads must happen in the order the data arrives, because reading is destructive."],
+      ["Cast as you read.", "int() for one number, list(map(int, ...)) for many, .strip() for a string. Decide the type from the words in the statement: \"integer\" means int, \"word\" or \"string\" means strip, \"space-separated\" means split."],
+      ["Echo what you parsed, before you solve anything.", "Print your variables, run against the sample, and confirm they hold what you expected. Then delete the echo and write the algorithm. This one habit catches almost every parsing bug in about fifteen seconds."]
+    ];
+    var ol = el("ol", "checks");
+    steps.forEach(function (x) {
+      var li = document.createElement("li");
+      li.appendChild(el("b", null, x[0]));
+      li.appendChild(document.createTextNode(" " + x[1]));
+      ol.appendChild(li);
+    });
+    s.appendChild(ol);
+
+    var c = el("div", "callout hero");
+    c.appendChild(el("h3", null, "Step 4 in practice — the echo"));
+    var q = el("p");
+    q.innerHTML = "Before writing a single line of algorithm:";
+    c.appendChild(q);
+    c.appendChild(codeBlock("n   = int(input())\narr = list(map(int, input().split()))\n\nprint(n, arr)        # <- run it. Do you see: 5 [1, 2, 3, 4, 5] ?\n                     #    yes -> delete this line, solve the problem\n                     #    no  -> your parse is wrong, fix it now"));
+    var q2 = el("p");
+    q2.innerHTML = "Debugging a parse is trivial. Debugging an algorithm that is silently receiving the wrong data is not. <strong>Always confirm the input before you trust it.</strong>";
+    c.appendChild(q2);
+    s.appendChild(c);
+
+    var p3 = el("p", "prose");
+    p3.innerHTML = "And when a statement is genuinely ambiguous — or you cannot tell whether there is a count line — dump the raw stream and look at it:";
+    s.appendChild(p3);
+    s.appendChild(codeBlock("import sys\nprint(repr(sys.stdin.read()))\n\n# shows you EXACTLY what you were given, newlines and all:\n#   '5\\n1 2 3 4 5\\n'\n# now there is nothing left to guess about"));
+    var p4 = el("p", "prose");
+    p4.innerHTML = "<code>repr()</code> is the important part — it makes the <code>\\n</code> characters visible instead of printing them. Do this once in the custom-input box and the format stops being a mystery.";
+    s.appendChild(p4);
+    return s;
+  }
+
+  function walkthroughs() {
+    var s = el("section");
+    var hd = el("div", "sec-head");
+    hd.appendChild(el("h2", null, "Three worked walkthroughs"));
+    hd.appendChild(el("span", "note", "the method applied line by line"));
+    s.appendChild(hd);
+    var p = el("p", "prose");
+    p.textContent = "Read these slowly. The point is not the final code, it is the translation from the English on the left to the Python on the right.";
+    s.appendChild(p);
+
+    var WT = [
+      {
+        title: "Walkthrough 1 — a count and an array",
+        spec: "Input Format\n\nThe first line contains an integer n,\nthe size of the array.\nThe second line contains n\nspace-separated integers.",
+        sample: "5\n1 2 3 4 5",
+        steps: [
+          ["\"The first line contains an integer n\"", "n = int(input())", "One line, one integer. int() strips the newline for you."],
+          ["\"The second line contains n space-separated integers\"", "arr = list(map(int, input().split()))", "One line again — n values do NOT mean n reads. Take the line, split on spaces, cast each piece."]
+        ],
+        full: "n   = int(input())\narr = list(map(int, input().split()))\n\nprint(n, arr)        # echo: 5 [1, 2, 3, 4, 5]  -> correct",
+        lesson: "n and len(arr) are the same number. n is still read, because it is a line in the queue and skipping it would shift everything."
+      },
+      {
+        title: "Walkthrough 2 — T test cases, two lines each",
+        spec: "Input Format\n\nThe first line contains T,\nthe number of test cases.\nEach test case consists of two lines:\n  - two integers n and k\n  - n space-separated integers",
+        sample: "2\n5 2\n1 2 3 4 5\n3 1\n9 8 7",
+        steps: [
+          ["\"The first line contains T\"", "t = int(input())", "Read once, outside the loop. This is not part of any test case."],
+          ["\"Each test case consists of two lines\"", "for _ in range(t):", "The two reads below go inside this loop, and they repeat exactly T times."],
+          ["\"two integers n and k\"", "n, k = map(int, input().split())", "Two values on ONE line. One read, then unpack. Reading twice here is the single most common mistake in this shape."],
+          ["\"n space-separated integers\"", "arr = list(map(int, input().split()))", "Same as walkthrough 1, now nested inside the loop."]
+        ],
+        full: "t = int(input())\nfor _ in range(t):\n    n, k = map(int, input().split())\n    arr = list(map(int, input().split()))\n\n    print(n, k, arr)     # echo each case while you build it\n    # ... solve this test case, print its answer",
+        lesson: "Print an answer per test case, inside the loop. T cases means T lines of output, not one."
+      },
+      {
+        title: "Walkthrough 3 — a grid, and the split() decision",
+        spec: "Input Format\n\nThe first line contains two integers\nR and C.\nThe next R lines each contain\nC space-separated integers.",
+        sample: "3 3\n1 0 1\n0 1 0\n1 1 1",
+        steps: [
+          ["\"two integers R and C\"", "r, c = map(int, input().split())", "One line, two values, unpack."],
+          ["\"The next R lines\"", "for _ in range(r):", "R is a loop count. This is where \"the next N lines\" always leads."],
+          ["\"C space-separated integers\"", "list(map(int, input().split()))", "Each row is one line. Collect the rows into a list of lists."]
+        ],
+        full: "r, c = map(int, input().split())\ngrid = [list(map(int, input().split())) for _ in range(r)]\n\nprint(grid)          # echo: [[1,0,1], [0,1,0], [1,1,1]]\n# grid[i][j] is now row i, column j",
+        lesson: "If the grid is characters with no spaces (#.# rather than 1 0 1) then do NOT split — use grid = [input().strip() for _ in range(r)]. Splitting a spaceless row gives you a one-element list and grid[i][j] quietly breaks."
+      }
+    ];
+
+    WT.forEach(function (w) {
+      var box = el("div", "shape");
+      var hdr = el("div", "shape-hd wt");
+      hdr.appendChild(el("h3", null, w.title));
+      box.appendChild(hdr);
+
+      var body = el("div", "shape-body");
+      var left = el("div");
+      left.appendChild(el("div", "lab", "what the statement says"));
+      left.appendChild(codeBlock(w.spec));
+      left.appendChild(el("div", "lab", "sample input"));
+      left.appendChild(codeBlock(w.sample));
+      body.appendChild(left);
+
+      var right = el("div");
+      right.appendChild(el("div", "lab", "translating it, line by line"));
+      w.steps.forEach(function (st) {
+        var row = el("div", "wt-step");
+        row.appendChild(el("div", "wt-en", st[0]));
+        row.appendChild(codeBlock(st[1]));
+        row.appendChild(el("div", "wt-why", st[2]));
+      right.appendChild(row);
+      });
+      body.appendChild(right);
+      box.appendChild(body);
+
+      var f = el("div", "shape-body");
+      var fl = el("div");
+      fl.appendChild(el("div", "lab", "the finished parse"));
+      fl.appendChild(codeBlock(w.full));
+      f.appendChild(fl);
+      f.style.gridTemplateColumns = "1fr";
+      box.appendChild(f);
+
+      var note = el("div", "shape-foot");
+      note.innerHTML = "<b>Remember:</b> " + w.lesson;
+      box.appendChild(note);
+      s.appendChild(box);
+    });
+    return s;
+  }
+
+  function oopsSection() {
+    var s = el("section");
+    var hd = el("div", "sec-head");
+    hd.appendChild(el("h2", null, "The OOP trap for a Python-only candidate"));
+    hd.appendChild(el("span", "note", "you raised this — here is the honest answer"));
+    s.appendChild(hd);
+    var p = el("p", "prose");
+    p.innerHTML = "You said companies focus on DSA and OOP. That is <strong>true for interviews and mostly false for the assessment stage</strong> at the mass recruiters. Checking current published patterns for Accenture, Infosys, TCS NQT, Wipro NLTH, Capgemini and Cognizant: not one has a dedicated OOP MCQ section. Their OAs are aptitude, then pseudocode or output-tracing, then coding. OOP turns up inside \"programming fundamentals\" MCQs, in Cognizant GenC's Python cluster, and then heavily in the interview that follows.";
+    s.appendChild(p);
+
+    var c = el("div", "callout bad");
+    c.appendChild(el("h3", null, "You can know Python OOP perfectly and still fail the MCQ"));
+    var q = el("p");
+    q.innerHTML = "Essentially every OOP question bank online is written in <strong>C++ or Java syntax</strong>, and several of the concepts they test either do not exist in Python or behave differently — <code>virtual</code> functions, <code>interface</code>, <code>private</code> access modifiers, and compile-time method overloading. Python has none of these in the form the question expects.";
+    c.appendChild(q);
+    var q2 = el("p");
+    q2.innerHTML = "The fix is <strong>not</strong> to switch languages. You need C++/Java as a <em>reading</em> skill — enough to trace what a snippet does — while you keep writing Python. Budget six to eight focused hours, and do it after the input work, not before.";
+    c.appendChild(q2);
+    s.appendChild(c);
+
+    var card = el("div", "card");
+    card.appendChild(el("h3", null, "Verified, free"));
+    card.appendChild(linkList([
+      ["C++ OOP quizzes — GeeksforGeeks", "https://www.geeksforgeeks.org/cpp/cpp-oops-quizzes/", "The C++-syntax grind. This is the reading skill; do the most reps here."],
+      ["OOP concepts quiz — GeeksforGeeks", "https://www.geeksforgeeks.org/quizzes/oop-concepts-gq/", "Language-agnostic concept questions — the four pillars, dispatch, abstraction."],
+      ["OOPs MCQs — InterviewBit", "https://www.interviewbit.com/oops-mcq/", "Mixed bank, closest in style to what an actual OA serves."],
+      ["Python OOP exercises — PyNative", "https://pynative.com/python-object-oriented-programming-oop-exercise/", "Python-native practice, for the interview rather than the MCQ."],
+      ["Python inheritance MCQ — GeeksforGeeks", "https://www.geeksforgeeks.org/quizzes/python-inheritance-mcq/", "Fills the gap between the two above."]
+    ]));
+    s.appendChild(card);
+    return s;
+  }
+
+  function linkList(rows) {
+    var ul = el("ul", "links");
+    rows.forEach(function (r) {
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.href = r[1]; a.target = "_blank"; a.rel = "noopener noreferrer"; a.textContent = r[0];
+      li.appendChild(a);
+      li.appendChild(el("div", "why", r[2]));
+      ul.appendChild(li);
+    });
+    return ul;
+  }
+
+  function shapesSection() {
+    var s = el("section");
+    var hd = el("div", "sec-head");
+    hd.appendChild(el("h2", null, "Every input shape"));
+    hd.appendChild(el("span", "note", "read the raw input, write the parse in your head, then reveal"));
+    s.appendChild(hd);
+    var p = el("p", "prose");
+    p.textContent = "Do not just read these. Cover the right column, look at the raw input on the left, and type the parse yourself. Mark a shape known only once you can write it from blank without hesitating.";
+    s.appendChild(p);
+
+    SHAPES.forEach(function (sh, i) {
+      var box = el("div", "shape");
+      var hdr = el("div", "shape-hd");
+      hdr.appendChild(el("span", "shape-n", String(i + 1).padStart(2, "0")));
+      hdr.appendChild(el("h3", null, sh.title));
+      var k = el("button", "know" + (state.known[sh.id] ? " on" : ""), state.known[sh.id] ? "known" : "mark known");
+      k.type = "button";
+      k.addEventListener("click", function () {
+        if (state.known[sh.id]) delete state.known[sh.id]; else state.known[sh.id] = 1;
+        save(); render();
+      });
+      hdr.appendChild(k);
+      box.appendChild(hdr);
+
+      var body = el("div", "shape-body");
+      var left = el("div");
+      left.appendChild(el("div", "lab", "raw stdin"));
+      left.appendChild(codeBlock(sh.raw));
+      body.appendChild(left);
+
+      var right = el("div");
+      right.appendChild(el("div", "lab", "the parse"));
+      if (shown[sh.id]) {
+        right.appendChild(codeBlock(sh.code));
+      } else {
+        var rv = el("button", "reveal", "click to reveal the parse →");
+        rv.type = "button";
+        rv.addEventListener("click", function () { shown[sh.id] = 1; render(); });
+        right.appendChild(rv);
+      }
+      body.appendChild(right);
+      box.appendChild(body);
+
+      if (sh.note) {
+        var f = el("div", "shape-foot");
+        f.innerHTML = sh.note.replace(/^([^.]+\.)/, "<b>$1</b>");
+        box.appendChild(f);
+      }
+      s.appendChild(box);
+    });
+    return s;
+  }
+
+  function outputSection() {
+    var s = el("section");
+    s.appendChild(el("h2", null, "Output — where correct code still scores zero"));
+    var p = el("p", "prose");
+    p.innerHTML = "The grader does a character-by-character comparison against expected output. It has no idea what you meant. <strong>Print the answer and nothing else</strong> — no labels, no prompts, no decoration.";
+    s.appendChild(p);
+
+    var c = el("div", "callout bad");
+    c.appendChild(el("h3", null, "This scores 0 out of 7 test cases"));
+    c.appendChild(codeBlock("print(\"Enter a number:\")     # never do this — there is no human\nprint(\"Output:\", ans)        # the grader wanted just: 42\nprint(\"The answer is\", ans)  # same problem"));
+    var q = el("p");
+    q.innerHTML = "TCS states it explicitly in its own instructions: other than the answer, <strong>nothing</strong> should be written to stdout. A prompt that helps a human read your program is what fails you.";
+    c.appendChild(q);
+    s.appendChild(c);
+
+    s.appendChild(el("h3", null, "The four output forms you will need"));
+    s.appendChild(codeBlock("print(ans)                              # a single value\n\nprint(*arr)                             # a list, space-separated\nprint(\" \".join(map(str, arr)))          # identical, and explicit\n\nprint(\"\\n\".join(map(str, arr)))         # one per line\n\nout = []                                # many test cases: collect,\nfor ... :                               # then flush once at the end.\n    out.append(str(ans))                # much faster than printing\nprint(\"\\n\".join(out))                   # inside the loop"));
+
+    var w = el("div", "callout warn");
+    w.appendChild(el("h3", null, "Case matters, and the statement decides"));
+    var q2 = el("p");
+    q2.innerHTML = "<code>YES</code>, <code>Yes</code> and <code>yes</code> are three different answers. So are <code>True</code> and <code>true</code>. Copy the exact spelling out of the problem statement rather than typing what feels natural — this is a genuinely common way to lose a solved problem.";
+    w.appendChild(q2);
+    s.appendChild(w);
+    return s;
+  }
+
+  function hazardsSection() {
+    var s = el("section");
+    s.appendChild(el("h2", null, "Two Python hazards LeetCode has never shown you"));
+    var p = el("p", "prose");
+    p.textContent = "LeetCode's limits are generous and its driver handles input for you. Neither of these has ever had a chance to bite you. Both will, on a real assessment platform.";
+    s.appendChild(p);
+
+    s.appendChild(el("h3", null, "1. The recursion limit is 1000"));
+    var p1 = el("p", "prose");
+    p1.innerHTML = "A perfectly correct DFS crashes with <code>RecursionError</code> on a 10⁵-node tree or a large grid, because Python caps recursion depth at 1000 by default. You will see a runtime error and assume your logic is wrong. It is not.";
+    s.appendChild(p1);
+    s.appendChild(codeBlock("import sys\nsys.setrecursionlimit(300000)    # do this before ANY recursive solution"));
+    var p2 = el("p", "prose");
+    p2.innerHTML = "Raising the limit alone can still blow the operating system's stack. For genuinely deep recursion, run your solution on a thread with a bigger stack:";
+    s.appendChild(p2);
+    s.appendChild(codeBlock("import sys, threading\n\ndef main():\n    # your whole solution goes in here\n    ...\n\nsys.setrecursionlimit(300000)\nthreading.stack_size(1 << 26)        # 64 MB of stack\nt = threading.Thread(target=main)\nt.start()\nt.join()"));
+    var p3 = el("p", "prose");
+    p3.innerHTML = "Worth knowing for interviews too — being able to say <em>\"Python caps recursion at 1000, so for a tree this deep I would write it iteratively or raise the limit\"</em> is exactly the kind of thing that reads as experience.";
+    s.appendChild(p3);
+
+    s.appendChild(el("h3", null, "2. input() in a loop times out"));
+    var p4 = el("p", "prose");
+    p4.innerHTML = "The built-in <code>input()</code> is slow. Past roughly 10⁵ lines it alone can exceed the time limit, even when your algorithm is optimal. Platforms like HackerEarth deliberately include maximum-constraint test cases to catch this.";
+    s.appendChild(p4);
+    s.appendChild(codeBlock("import sys\ninput = sys.stdin.readline      # one line, fixes it for the whole program"));
+    return s;
+  }
+
+  function debugSection() {
+    var s = el("section");
+    s.appendChild(el("h2", null, "It works on my machine but scored zero"));
+    var p = el("p", "prose");
+    p.textContent = "Run down this list in order. In an assessment, the cause is almost always in the top four.";
+    s.appendChild(p);
+    var ol = el("ol", "checks");
+    [
+      ["You printed a label or a prompt.", " Anything other than the answer itself fails the comparison."],
+      ["You did not strip the newline off a string.", " 'apple\\n' does not equal 'apple', so every comparison silently fails."],
+      ["The case is wrong.", " YES versus Yes versus yes. Check the statement, not your instinct."],
+      ["You assumed a count line that was not there — or missed one that was.", " Everything after it shifts by one position and every answer is wrong."],
+      ["You are on Python 2.", " Check the language dropdown. See the table above."],
+      ["RecursionError on the large cases only.", " Raise the recursion limit."],
+      ["Timeout on the large cases only.", " Switch to sys.stdin.readline, and stop printing inside the loop."],
+      ["You read with input() when several values sat on the same line.", " One read takes the whole line; you then have to split it."],
+      ["Integer overflow.", " Not a thing in Python — but if the statement asks for a result modulo 10⁹+7, apply it as you go."],
+      ["Trailing whitespace or an extra blank line.", " Usually tolerated, occasionally not. print() already adds exactly one newline; do not add another."]
+    ].forEach(function (x) {
+      var li = document.createElement("li");
+      li.appendChild(el("b", null, x[0]));
+      li.appendChild(document.createTextNode(x[1]));
+      ol.appendChild(li);
+    });
+    s.appendChild(ol);
+    return s;
+  }
+
+  function practiceSection() {
+    var s = el("section");
+    var hd = el("div", "sec-head");
+    hd.appendChild(el("h2", null, "Where to practise — in order"));
+    hd.appendChild(el("span", "note", "every link below was fetched and confirmed live"));
+    s.appendChild(hd);
+    var p = el("p", "prose");
+    p.innerHTML = "Work these in sequence. The whole ladder is about a week of evenings, and it closes the gap that cost you the Infosys attempt.";
+    s.appendChild(p);
+
+    var bad = el("div", "callout bad");
+    bad.appendChild(el("h3", null, "Do not use GeeksforGeeks Practice for this"));
+    var bq = el("p");
+    bq.innerHTML = "This surprised me too, so it was checked directly: a GfG practice problem serves you a <strong>function stub</strong> (<code>char* reverseString(char* s)</code>) with LeetCode-style <code>Input: s = \"Geeks\"</code> examples. It is the same trap that got you at Infosys, so it cannot be the thing that fixes it. Same verdict for <strong>IndiaBix</strong> (no Python and no code editor at all), <strong>PrepInsta</strong> (articles behind a login wall) and <strong>FACE Prep</strong> (written articles, no judge). GfG is fine for concepts — just not for this.";
+    bad.appendChild(bq);
+    s.appendChild(bad);
+
+    var c0 = el("div", "card");
+    c0.appendChild(el("div", "step", "Step 0 · tonight · 30 minutes"));
+    c0.appendChild(el("h3", null, "See that the input box IS stdin"));
+    var p0 = el("p", "prose");
+    p0.innerHTML = "Open the editor below. It is free, needs no login, and has an explicit <strong>Input</strong> box labelled \"If your code takes input, add it in the above box before running\". Paste each of the 14 raw-input samples from this page into that box, write the parse, and print what you got. That box is the same mechanism as the \"custom input\" tab in a real assessment — once that clicks, the whole thing stops being mysterious.";
+    c0.appendChild(p0);
+    c0.appendChild(linkList([
+      ["CodeChef online Python compiler", "https://www.codechef.com/python-online-compiler", "No login. Python 3. A real stdin box. Start here."]
+    ]));
+    s.appendChild(c0);
+
+    var c1 = el("div", "card");
+    c1.appendChild(el("div", "step", "Step 1 · days 1-2"));
+    c1.appendChild(el("h3", null, "Blank-editor drills, where reading input IS the problem"));
+    var p1 = el("p", "prose");
+    p1.innerHTML = "HackerRank's <strong>Python practice domain</strong> is the no-stub kind — you get an empty editor and the statement treats reading the input as your job. That is precisely the mode you have never trained. Day 0 literally instructs you to \"save a line of input from stdin\", and Day 1 explicitly fails you if you hardcode the sample values instead of reading them.";
+    c1.appendChild(p1);
+    c1.appendChild(linkList([
+      ["30 Days of Code — Day 0: Hello World", "https://www.hackerrank.com/challenges/30-hello-world/problem", "The single best first problem. Reading one line from stdin is the entire task."],
+      ["30 Days of Code — Day 1: Data Types", "https://www.hackerrank.com/challenges/30-data-types/problem", "Reading three typed values. Refuses hardcoded answers by design."],
+      ["Python — Introduction", "https://www.hackerrank.com/domains/python/py-introduction", "Short set. Do all of it."],
+      ["Python If-Else", "https://www.hackerrank.com/challenges/py-if-else/problem", "One integer in, one decision out. Shape 1."],
+      ["What's Your Name?", "https://www.hackerrank.com/challenges/whats-your-name/problem", "Two lines of string input — the strip() lesson, learned the hard way. Shape 5."],
+      ["Python — Basic Data Types", "https://www.hackerrank.com/domains/python/py-basic-data-types", "Lists and typed input. Shapes 2, 3 and 4."],
+      ["Python practice domain (all of it)", "https://www.hackerrank.com/domains/python", "The full track if you want more reps."]
+    ]));
+    s.appendChild(c1);
+
+    var c2 = el("div", "card");
+    c2.appendChild(el("div", "step", "Step 2 · days 3-5"));
+    c2.appendChild(el("h3", null, "CodeChef — stdin-native, no stub to fall back on"));
+    var p2 = el("p", "prose");
+    p2.innerHTML = "CodeChef's beginner Python path is 192 problems, and modules 4, 5 and 14 are literally named <em>User inputs</em>, <em>simple problems on input, output and basic math</em>, and <em>test cases &amp; custom input/output</em>. That third one is the T-test-cases shape, which is shape 6 and the one that shows up constantly on TCS and HackerEarth.";
+    c2.appendChild(p2);
+    c2.appendChild(linkList([
+      ["CodeChef Practice — Python path", "https://www.codechef.com/practice/python", "192 problems. Modules 4, 5 and 14 are the ones you came for."],
+      ["CodeChef Practice (classic problemset)", "https://www.codechef.com/practice-old", "5000+ problems, sortable by difficulty ascending. Where you go once the shapes are automatic."]
+    ]));
+    s.appendChild(c2);
+
+    var c3 = el("div", "card");
+    c3.appendChild(el("div", "step", "Step 3 · day 6"));
+    c3.appendChild(el("h3", null, "HackerEarth — and deliberately feel one timeout"));
+    var p3 = el("p", "prose");
+    p3.innerHTML = "HackerEarth hosts the Flipkart, Swiggy, Razorpay and Sprinklr assessments, and it is competitive-programming style by design: read stdin, write stdout, no scaffolding. It also sets maximum-constraint test cases on purpose. <strong>Do one problem here with <code>input()</code> in a loop and let it time out</strong>, then change the single line to <code>sys.stdin.readline</code> and watch it pass. Learning that once by experience beats reading it ten times.";
+    c3.appendChild(p3);
+    c3.appendChild(linkList([
+      ["Basics of Input/Output — practice problems", "https://www.hackerearth.com/practice/basic-programming/input-output/basics-of-input-output/practice-problems/", "20 problems, pure stdin. Free to read; a free account to submit."],
+      ["Basics of Input/Output — tutorial", "https://www.hackerearth.com/practice/basic-programming/input-output/basics-of-input-output/tutorial/", "Read this first if any shape on this page still feels shaky."]
+    ]));
+    s.appendChild(c3);
+
+    var c4 = el("div", "card");
+    c4.appendChild(el("div", "step", "Step 4 · day 7"));
+    c4.appendChild(el("h3", null, "Now go look at the stubbed side, so you can name the difference"));
+    var p4 = el("p", "prose");
+    p4.innerHTML = "These problems hand you a read-only header that already reads stdin and a footer that already prints — you only fill the function body, exactly like LeetCode. Open one and <strong>click the arrow to expand the read-only header</strong>. Seeing the parsing code that was being written for you all along is the moment the whole thing makes sense. Then, in a real OA, your first question is always: <em>am I in a stubbed editor or a blank one?</em>";
+    c4.appendChild(p4);
+    c4.appendChild(linkList([
+      ["Solve Me First", "https://www.hackerrank.com/challenges/solve-me-first/problem", "The stubbed kind. Expand the header and read what it does for you."],
+      ["Simple Array Sum", "https://www.hackerrank.com/challenges/simple-array-sum/problem", "Statement describes a count line and an array line — but the stub eats both, not you."],
+      ["Interview Preparation Kit", "https://www.hackerrank.com/interview/interview-preparation-kit", "Stubbed throughout. This is the mode Amazon, Salesforce and Adobe use."]
+    ]));
+    s.appendChild(c4);
+
+    var c5 = el("div", "card");
+    c5.appendChild(el("h3", null, "Reference, for when something goes wrong"));
+    c5.appendChild(linkList([
+      ["Codeforces — Python input template", "https://codeforces.com/blog/entry/71884", "A copy-paste template with four helper functions. Three minutes to read."],
+      ["Codeforces — fast input with os.read", "https://codeforces.com/blog/entry/83441", "The heavy-input trick, with real timed-out-then-accepted submissions so you can see it mattering."],
+      ["USACO Guide — fast I/O", "https://usaco.guide/general/fast-io", "Benchmarks the difference: 18.9 seconds down to 2.9, from one changed line."],
+      ["HackerRank — Reading Raw Input tutorial", "https://www.hackerrank.com/challenges/python-raw-input/tutorial", "Teaches raw_input() against input() side by side — literally the Python 2 versus Python 3 confusion from your Infosys attempt."],
+      ["Codeforces — recursion depth and the threading trick", "https://codeforces.com/blog/entry/80158", "The working stack-size workaround, plus a decorator alternative."],
+      ["Python docs — sys.setrecursionlimit", "https://docs.python.org/3/library/sys.html#sys.setrecursionlimit", "The primary source, worth reading once."],
+      ["Python docs — threading.stack_size", "https://docs.python.org/3/library/threading.html#threading.stack_size", "Pairs with the above for genuinely deep recursion."]
+    ]));
+    s.appendChild(c5);
+    return s;
+  }
+
+  function footerNode() {
+    var f = document.createElement("footer");
+    f.textContent = "Marks are stored on this device and synced to this page when it can reach the server. Companion to the 20-week plan — this covers the seven lines before the algorithm; that covers the algorithm.";
+    var cr = document.createElement("div");
+    cr.className = "companion-row";
+    cr.style.marginTop = "9px";
+    cr.innerHTML = 'Companion tools: <a href="./10%20-%20Mock%20OA%20%28timed%20exam%29.html" target="_blank" rel="noopener noreferrer">Mock OA</a> · <a href="./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html" target="_blank" rel="noopener noreferrer">Decoder</a> · <a href="./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html" target="_blank" rel="noopener noreferrer">Pattern Radar</a> &middot; <a href="./1%20-%20Twenty%20Weeks%20to%20AC%20%28tracker%29.html" target="_blank" rel="noopener noreferrer">the plan</a> &middot; <a href="./5%20-%20SQL%20Lab%20%28practice%29.html" target="_blank" rel="noopener noreferrer">SQL Lab</a> &middot; <a href="./6%20-%20CS%20Core%20Drill%20%28OS%20DBMS%20CN%20OOP%20C%29.html" target="_blank" rel="noopener noreferrer">CS Core Drill</a> &middot; <a href="./7%20-%20Aptitude%20Sprint%20%28formulas%20%2B%20practice%29.html" target="_blank" rel="noopener noreferrer">Aptitude Sprint</a> &middot; <a href="./2%20-%20Stdin%20Trainer%20%28drill%29.html" target="_blank" rel="noopener noreferrer">Stdin Trainer</a>';
+    f.appendChild(cr);
+    return f;
+  }
+
+  function render() {
+    var y = window.scrollY;
+    app.textContent = "";
+    app.appendChild(header());
+    app.appendChild(theOneTemplate());
+    app.appendChild(mentalModel());
+    app.appendChild(theMethod());
+    app.appendChild(walkthroughs());
+    app.appendChild(shapesSection());
+    app.appendChild(outputSection());
+    app.appendChild(hazardsSection());
+    app.appendChild(debugSection());
+    app.appendChild(practiceSection());
+    app.appendChild(oopsSection());
+    app.appendChild(footerNode());
+    window.scrollTo(0, y);
+  }
+
+  render();
+  if (window.claude && window.claude.use) {
+    window.claude.use("artifact").then(function (a) { if (a) api = a; }).catch(function () {});
+  }
+})();
+</script>
+
+</body></html>

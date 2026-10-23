@@ -1,0 +1,873 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>CS Core Drill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#070B11; --bg2:#0C121B; --panel:#121A26; --panel2:#182231; --edge:#1E2A3A; --edge2:#2A3A4E;
+    --txt:#E8EEF6; --dim:#8397AE; --dim2:#5B6E85;
+    --cy:#3FD9EC; --cy-dim:#12333D;
+    --ok:#4BE08B; --ok-dim:#0E2C1D;
+    --no:#FF7A6B; --no-dim:#331612;
+    --am:#FFC44D; --am-dim:#332714;
+    --vi:#B98CF0; --vi-dim:#241A38;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    --sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  button{font-family:inherit;color:inherit}
+  :focus-visible{outline:2px solid var(--cy);outline-offset:2px;border-radius:4px}
+  .wrap{max-width:880px;margin:0 auto;padding:20px 16px 90px;display:flex;flex-direction:column;gap:14px}
+
+  .bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:11px 14px;background:var(--panel);border:1px solid var(--edge);border-radius:10px}
+  .logo{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--cy)}
+  .bar .sp{flex:1 1 auto}
+  .stat{display:flex;align-items:baseline;gap:5px;font-family:var(--mono)}
+  .stat b{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
+  .stat span{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2)}
+  .stat.ok b{color:var(--ok)} .stat.warn b{color:var(--am)}
+  .clock{font-family:var(--mono);font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--cy)}
+  .clock.low{color:var(--no)}
+
+  .btn{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+       background:var(--panel2);border:1px solid var(--edge2);border-radius:7px;padding:9px 14px;cursor:pointer;
+       transition:transform .08s ease,background .15s ease,border-color .15s ease}
+  .btn:hover:not(:disabled){background:var(--edge);border-color:var(--cy)}
+  .btn:active{transform:translateY(1px)}
+  .btn.primary{background:var(--cy);border-color:var(--cy);color:#04222A}
+  .btn.primary:hover:not(:disabled){background:#5FE6F5}
+  .btn.exam{background:var(--vi);border-color:var(--vi);color:#170D26}
+  .btn.exam:hover:not(:disabled){background:#C9A3F5}
+  .btn.ghost{background:transparent}
+  .btn:disabled{opacity:.35;cursor:default}
+
+  .hero{padding:24px 20px;background:linear-gradient(160deg,var(--panel) 0%,var(--bg2) 100%);border:1px solid var(--edge);border-radius:14px;display:flex;flex-direction:column;gap:13px}
+  .hero h1{margin:0;font-family:var(--mono);font-weight:700;font-size:clamp(24px,4.8vw,35px);letter-spacing:-.02em;line-height:1.06}
+  .hero h1 em{font-style:normal;color:var(--cy)}
+  .hero p{margin:0;color:var(--dim);max-width:64ch;font-size:14.5px}
+  .cta{display:flex;gap:9px;flex-wrap:wrap;margin-top:2px}
+
+  .topics{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:10px}
+  .tcard{text-align:left;background:var(--panel);border:1px solid var(--edge);border-radius:11px;padding:14px;cursor:pointer;
+         display:flex;flex-direction:column;gap:9px;transition:border-color .15s ease,background .15s ease}
+  .tcard:hover{border-color:var(--cy);background:var(--panel2)}
+  .tcard .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--cy)}
+  .tcard h3{margin:0;font-size:16px}
+  .tcard .d{font-size:12.5px;color:var(--dim2);line-height:1.45}
+  .tcard .m{display:flex;align-items:center;gap:9px;margin-top:auto;font-family:var(--mono);font-size:11px;color:var(--dim2)}
+  .barline{flex:1 1 auto;height:4px;background:var(--edge2);border-radius:2px;overflow:hidden}
+  .barline i{display:block;height:100%;background:var(--ok);transition:width .3s ease}
+
+  .crumb{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);flex-wrap:wrap}
+  .crumb .now{color:var(--cy)}
+  .crumb .sp{flex:1 1 auto}
+  .prog{flex:1 1 90px;height:3px;background:var(--edge);border-radius:2px;overflow:hidden;min-width:70px}
+  .prog i{display:block;height:100%;background:var(--cy);transition:width .3s ease}
+
+  .qbox{background:var(--panel);border:1px solid var(--edge);border-radius:11px;padding:16px;display:flex;flex-direction:column;gap:12px}
+  .tag{align-self:flex-start;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+       border:1px solid var(--edge2);border-radius:5px;padding:2px 7px;color:var(--dim2)}
+  .q{font-size:16px;font-weight:500;line-height:1.5}
+  .q code,.opt code{font-family:var(--mono);font-size:13px;background:rgba(0,0,0,.4);padding:1px 5px;border-radius:4px}
+  pre{margin:0;background:var(--bg);border:1px solid var(--edge2);border-radius:9px;padding:12px 14px;
+      font-family:var(--mono);font-size:13px;line-height:1.6;overflow-x:auto;white-space:pre}
+  .assume{font-family:var(--mono);font-size:11px;color:var(--dim2)}
+
+  .opts{display:flex;flex-direction:column;gap:7px}
+  .opt{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:baseline;text-align:left;
+       background:var(--bg2);border:1px solid var(--edge);border-radius:8px;padding:11px 12px;cursor:pointer;
+       font-size:14px;transition:border-color .12s ease,background .12s ease}
+  .opt:hover:not(:disabled){border-color:var(--cy);background:var(--panel2)}
+  .opt .k{font-family:var(--mono);font-size:10px;color:var(--dim2);border:1px solid var(--edge2);border-radius:4px;text-align:center;padding:1px 0}
+  .opt.right{border-color:var(--ok);background:var(--ok-dim)}
+  .opt.right .k{color:var(--ok);border-color:var(--ok)}
+  .opt.wrong{border-color:var(--no);background:var(--no-dim);animation:shk .3s}
+  .opt.wrong .k{color:var(--no);border-color:var(--no)}
+  .opt.picked{border-color:var(--vi)}
+  .opt:disabled{cursor:default}
+  @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  .fb{border-radius:9px;padding:12px 13px;font-size:14px;line-height:1.55;border:1px solid;display:flex;flex-direction:column;gap:7px}
+  .fb.good{background:var(--ok-dim);border-color:var(--ok)}
+  .fb.bad{background:var(--no-dim);border-color:var(--no)}
+  .fb b{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+  .fb.good b{color:var(--ok)} .fb.bad b{color:var(--no)}
+  .fb .why{color:var(--am)}
+  .fbrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:3px}
+  .kbd{font-family:var(--mono);font-size:10px;color:var(--dim2);border:1px solid var(--edge2);border-radius:4px;padding:1px 5px}
+
+  .score{text-align:center;padding:28px 20px;background:linear-gradient(160deg,var(--panel) 0%,var(--bg2) 100%);
+         border:1px solid var(--edge);border-radius:14px;display:flex;flex-direction:column;gap:11px;align-items:center}
+  .score .big{font-family:var(--mono);font-size:46px;font-weight:700;line-height:1}
+  .score .big.pass{color:var(--ok)} .score .big.fail{color:var(--no)}
+  .score h2{margin:0;font-size:19px}
+  .score p{margin:0;color:var(--dim);max-width:56ch;font-size:14px}
+  .breakdown{width:100%;display:flex;flex-direction:column;gap:6px;margin-top:4px}
+  .brow{display:grid;grid-template-columns:110px 1fr 54px;gap:10px;align-items:center;font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+  .review{width:100%;text-align:left;display:flex;flex-direction:column;gap:8px;margin-top:6px}
+  .ritem{background:var(--bg);border:1px solid var(--edge);border-left:3px solid var(--no);border-radius:8px;padding:11px 12px;font-size:13.5px}
+  .ritem .rq{margin-bottom:5px}
+  .ritem .ra{font-family:var(--mono);font-size:12px;color:var(--ok)}
+  .ritem .rp{font-family:var(--mono);font-size:12px;color:var(--no)}
+  .ritem .re{color:var(--dim);font-size:12.5px;margin-top:5px}
+
+  .foot{color:var(--dim2);font-size:12.5px;font-family:var(--mono);text-align:center;padding-top:4px}
+  .foot a{color:var(--dim)}
+
+  @media(max-width:620px){
+    .wrap{padding:14px 11px 80px;gap:12px}
+    .hero{padding:19px 15px}
+    .opt{padding:13px 11px}
+    .brow{grid-template-columns:82px 1fr 48px}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script type="application/json" id="bank">
+{
+"topics":[
+ {"k":"os","name":"Operating Systems","d":"Processes and threads, scheduling, deadlock, memory and paging, synchronisation."},
+ {"k":"dbms","name":"DBMS theory","d":"Keys, normal forms, ACID, isolation levels, indexing. The part that faded since 4th sem."},
+ {"k":"cn","name":"Computer Networks","d":"OSI and TCP/IP, TCP vs UDP, HTTP, addressing, DNS and ARP, ports."},
+ {"k":"oop","name":"OOP concepts","d":"The four pillars, overloading vs overriding, virtual dispatch, abstract vs interface — in C++/Java terms."},
+ {"k":"c","name":"C / C++ output","d":"Predict what prints. Only well-defined behaviour, with assumptions stated. Your biggest blind spot as a Python-only solver — paste any snippet into an online compiler to check it yourself."}
+],
+"q":[
+{"t":"os","q":"Two threads belong to the same process. Which of these is NOT shared between them?","o":["The stack","The heap","Open file descriptors","The code segment"],"a":0,
+ "e":"Each thread gets its own stack (and its own registers and program counter), because each one needs an independent call chain. Everything else — heap, code, global data, open files — is shared, which is exactly why threads need synchronisation and processes do not.",
+ "w":{"1":"The heap is shared. That is the whole point of threads: one address space.","2":"File descriptors are per-process, so all threads see the same open files.","3":"The code segment is shared — they are running the same program."}},
+
+{"t":"os","q":"Which CPU scheduling algorithm is most prone to starving long jobs?","o":["Shortest Job First","First Come First Served","Round Robin","Multilevel queue with aging"],"a":0,
+ "e":"SJF always picks the shortest available job, so a long job can be pushed back indefinitely while short jobs keep arriving. SJF gives the best average waiting time and the worst fairness — that trade-off is the standard exam point.",
+ "w":{"1":"FCFS is unfair to short jobs (convoy effect) but it never starves anything — the queue always drains in order.","2":"Round Robin gives every process a slice, so nothing starves.","3":"Aging exists precisely to prevent starvation by raising the priority of waiting jobs."}},
+
+{"t":"os","q":"Which of these is NOT one of the four Coffman conditions required for deadlock?","o":["Priority inversion","Mutual exclusion","Hold and wait","Circular wait"],"a":0,
+ "e":"The four conditions are mutual exclusion, hold and wait, no preemption, and circular wait. All four must hold simultaneously — break any one and deadlock becomes impossible. Priority inversion is a different problem: a high-priority task blocked by a low-priority one holding a lock.",
+ "w":{"1":"Mutual exclusion is condition one — the resource cannot be shared.","2":"Hold and wait is condition two — a process holds one resource while requesting another.","3":"Circular wait is condition four — a cycle in the wait-for graph."}},
+
+{"t":"os","q":"The Banker's algorithm is used for deadlock —","o":["avoidance","prevention","detection","recovery"],"a":0,
+ "e":"Avoidance. It is handed the maximum resources each process may ever claim, and before granting any request it checks whether the resulting state is still 'safe' — meaning some ordering exists in which everyone can finish. Prevention breaks one of the four conditions structurally; avoidance allows the conditions but steers around unsafe states at runtime.",
+ "w":{"1":"Prevention removes a Coffman condition by design. Banker's does not — it permits them and just refuses risky grants.","2":"Detection lets deadlock happen and then finds the cycle afterwards.","3":"Recovery is what you do after detection: kill a process or preempt a resource."}},
+
+{"t":"os","q":"A system spends most of its time swapping pages in and out rather than executing. This is called —","o":["thrashing","fragmentation","a page fault","context switching"],"a":0,
+ "e":"Thrashing. It happens when the combined working sets of the running processes exceed available physical frames, so every process constantly evicts a page another one immediately needs. The fix is to reduce the degree of multiprogramming (suspend processes) or add memory — not to speed up the disk.",
+ "w":{"1":"Fragmentation is wasted space, not wasted time.","2":"A single page fault is normal and cheap. Thrashing is the pathological rate of them.","3":"Context switching is the cost of changing process; thrashing causes a lot of it but is not the same thing."}},
+
+{"t":"os","q":"Which page replacement algorithm can suffer Belady's anomaly, where adding more frames increases the number of page faults?","o":["FIFO","LRU","Optimal (OPT)","Both LRU and OPT"],"a":0,
+ "e":"FIFO. Belady's anomaly is possible because FIFO ignores usage — it can evict a page that is about to be needed simply because it arrived first, and a larger frame count can change the eviction order for the worse. LRU and OPT are 'stack algorithms': the set of pages held with n frames is always a subset of the set held with n+1, so more frames can never hurt.",
+ "w":{"1":"LRU is a stack algorithm and is immune.","2":"OPT is provably optimal, so more frames can never make it worse.","3":"Neither is vulnerable — both are stack algorithms."}},
+
+{"t":"os","q":"A mutex differs from a binary semaphore mainly because —","o":["a mutex has ownership: only the thread that locked it may unlock it","a mutex can count above one","a semaphore cannot be used between threads","a mutex never blocks"],"a":0,
+ "e":"Ownership. A mutex is held by a specific thread and only that thread can release it, which makes priority inheritance and recursive locking possible. A binary semaphore is just a signal with values 0 and 1 — any thread can post it, so it suits producer/consumer signalling rather than protecting a critical section.",
+ "w":{"1":"That is a counting semaphore. A binary semaphore is capped at one, like a mutex.","2":"Semaphores work fine between threads and between processes.","3":"A mutex blocks whenever the lock is already held — that is its job."}},
+
+{"t":"os","q":"A child process has terminated but its parent has not yet called wait(). The child is now a —","o":["zombie process","orphan process","daemon process","suspended process"],"a":0,
+ "e":"Zombie. The child is dead but its entry stays in the process table so the parent can still read its exit status. Once the parent reaps it with wait(), the entry disappears. A parent that never reaps leaks process-table entries — a real bug, not just trivia.",
+ "w":{"1":"An orphan is the opposite: the parent died first, and init/systemd adopts the child.","2":"A daemon is a long-running background process, entirely alive.","3":"Suspended means stopped but still runnable later."}},
+
+{"t":"os","q":"Paging causes which kind of fragmentation?","o":["Internal","External","Both equally","Neither"],"a":0,
+ "e":"Internal. Pages are a fixed size, so the last page of an allocation is usually partly wasted — that waste sits inside an allocated block. Segmentation gives variable-sized blocks instead, which leaves unusable gaps between allocations: external fragmentation. Fixed size means internal; variable size means external.",
+ "w":{"1":"External fragmentation is the segmentation problem. Paging eliminates it because any free frame fits any page.","2":"Paging essentially eliminates external fragmentation.","3":"There is always some internal waste unless every allocation is an exact multiple of the page size."}},
+
+{"t":"os","q":"The TLB is a cache for —","o":["page table entries","recently used disk blocks","instructions about to execute","the process control block"],"a":0,
+ "e":"Page table entries — that is, virtual-to-physical address translations. Without it, every memory access would need an extra memory read just to consult the page table, roughly doubling the cost. A TLB hit makes translation nearly free; a miss walks the page table.",
+ "w":{"1":"That is the buffer cache or page cache, kept in RAM by the OS.","2":"That is the instruction cache, part of the CPU cache hierarchy.","3":"The PCB lives in kernel memory and is not what the TLB caches."}},
+
+{"t":"os","q":"Which of these is a preemptive scheduling algorithm?","o":["Round Robin","First Come First Served","Non-preemptive SJF","Priority scheduling without a timer"],"a":0,
+ "e":"Round Robin. Each process gets a fixed time quantum and is forcibly descheduled when it expires, whether or not it is finished. Preemption is what makes a system responsive and is what an interactive OS needs.",
+ "w":{"1":"FCFS runs each process to completion or until it blocks — no forced switch.","2":"The name says it: non-preemptive.","3":"Without a timer interrupt there is no mechanism to take the CPU away."}},
+
+{"t":"os","q":"Virtual memory allows a program to —","o":["use more memory than the machine physically has","run faster than it would in RAM","avoid all page faults","share the CPU with other processes"],"a":0,
+ "e":"Use an address space larger than physical RAM, by keeping only the active pages resident and the rest on disk. It also gives each process an isolated address space, which is arguably the more important benefit — one process cannot read another's memory.",
+ "w":{"1":"Virtual memory is slower than pure RAM, not faster. It buys capacity and isolation, not speed.","2":"It causes page faults; that is the mechanism by which it works.","3":"CPU sharing is scheduling, a separate concern."}},
+
+{"t":"os","q":"A race condition occurs when —","o":["the result depends on the unpredictable timing of concurrent accesses to shared data","two processes deadlock waiting for each other","a process is starved of CPU time","memory is exhausted"],"a":0,
+ "e":"Timing-dependent behaviour over shared mutable state. The classic case is two threads doing count = count + 1 concurrently: the read-modify-write is not atomic, so one update can be lost. The fix is mutual exclusion around the critical section, or an atomic operation.",
+ "w":{"1":"That is deadlock — both are concurrency bugs but distinct ones.","2":"That is starvation.","3":"Unrelated to concurrency."}},
+
+{"t":"os","q":"During a context switch, the operating system must save —","o":["the CPU registers and program counter of the outgoing process","the entire heap of the outgoing process","all open files to disk","the contents of the TLB to disk"],"a":0,
+ "e":"The CPU state — registers, program counter, stack pointer — into the process's PCB, so execution can resume exactly where it left off. Memory itself does not move; only the small register set is saved. The TLB is typically flushed or tagged, not written to disk.",
+ "w":{"1":"The heap stays in memory. Copying it would make switching absurdly expensive.","2":"Files are not flushed on every switch.","3":"The TLB is a cache — it is discarded or tagged by address space, never persisted."}},
+
+{"t":"os","q":"Which is true of a system call?","o":["It switches the CPU from user mode to kernel mode","It is just a normal function call into a library","It always creates a new process","It runs entirely in user mode"],"a":0,
+ "e":"A system call is the controlled doorway from user mode into kernel mode, via a trap instruction. The mode switch is what makes it far more expensive than an ordinary function call, and why reducing syscalls (buffering I/O, for instance) speeds programs up.",
+ "w":{"1":"A library function may wrap a syscall, but the syscall itself crosses the privilege boundary.","2":"Only fork/clone create processes; most syscalls do not.","3":"If it ran in user mode it could not do anything privileged."}},
+
+{"t":"dbms","q":"Which statement about a PRIMARY KEY is correct?","o":["It cannot contain NULL, and a table has at most one","It may contain one NULL value","A table can have several primary keys","It must always be a single column"],"a":0,
+ "e":"A primary key is NOT NULL and unique, and there is exactly one per table (though it may span several columns as a composite key). A UNIQUE constraint is the looser cousin: also unique, but most databases permit a NULL in it, and you can have many per table.",
+ "w":{"1":"That describes a UNIQUE constraint. A primary key rejects NULL outright.","2":"Only one primary key per table. Several candidate keys may exist, but one is chosen.","3":"Composite primary keys over two or more columns are perfectly normal."}},
+
+{"t":"dbms","q":"A table is in 1NF when —","o":["every column holds a single atomic value, with no repeating groups","it has no partial dependencies","it has no transitive dependencies","every determinant is a candidate key"],"a":0,
+ "e":"1NF is about atomicity: one value per cell, no lists stuffed into a column, no repeating column groups like phone1, phone2, phone3. It is the entry requirement before the other normal forms even apply.",
+ "w":{"1":"No partial dependency is 2NF.","2":"No transitive dependency is 3NF.","3":"That is BCNF."}},
+
+{"t":"dbms","q":"A relation is in 2NF but NOT in 3NF. What must be true?","o":["A non-key attribute depends on another non-key attribute","A non-key attribute depends on part of a composite key","A column contains a repeating group","Every determinant is a candidate key"],"a":0,
+ "e":"3NF forbids transitive dependency — a non-key attribute determining another non-key attribute. The textbook example: (emp_id → dept_id) and (dept_id → dept_name), so dept_name depends on emp_id only indirectly. Fix it by splitting the department into its own table.",
+ "w":{"1":"That is a partial dependency, which 2NF already forbids. If it were present the relation would not be in 2NF.","2":"A repeating group breaks 1NF.","3":"That is the definition of BCNF, which is stricter than 3NF."}},
+
+{"t":"dbms","q":"In ACID, Durability guarantees that —","o":["once a transaction commits, its changes survive a crash","concurrent transactions do not see each other's uncommitted work","a transaction either completes fully or not at all","constraints are never violated"],"a":0,
+ "e":"Durability is about persistence after commit, normally implemented with a write-ahead log flushed to stable storage before the commit is acknowledged. Learn the four by what they defend against: Atomicity against partial failure, Consistency against invalid state, Isolation against concurrency, Durability against crashes.",
+ "w":{"1":"That is Isolation.","2":"That is Atomicity.","3":"That is Consistency."}},
+
+{"t":"dbms","q":"Transaction A reads a row that transaction B has modified but not yet committed. B then rolls back. What has A suffered?","o":["A dirty read","A non-repeatable read","A phantom read","A lost update"],"a":0,
+ "e":"A dirty read: A consumed data that never officially existed. Only the READ UNCOMMITTED isolation level allows this; READ COMMITTED and above prevent it. Remember the ladder by what each anomaly touches — dirty read is uncommitted data, non-repeatable read is a changed row, phantom is a new row appearing.",
+ "w":{"1":"Non-repeatable read is when A re-reads the same row and finds it changed by a committed transaction.","2":"A phantom read is when a re-run query returns rows that were not there before.","3":"A lost update is two writers overwriting each other."}},
+
+{"t":"dbms","q":"Which isolation level prevents dirty reads and non-repeatable reads, but still allows phantom reads?","o":["Repeatable Read","Read Uncommitted","Read Committed","Serializable"],"a":0,
+ "e":"Repeatable Read. It locks the rows you have read so they cannot change under you, but does not lock the range, so newly inserted rows matching your predicate can still appear. Serializable closes that gap too, at the cost of concurrency.",
+ "w":{"1":"Read Uncommitted allows all three anomalies.","2":"Read Committed prevents dirty reads only; a re-read can still change.","3":"Serializable prevents phantoms as well — that is exactly what separates it from Repeatable Read."}},
+
+{"t":"dbms","q":"Adding an index to a column speeds up reads. What is the cost?","o":["Writes get slower and storage grows","Reads on other columns get slower","The table can no longer be joined","Transactions lose ACID guarantees"],"a":0,
+ "e":"Every INSERT, UPDATE and DELETE must now maintain the index structure as well as the row, and the index itself occupies disk. That is the whole trade-off, and it is why write-heavy tables are indexed sparingly and read-heavy ones generously.",
+ "w":{"1":"Other columns are unaffected — they simply do not benefit.","2":"Indexes have no effect on join legality; they usually make joins faster.","3":"Indexes are orthogonal to ACID."}},
+
+{"t":"dbms","q":"Which is true of a CLUSTERED index?","o":["It determines the physical order of rows, so a table can have only one","A table may have many clustered indexes","It stores no data, only pointers","It cannot be the primary key"],"a":0,
+ "e":"A clustered index defines the on-disk ordering of the rows themselves, so there can be only one — you cannot sort the same data two ways at once. Non-clustered indexes are separate structures pointing back at the rows, and you can have many. In most databases the primary key becomes the clustered index by default.",
+ "w":{"1":"Only one, by definition — the rows have a single physical order.","2":"That describes a non-clustered index. A clustered index IS the table, stored in key order.","3":"The primary key is usually exactly what gets clustered."}},
+
+{"t":"dbms","q":"Which is true of TRUNCATE compared with DELETE?","o":["TRUNCATE cannot use a WHERE clause and is far faster on a full-table wipe","TRUNCATE can delete selected rows","DELETE resets identity/auto-increment counters","TRUNCATE fires row-level triggers"],"a":0,
+ "e":"TRUNCATE is DDL: it deallocates whole data pages instead of logging each row, so it is much faster but all-or-nothing, resets identity counters, and fires no row triggers. DELETE is DML: row by row, logged, WHERE-able, trigger-firing, and rollback-friendly everywhere.",
+ "w":{"1":"No WHERE clause exists for TRUNCATE — it is the whole table or nothing.","2":"DELETE leaves the auto-increment counter alone; TRUNCATE resets it.","3":"TRUNCATE bypasses row-level triggers, which is a classic gotcha."}},
+
+{"t":"dbms","q":"A FOREIGN KEY primarily enforces —","o":["referential integrity between two tables","uniqueness of a column","that a column is never NULL","faster joins"],"a":0,
+ "e":"Referential integrity: a value in the child column must exist in the referenced parent column, so you cannot orphan a row. It also lets you declare what happens on delete or update — CASCADE, SET NULL, RESTRICT.",
+ "w":{"1":"That is UNIQUE. A foreign key column can repeat freely — many employees in one department.","2":"That is NOT NULL. Foreign keys are often nullable, which is how 'no department yet' is represented.","3":"Databases often index foreign keys, but integrity is the purpose, not speed."}},
+
+{"t":"dbms","q":"A super key that has no redundant attributes — you cannot remove any column and still identify rows uniquely — is called a —","o":["candidate key","primary key","foreign key","composite key"],"a":0,
+ "e":"A candidate key is a minimal super key. Every table may have several candidate keys; the designer promotes one to primary key and the rest usually get UNIQUE constraints. Any super key contains at least one candidate key inside it.",
+ "w":{"1":"The primary key is the candidate key you chose. Minimality is what makes it a candidate in the first place.","2":"A foreign key references another table and identifies nothing locally.","3":"Composite just means spanning several columns; it says nothing about minimality."}},
+
+{"t":"dbms","q":"Why would a team deliberately denormalise a schema?","o":["To speed up reads by avoiding joins, accepting redundancy and update risk","To save disk space","To reach a higher normal form","To enforce more constraints"],"a":0,
+ "e":"Denormalisation trades write-time correctness risk for read-time speed: duplicate a column so a hot query stops joining. The cost is that the duplicate can drift out of sync, so every writer must now maintain both copies. It is a considered optimisation, not sloppiness.",
+ "w":{"1":"It uses more space, not less — that is the point of the trade.","2":"It moves you to a lower normal form, deliberately.","3":"It generally makes constraints harder to enforce, not easier."}},
+
+{"t":"dbms","q":"A NATURAL JOIN differs from an INNER JOIN ... ON because it —","o":["joins automatically on all columns sharing a name in both tables","always returns every row from the left table","never eliminates duplicates","requires a foreign key to exist"],"a":0,
+ "e":"NATURAL JOIN infers the join condition from matching column names, which is convenient and dangerous: add an unrelated column called created_at to both tables and your join condition silently changes. Explicit ON is preferred in production for exactly that reason.",
+ "w":{"1":"That is a LEFT JOIN.","2":"It removes the duplicated join column from the output, in fact.","3":"No declared foreign key is needed — only matching names."}},
+
+{"t":"dbms","q":"COUNT(*) and COUNT(column) differ because —","o":["COUNT(column) skips NULLs in that column, COUNT(*) counts all rows","COUNT(*) is slower on every database","COUNT(column) counts distinct values","they are identical"],"a":0,
+ "e":"Every aggregate except COUNT(*) ignores NULL. So COUNT(*) is the row count, while COUNT(dept_id) is the count of rows where dept_id is not null. This bites when you expect the two to agree and a nullable column silently reduces the total.",
+ "w":{"1":"Performance depends on the engine and indexes; COUNT(*) is often the faster one.","2":"That is COUNT(DISTINCT column).","3":"They differ whenever the column contains a NULL."}},
+
+{"t":"cn","q":"TCP operates at which OSI layer?","o":["Transport (layer 4)","Network (layer 3)","Session (layer 5)","Data link (layer 2)"],"a":0,
+ "e":"Transport, layer 4 — it provides end-to-end delivery between processes, identified by port numbers. IP is layer 3 (host-to-host routing), Ethernet is layer 2 (link-local frames), HTTP is layer 7.",
+ "w":{"1":"IP and ICMP live at layer 3.","2":"The session layer is rarely implemented distinctly in the TCP/IP stack.","3":"Layer 2 is Ethernet, MAC addresses and switches."}},
+
+{"t":"cn","q":"Which is true of UDP but NOT of TCP?","o":["It does not guarantee delivery or ordering","It uses port numbers","It has a checksum","It is a transport layer protocol"],"a":0,
+ "e":"UDP is fire-and-forget: no handshake, no acknowledgements, no retransmission, no ordering, no congestion control. That is what makes it right for DNS lookups, live video and gaming, where a late packet is worse than a lost one.",
+ "w":{"1":"Both use 16-bit port numbers.","2":"Both carry a checksum, though UDP's is optional over IPv4.","3":"Both are layer 4."}},
+
+{"t":"cn","q":"The TCP three-way handshake is —","o":["SYN, SYN-ACK, ACK","SYN, ACK, FIN","ACK, SYN, ACK","SYN, ACK, SYN-ACK"],"a":0,
+ "e":"Client sends SYN with its initial sequence number, server replies SYN-ACK acknowledging it and supplying its own, client sends ACK. Three messages are the minimum to synchronise sequence numbers in both directions. Teardown is separate and uses FIN, usually taking four messages.",
+ "w":{"1":"FIN belongs to connection teardown, not setup.","2":"The client must initiate with SYN; an unsolicited ACK gets a RST.","3":"SYN-ACK is a single segment with both flags set, and it comes second."}},
+
+{"t":"cn","q":"A router forwards traffic using information at which layer?","o":["Layer 3, using IP addresses","Layer 2, using MAC addresses","Layer 4, using port numbers","Layer 7, using URLs"],"a":0,
+ "e":"Routers work at layer 3 on IP addresses, moving packets between networks. Switches work at layer 2 on MAC addresses within one network. The distinction — switch inside a network, router between networks — is asked constantly.",
+ "w":{"1":"That is a switch or bridge.","2":"Port-based forwarding is what NAT devices and load balancers do on top of routing.","3":"URL-based routing is a layer 7 reverse proxy."}},
+
+{"t":"cn","q":"An HTTP 301 response means —","o":["moved permanently: use the new URL from now on","the server hit an internal error","the resource does not exist","the request was malformed"],"a":0,
+ "e":"301 is a permanent redirect and browsers cache it, so it is hard to undo. 302 is temporary. Learn the classes: 2xx success, 3xx redirect, 4xx your fault, 5xx server's fault — 404 not found, 401 unauthenticated, 403 forbidden, 500 server error.",
+ "w":{"1":"That is 500.","2":"That is 404.","3":"That is 400."}},
+
+{"t":"cn","q":"DNS primarily uses which transport protocol and port?","o":["UDP port 53","TCP port 53 only","UDP port 80","TCP port 443"],"a":0,
+ "e":"UDP on 53 for ordinary queries, because a lookup is one small request and one small reply — a handshake would double the latency for nothing. DNS falls back to TCP on the same port when the response is too large or for zone transfers.",
+ "w":{"1":"TCP 53 is the fallback for large responses and zone transfers, not the default.","2":"Port 80 is HTTP.","3":"443 is HTTPS."}},
+
+{"t":"cn","q":"ARP resolves —","o":["an IP address to a MAC address","a domain name to an IP address","a MAC address to a port number","a private IP to a public IP"],"a":0,
+ "e":"ARP maps a layer 3 IP address to the layer 2 MAC address needed to actually put a frame on the wire. It only works within one broadcast domain. DNS does name-to-IP, NAT does private-to-public, and reverse ARP does the opposite mapping.",
+ "w":{"1":"That is DNS.","2":"MAC-to-port mapping is the switch's internal CAM table.","3":"That is NAT."}},
+
+{"t":"cn","q":"Which port pairing is correct?","o":["HTTPS 443, SSH 22","HTTP 8080 always, SSH 23","HTTPS 80, SSH 22","HTTP 443, HTTPS 80"],"a":0,
+ "e":"HTTPS is 443 and SSH is 22. The set worth memorising outright: FTP 21, SSH 22, Telnet 23, SMTP 25, DNS 53, HTTP 80, HTTPS 443, MySQL 3306, PostgreSQL 5432.",
+ "w":{"1":"8080 is a common alternative HTTP port but not the standard, and 23 is Telnet.","2":"80 is plain HTTP.","3":"Those are swapped."}},
+
+{"t":"cn","q":"A /24 subnet provides how many usable host addresses?","o":["254","256","255","128"],"a":0,
+ "e":"/24 leaves 8 host bits, so 2^8 = 256 addresses, minus the network address and the broadcast address, leaving 254 assignable. The general form is 2^(32-prefix) - 2. So /25 gives 126, /26 gives 62, /30 gives 2.",
+ "w":{"1":"256 is the total address count before reserving network and broadcast.","2":"255 subtracts only one; both ends are reserved.","3":"128 would be a /25's total, not a /24's usable count."}},
+
+{"t":"cn","q":"Which of these is a private IP range not routable on the public internet?","o":["192.168.0.0/16","8.8.8.0/24","172.32.0.0/16","11.0.0.0/8"],"a":0,
+ "e":"The three RFC 1918 ranges are 10.0.0.0/8, 172.16.0.0/12 and 192.168.0.0/16. Note the middle one carefully: it covers 172.16 through 172.31 only, so 172.32 is public — that off-by-one is a favourite trick question.",
+ "w":{"1":"8.8.8.8 is Google's public DNS.","2":"The private block stops at 172.31.255.255, so 172.32 is public.","3":"The private block is 10.0.0.0/8; 11.x is public."}},
+
+{"t":"cn","q":"TCP flow control is implemented using —","o":["a sliding window advertised by the receiver","a fixed one-packet-at-a-time acknowledgement","the IP header's TTL field","ICMP messages"],"a":0,
+ "e":"The receiver advertises a window size saying how much unacknowledged data it can buffer, and the sender may have that much in flight. Flow control protects the receiver from being overrun; congestion control (slow start, AIMD) protects the network. They are two different mechanisms and get confused constantly.",
+ "w":{"1":"Stop-and-wait is that scheme, and it is far too slow — the window exists to avoid it.","2":"TTL prevents routing loops.","3":"ICMP carries errors and diagnostics, not TCP flow control."}},
+
+{"t":"cn","q":"A MAC address is how many bits?","o":["48","32","64","128"],"a":0,
+ "e":"48 bits, written as six hex pairs like 00:1A:2B:3C:4D:5E. IPv4 is 32 bits, IPv6 is 128. Keeping those three numbers straight covers most addressing questions.",
+ "w":{"1":"32 bits is IPv4.","2":"64 bits is the IPv6 interface identifier portion, not a MAC.","3":"128 bits is a full IPv6 address."}},
+
+{"t":"cn","q":"DHCP is responsible for —","o":["assigning IP configuration to hosts automatically","translating names to addresses","routing between subnets","encrypting traffic"],"a":0,
+ "e":"DHCP leases an IP address, subnet mask, default gateway and DNS servers to a client that has just joined the network. The exchange is DISCOVER, OFFER, REQUEST, ACK — worth remembering as DORA.",
+ "w":{"1":"That is DNS.","2":"That is a router's job.","3":"That is TLS or IPsec."}},
+
+{"t":"cn","q":"Which layer of the OSI model does HTTP belong to?","o":["Application (layer 7)","Presentation (layer 6)","Transport (layer 4)","Session (layer 5)"],"a":0,
+ "e":"Application, layer 7 — along with FTP, SMTP, DNS and SSH. The seven layers bottom-up are Physical, Data link, Network, Transport, Session, Presentation, Application.",
+ "w":{"1":"Layer 6 handles encoding and encryption concerns in the OSI model.","2":"Layer 4 is TCP and UDP.","3":"Layer 5 manages sessions and is largely notional in TCP/IP."}},
+
+{"t":"cn","q":"NAT exists mainly to —","o":["let many private hosts share one public IP address","encrypt outbound traffic","resolve domain names","balance load between servers"],"a":0,
+ "e":"NAT rewrites source addresses and ports so an entire private network can share one public IPv4 address, which is what postponed IPv4 exhaustion. Its side effect is that inbound connections do not work without explicit port forwarding.",
+ "w":{"1":"NAT provides no confidentiality.","2":"That is DNS.","3":"That is a load balancer, though both rewrite addresses."}},
+
+{"t":"oop","q":"Which are the four pillars of OOP?","o":["Encapsulation, inheritance, polymorphism, abstraction","Encapsulation, recursion, polymorphism, abstraction","Inheritance, polymorphism, iteration, encapsulation","Abstraction, composition, inheritance, delegation"],"a":0,
+ "e":"Encapsulation (bundle data with the code that touches it, hide internals), inheritance (derive from a base), polymorphism (one interface, several behaviours) and abstraction (expose what, hide how). Every interviewer asks this, and the useful follow-up is an example of each from your own code.",
+ "w":{"1":"Recursion is a technique, not an OOP pillar.","2":"Iteration is not a pillar.","3":"Composition and delegation are design patterns built on the pillars."}},
+
+{"t":"oop","q":"Method overloading is resolved at compile time; overriding is resolved at run time. Overloading means —","o":["several methods share a name in the same class but differ in parameters","a subclass replaces a base class method","a method calls itself","a method is hidden from subclasses"],"a":0,
+ "e":"Overloading is several same-named methods in one class distinguished by their parameter lists, chosen by the compiler from the static types at the call site. Overriding is a subclass supplying a new body for an inherited method, chosen at run time from the object's actual type. Compile-time vs run-time is the phrase to remember.",
+ "w":{"1":"That is overriding.","2":"That is recursion.","3":"That is shadowing or private access."}},
+
+{"t":"oop","q":"In C++, what happens when a base class method is NOT declared virtual and you call it through a base class pointer to a derived object?","o":["The base class version runs — the call binds statically","The derived version runs anyway","It fails to compile","Behaviour is undefined"],"a":0,
+ "e":"Without virtual, the call is bound at compile time from the pointer's declared type, so you get the base version even though the object is derived. Adding virtual creates a vtable and defers the decision to run time. Java makes methods virtual by default, which is why this trap surprises Java and Python developers.",
+ "w":{"1":"That is what virtual buys you. Without it, no dynamic dispatch happens.","2":"It compiles perfectly — that is what makes the bug hard to spot.","3":"It is fully defined, just not what you wanted."}},
+
+{"t":"oop","q":"Which is true of an abstract class compared with a Java interface?","o":["An abstract class can hold state and implemented methods; a class can extend only one","An abstract class can be instantiated directly","An interface can hold constructors","A class can extend many abstract classes"],"a":0,
+ "e":"An abstract class may carry fields, constructors and concrete methods, and Java allows extending only one. An interface classically declared signatures only (modern Java adds default methods) and a class may implement many. Use an abstract class to share implementation, an interface to declare a capability.",
+ "w":{"1":"Neither an abstract class nor an interface can be instantiated — that is the point of both.","2":"Interfaces have no constructors; they never hold instance state to initialise.","3":"Java permits single class inheritance only, abstract or not."}},
+
+{"t":"oop","q":"In C++, why should a base class destructor be declared virtual?","o":["So deleting a derived object through a base pointer runs the derived destructor","So the class can be inherited from at all","To allow multiple inheritance","To make the class abstract"],"a":0,
+ "e":"Without a virtual destructor, delete on a base pointer calls only the base destructor, and the derived part is never cleaned up — a resource leak, and formally undefined behaviour. The rule: any class with virtual functions needs a virtual destructor. Note constructors can never be virtual, since no object exists yet to dispatch on.",
+ "w":{"1":"Inheritance works regardless; only the destruction path is broken.","2":"Unrelated to multiple inheritance.","3":"A class becomes abstract by having a pure virtual function."}},
+
+{"t":"oop","q":"A private member of a class is accessible from —","o":["only inside that class (plus friends, in C++)","the class and all its subclasses","anywhere in the same file","any class in the same package"],"a":0,
+ "e":"Private is the class itself only. If you want subclasses to see it, that is protected. Java's package-private is the default with no modifier at all. This ladder — private, protected, package/internal, public — is standard MCQ material.",
+ "w":{"1":"Subclass access is what protected grants.","2":"File scope is not an access level in C++ or Java.","3":"That is package-private in Java, written with no modifier."}},
+
+{"t":"oop","q":"Does Python have truly private attributes?","o":["No — a leading double underscore only triggers name mangling, and the attribute stays reachable","Yes, __x is fully inaccessible from outside","Yes, using the private keyword","Yes, but only inside a class decorated with @private"],"a":0,
+ "e":"Python has no access control. A leading double underscore renames __x to _ClassName__x, which prevents accidental collisions in subclasses but is trivially bypassed. Worth knowing precisely because MCQ banks are written in C++/Java terms — you will be asked about private as if it were enforced, and in your own language it is not.",
+ "w":{"1":"You can still reach it as obj._ClassName__x.","2":"Python has no private keyword.","3":"No such decorator exists in the standard library."}},
+
+{"t":"oop","q":"The diamond problem arises from —","o":["multiple inheritance, where a class inherits the same base along two paths","recursion that never terminates","two classes with the same method name","a circular import"],"a":0,
+ "e":"D inherits from B and C, both of which inherit from A — so which A does D get? C++ answers with virtual inheritance to share one A. Java sidesteps it by forbidding multiple class inheritance. Python resolves it with the C3 linearisation, its method resolution order.",
+ "w":{"1":"That is infinite recursion.","2":"Same-named methods in unrelated classes are fine.","3":"A circular import is a module-loading problem."}},
+
+{"t":"oop","q":"A static (class) member —","o":["belongs to the class itself and is shared by every instance","is created fresh for each object","cannot be accessed outside the class","must be initialised in the constructor"],"a":0,
+ "e":"One copy exists per class, not per object, so it is reachable without an instance and shared by all of them. Typical uses are counters, constants and factory methods. A static method also cannot touch instance state, because there is no instance.",
+ "w":{"1":"That is an instance member — the opposite of static.","2":"Access depends on the access modifier, not on being static.","3":"Static members are initialised once, outside any constructor."}},
+
+{"t":"oop","q":"Composition is usually preferred over inheritance because —","o":["it couples classes loosely and can change at run time, while inheritance is fixed and rigid","it is faster to execute","inheritance is deprecated in modern languages","composition avoids writing constructors"],"a":0,
+ "e":"Inheritance is a compile-time 'is-a' that exposes you to every change in the base class; composition is a 'has-a' you can swap at run time and test in isolation. Hence the guideline 'favour composition over inheritance' — the classic misuse being a Stack that extends ArrayList and thereby inherits methods that break its own invariant.",
+ "w":{"1":"Performance is essentially identical and not the reason.","2":"Inheritance is alive and well; it is just narrower in scope than people assume.","3":"Composition needs constructors too."}},
+
+{"t":"oop","q":"Runtime polymorphism in Java is achieved through —","o":["method overriding, dispatched on the object's actual type","method overloading","static methods","constructors"],"a":0,
+ "e":"Overriding. The JVM looks at the object's real class at call time, not the declared type of the reference, so Animal a = new Dog(); a.speak(); runs Dog's version. Overloading is the compile-time counterpart and is resolved from static types.",
+ "w":{"1":"Overloading is resolved by the compiler — compile-time polymorphism.","2":"Static methods are hidden, not overridden, and dispatch on the declared type.","3":"Constructors are not inherited and cannot be overridden."}},
+
+{"t":"oop","q":"Encapsulation is achieved primarily by —","o":["making fields private and exposing controlled accessors","using inheritance hierarchies","overloading methods","declaring everything public for convenience"],"a":0,
+ "e":"Restrict direct access to state and mediate it through methods, so the class can enforce invariants and change its internals without breaking callers. It is not merely 'write getters and setters' — a setter that blindly assigns any value encapsulates nothing.",
+ "w":{"1":"Inheritance is a separate pillar.","2":"Overloading is about call signatures.","3":"Public fields are precisely the absence of encapsulation."}},
+
+{"t":"c","q":"What does this print?","code":"#include <stdio.h>\nint main(void) {\n    int i = 5;\n    int j = i++;\n    printf(\"%d %d\", i, j);\n    return 0;\n}","o":["6 5","5 6","6 6","5 5"],"a":0,
+ "e":"Post-increment yields the OLD value and then increments. So j receives 5 and i becomes 6. Pre-increment (++i) would do the opposite: increment first, then yield 6 to j. Each is in its own statement here, so the behaviour is fully defined.",
+ "w":{"1":"That is what ++i would give: j would be 6 and i would be 6.","2":"j takes the value before the increment, so it cannot be 6.","3":"i is definitely incremented — the ++ still happens."}},
+
+{"t":"c","q":"What does this print?","code":"#include <stdio.h>\nint main(void) {\n    int a[] = {10, 20, 30, 40};\n    int *p = a;\n    printf(\"%d\", *(p + 2));\n    return 0;\n}","o":["30","20","a memory address","12"],"a":0,
+ "e":"Pointer arithmetic scales by the size of the pointed-to type, so p + 2 advances two ints, not two bytes. Dereferencing gives a[2], which is 30. The identity worth internalising: *(p + i) is exactly a[i].",
+ "w":{"1":"That would be *(p + 1).","2":"The * dereferences, so you get the value, not the address.","3":"It does not add 2 bytes — it adds 2 * sizeof(int)."}},
+
+{"t":"c","q":"What does this print on a 64-bit Linux build where sizeof(int) is 4 and sizeof(void*) is 8?","code":"#include <stdio.h>\nvoid f(int arr[]) {\n    printf(\"%zu\", sizeof(arr));\n}\nint main(void) {\n    int a[10];\n    f(a);\n    return 0;\n}","o":["8","40","10","4"],"a":0,
+ "e":"This is the single most-asked C trap. An array parameter decays to a pointer, so inside f the name arr is an int*, and sizeof gives the pointer size: 8. In main, sizeof(a) would give 40. That is why any C function taking an array must also take its length.",
+ "w":{"1":"40 is what sizeof(a) gives in main, where a is still an array type.","2":"sizeof never returns an element count.","3":"4 is sizeof(int), not sizeof(int*)."}},
+
+{"t":"c","q":"What does this print?","code":"#include <stdio.h>\nint main(void) {\n    printf(\"%zu\", sizeof(\"hello\"));\n    return 0;\n}","o":["6","5","4","8"],"a":0,
+ "e":"A string literal is a char array including its terminating '\\0', so \"hello\" occupies 6 bytes. Contrast strlen(\"hello\"), which counts characters up to but excluding the terminator and returns 5. sizeof measures storage; strlen measures content.",
+ "w":{"1":"5 is strlen, not sizeof.","2":"4 would be a pointer size on a 32-bit build, but this is an array, not a pointer.","3":"8 would be a 64-bit pointer — again, this is an array."}},
+
+{"t":"c","q":"What does this print?","code":"#include <stdio.h>\nint main(void) {\n    printf(\"%d\", 'A');\n    return 0;\n}","o":["65","A","0","undefined"],"a":0,
+ "e":"A character constant in C has type int and the value of its character code, so 'A' is 65. Printing it with %d shows the number; %c would show the letter. This is also why 'A' + 2 is 67, which as a char is 'C'.",
+ "w":{"1":"%c would print A. %d asks for the integer.","2":"Only '\\0' has value 0.","3":"Entirely well defined by the character set — 65 in ASCII."}},
+
+{"t":"c","q":"What does this print?","code":"#include <stdio.h>\nvoid tick(void) {\n    static int c = 0;\n    c++;\n    printf(\"%d \", c);\n}\nint main(void) {\n    tick(); tick(); tick();\n    return 0;\n}","o":["1 2 3","1 1 1","3 3 3","0 1 2"],"a":0,
+ "e":"A static local is initialised once, at program start, and keeps its value between calls — it has function scope but static storage duration. Drop the static and c would be a fresh 0 each call, printing 1 1 1.",
+ "w":{"1":"That is what happens WITHOUT static.","2":"Each call prints as it goes, so the values differ.","3":"c is incremented before the first print, so it starts at 1."}},
+
+{"t":"c","q":"What does this print?","code":"#include <stdio.h>\nint main(void) {\n    int a[] = {1, 2, 3};\n    printf(\"%d %d %d\", a[2], *(a + 2), 2[a]);\n    return 0;\n}","o":["3 3 3","3 3 and a compile error","1 2 3","3 2 1"],"a":0,
+ "e":"All three forms are identical. a[i] is defined as *(a + i), and addition commutes, so 2[a] is *(2 + a) — the same element. It is legal, if deliberately ugly, and appears in quizzes precisely to test whether you know subscripting is pointer arithmetic underneath.",
+ "w":{"1":"2[a] compiles fine; it is a documented consequence of how [] is defined.","2":"All three index the same element.","3":"They all give a[2]."}},
+
+{"t":"c","q":"What does this print?","code":"#include <stdio.h>\nint main(void) {\n    int i = 0;\n    if (i++ && i++) { }\n    printf(\"%d\", i);\n    return 0;\n}","o":["1","2","0","undefined"],"a":0,
+ "e":"&& short-circuits. The left operand i++ yields 0, which is false, so the whole expression is known false and the right operand is never evaluated. i is incremented exactly once, giving 1. The sequencing is well defined here because && introduces a sequence point.",
+ "w":{"1":"2 would require both increments to run, but short-circuiting prevents the second.","2":"The first i++ does execute; only the second is skipped.","3":"This one IS defined — && guarantees left-to-right evaluation with a sequence point."}},
+
+{"t":"c","q":"What does this print?","code":"#include <stdio.h>\nint main(void) {\n    printf(\"%d %d\", 7 / 2, -7 / 2);\n    return 0;\n}","o":["3 -3","3 -4","3.5 -3.5","4 -4"],"a":0,
+ "e":"Integer division truncates toward zero in C99 and later, so 7/2 is 3 and -7/2 is -3 (not -4). The remainder follows: -7 % 2 is -1, because the sign of the remainder matches the dividend. Python differs here — it floors instead, giving -4 and 1.",
+ "w":{"1":"-4 is what floor division gives. C truncates toward zero; Python floors.","2":"Both operands are ints, so no floating point is involved.","3":"7/2 truncates down to 3, not up to 4."}},
+
+{"t":"c","q":"What does this print?","code":"#include <stdio.h>\nvoid swap(int *x, int *y) {\n    int t = *x; *x = *y; *y = t;\n}\nint main(void) {\n    int a = 1, b = 2;\n    swap(&a, &b);\n    printf(\"%d %d\", a, b);\n    return 0;\n}","o":["2 1","1 2","garbage values","a compile error"],"a":0,
+ "e":"C is pass-by-value always, so to modify a caller's variable you pass its address and dereference. Here the swap works because pointers were passed. Had the parameters been plain ints, the swap would be invisible to main — the classic demonstration of why pointers exist.",
+ "w":{"1":"1 2 is what you would get passing ints by value.","2":"The pointers are valid — they point at live locals.","3":"It is correct, idiomatic C."}},
+
+{"t":"c","q":"What is the result of this program?","code":"#include <stdio.h>\nint main(void) {\n    int i = 5;\n    i = i++ + ++i;\n    printf(\"%d\", i);\n    return 0;\n}","o":["Undefined behaviour — the standard specifies no result","12","11","13"],"a":0,
+ "e":"i is modified twice between sequence points, so the behaviour is undefined: the compiler may produce any value, warn, or optimise the whole thing away. Different compilers genuinely print different numbers. Any question bank that gives a definite answer here is wrong, and knowing that is more useful than memorising one compiler's output. Real assessments should not ask this — if one does, pick the undefined option if it is offered.",
+ "w":{"1":"A common answer from one compiler, but not guaranteed by the language.","2":"Another plausible compiler output, equally unguaranteed.","3":"Also observed in practice, also not defined."}},
+
+{"t":"c","q":"What does this print?","code":"#include <stdio.h>\n#include <string.h>\nint main(void) {\n    char s[] = \"abc\";\n    printf(\"%zu %zu\", sizeof(s), strlen(s));\n    return 0;\n}","o":["4 3","3 3","4 4","3 4"],"a":0,
+ "e":"char s[] = \"abc\" allocates 4 bytes — three characters plus the terminator — so sizeof is 4 while strlen is 3. Note that if s were declared char *s = \"abc\", sizeof(s) would be the pointer size instead, 8 on a 64-bit build. Array versus pointer changes the answer.",
+ "w":{"1":"sizeof counts the '\\0' as well.","2":"strlen stops at the terminator and does not count it.","3":"These are the wrong way round."}}
+]
+}
+</script>
+
+<script type="application/json" id="state">
+{"rev":0,"seen":{},"wrong":{},"tot":{},"ok":{},"exams":[]}
+</script>
+
+<script id="code">
+(function () {
+  "use strict";
+  // Cross-tool links in this page are plain .html filenames, so opening the file straight off disk
+  // just works. Served over http(s) those relative names cannot resolve, so there each one is
+  // swapped for its hosted copy. Local is what the file actually contains; online adapts.
+  var HOSTED = {
+    "./1%20-%20Twenty%20Weeks%20to%20AC%20%28tracker%29.html": "https://claude.ai/code/artifact/32b165b3-0cee-4121-9470-b0e8d6d17c16",
+    "./2%20-%20Stdin%20Trainer%20%28drill%29.html": "https://claude.ai/code/artifact/00d12bf6-5548-4e56-b449-d0f33193a495",
+    "./3%20-%20Stdin%20Survival%20Kit%20%28manual%29.html": "https://claude.ai/code/artifact/49b64e1a-a87a-4924-b42d-2a7a614ab41a",
+    "./5%20-%20SQL%20Lab%20%28practice%29.html": "https://claude.ai/code/artifact/0f564ee0-0ae9-4f76-b0db-9cbaf04a5664",
+    "./6%20-%20CS%20Core%20Drill%20%28OS%20DBMS%20CN%20OOP%20C%29.html": "https://claude.ai/code/artifact/3a19c5c3-5b45-4744-a980-20f138d77859",
+    "./7%20-%20Aptitude%20Sprint%20%28formulas%20%2B%20practice%29.html": "https://claude.ai/code/artifact/1176c004-05c1-4ebd-bd08-041957dd07f6",
+    "./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html": "https://claude.ai/code/artifact/9c7876de-143f-4f4d-bead-a8204d0f63ad",
+    "./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html": "https://claude.ai/code/artifact/ca3214a6-ec8f-4b10-b757-9c025a98ba47",
+    "./10%20-%20Mock%20OA%20%28timed%20exam%29.html": "https://claude.ai/code/artifact/ea757a13-0226-4bad-9065-96ca4927af42"
+  };
+  function fixToolLinks() {
+    if (location.protocol === "file:") return;
+    Array.prototype.forEach.call(document.querySelectorAll("a[href]"), function (a) {
+      var u = HOSTED[a.getAttribute("href")];
+      if (u) a.setAttribute("href", u);
+    });
+  }
+  if (location.protocol !== "file:") {
+    try {
+      new MutationObserver(function () { fixToolLinks(); })
+        .observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) {}
+    fixToolLinks();
+  }
+
+
+
+  // An artifact places the authored <title>, font <link>s and <style> BELOW <head>, so reading the
+  // head alone would republish this page with no CSS at all. Collect them wherever they sit;
+  // platform styles are skipped by marker, keeping this idempotent across republish generations.
+  function SHELL() {
+    var out = ['<meta charset="utf-8">',
+               '<meta name="viewport" content="width=device-width,initial-scale=1">'];
+    var t = document.querySelector("title");
+    if (t) out.push(t.outerHTML);
+    Array.prototype.forEach.call(document.querySelectorAll("link"), function (n) {
+      var h = n.getAttribute("href") || "";
+      if (h.indexOf("fonts.googleapis") !== -1 || h.indexOf("fonts.gstatic") !== -1) out.push(n.outerHTML);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("style"), function (n) {
+      var s = n.textContent || "";
+      if (s.indexOf("--mono:") !== -1) out.push(n.outerHTML);
+    });
+    return out.join("\n");
+  }
+
+  var BANK = JSON.parse(document.getElementById("bank").textContent);
+  var TOPICS = BANK.topics, Q = BANK.q;
+  Q.forEach(function (q, i) { q._i = i; });
+
+  var EXAM_N = 22, EXAM_MIN = 35;   // mirrors the Walmart shape: 22 MCQ in 35 minutes
+
+  var LS = "cs-core-v1";
+  function migrate(s) {
+    if (!s || typeof s !== "object") s = {};
+    ["seen", "wrong", "tot", "ok"].forEach(function (k) { if (!s[k]) s[k] = {}; });
+    if (!Array.isArray(s.exams)) s.exams = [];
+    if (typeof s.rev !== "number") s.rev = 0;
+    return s;
+  }
+  var embedded = migrate(JSON.parse(document.getElementById("state").textContent));
+  var state = embedded, local = null;
+  try { var raw = localStorage.getItem(LS); if (raw) local = migrate(JSON.parse(raw)); } catch (e) {}
+  if (local && local.rev > embedded.rev) state = local;
+
+  var app = document.getElementById("app");
+  var api = null, saveT = null;
+  var V = { screen: "home", queue: [], at: 0, picked: null, mode: "drill", answers: [], t0: null, left: 0, tid: null };
+
+  function save() {
+    state.rev++;
+    try { localStorage.setItem(LS, JSON.stringify(state)); } catch (e) {}
+    if (!api) return;
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      var o = "<" + "script", c = "<" + "/" + "script>";
+      api.publish('<!doctype html>\n<html lang="en">\n<head>\n' + SHELL() + '\n</head>\n<body>\n' +
+        '<div class="wrap" id="app"></div>\n' +
+        o + ' type="application/json" id="bank">' + JSON.stringify(BANK, function (k, v) { return k === "_i" ? undefined : v; }) + c + '\n' +
+        o + ' type="application/json" id="state">' + JSON.stringify(state) + c + '\n' +
+        o + ' id="code">' + document.getElementById("code").textContent + c + '\n' +
+        '</body>\n</html>').catch(function () {});
+    }, 1800);
+  }
+
+  function el(t, c, x) { var n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; }
+  function topicOf(k) { return TOPICS.filter(function (t) { return t.k === k; })[0]; }
+  function tot(k) { return state.tot[k] || 0; }
+  function okc(k) { return state.ok[k] || 0; }
+  function acc(k) { return tot(k) ? Math.round((okc(k) / tot(k)) * 100) : 0; }
+  function nQ(k) { return Q.filter(function (q) { return q.t === k; }).length; }
+  function seenIn(k) { return Q.filter(function (q) { return q.t === k && state.seen[q._i]; }).length; }
+  function wrongList() { return Q.filter(function (q) { return state.wrong[q._i]; }); }
+
+  function shuffle(a) {
+    var arr = a.slice();
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+    }
+    return arr;
+  }
+  // options are shuffled per presentation, tracking where the correct one landed
+  function present(q) {
+    var idx = q.o.map(function (_, i) { return i; });
+    idx = shuffle(idx);
+    return { order: idx, correctAt: idx.indexOf(q.a) };
+  }
+
+  /* ---------- chrome ---------- */
+  function bar() {
+    var b = el("div", "bar");
+    b.appendChild(el("div", "logo", "cs_core"));
+    b.appendChild(el("div", "sp"));
+    if (V.screen === "quiz" && V.mode === "exam") {
+      var c = el("div", "clock" + (V.left < 300 ? " low" : ""), fmt(V.left));
+      c.id = "clk";
+      b.appendChild(c);
+      b.appendChild(el("div", "stat", ""));
+    }
+    var allT = TOPICS.reduce(function (s, t) { return s + tot(t.k); }, 0);
+    var allO = TOPICS.reduce(function (s, t) { return s + okc(t.k); }, 0);
+    var s1 = el("div", "stat ok");
+    s1.appendChild(el("b", null, allT ? Math.round((allO / allT) * 100) + "%" : "—"));
+    s1.appendChild(el("span", null, "accuracy"));
+    b.appendChild(s1);
+    var wl = wrongList().length;
+    if (wl) {
+      var s2 = el("div", "stat warn");
+      s2.appendChild(el("b", null, String(wl)));
+      s2.appendChild(el("span", null, "to redo"));
+      b.appendChild(s2);
+    }
+    if (V.screen !== "home") {
+      var h = el("button", "btn ghost", V.mode === "exam" && V.screen === "quiz" ? "abandon" : "menu");
+      h.type = "button";
+      h.addEventListener("click", function () { stopClock(); V.screen = "home"; V.mode = "drill"; render(); });
+      b.appendChild(h);
+    }
+    return b;
+  }
+  function fmt(s) { if (s < 0) s = 0; return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); }
+
+  /* ---------- home ---------- */
+  function home() {
+    var f = document.createDocumentFragment();
+    var hero = el("div", "hero");
+    var h1 = el("h1");
+    h1.innerHTML = 'The MCQ section is<br>the <em>actual</em> gate.';
+    hero.appendChild(h1);
+    var p = el("p");
+    p.textContent = "Walmart gives you 22 technical MCQs in 35 minutes and only then 40 minutes of coding. Oracle's fresher assessment is often 92 questions with no free coding at all. " + Q.length + " questions here across five topics, every one with an explanation of why the tempting wrong answer is wrong.";
+    hero.appendChild(p);
+    var cta = el("div", "cta");
+    var go = el("button", "btn primary", "drill all topics");
+    go.type = "button";
+    go.addEventListener("click", function () { start(shuffle(Q), "drill"); });
+    cta.appendChild(go);
+    var ex = el("button", "btn exam", EXAM_N + " q / " + EXAM_MIN + " min exam");
+    ex.type = "button";
+    ex.addEventListener("click", function () { start(shuffle(Q).slice(0, EXAM_N), "exam"); });
+    cta.appendChild(ex);
+    var wl = wrongList();
+    if (wl.length) {
+      var rb = el("button", "btn", "redo my " + wl.length + " mistakes");
+      rb.type = "button";
+      rb.addEventListener("click", function () { start(shuffle(wl), "drill"); });
+      cta.appendChild(rb);
+    }
+    hero.appendChild(cta);
+    f.appendChild(hero);
+
+    var grid = el("div", "topics");
+    TOPICS.forEach(function (t) {
+      var card = el("button", "tcard");
+      card.type = "button";
+      card.appendChild(el("div", "k", t.k === "c" ? "C / C++" : t.k));
+      card.appendChild(el("h3", null, t.name));
+      card.appendChild(el("div", "d", t.d));
+      var m = el("div", "m");
+      m.appendChild(el("span", null, seenIn(t.k) + "/" + nQ(t.k)));
+      var bl = el("div", "barline"); var fi = el("i");
+      fi.style.width = Math.round((seenIn(t.k) / nQ(t.k)) * 100) + "%";
+      bl.appendChild(fi); m.appendChild(bl);
+      m.appendChild(el("span", null, tot(t.k) ? acc(t.k) + "%" : "—"));
+      card.appendChild(m);
+      card.addEventListener("click", function () {
+        start(shuffle(Q.filter(function (q) { return q.t === t.k; })), "drill");
+      });
+      grid.appendChild(card);
+    });
+    f.appendChild(grid);
+
+    if (state.exams.length) {
+      var last = state.exams[state.exams.length - 1];
+      var e = el("div", "foot", "last exam: " + last.score + "/" + last.n + " (" + Math.round((last.score / last.n) * 100) + "%) in " + fmt(last.used));
+      f.appendChild(e);
+    }
+    var cc = el("div", "foot");
+    cc.innerHTML = 'Run any C snippet yourself, nothing to install: ' +
+      '<a href="https://www.programiz.com/c-programming/online-compiler/" target="_blank" rel="noopener noreferrer">programiz</a> · ' +
+      '<a href="https://www.onlinegdb.com/online_c_compiler" target="_blank" rel="noopener noreferrer">onlineGDB</a> · ' +
+      '<a href="https://godbolt.org/" target="_blank" rel="noopener noreferrer">godbolt</a> (shows the assembly too)';
+    f.appendChild(cc);
+
+    var ft = el("div", "foot");
+    ft.innerHTML = 'Companion tools: <a href="./10%20-%20Mock%20OA%20%28timed%20exam%29.html" target="_blank" rel="noopener noreferrer">Mock OA</a> · <a href="./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html" target="_blank" rel="noopener noreferrer">Decoder</a> · <a href="./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html" target="_blank" rel="noopener noreferrer">Pattern Radar</a> · <a href="./5%20-%20SQL%20Lab%20%28practice%29.html" target="_blank" rel="noopener noreferrer">SQL Lab</a> · <a href="./2%20-%20Stdin%20Trainer%20%28drill%29.html" target="_blank" rel="noopener noreferrer">Stdin Trainer</a> · <a href="./1%20-%20Twenty%20Weeks%20to%20AC%20%28tracker%29.html" target="_blank" rel="noopener noreferrer">the plan</a>';
+    f.appendChild(ft);
+    return f;
+  }
+
+  function start(queue, mode) {
+    V.queue = queue.map(function (q) { return { q: q, p: present(q) }; });
+    V.at = 0; V.picked = null; V.mode = mode; V.answers = []; V.screen = "quiz";
+    if (mode === "exam") { V.left = EXAM_MIN * 60; startClock(); }
+    render();
+  }
+  function startClock() {
+    stopClock();
+    V.tid = setInterval(function () {
+      V.left--;
+      var n = document.getElementById("clk");
+      if (n) { n.textContent = fmt(V.left); n.className = "clock" + (V.left < 300 ? " low" : ""); }
+      if (V.left <= 0) { stopClock(); finishExam(); }
+    }, 1000);
+  }
+  function stopClock() { if (V.tid) { clearInterval(V.tid); V.tid = null; } }
+
+  /* ---------- quiz ---------- */
+  function quiz() {
+    var f = document.createDocumentFragment();
+    var item = V.queue[V.at], q = item.q, p = item.p;
+
+    var crumb = el("div", "crumb");
+    crumb.appendChild(el("span", "now", (V.at + 1) + " / " + V.queue.length));
+    crumb.appendChild(el("span", null, V.mode === "exam" ? "exam · no feedback until the end" : topicOf(q.t).name));
+    var pr = el("div", "prog"); var pf = el("i");
+    pf.style.width = Math.round((V.at / V.queue.length) * 100) + "%";
+    pr.appendChild(pf); crumb.appendChild(pr);
+    f.appendChild(crumb);
+
+    var qb = el("div", "qbox");
+    qb.appendChild(el("div", "tag", topicOf(q.t).name));
+    qb.appendChild(el("div", "q", q.q));
+    if (q.code) qb.appendChild(el("pre", null, q.code));
+
+    var opts = el("div", "opts");
+    p.order.forEach(function (origIdx, shown) {
+      var b = el("button", "opt");
+      b.type = "button";
+      b.appendChild(el("span", "k", String(shown + 1)));
+      b.appendChild(el("span", null, q.o[origIdx]));
+      if (V.picked != null) {
+        b.disabled = true;
+        if (shown === p.correctAt) b.className = "opt right";
+        else if (shown === V.picked) b.className = "opt wrong";
+      } else if (V.mode === "exam" && V.answers[V.at] === shown) {
+        b.className = "opt picked";
+        b.addEventListener("click", function () { answer(shown); });
+      } else {
+        b.addEventListener("click", function () { answer(shown); });
+      }
+      opts.appendChild(b);
+    });
+    qb.appendChild(opts);
+
+    if (V.mode === "drill" && V.picked != null) {
+      var right = V.picked === p.correctAt;
+      var fb = el("div", "fb " + (right ? "good" : "bad"));
+      fb.appendChild(el("b", null, right ? "correct" : "wrong"));
+      if (!right && q.w) {
+        var pickedOrig = p.order[V.picked];
+        var why = q.w[String(pickedOrig)];
+        if (why) {
+          var wl = el("div", "why");
+          wl.textContent = "You picked: " + why;
+          fb.appendChild(wl);
+        }
+      }
+      fb.appendChild(el("div", null, q.e));
+      var row = el("div", "fbrow");
+      var nx = el("button", "btn primary", V.at + 1 < V.queue.length ? "next" : "finish");
+      nx.type = "button"; nx.id = "nextBtn";
+      nx.addEventListener("click", next);
+      row.appendChild(nx);
+      row.appendChild(el("span", "kbd", "enter"));
+      fb.appendChild(row);
+      qb.appendChild(fb);
+    }
+
+    if (V.mode === "exam") {
+      var row2 = el("div", "fbrow");
+      if (V.at > 0) {
+        var pb = el("button", "btn ghost", "back"); pb.type = "button";
+        pb.addEventListener("click", function () { V.at--; render(); });
+        row2.appendChild(pb);
+      }
+      var sk = el("button", "btn", V.at + 1 < V.queue.length ? "skip / next" : "submit exam");
+      sk.type = "button"; sk.id = "nextBtn";
+      sk.addEventListener("click", function () {
+        if (V.at + 1 < V.queue.length) { V.at++; render(); } else finishExam();
+      });
+      row2.appendChild(sk);
+      row2.appendChild(el("span", "kbd", "1-4 to answer, enter to advance"));
+      qb.appendChild(row2);
+    }
+    f.appendChild(qb);
+    return f;
+  }
+
+  function answer(shown) {
+    var item = V.queue[V.at], q = item.q, p = item.p;
+    if (V.mode === "exam") {
+      V.answers[V.at] = shown;
+      if (V.at + 1 < V.queue.length) { V.at++; V.picked = null; }
+      render();
+      return;
+    }
+    if (V.picked != null) return;
+    V.picked = shown;
+    var right = shown === p.correctAt;
+    state.seen[q._i] = 1;
+    state.tot[q.t] = tot(q.t) + 1;
+    if (right) { state.ok[q.t] = okc(q.t) + 1; delete state.wrong[q._i]; }
+    else state.wrong[q._i] = 1;
+    save(); render();
+  }
+
+  function next() {
+    V.picked = null;
+    if (V.at + 1 < V.queue.length) { V.at++; render(); }
+    else { V.screen = "home"; render(); }
+  }
+
+  function finishExam() {
+    stopClock();
+    var score = 0;
+    V.queue.forEach(function (item, i) {
+      var right = V.answers[i] === item.p.correctAt;
+      state.seen[item.q._i] = 1;
+      state.tot[item.q.t] = tot(item.q.t) + 1;
+      if (right) { score++; state.ok[item.q.t] = okc(item.q.t) + 1; delete state.wrong[item.q._i]; }
+      else state.wrong[item.q._i] = 1;
+    });
+    state.exams.push({ n: V.queue.length, score: score, used: EXAM_MIN * 60 - V.left });
+    V.examScore = score;
+    V.screen = "result";
+    save(); render();
+  }
+
+  function result() {
+    var f = document.createDocumentFragment();
+    var n = V.queue.length, score = V.examScore, pct = Math.round((score / n) * 100);
+    var pass = pct >= 70;
+    var card = el("div", "score");
+    var big = el("div", "big " + (pass ? "pass" : "fail"), score + "/" + n);
+    card.appendChild(big);
+    card.appendChild(el("h2", null, pct + "% · " + (pass ? "above a typical cut-off" : "below a typical cut-off")));
+    card.appendChild(el("p", null, pass
+      ? "Cut-offs vary by company and drive, but around 70% is the usual shortlisting bar on a technical MCQ section. Keep the accuracy while cutting the time."
+      : "Most technical MCQ sections shortlist somewhere near 70%. Work the mistakes below, then retake — the questions get reshuffled and so do the options."));
+
+    var byT = {};
+    V.queue.forEach(function (item, i) {
+      var k = item.q.t;
+      if (!byT[k]) byT[k] = { n: 0, ok: 0 };
+      byT[k].n++;
+      if (V.answers[i] === item.p.correctAt) byT[k].ok++;
+    });
+    var bd = el("div", "breakdown");
+    Object.keys(byT).forEach(function (k) {
+      var r = el("div", "brow");
+      r.appendChild(el("span", null, topicOf(k).name.split(" ")[0]));
+      var bl = el("div", "barline"); var fi = el("i");
+      fi.style.width = Math.round((byT[k].ok / byT[k].n) * 100) + "%";
+      if (byT[k].ok / byT[k].n < 0.6) fi.style.background = "var(--no)";
+      bl.appendChild(fi); r.appendChild(bl);
+      r.appendChild(el("span", null, byT[k].ok + "/" + byT[k].n));
+      bd.appendChild(r);
+    });
+    card.appendChild(bd);
+
+    var missed = V.queue.filter(function (item, i) { return V.answers[i] !== item.p.correctAt; });
+    if (missed.length) {
+      var rv = el("div", "review");
+      rv.appendChild(el("div", "brow", ""));
+      V.queue.forEach(function (item, i) {
+        if (V.answers[i] === item.p.correctAt) return;
+        var q = item.q;
+        var d = el("div", "ritem");
+        d.appendChild(el("div", "rq", q.q));
+        d.appendChild(el("div", "ra", "correct: " + q.o[q.a]));
+        if (V.answers[i] != null) d.appendChild(el("div", "rp", "you: " + q.o[item.p.order[V.answers[i]]]));
+        else d.appendChild(el("div", "rp", "you: left blank"));
+        d.appendChild(el("div", "re", q.e));
+        rv.appendChild(d);
+      });
+      card.appendChild(rv);
+    }
+
+    var row = el("div", "cta");
+    var again = el("button", "btn exam", "retake exam"); again.type = "button";
+    again.addEventListener("click", function () { start(shuffle(Q).slice(0, EXAM_N), "exam"); });
+    row.appendChild(again);
+    if (wrongList().length) {
+      var rb = el("button", "btn primary", "drill my mistakes"); rb.type = "button";
+      rb.addEventListener("click", function () { start(shuffle(wrongList()), "drill"); });
+      row.appendChild(rb);
+    }
+    var hm = el("button", "btn ghost", "menu"); hm.type = "button";
+    hm.addEventListener("click", function () { V.screen = "home"; V.mode = "drill"; render(); });
+    row.appendChild(hm);
+    card.appendChild(row);
+    f.appendChild(card);
+    return f;
+  }
+
+  document.addEventListener("keydown", function (ev) {
+    if (V.screen !== "quiz") {
+      if (ev.key === "Enter") { var b = document.getElementById("nextBtn"); if (b) { b.click(); ev.preventDefault(); } }
+      return;
+    }
+    var n = parseInt(ev.key, 10);
+    if (n >= 1 && n <= 4) {
+      var btns = document.querySelectorAll(".opt");
+      if (btns[n - 1] && !btns[n - 1].disabled) { btns[n - 1].click(); ev.preventDefault(); return; }
+    }
+    if (ev.key === "Enter") { var b2 = document.getElementById("nextBtn"); if (b2) { b2.click(); ev.preventDefault(); } }
+  });
+
+  function render() {
+    var y = window.scrollY;
+    app.textContent = "";
+    app.appendChild(bar());
+    if (V.screen === "home") app.appendChild(home());
+    else if (V.screen === "quiz") app.appendChild(quiz());
+    else app.appendChild(result());
+    window.scrollTo(0, V.screen === "home" ? y : 0);
+  }
+
+  render();
+  if (window.claude && window.claude.use) {
+    window.claude.use("artifact").then(function (a) { if (a) api = a; }).catch(function () {});
+  }
+})();
+</script>
+
+</body></html>

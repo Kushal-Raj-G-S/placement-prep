@@ -1,0 +1,562 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pattern Radar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+  :root{
+    --bg:#070B11; --bg2:#0C121B; --panel:#121A26; --panel2:#182231; --edge:#1E2A3A; --edge2:#2A3A4E;
+    --txt:#E8EEF6; --dim:#8397AE; --dim2:#5B6E85;
+    --cy:#3FD9EC; --cy-dim:#12333D;
+    --ok:#4BE08B; --ok-dim:#0E2C1D;
+    --no:#FF7A6B; --no-dim:#331612;
+    --am:#FFC44D; --am-dim:#332714;
+    --vi:#B98CF0; --vi-dim:#241A38;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    --sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  button{font-family:inherit;color:inherit}
+  :focus-visible{outline:2px solid var(--cy);outline-offset:2px;border-radius:4px}
+  .wrap{max-width:880px;margin:0 auto;padding:20px 16px 90px;display:flex;flex-direction:column;gap:14px}
+
+  .bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:11px 14px;background:var(--panel);border:1px solid var(--edge);border-radius:10px}
+  .logo{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--cy)}
+  .bar .sp{flex:1 1 auto}
+  .stat{display:flex;align-items:baseline;gap:5px;font-family:var(--mono)}
+  .stat b{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
+  .stat span{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2)}
+  .stat.ok b{color:var(--ok)} .stat.warn b{color:var(--am)}
+
+  .btn{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+       background:var(--panel2);border:1px solid var(--edge2);border-radius:7px;padding:9px 14px;cursor:pointer;
+       transition:transform .08s ease,background .15s ease,border-color .15s ease}
+  .btn:hover:not(:disabled){background:var(--edge);border-color:var(--cy)}
+  .btn:active{transform:translateY(1px)}
+  .btn.primary{background:var(--cy);border-color:var(--cy);color:#04222A}
+  .btn.primary:hover:not(:disabled){background:#5FE6F5}
+  .btn.ghost{background:transparent}
+
+  .hero{padding:24px 20px;background:linear-gradient(160deg,var(--panel) 0%,var(--bg2) 100%);border:1px solid var(--edge);border-radius:14px;display:flex;flex-direction:column;gap:13px}
+  .hero h1{margin:0;font-family:var(--mono);font-weight:700;font-size:clamp(24px,4.8vw,35px);letter-spacing:-.02em;line-height:1.06}
+  .hero h1 em{font-style:normal;color:var(--cy)}
+  .hero p{margin:0;color:var(--dim);max-width:66ch;font-size:14.5px}
+  .cta{display:flex;gap:9px;flex-wrap:wrap;margin-top:2px}
+
+  .sheet{background:var(--panel);border:1px solid var(--cy);border-radius:12px;overflow:hidden}
+  .sheet-h{padding:12px 16px;background:var(--cy-dim);border-bottom:1px solid var(--cy);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .sheet-h h2{margin:0;font-size:18px}
+  .sheet-h .badge{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--cy);border:1px solid var(--cy);border-radius:5px;padding:2px 7px}
+  .sec{padding:14px 16px;border-bottom:1px solid var(--edge)}
+  .sec:last-child{border-bottom:0}
+  .sec .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim2);margin-bottom:9px}
+
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);text-align:left;
+     font-weight:500;padding:0 12px 7px 0;border-bottom:1px solid var(--edge2);white-space:nowrap}
+  td{padding:7px 12px 7px 0;border-bottom:1px solid var(--edge);vertical-align:top;color:var(--dim)}
+  tr:last-child td{border-bottom:0}
+  td.n{font-family:var(--mono);color:var(--txt);white-space:nowrap}
+  td.o{font-family:var(--mono);color:var(--cy);white-space:nowrap}
+  .tscroll{overflow-x:auto}
+
+  .tells{display:flex;flex-direction:column;gap:0}
+  .tell{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:9px 0;border-bottom:1px solid var(--edge);align-items:baseline}
+  .tell:last-child{border-bottom:0}
+  .tell .cue{font-size:13.5px;color:var(--txt)}
+  .tell .cue b{color:var(--am);font-weight:600}
+  .tell .pat{font-family:var(--mono);font-size:12.5px;color:var(--cy)}
+
+  .crumb{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);flex-wrap:wrap}
+  .crumb .now{color:var(--cy)}
+  .prog{flex:1 1 90px;height:3px;background:var(--edge);border-radius:2px;overflow:hidden;min-width:70px}
+  .prog i{display:block;height:100%;background:var(--cy);transition:width .3s ease}
+  .qtimer{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .qtimer.over{color:var(--no)}
+
+  .qbox{background:var(--panel);border:1px solid var(--edge);border-radius:11px;padding:16px;display:flex;flex-direction:column;gap:12px}
+  .stmt{font-size:16px;line-height:1.6}
+  .cons{font-family:var(--mono);font-size:12.5px;color:var(--am);background:var(--am-dim);border:1px solid var(--am);border-radius:8px;padding:10px 12px;white-space:pre-wrap}
+  .cons b{color:var(--am);font-weight:600;display:block;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;margin-bottom:4px}
+
+  .opts{display:flex;flex-direction:column;gap:7px}
+  .opt{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:baseline;text-align:left;
+       background:var(--bg2);border:1px solid var(--edge);border-radius:8px;padding:11px 12px;cursor:pointer;
+       font-size:14px;transition:border-color .12s ease,background .12s ease}
+  .opt:hover:not(:disabled){border-color:var(--cy);background:var(--panel2)}
+  .opt .k{font-family:var(--mono);font-size:10px;color:var(--dim2);border:1px solid var(--edge2);border-radius:4px;text-align:center;padding:1px 0}
+  .opt.right{border-color:var(--ok);background:var(--ok-dim)}
+  .opt.right .k{color:var(--ok);border-color:var(--ok)}
+  .opt.wrong{border-color:var(--no);background:var(--no-dim);animation:shk .3s}
+  .opt.wrong .k{color:var(--no);border-color:var(--no)}
+  .opt:disabled{cursor:default}
+  @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  .fb{border-radius:9px;padding:12px 13px;font-size:14px;line-height:1.6;border:1px solid;display:flex;flex-direction:column;gap:8px}
+  .fb.good{background:var(--ok-dim);border-color:var(--ok)}
+  .fb.bad{background:var(--no-dim);border-color:var(--no)}
+  .fb b{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+  .fb.good b{color:var(--ok)} .fb.bad b{color:var(--no)}
+  .fb .tellbox{font-size:13.5px;color:var(--txt);background:rgba(0,0,0,.35);border-radius:7px;padding:10px 12px;border-left:3px solid var(--am)}
+  .fb .tellbox i{font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--am);display:block;margin-bottom:4px}
+  .fb .cx{font-family:var(--mono);font-size:12.5px;color:var(--cy)}
+  .fb .whywrong{color:var(--am)}
+  .fbrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:3px}
+  .kbd{font-family:var(--mono);font-size:10px;color:var(--dim2);border:1px solid var(--edge2);border-radius:4px;padding:1px 5px}
+
+  .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+  .prow{display:grid;grid-template-columns:1fr auto;gap:9px;align-items:center;background:var(--panel);border:1px solid var(--edge);
+        border-radius:9px;padding:10px 12px;font-size:13px}
+  .prow.weak{border-color:var(--no)}
+  .prow.strong{border-color:var(--ok-dim)}
+  .prow .c{font-family:var(--mono);font-size:11.5px;color:var(--dim2);font-variant-numeric:tabular-nums}
+
+  .score{text-align:center;padding:28px 20px;background:linear-gradient(160deg,var(--panel) 0%,var(--bg2) 100%);
+         border:1px solid var(--edge);border-radius:14px;display:flex;flex-direction:column;gap:11px;align-items:center}
+  .score .big{font-family:var(--mono);font-size:44px;font-weight:700;line-height:1}
+  .score .big.pass{color:var(--ok)} .score .big.fail{color:var(--no)}
+  .score h2{margin:0;font-size:19px}
+  .score p{margin:0;color:var(--dim);max-width:58ch;font-size:14px}
+
+  .foot{color:var(--dim2);font-size:12.5px;font-family:var(--mono);text-align:center;padding-top:4px}
+  .foot a{color:var(--dim)}
+
+  @media(max-width:620px){
+    .wrap{padding:14px 11px 80px;gap:12px}
+    .hero{padding:19px 15px}
+    .opt{padding:13px 11px}
+    .tell{grid-template-columns:1fr;gap:3px}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script type="application/json" id="bank">{"ladder":[["n ≤ 12","O(n!)","full permutations, brute backtracking"],["n ≤ 20-25","O(2ⁿ)","subsets, bitmask DP, meet in the middle"],["n ≤ 100","O(n³)","Floyd–Warshall, interval DP"],["n ≤ 1,000-5,000","O(n²)","2-D DP, LCS, edit distance, O(n²) LIS"],["n ≤ 10⁵","O(n log n)","sort, heap, binary search, sliding window"],["n ≤ 10⁶-10⁷","O(n)","hashing, prefix sums, two pointers"],["n ≥ 10⁹","O(log n) / O(1)","binary search on the answer, maths, bit tricks"]],"tells":[["<b>contiguous</b> subarray or substring, and longest / shortest / at most K","sliding window"],["contiguous, <b>sum equals K</b>, and negatives are allowed","prefix sum + hashmap"],["array is <b>already sorted</b>, and you want a pair or triplet","two pointers"],["unsorted, and the question is <b>“have I seen this before”</b>","hashmap / set"],["<b>minimum X such that</b> a condition holds, and bigger X is always easier","binary search on the answer"],["<b>next greater</b> / next smaller / span / histogram","monotonic stack"],["<b>K largest</b> / K smallest / K closest / streaming median","heap of size K"],["<b>all</b> subsets / permutations / combinations, and n ≤ 20","backtracking"],["grid, and <b>connected regions</b> or flood fill","grid DFS or BFS"],["<b>fewest steps</b> in an unweighted graph or grid","BFS"],["<b>many starting points spreading at once</b>","multi-source BFS"],["weighted edges, non-negative, shortest path","Dijkstra"],["<b>prerequisites</b>, ordering, or “is there a cycle”","topological sort"],["<b>merging groups</b> incrementally, or “are these connected”","union-find"],["<b>pick or skip</b> each item against a budget or target sum","knapsack DP"],["<b>two strings</b> compared, transformed or matched","2-D string DP"],["max / min over choices, with <b>overlapping subproblems</b>","DP"],["<b>sort first</b>, then one pass, locally best choice is safe","greedy"],["numbers are <b>1..n</b>, find the missing or duplicate, O(1) space","cyclic sort / index-as-hash"],["“appears once while others appear twice”, O(1) space","XOR"],["fixed 2-D board to <b>rotate, spiral or mark in place</b>","matrix simulation"],["intervals, and <b>maximum overlapping at any moment</b>","sort + min-heap"]],"q":[{"pat":"hashmap / set","tgt":40,"st":"Given an unsorted array of integers and a target value, determine whether any two elements sum to the target. Return true or false.","cn":"n ≤ 10⁵, values may be negative","o":["Hashmap / set — one pass, store what you have seen","Two pointers from both ends","Sort then binary search for each element","Nested loops over every pair"],"a":0,"tell":"Unsorted + “does a partner exist” = store what you have seen and ask the set. Sorting would work but throws away your O(n) budget for no reason.","cx":"O(n) time, O(n) space. Sorting first would be O(n log n).","w":{"1":"Two pointers needs a sorted array. This one is unsorted, so you would have to sort first — which is strictly worse here.","2":"That is O(n log n) when O(n) is available.","3":"O(n²) is 10¹⁰ operations at n = 10⁵. Far too slow."}},{"pat":"two pointers","tgt":40,"st":"Given a SORTED array of integers and a target, return the indices of the two elements that sum to the target. You must use O(1) extra space.","cn":"n ≤ 10⁵, array is sorted ascending","o":["Two pointers from both ends","Hashmap of complements","Binary search for each element","Sliding window"],"a":0,"tell":"Sorted + a pair + O(1) space is the two-pointer signature. Sum too small, move left pointer right; too big, move right pointer left.","cx":"O(n) time, O(1) space — which is what the space constraint was really asking for.","w":{"1":"It works and is O(n), but it uses O(n) space, and the question explicitly forbade that. The word “sorted” was placed there to make the pointer solution possible.","2":"O(n log n) when O(n) is available, and it does not exploit sortedness fully.","3":"A window is for contiguous ranges; here the two elements can be anywhere."}},{"pat":"sliding window","tgt":50,"st":"Find the length of the longest substring containing at most K distinct characters.","cn":"n ≤ 10⁵, K ≤ 26","o":["Variable sliding window with a frequency map","Fixed-size sliding window of width K","Prefix sums over character counts","Backtracking over all substrings"],"a":0,"tell":"“Longest contiguous stretch satisfying a condition” is the variable window. Expand right always; when the condition breaks, shrink from the left until it holds again.","cx":"O(n) — each index enters and leaves the window at most once.","w":{"1":"The window width is not K. K bounds the number of DISTINCT characters, not the length — the answer can be far longer than K.","2":"Prefix sums answer range-sum questions, not “how many distinct in this range”.","3":"There are O(n²) substrings. At n = 10⁵ that is hopeless."}},{"pat":"sliding window","tgt":40,"st":"Find the maximum sum of any subarray of size exactly K.","cn":"n ≤ 10⁵, 1 ≤ K ≤ n","o":["Fixed-size sliding window","Variable sliding window that shrinks on a condition","Prefix sum + hashmap","Heap of size K"],"a":0,"tell":"“Exactly size K” fixes the window. Add the entering element, subtract the leaving one — never re-add the whole window.","cx":"O(n) time, O(1) space.","w":{"1":"Nothing here needs shrinking; the size is pinned at K, so the window never changes width.","2":"Overkill. A prefix array would work but the rolling sum is simpler and uses O(1) space.","3":"A heap finds the K largest ELEMENTS, not the best contiguous block of K."}},{"pat":"prefix sum + hashmap","tgt":55,"st":"Count the number of contiguous subarrays whose elements sum to exactly K. The array contains negative numbers.","cn":"n ≤ 10⁵, values from −10⁴ to 10⁴","o":["Prefix sum with a hashmap of prefix counts","Sliding window that shrinks when the sum exceeds K","Two pointers after sorting","Binary search on the answer"],"a":0,"tell":"The word “negative” is the whole question. Negatives break the sliding window, because growing the window no longer means growing the sum. Store prefix counts and look for prefix − K.","cx":"O(n) time and space. This exact problem is LeetCode’s Subarray Sum Equals K, one of the most frequently reported OA questions.","w":{"1":"This is the trap, and it is the right answer only for all-positive arrays. With negatives, shrinking on “sum too big” can skip valid answers.","2":"Sorting destroys contiguity, and contiguity is the requirement.","3":"There is no monotonic condition to binary search over."}},{"pat":"sort + min-heap","tgt":60,"st":"Given the start and end times of a set of meetings, find the minimum number of rooms needed so that no two meetings overlap in a room.","cn":"n ≤ 10⁵","o":["Sort by start time, keep a min-heap of end times","Sort by end time and greedily count non-overlapping meetings","Merge all overlapping intervals and count them","Sort by duration, shortest first"],"a":0,"tell":"“Maximum simultaneous overlap” is the heap-of-end-times pattern. The heap size at any moment is the number of rooms in use; its peak is the answer.","cx":"O(n log n). The alternative is a sweep line over +1/−1 events, which is the same idea in different clothing.","w":{"1":"That solves a different question — the MAXIMUM number of non-overlapping meetings you can attend, not the rooms required.","2":"Merging tells you how many disjoint blocks of busy time exist, not how many overlap at the peak.","3":"Duration is irrelevant to overlap."}},{"pat":"sort + sweep","tgt":45,"st":"Given a list of intervals, merge all overlapping ones and return the resulting non-overlapping set.","cn":"n ≤ 10⁵","o":["Sort by start time, then sweep and extend the current interval","Sort by end time and use a heap","Union-find over overlapping pairs","Binary search for each interval's neighbours"],"a":0,"tell":"Almost every interval question begins with sorting by start. Then keep one “current” interval and either extend its end or close it and open a new one.","cx":"O(n log n), dominated by the sort.","w":{"1":"A heap is not needed — merging never requires knowing the earliest end among several actives.","2":"It would work but is far heavier than a single sorted pass.","3":"Once sorted, neighbours are simply adjacent. No search needed."}},{"pat":"binary search on the answer","tgt":60,"st":"Packages must be shipped within D days. Each day you load packages in order onto a ship of fixed capacity. Find the minimum ship capacity that lets you finish within D days.","cn":"1 ≤ n ≤ 5·10⁴, weights ≤ 500, 1 ≤ D ≤ n","o":["Binary search on the capacity, checking feasibility greedily","Greedy: capacity = total weight ÷ D","DP over days and packages","Sort the weights, then take the largest D"],"a":0,"tell":"“Minimum X such that a condition holds” plus monotonicity — a bigger ship is never worse — is binary search on the answer. Search the value, not the array. Bounds run from max(weight) to sum(weights).","cx":"O(n log(sum)). Amazon's reported September 2025 questions included exactly this problem.","w":{"1":"Averages ignore that packages must ship in order and cannot be split. It fails on a single heavy item.","2":"Possible but needlessly expensive, and the state space is large.","3":"Order matters and packages cannot be rearranged, so sorting is invalid here."}},{"pat":"binary search on the answer","tgt":55,"st":"You are given an array and an integer k. Split the array into k contiguous subarrays so that the largest subarray sum is as small as possible. Return that minimised largest sum.","cn":"n ≤ 1000, values ≤ 10⁶, k ≤ min(50, n)","o":["Binary search on the answer, greedily counting the pieces needed","Sort then take the k largest","Sliding window of size n/k","Greedy from the left, cutting at exactly total/k"],"a":0,"tell":"Same shape as the ship problem — minimise a maximum, with monotone feasibility. Note the n ≤ 1000 constraint also permits an O(n²k) DP, so both solutions pass. Binary search is shorter to write under a clock.","cx":"O(n log(sum)) for binary search, versus O(n²k) for DP.","w":{"1":"Sorting destroys contiguity, which the question requires.","2":"The pieces need not be equal in length, only balanced in sum.","3":"A single greedy cut point does not minimise the maximum; you need to test feasibility of a candidate maximum."}},{"pat":"modified binary search","tgt":50,"st":"Search for a target value in an array that was sorted ascending and then rotated at an unknown pivot. Return its index or −1.","cn":"n ≤ 5000, all values distinct","o":["Binary search, deciding each step which half is sorted","Linear scan","Find the pivot by binary search, then binary search twice","Sort the array, then binary search"],"a":0,"tell":"Rotated but sorted still admits binary search: at each midpoint one half is guaranteed sorted, so check whether the target lies inside that half and discard the other.","cx":"O(log n). Finding the pivot first also works and is easier to reason about, but it is two passes.","w":{"1":"O(n) works at this size but throws away the structure the question deliberately gave you.","2":"Correct, and a perfectly acceptable answer — just two searches where one suffices. Worth knowing as the easier-to-derive version.","3":"Sorting is O(n log n) and destroys the original indices you were asked to return."}},{"pat":"monotonic stack","tgt":50,"st":"For each element in an array, find the next element to its right that is strictly greater. If none exists, report −1.","cn":"n ≤ 10⁵","o":["Monotonic decreasing stack, single pass","Nested loops scanning right for each element","Sort the array and map back to indices","Heap of upcoming elements"],"a":0,"tell":"“Next greater / next smaller / how far until something bigger” is always a monotonic stack. Push indices; when the current element exceeds the stack top, you have just found that element's answer, so pop and record.","cx":"O(n) — every index is pushed once and popped once.","w":{"1":"O(n²) at 10⁵ is 10¹⁰ operations. Correct but far too slow.","2":"Sorting loses the “to its right” relationship, which is positional.","3":"A heap gives you the largest remaining, not the nearest greater. Nearness is the requirement."}},{"pat":"heap of size K","tgt":45,"st":"A stream of integers arrives one at a time. After each arrival, report the Kth largest value seen so far.","cn":"up to 10⁵ arrivals, K ≤ 10⁴","o":["Min-heap capped at size K","Max-heap of everything seen","Sort after every arrival","Binary search over the value range each time"],"a":0,"tell":"For “Kth largest”, keep a MIN-heap of size K — its root is the answer, and anything smaller than the root can be discarded immediately. The counter-intuitive part is that largest wants a min-heap.","cx":"O(log K) per arrival. A max-heap of everything would be O(log n) per push but O(K log n) to answer each query.","w":{"1":"You would have to pop K−1 elements to answer each query, then push them all back.","2":"O(n log n) per arrival is catastrophic over a stream.","3":"There is no monotone predicate to search here, and values change as the stream grows."}},{"pat":"BFS by levels","tgt":40,"st":"Return the values of a binary tree grouped by depth — one list per level, top to bottom.","cn":"up to 2000 nodes","o":["BFS with a queue, processing one full level per iteration","Recursive DFS, appending in preorder","Two stacks alternating","Sort all nodes by depth after an inorder walk"],"a":0,"tell":"Anything phrased “level by level”, “per depth”, or “right side view” is BFS where you record the queue's size before draining exactly that many nodes. That size is the level width.","cx":"O(n) time and O(width) space.","w":{"1":"DFS can do it if you pass the depth down and index into a list of lists, but the queue version is the direct expression of the requirement.","2":"That is the zigzag traversal variant, which is a different question.","3":"Works, but you are sorting to recover information a queue gives you for free."}},{"pat":"DFS returning a value","tgt":55,"st":"Find the diameter of a binary tree — the number of edges on the longest path between any two nodes. The path need not pass through the root.","cn":"up to 10⁴ nodes","o":["DFS that returns height upward while updating a global best","BFS from the root, taking the deepest level","Two BFS passes, as in a tree graph's diameter","DP over all node pairs"],"a":0,"tell":"The pattern is: the recursion RETURNS one thing (height) while ANSWERING a different thing (best path seen). Any “longest path anywhere in the tree” question has this shape — including maximum path sum.","cx":"O(n), one traversal.","w":{"1":"The deepest level gives depth, not diameter. The longest path may not touch the root at all — which the question warns you about explicitly.","2":"That is the correct trick for an undirected GRAPH tree, but a rooted binary tree gives you the single-pass version for free.","3":"O(n²) pairs is unnecessary when one pass suffices."}},{"pat":"fast and slow pointers","tgt":45,"st":"Determine whether a singly linked list contains a cycle. You must use O(1) extra space.","cn":"up to 10⁴ nodes","o":["Fast and slow pointers — they meet if and only if a cycle exists","Hash set of visited nodes","Reverse the list and compare","Mark each node as visited with a flag"],"a":0,"tell":"O(1) space on a linked list means two pointers at different speeds. If the fast one laps the slow one, there is a cycle. Also gives you the cycle's start and the list's middle.","cx":"O(n) time, O(1) space.","w":{"1":"Correct and simpler to write, but it uses O(n) space — precisely what the constraint forbade. The space limit is the entire point of the question.","2":"Reversing a list that contains a cycle does not terminate.","3":"That mutates the input, which is normally disallowed, and still needs a field to write to."}},{"pat":"grid DFS or BFS","tgt":45,"st":"A grid contains '1' for land and '0' for water. Count the number of islands, where an island is land connected horizontally or vertically.","cn":"grid up to 300 × 300","o":["Scan every cell; on unvisited land, flood fill and increment the count","Union-find over all adjacent land pairs","Count the 1s and divide by the average island size","Dijkstra from each land cell"],"a":0,"tell":"“Connected regions in a grid” is flood fill. Walk the grid; each time you hit unvisited land, sink the whole component with DFS or BFS and add one to the count.","cx":"O(rows × cols) — each cell is visited once.","w":{"1":"Genuinely correct and a good answer, especially if the grid changes over time. Flood fill is simpler for a one-off count.","2":"Island sizes vary; there is no such average to divide by.","3":"Dijkstra is for weighted shortest paths. There are no weights and no path being sought."}},{"pat":"multi-source BFS","tgt":55,"st":"In a grid, some oranges are rotten and some are fresh. Every minute, a rotten orange rots all fresh oranges adjacent to it. Return the number of minutes until none remain fresh, or −1 if impossible.","cn":"grid up to 10 × 10, and up to 300 × 300 in the harder variant","o":["Multi-source BFS — seed the queue with every rotten orange at once","BFS from each rotten orange separately, taking the minimum","DFS from each rotten orange","Dijkstra with unit weights"],"a":0,"tell":"Many starting points spreading simultaneously means you push ALL of them into the queue before the first pop. The BFS level number is then the elapsed minute. Running BFS once per source is the classic inefficiency.","cx":"O(rows × cols) for multi-source, versus O(sources × cells) for the naive version.","w":{"1":"Correct but wasteful, and it makes the “simultaneous” timing awkward to reason about.","2":"DFS does not explore in distance order, so it cannot give you a minimum time without extra work.","3":"Dijkstra with all-equal weights degenerates into BFS with a needless heap."}},{"pat":"topological sort","tgt":50,"st":"You are given a number of courses and a list of prerequisite pairs. Determine whether it is possible to finish all courses.","cn":"courses ≤ 2000, prerequisite pairs ≤ 5000","o":["Topological sort — Kahn's algorithm, or DFS cycle detection","Union-find over the prerequisite pairs","BFS from course 0","Sort the courses by number of prerequisites"],"a":0,"tell":"Prerequisites, ordering, or “can this be scheduled” means a directed graph and a cycle question. If a topological order exists, the answer is yes. Kahn's version also hands you the order itself.","cx":"O(V + E).","w":{"1":"Union-find detects cycles in UNDIRECTED graphs. Direction matters here: A→B plus B→A is a cycle, but union-find cannot tell that from a single undirected edge.","2":"The graph may be disconnected, and course 0 is not special.","3":"A static count ignores the chains; a cycle can hide among nodes that all have prerequisites."}},{"pat":"Dijkstra","tgt":55,"st":"Given a network of nodes with weighted travel times along directed edges, find the time for a signal sent from node k to reach every node. Return −1 if some node is unreachable.","cn":"nodes ≤ 100, edges ≤ 6000, weights are positive","o":["Dijkstra from k, then take the maximum distance","BFS from k, counting hops","Topological sort then relax in order","Union-find to test reachability"],"a":0,"tell":"Weighted, non-negative, single source, shortest path — Dijkstra. Because the answer is when the LAST node receives it, you take the maximum of the final distances. Negative weights would force Bellman–Ford instead.","cx":"O(E log V) with a heap. At these bounds Floyd–Warshall at O(V³) = 10⁶ would also pass.","w":{"1":"BFS counts edges, not weight. It is only correct when every weight is identical.","2":"Relaxing in topological order works on a DAG only, and this graph may contain cycles.","3":"Union-find answers whether a path exists, not how long it is."}},{"pat":"union-find","tgt":55,"st":"A tree had one extra edge added, creating exactly one cycle. Given the edges in the order they were added, return the edge that should be removed.","cn":"n ≤ 1000 edges, undirected","o":["Union-find — the first edge whose endpoints already share a root","DFS after building the whole graph","Topological sort","Count degrees and remove from the highest-degree node"],"a":0,"tell":"Edges arriving one at a time, plus “are these two already connected”, is union-find. The moment a union fails because both ends already share a root, that edge closed the cycle.","cx":"Near O(n) with path compression and union by rank.","w":{"1":"Workable, but you would have to find the cycle and then decide which of its edges came last — union-find gives you that directly from the arrival order.","2":"Topological sort is for directed graphs; this one is undirected.","3":"Degree does not identify the offending edge; every node on the cycle has degree at least two."}},{"pat":"backtracking","tgt":45,"st":"Return every possible subset of a set of distinct integers, in any order.","cn":"n ≤ 10","o":["Backtracking with choose / recurse / un-choose","Iterate over bitmasks from 0 to 2ⁿ − 1","DP over subset sums","Sort then use two pointers"],"a":0,"tell":"The constraint is the tell. n ≤ 10 means 2ⁿ = 1024, so exponential enumeration is not only allowed, it is expected. Anything asking for ALL of something, rather than a count or a best, is backtracking.","cx":"O(2ⁿ × n) to build and copy every subset. Unavoidable — the output itself is that big.","w":{"1":"Equally correct and arguably neater at this size. Both are accepted answers; bitmask is the iterative form of the same enumeration.","2":"DP counts or optimises. It cannot list every subset.","3":"Two pointers finds specific pairs, not the full power set."}},{"pat":"1-D DP","tgt":45,"st":"You are climbing a staircase of n steps and may take either 1 or 2 steps at a time. Count the distinct ways to reach the top.","cn":"1 ≤ n ≤ 45","o":["1-D DP: ways[i] = ways[i−1] + ways[i−2]","Backtracking over every sequence of moves","Combinatorics: n choose n/2","Greedy: always take 2 steps"],"a":0,"tell":"Count of ways, where each state depends only on a couple of earlier states — this is linear DP, and it is just Fibonacci. Two rolling variables suffice; you never need the array.","cx":"O(n) time, O(1) space with two variables.","w":{"1":"Correct but exponential. At n = 45 that is roughly 10⁹ recursive calls without memoisation — the classic demonstration of why DP exists.","2":"No single binomial coefficient gives this; the number of 2-steps varies.","3":"Greedy computes one path, not a count of all paths."}},{"pat":"knapsack DP","tgt":60,"st":"Determine whether an array of positive integers can be partitioned into two subsets with equal sums.","cn":"n ≤ 200, each value ≤ 100, so total sum ≤ 20000","o":["Subset-sum DP for a target of total/2","Sort descending and greedily fill two buckets","Backtracking over all 2ⁿ subsets","Two pointers after sorting"],"a":0,"tell":"Pick-or-skip each item against a target sum is 0/1 knapsack. The bounded total sum is the permission slip: a boolean table of size n × 10000 is fine, whereas 2²⁰⁰ subsets are not. If the sum is odd, return false immediately.","cx":"O(n × sum) = 200 × 10000 = 2·10⁶. Comfortable.","w":{"1":"Greedy bucket-filling fails on cases like [3,3,2,2,2] — it is a well-known counterexample-rich heuristic.","2":"2²⁰⁰ is beyond astronomical. The n ≤ 200 bound is there specifically to rule this out.","3":"Two pointers cannot explore subsets."}},{"pat":"grid DP","tgt":45,"st":"Find the minimum sum of a path from the top-left to the bottom-right of a grid of non-negative numbers, moving only right or down.","cn":"grid up to 200 × 200","o":["Grid DP: best[i][j] = cell + min(best above, best left)","Dijkstra over the grid","BFS from the top-left","Greedy: always step toward the smaller neighbour"],"a":0,"tell":"Movement restricted to right and down makes the grid a DAG, so a single sweep in reading order works — no priority queue needed. If movement were in all four directions, it would become Dijkstra.","cx":"O(rows × cols), and you can reuse a single row for O(cols) space.","w":{"1":"Correct but heavier than needed. Reach for it only when movement allows going back up or left.","2":"BFS minimises the number of steps, not the sum of weights. Every path here has the same length.","3":"Greedy fails — a cheap first step can lead into an expensive region."}},{"pat":"2-D string DP","tgt":55,"st":"Find the length of the longest common subsequence of two strings. A subsequence need not be contiguous.","cn":"both lengths ≤ 1000","o":["2-D DP over the two indices","Sliding window over the longer string","Sort both strings and intersect them","Greedy matching from left to right"],"a":0,"tell":"Two strings being compared or transformed means a table indexed by a position in each. The constraint confirms it: 1000 × 1000 = 10⁶ cells is exactly the O(n²) budget. Edit distance is the same table with different transitions.","cx":"O(n × m) time; O(min(n, m)) space if you keep only two rows.","w":{"1":"A window needs contiguity, and a subsequence is explicitly not contiguous.","2":"Sorting destroys order, and subsequences depend on order.","3":"Greedy fails: taking the first available match can block a longer overall alignment."}},{"pat":"LIS — binary search version","tgt":65,"st":"Find the length of the longest strictly increasing subsequence of an array.","cn":"n ≤ 2500 in one version of this problem, and n ≤ 10⁵ in the follow-up","o":["O(n²) DP for the small bound, patience sorting with binary search for the large one","O(n²) DP is sufficient for both","Sliding window","Sort the array and find the longest run"],"a":0,"tell":"This is the clearest constraint-reading question there is. n ≤ 2500 permits O(n²) = 6·10⁶. n ≤ 10⁵ makes O(n²) = 10¹⁰, so you must switch to maintaining tails and binary searching each element's position.","cx":"O(n²) versus O(n log n). Same problem, two different required algorithms, decided purely by the bound.","w":{"1":"At n = 10⁵ the quadratic version is 10¹⁰ operations. The follow-up exists precisely to force the O(n log n) solution.","2":"A subsequence is not contiguous, so no window applies.","3":"Sorting destroys the order the subsequence must respect."}},{"pat":"greedy after sorting","tgt":45,"st":"Each child has a greed factor and each cookie a size. A child is content if given a cookie at least as large as their greed factor. Maximise the number of content children.","cn":"both arrays up to 5·10⁴","o":["Sort both, then two pointers giving the smallest sufficient cookie to the greediest-satisfiable child","DP over children and cookies","Backtracking over all assignments","Sort only the cookies, then scan"],"a":0,"tell":"Sort first, then one pass, with a locally optimal choice that is provably safe — never waste a large cookie on a child a smaller one would satisfy. If you can defend the local choice by an exchange argument, greedy is right.","cx":"O(n log n) for the sorts, then O(n).","w":{"1":"Vastly overkill for a problem greedy solves exactly, and the state space is large.","2":"Exponential and unnecessary.","3":"Both sides must be sorted for the pointers to advance correctly."}},{"pat":"greedy — reachability","tgt":50,"st":"Each element of an array is the maximum jump length from that position. Starting at index 0, determine whether you can reach the last index.","cn":"n ≤ 10⁴","o":["Greedy: track the furthest index reachable so far","BFS over positions as graph nodes","DP: reachable[i] from every earlier index","Backtracking over all jump sequences"],"a":0,"tell":"One number to maintain — the furthest reachable index. If your current index ever exceeds it, you are stuck. Scanning positions and extending a frontier, rather than exploring choices, is the greedy signature.","cx":"O(n) time, O(1) space.","w":{"1":"Correct but O(n²) edges in the worst case, and it computes more than asked.","2":"Correct at O(n²), which passes at 10⁴ but is needless.","3":"Exponential. This is what the greedy insight replaces."}},{"pat":"cyclic sort / index-as-hash","tgt":50,"st":"An array contains n distinct numbers taken from the range 0..n. Exactly one number in that range is missing. Find it using O(1) extra space.","cn":"n ≤ 10⁴, O(1) space required","o":["Sum formula n(n+1)/2 minus the actual sum, or XOR of both ranges","Hash set of present values","Sort then scan for the gap","Binary search over the value range"],"a":0,"tell":"“Values are 1..n” plus an O(1) space limit means using the numbers themselves as information — a sum identity, an XOR, or placing each value at its own index. A hash set is the answer they are trying to forbid.","cx":"O(n) time, O(1) space. XOR avoids any overflow concern in languages where that matters.","w":{"1":"Correct but O(n) space, which the constraint rules out.","2":"O(n log n) and it mutates the input.","3":"Binary search needs sorted input or a monotone predicate; neither is available unsorted."}},{"pat":"XOR","tgt":40,"st":"Every element in an array appears exactly twice except for one, which appears once. Find that element in linear time and constant space.","cn":"n ≤ 3·10⁴","o":["XOR every element together","Hashmap of counts","Sort then compare neighbours in pairs","Sum the array and subtract twice the sum of the distinct values"],"a":0,"tell":"“Everything paired except one” plus O(1) space is XOR, because a ^ a = 0 and a ^ 0 = a, so all the pairs annihilate and only the loner survives. Order does not matter at all.","cx":"O(n) time, O(1) space.","w":{"1":"Correct but O(n) space — the constraint exists to exclude it.","2":"O(n log n), and sorting is more than the question needs.","3":"That requires a set of distinct values, which is O(n) space again."}},{"pat":"matrix simulation","tgt":50,"st":"Rotate an n × n matrix by 90 degrees clockwise, in place.","cn":"n ≤ 20, in-place required","o":["Transpose, then reverse each row","Copy into a new matrix at rotated indices","BFS around the layers","Sort each row and column"],"a":0,"tell":"Fixed 2-D board plus “in place” means index manipulation, not an algorithm. Transpose then reverse each row is the two-line trick; rotating ring by ring also works but is far easier to get wrong under pressure.","cx":"O(n²) time, O(1) extra space.","w":{"1":"Straightforward and correct, but it uses O(n²) extra space, and “in place” forbids that.","2":"BFS is for traversal and distance, not for rearranging cells.","3":"Rotation is not sorting; the values keep their relative arrangement."}},{"pat":"bitmask DP","tgt":65,"st":"Given the pairwise distances between cities, find the length of the shortest tour that visits every city exactly once and returns to the start.","cn":"number of cities ≤ 12","o":["Bitmask DP over (visited set, current city)","Dijkstra from the starting city","Greedy nearest-neighbour tour","Plain DP over cities only"],"a":0,"tell":"n ≤ 12 is almost a signature for bitmask DP: 2¹² × 12 states is about 50 thousand, entirely tractable, whereas 12! tours is 479 million. Whenever n is under about 20 and you need a subset in the state, encode it as bits.","cx":"O(2ⁿ × n²) ≈ 5·10⁵ here. Brute-force permutations would be O(n!).","w":{"1":"Dijkstra finds shortest paths, not a tour visiting everything. This is a fundamentally different problem.","2":"Nearest-neighbour is a heuristic with no optimality guarantee, and the question asks for the shortest.","3":"Without the visited set in the state you cannot know which cities remain, so the recurrence is not well defined."}},{"pat":"stack","tgt":35,"st":"Given a string containing only the characters ()[]{}, determine whether the brackets are correctly matched and nested.","cn":"length ≤ 10⁴","o":["Stack — push openers, pop and check on each closer","Count each bracket type and compare totals","Two pointers from both ends","Recursion over the whole string"],"a":0,"tell":"Matching and nesting means a stack. Counts alone are not enough: \"([)]\" has perfectly balanced counts and is still invalid, because nesting order matters and only a stack records it.","cx":"O(n) time, O(n) space in the worst case.","w":{"1":"The classic wrong answer. \"([)]\" defeats it — the counts match but the nesting does not.","2":"Nesting is not symmetric around the centre; \"()()\" is valid but its ends do not pair with each other.","3":"Recursion works but is effectively an implicit stack, with a depth-limit risk for no benefit."}},{"pat":"binary search on partition","tgt":75,"st":"Find the median of two sorted arrays. The overall run time must be O(log(m+n)).","cn":"m, n ≤ 1000, both sorted","o":["Binary search for the correct partition point in the smaller array","Merge both arrays and take the middle","Two pointers walking to the halfway position","Sort the concatenation"],"a":0,"tell":"The stated complexity is the whole instruction. O(log) rules out any solution that touches every element, so you binary search for where to cut the smaller array such that everything left of both cuts is ≤ everything right of them.","cx":"O(log(min(m, n))). Merging is O(m + n) and would be accepted at these bounds — but not by the stated requirement.","w":{"1":"Correct answer, wrong complexity. It is O(m+n), and the question explicitly demanded logarithmic.","2":"Also O(m+n) — you still walk halfway through the data.","3":"O((m+n) log(m+n)), the worst of the four."}}]}</script>
+<script type="application/json" id="state">{"rev":1,"seen":{"32":1},"wrong":{},"pat":{"stack":1},"patok":{"stack":1},"exams":[]}</script>
+<script id="code">
+(function () {
+  "use strict";
+  // Cross-tool links in this page are plain .html filenames, so opening the file straight off disk
+  // just works. Served over http(s) those relative names cannot resolve, so there each one is
+  // swapped for its hosted copy. Local is what the file actually contains; online adapts.
+  var HOSTED = {
+    "./1%20-%20Twenty%20Weeks%20to%20AC%20%28tracker%29.html": "https://claude.ai/code/artifact/32b165b3-0cee-4121-9470-b0e8d6d17c16",
+    "./2%20-%20Stdin%20Trainer%20%28drill%29.html": "https://claude.ai/code/artifact/00d12bf6-5548-4e56-b449-d0f33193a495",
+    "./3%20-%20Stdin%20Survival%20Kit%20%28manual%29.html": "https://claude.ai/code/artifact/49b64e1a-a87a-4924-b42d-2a7a614ab41a",
+    "./5%20-%20SQL%20Lab%20%28practice%29.html": "https://claude.ai/code/artifact/0f564ee0-0ae9-4f76-b0db-9cbaf04a5664",
+    "./6%20-%20CS%20Core%20Drill%20%28OS%20DBMS%20CN%20OOP%20C%29.html": "https://claude.ai/code/artifact/3a19c5c3-5b45-4744-a980-20f138d77859",
+    "./7%20-%20Aptitude%20Sprint%20%28formulas%20%2B%20practice%29.html": "https://claude.ai/code/artifact/1176c004-05c1-4ebd-bd08-041957dd07f6",
+    "./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html": "https://claude.ai/code/artifact/9c7876de-143f-4f4d-bead-a8204d0f63ad",
+    "./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html": "https://claude.ai/code/artifact/ca3214a6-ec8f-4b10-b757-9c025a98ba47",
+    "./10%20-%20Mock%20OA%20%28timed%20exam%29.html": "https://claude.ai/code/artifact/ea757a13-0226-4bad-9065-96ca4927af42"
+  };
+  function fixToolLinks() {
+    if (location.protocol === "file:") return;
+    Array.prototype.forEach.call(document.querySelectorAll("a[href]"), function (a) {
+      var u = HOSTED[a.getAttribute("href")];
+      if (u) a.setAttribute("href", u);
+    });
+  }
+  if (location.protocol !== "file:") {
+    try {
+      new MutationObserver(function () { fixToolLinks(); })
+        .observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) {}
+    fixToolLinks();
+  }
+
+
+
+  // An artifact places the authored <title>, font <link>s and <style> BELOW <head>, so reading the
+  // head alone would republish this page with no CSS. Collect them wherever they sit; platform
+  // styles are skipped by marker, which keeps this idempotent across republish generations.
+  function SHELL() {
+    var out = ['<meta charset="utf-8">',
+               '<meta name="viewport" content="width=device-width,initial-scale=1">'];
+    var t = document.querySelector("title");
+    if (t) out.push(t.outerHTML);
+    Array.prototype.forEach.call(document.querySelectorAll("link"), function (n) {
+      var h = n.getAttribute("href") || "";
+      if (h.indexOf("fonts.googleapis") !== -1 || h.indexOf("fonts.gstatic") !== -1) out.push(n.outerHTML);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("style"), function (n) {
+      var s = n.textContent || "";
+      if (s.indexOf("--mono:") !== -1) out.push(n.outerHTML);
+    });
+    return out.join("\n");
+  }
+
+  var BANK = JSON.parse(document.getElementById("bank").textContent);
+  var Q = BANK.q, LADDER = BANK.ladder, TELLS = BANK.tells;
+  Q.forEach(function (q, i) { q._i = i; });
+  var PATS = [];
+  Q.forEach(function (q) { if (PATS.indexOf(q.pat) === -1) PATS.push(q.pat); });
+
+  var LS = "pattern-radar-v1";
+  function migrate(s) {
+    if (!s || typeof s !== "object") s = {};
+    ["seen", "wrong", "pat", "patok"].forEach(function (k) { if (!s[k]) s[k] = {}; });
+    if (!Array.isArray(s.exams)) s.exams = [];
+    if (typeof s.rev !== "number") s.rev = 0;
+    return s;
+  }
+  var embedded = migrate(JSON.parse(document.getElementById("state").textContent));
+  var state = embedded, local = null;
+  try { var raw = localStorage.getItem(LS); if (raw) local = migrate(JSON.parse(raw)); } catch (e) {}
+  if (local && local.rev > embedded.rev) state = local;
+
+  var app = document.getElementById("app");
+  var api = null, saveT = null;
+  var V = { screen: "home", queue: [], at: 0, picked: null, times: [], qElapsed: 0, qtid: null };
+
+  function save() {
+    state.rev++;
+    try { localStorage.setItem(LS, JSON.stringify(state)); } catch (e) {}
+    if (!api) return;
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      var o = "<" + "script", c = "<" + "/" + "script>";
+      api.publish('<!doctype html>\n<html lang="en">\n<head>\n' + SHELL() + '\n</head>\n<body>\n' +
+        '<div class="wrap" id="app"></div>\n' +
+        o + ' type="application/json" id="bank">' + JSON.stringify(BANK, function (k, v) { return k === "_i" ? undefined : v; }) + c + '\n' +
+        o + ' type="application/json" id="state">' + JSON.stringify(state) + c + '\n' +
+        o + ' id="code">' + document.getElementById("code").textContent + c + '\n' +
+        '</body>\n</html>').catch(function () {});
+    }, 1800);
+  }
+
+  function el(t, c, x) { var n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; }
+  function solved() { return Q.filter(function (q) { return state.seen[q._i] && !state.wrong[q._i]; }).length; }
+  function wrongList() { return Q.filter(function (q) { return state.wrong[q._i]; }); }
+  function patAcc(p) {
+    var t = state.pat[p] || 0, o = state.patok[p] || 0;
+    return t ? Math.round((o / t) * 100) : null;
+  }
+  function shuffle(a) {
+    var arr = a.slice();
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+    }
+    return arr;
+  }
+  function present(q) {
+    var idx = shuffle(q.o.map(function (_, i) { return i; }));
+    return { order: idx, correctAt: idx.indexOf(q.a) };
+  }
+
+  /* ---------- chrome ---------- */
+  function bar() {
+    var b = el("div", "bar");
+    b.appendChild(el("div", "logo", "pattern_radar"));
+    b.appendChild(el("div", "sp"));
+    var s1 = el("div", "stat ok");
+    s1.appendChild(el("b", null, solved() + "/" + Q.length));
+    s1.appendChild(el("span", null, "identified"));
+    b.appendChild(s1);
+    var wl = wrongList().length;
+    if (wl) {
+      var s2 = el("div", "stat warn");
+      s2.appendChild(el("b", null, String(wl)));
+      s2.appendChild(el("span", null, "to redo"));
+      b.appendChild(s2);
+    }
+    if (V.screen !== "home") {
+      var h = el("button", "btn ghost", "menu"); h.type = "button";
+      h.addEventListener("click", function () { stopQ(); V.screen = "home"; render(); });
+      b.appendChild(h);
+    }
+    return b;
+  }
+
+  /* ---------- home ---------- */
+  function home() {
+    var f = document.createDocumentFragment();
+    var hero = el("div", "hero");
+    var h1 = el("h1");
+    h1.innerHTML = 'Name the pattern<br>before you <em>write</em> anything.';
+    hero.appendChild(h1);
+    var p = el("p");
+    p.textContent = "The tracker links 235 problems to solve. This is the skill underneath all of them: read a statement, look at the constraints, and know which of about twenty patterns it is — inside a minute. Every question here gives you the statement and the real constraint bounds, and every explanation names the tell that gave it away.";
+    hero.appendChild(p);
+    var cta = el("div", "cta");
+    var sheet = el("button", "btn primary", "the tells & the ladder");
+    sheet.type = "button";
+    sheet.addEventListener("click", function () { V.screen = "sheet"; render(); });
+    cta.appendChild(sheet);
+    var go = el("button", "btn", "drill all " + Q.length);
+    go.type = "button";
+    go.addEventListener("click", function () { start(shuffle(Q)); });
+    cta.appendChild(go);
+    var wl = wrongList();
+    if (wl.length) {
+      var rb = el("button", "btn", "redo " + wl.length + " missed");
+      rb.type = "button";
+      rb.addEventListener("click", function () { start(shuffle(wl)); });
+      cta.appendChild(rb);
+    }
+    hero.appendChild(cta);
+    f.appendChild(hero);
+
+    f.appendChild(el("div", "crumb", "accuracy by pattern"));
+    var g = el("div", "pgrid");
+    PATS.forEach(function (p) {
+      var a = patAcc(p);
+      var r = el("div", "prow" + (a != null && a < 60 ? " weak" : (a === 100 ? " strong" : "")));
+      r.appendChild(el("span", null, p));
+      r.appendChild(el("span", "c", a == null ? "—" : a + "%"));
+      g.appendChild(r);
+    });
+    f.appendChild(g);
+
+    var ft = el("div", "foot");
+    ft.innerHTML = 'Companion tools: <a href="./10%20-%20Mock%20OA%20%28timed%20exam%29.html" target="_blank" rel="noopener noreferrer">Mock OA</a> · <a href="./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html" target="_blank" rel="noopener noreferrer">Decoder</a> · <a href="./7%20-%20Aptitude%20Sprint%20%28formulas%20%2B%20practice%29.html" target="_blank" rel="noopener noreferrer">Aptitude Sprint</a> · <a href="./6%20-%20CS%20Core%20Drill%20%28OS%20DBMS%20CN%20OOP%20C%29.html" target="_blank" rel="noopener noreferrer">CS Core Drill</a> · <a href="./5%20-%20SQL%20Lab%20%28practice%29.html" target="_blank" rel="noopener noreferrer">SQL Lab</a> · <a href="./2%20-%20Stdin%20Trainer%20%28drill%29.html" target="_blank" rel="noopener noreferrer">Stdin Trainer</a> · <a href="./1%20-%20Twenty%20Weeks%20to%20AC%20%28tracker%29.html" target="_blank" rel="noopener noreferrer">the plan</a>';
+    f.appendChild(ft);
+    return f;
+  }
+
+  /* ---------- the sheet ---------- */
+  function sheetScreen() {
+    var f = document.createDocumentFragment();
+    f.appendChild(el("div", "crumb", "read this first, then drill"));
+
+    var box = el("div", "sheet");
+    var h = el("div", "sheet-h");
+    h.appendChild(el("h2", null, "Reading the constraints"));
+    h.appendChild(el("span", "badge", "highest leverage page here"));
+    box.appendChild(h);
+
+    var s1 = el("div", "sec");
+    s1.appendChild(el("div", "lab", "the bound names the algorithm family"));
+    var sc = el("div", "tscroll");
+    var t = document.createElement("table");
+    var th = document.createElement("thead"), htr = document.createElement("tr");
+    ["input size", "budget", "so it must be"].forEach(function (x) {
+      var c = document.createElement("th"); c.textContent = x; htr.appendChild(c);
+    });
+    th.appendChild(htr); t.appendChild(th);
+    var tb = document.createElement("tbody");
+    LADDER.forEach(function (r) {
+      var tr = document.createElement("tr");
+      var a = document.createElement("td"); a.className = "n"; a.textContent = r[0];
+      var b = document.createElement("td"); b.className = "o"; b.textContent = r[1];
+      var c = document.createElement("td"); c.textContent = r[2];
+      tr.appendChild(a); tr.appendChild(b); tr.appendChild(c); tb.appendChild(tr);
+    });
+    t.appendChild(tb); sc.appendChild(t); s1.appendChild(sc);
+    var note = el("div", "titem");
+    note.style.marginTop = "10px";
+    note.style.color = "var(--dim)";
+    note.style.fontSize = "13.5px";
+    note.textContent = "Read the constraints BEFORE the statement. A bound of 10⁵ tells you the answer is O(n log n) before you know what the question is, which usually narrows it to four or five candidates.";
+    s1.appendChild(note);
+    box.appendChild(s1);
+
+    var s2 = el("div", "sec");
+    s2.appendChild(el("div", "lab", "the tells — phrase on the left, pattern on the right"));
+    var tl = el("div", "tells");
+    TELLS.forEach(function (x) {
+      var row = el("div", "tell");
+      var cue = el("div", "cue");
+      cue.innerHTML = x[0];
+      row.appendChild(cue);
+      row.appendChild(el("div", "pat", x[1]));
+      tl.appendChild(row);
+    });
+    s2.appendChild(tl);
+    box.appendChild(s2);
+
+    var s3 = el("div", "sec");
+    var go = el("button", "btn primary", "drill all " + Q.length);
+    go.type = "button"; go.id = "nextBtn";
+    go.addEventListener("click", function () { start(shuffle(Q)); });
+    s3.appendChild(go);
+    box.appendChild(s3);
+
+    f.appendChild(box);
+    return f;
+  }
+
+  /* ---------- drill ---------- */
+  function start(queue) {
+    V.queue = queue.map(function (q) { return { q: q, p: present(q) }; });
+    V.at = 0; V.picked = null; V.times = []; V.screen = "quiz";
+    beginQ(); render();
+  }
+  function beginQ() {
+    V.qElapsed = 0; stopQ();
+    V.qtid = setInterval(function () {
+      V.qElapsed++;
+      var n = document.getElementById("qt");
+      if (n) {
+        var tgt = V.queue[V.at].q.tgt;
+        n.textContent = V.qElapsed + "s";
+        n.className = "qtimer" + (V.qElapsed > tgt ? " over" : "");
+      }
+    }, 1000);
+  }
+  function stopQ() { if (V.qtid) { clearInterval(V.qtid); V.qtid = null; } }
+
+  function quiz() {
+    var f = document.createDocumentFragment();
+    var item = V.queue[V.at], q = item.q, p = item.p;
+
+    var crumb = el("div", "crumb");
+    crumb.appendChild(el("span", "now", (V.at + 1) + " / " + V.queue.length));
+    var pr = el("div", "prog"); var pf = el("i");
+    pf.style.width = Math.round((V.at / V.queue.length) * 100) + "%";
+    pr.appendChild(pf); crumb.appendChild(pr);
+    var qt = el("span", "qtimer", V.qElapsed + "s"); qt.id = "qt";
+    crumb.appendChild(qt);
+    crumb.appendChild(el("span", null, "target " + q.tgt + "s"));
+    f.appendChild(crumb);
+
+    var qb = el("div", "qbox");
+    qb.appendChild(el("div", "stmt", q.st));
+    var cn = el("div", "cons");
+    cn.appendChild(el("b", null, "constraints"));
+    cn.appendChild(document.createTextNode(q.cn));
+    qb.appendChild(cn);
+
+    var opts = el("div", "opts");
+    p.order.forEach(function (origIdx, shown) {
+      var b = el("button", "opt");
+      b.type = "button";
+      b.appendChild(el("span", "k", String(shown + 1)));
+      b.appendChild(el("span", null, q.o[origIdx]));
+      if (V.picked != null) {
+        b.disabled = true;
+        if (shown === p.correctAt) b.className = "opt right";
+        else if (shown === V.picked) b.className = "opt wrong";
+      } else {
+        b.addEventListener("click", function () { answer(shown); });
+      }
+      opts.appendChild(b);
+    });
+    qb.appendChild(opts);
+
+    if (V.picked != null) {
+      var right = V.picked === p.correctAt;
+      var fb = el("div", "fb " + (right ? "good" : "bad"));
+      fb.appendChild(el("b", null, right
+        ? (V.times[V.at] <= q.tgt ? "correct in " + V.times[V.at] + "s — " + q.pat : "correct, but " + V.times[V.at] + "s against a " + q.tgt + "s target")
+        : "not this one — it is " + q.pat));
+      if (!right) {
+        var pickedOrig = p.order[V.picked];
+        var why = q.w && q.w[String(pickedOrig)];
+        if (why) {
+          var wl = el("div", "whywrong");
+          wl.textContent = "You picked: " + why;
+          fb.appendChild(wl);
+        }
+      }
+      var tb2 = el("div", "tellbox");
+      tb2.appendChild(el("i", null, "the tell"));
+      tb2.appendChild(document.createTextNode(q.tell));
+      fb.appendChild(tb2);
+      fb.appendChild(el("div", "cx", q.cx));
+      var row = el("div", "fbrow");
+      var nx = el("button", "btn primary", V.at + 1 < V.queue.length ? "next" : "finish");
+      nx.type = "button"; nx.id = "nextBtn";
+      nx.addEventListener("click", next);
+      row.appendChild(nx);
+      row.appendChild(el("span", "kbd", "enter"));
+      fb.appendChild(row);
+      qb.appendChild(fb);
+    }
+    f.appendChild(qb);
+    return f;
+  }
+
+  function answer(shown) {
+    var item = V.queue[V.at], q = item.q, p = item.p;
+    if (V.picked != null) return;
+    stopQ();
+    V.times[V.at] = V.qElapsed;
+    V.picked = shown;
+    var right = shown === p.correctAt;
+    state.seen[q._i] = 1;
+    state.pat[q.pat] = (state.pat[q.pat] || 0) + 1;
+    if (right) { state.patok[q.pat] = (state.patok[q.pat] || 0) + 1; delete state.wrong[q._i]; }
+    else state.wrong[q._i] = 1;
+    save(); render();
+  }
+
+  function next() {
+    V.picked = null;
+    if (V.at + 1 < V.queue.length) { V.at++; beginQ(); render(); }
+    else { stopQ(); V.screen = "result"; render(); }
+  }
+
+  function result() {
+    var f = document.createDocumentFragment();
+    var n = V.queue.length;
+    var right = V.queue.filter(function (item, i) { return true; }).length;
+    var got = 0, slow = 0;
+    V.queue.forEach(function (item, i) {
+      if (!state.wrong[item.q._i]) got++;
+      if (V.times[i] > item.q.tgt) slow++;
+    });
+    var pct = Math.round((got / n) * 100);
+    var card = el("div", "score");
+    card.appendChild(el("div", "big " + (pct >= 75 ? "pass" : "fail"), got + "/" + n));
+    card.appendChild(el("h2", null, pct + "% identified" + (slow ? " · " + slow + " over target" : "")));
+    card.appendChild(el("p", null, pct >= 75
+      ? "That is the recognition speed you want walking into an assessment. The remaining work is writing the pattern out fast, which is what the problem lists in the tracker are for."
+      : "Recognition is the cheapest skill to improve here — it is pure pattern matching, not problem solving. Re-read the tells sheet, then redo the ones you missed."));
+    var row = el("div", "cta");
+    if (wrongList().length) {
+      var rb = el("button", "btn primary", "redo the " + wrongList().length + " missed");
+      rb.type = "button"; rb.id = "nextBtn";
+      rb.addEventListener("click", function () { start(shuffle(wrongList())); });
+      row.appendChild(rb);
+    }
+    var sh = el("button", "btn", "back to the tells"); sh.type = "button";
+    sh.addEventListener("click", function () { V.screen = "sheet"; render(); });
+    row.appendChild(sh);
+    var hm = el("button", "btn ghost", "menu"); hm.type = "button";
+    hm.addEventListener("click", function () { V.screen = "home"; render(); });
+    row.appendChild(hm);
+    card.appendChild(row);
+    f.appendChild(card);
+    return f;
+  }
+
+  document.addEventListener("keydown", function (ev) {
+    if (V.screen === "quiz" && V.picked == null) {
+      var n = parseInt(ev.key, 10);
+      if (n >= 1 && n <= 4) {
+        var btns = document.querySelectorAll(".opt");
+        if (btns[n - 1] && !btns[n - 1].disabled) { btns[n - 1].click(); ev.preventDefault(); return; }
+      }
+    }
+    if (ev.key === "Enter") { var b = document.getElementById("nextBtn"); if (b) { b.click(); ev.preventDefault(); } }
+  });
+
+  function render() {
+    var y = window.scrollY;
+    app.textContent = "";
+    app.appendChild(bar());
+    if (V.screen === "home") app.appendChild(home());
+    else if (V.screen === "sheet") app.appendChild(sheetScreen());
+    else if (V.screen === "quiz") app.appendChild(quiz());
+    else app.appendChild(result());
+    window.scrollTo(0, V.screen === "home" ? y : 0);
+  }
+
+  render();
+  if (window.claude && window.claude.use) {
+    window.claude.use("artifact").then(function (a) { if (a) api = a; }).catch(function () {});
+  }
+})();
+</script>
+</body>
+</html>
+</body></html>

@@ -1,0 +1,715 @@
+<title>SQL Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#070B11; --bg2:#0C121B; --panel:#121A26; --panel2:#182231; --edge:#1E2A3A; --edge2:#2A3A4E;
+    --txt:#E8EEF6; --dim:#8397AE; --dim2:#5B6E85;
+    --cy:#3FD9EC; --cy-dim:#12333D;
+    --ok:#4BE08B; --ok-dim:#0E2C1D;
+    --no:#FF7A6B; --no-dim:#331612;
+    --am:#FFC44D; --am-dim:#332714;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    --sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  button,textarea{font-family:inherit;color:inherit}
+  :focus-visible{outline:2px solid var(--cy);outline-offset:2px;border-radius:4px}
+  .wrap{max-width:1000px;margin:0 auto;padding:20px 16px 90px;display:flex;flex-direction:column;gap:15px}
+
+  .bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:11px 14px;background:var(--panel);border:1px solid var(--edge);border-radius:10px}
+  .logo{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--cy)}
+  .bar .sp{flex:1 1 auto}
+  .stat{display:flex;align-items:baseline;gap:5px;font-family:var(--mono)}
+  .stat b{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
+  .stat span{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2)}
+  .stat.ok b{color:var(--ok)}
+  .engine{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:5px;border:1px solid var(--edge2);color:var(--dim2)}
+  .engine.on{color:var(--ok);border-color:var(--ok)}
+  .engine.off{color:var(--am);border-color:var(--am)}
+
+  .btn{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+       background:var(--panel2);border:1px solid var(--edge2);border-radius:7px;padding:9px 14px;cursor:pointer;
+       transition:transform .08s ease,background .15s ease,border-color .15s ease}
+  .btn:hover:not(:disabled){background:var(--edge);border-color:var(--cy)}
+  .btn:active{transform:translateY(1px)}
+  .btn.primary{background:var(--cy);border-color:var(--cy);color:#04222A}
+  .btn.primary:hover:not(:disabled){background:#5FE6F5}
+  .btn.ghost{background:transparent}
+  .btn:disabled{opacity:.35;cursor:default}
+
+  .hero{padding:24px 20px;background:linear-gradient(160deg,var(--panel) 0%,var(--bg2) 100%);border:1px solid var(--edge);border-radius:14px;display:flex;flex-direction:column;gap:13px}
+  .hero h1{margin:0;font-family:var(--mono);font-weight:700;font-size:clamp(25px,5vw,36px);letter-spacing:-.02em;line-height:1.05}
+  .hero h1 em{font-style:normal;color:var(--cy)}
+  .hero p{margin:0;color:var(--dim);max-width:64ch;font-size:14.5px}
+  .cta{display:flex;gap:9px;flex-wrap:wrap;margin-top:2px}
+
+  .tiers{display:flex;flex-direction:column;gap:10px}
+  .tier{background:var(--panel);border:1px solid var(--edge);border-radius:11px;overflow:hidden}
+  .tier-h{display:flex;align-items:center;gap:11px;padding:11px 14px;background:var(--panel2);border-bottom:1px solid var(--edge);flex-wrap:wrap}
+  .tier-h .n{font-family:var(--mono);font-size:10px;color:var(--cy);letter-spacing:.1em}
+  .tier-h h3{margin:0;font-size:15px}
+  .tier-h .c{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--dim2);font-variant-numeric:tabular-nums}
+  .exlist{display:flex;flex-direction:column}
+  .ex{display:grid;grid-template-columns:30px 1fr auto;gap:11px;align-items:center;text-align:left;
+      background:none;border:0;border-bottom:1px solid var(--edge);padding:11px 14px;cursor:pointer;width:100%}
+  .ex:last-child{border-bottom:0}
+  .ex:hover{background:var(--panel2)}
+  .ex .id{font-family:var(--mono);font-size:11px;color:var(--dim2)}
+  .ex .t{font-size:14px}
+  .ex.done .t{color:var(--dim)}
+  .tick{font-family:var(--mono);font-size:10px;font-weight:700;width:26px;text-align:center;padding:3px 0;border-radius:4px;border:1px solid var(--edge2);color:var(--dim2)}
+  .tick.on{color:var(--ok);border-color:var(--ok);background:var(--ok-dim)}
+
+  .crumb{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);flex-wrap:wrap}
+  .crumb .now{color:var(--cy)}
+  .crumb .sp{flex:1 1 auto}
+
+  .qbox{background:var(--panel);border:1px solid var(--edge);border-radius:11px;padding:15px;display:flex;flex-direction:column;gap:9px}
+  .qbox h2{margin:0;font-size:18px}
+  .qbox .task{color:var(--txt);font-size:15px}
+  .qbox .want{font-family:var(--mono);font-size:12px;color:var(--cy);background:var(--cy-dim);border:1px solid var(--cy);border-radius:7px;padding:9px 11px}
+  .dialect{font-size:13px;color:var(--am);background:var(--am-dim);border:1px solid var(--am);border-radius:7px;padding:9px 11px}
+  .dialect b{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:3px}
+
+  textarea{width:100%;min-height:130px;background:var(--bg);border:1px solid var(--edge2);border-radius:9px;padding:12px;
+           font-family:var(--mono);font-size:13.5px;line-height:1.6;resize:vertical;tab-size:2}
+  textarea:focus{border-color:var(--cy);outline:none}
+  .runrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .runrow .sp{flex:1 1 auto}
+  .kbd{font-family:var(--mono);font-size:10px;color:var(--dim2);border:1px solid var(--edge2);border-radius:4px;padding:1px 5px}
+
+  .verdict{border-radius:9px;padding:12px 13px;font-size:14px;border:1px solid;display:flex;flex-direction:column;gap:6px}
+  .verdict b{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+  .verdict.pass{background:var(--ok-dim);border-color:var(--ok)} .verdict.pass b{color:var(--ok)}
+  .verdict.fail{background:var(--no-dim);border-color:var(--no)} .verdict.fail b{color:var(--no)}
+  .verdict.err{background:var(--am-dim);border-color:var(--am)} .verdict.err b{color:var(--am)}
+  .verdict code{font-family:var(--mono);font-size:12.5px;background:rgba(0,0,0,.4);padding:1px 5px;border-radius:4px}
+
+  .rpanel{background:var(--panel);border:1px solid var(--edge);border-radius:11px;overflow:hidden}
+  .rpanel-h{padding:8px 12px;background:var(--panel2);border-bottom:1px solid var(--edge);font-family:var(--mono);
+            font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim2);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .rpanel-h .sp{flex:1 1 auto}
+  .tscroll{overflow:auto;max-height:340px}
+  table{border-collapse:collapse;width:100%;font-family:var(--mono);font-size:12.5px}
+  th{position:sticky;top:0;background:var(--panel2);text-align:left;padding:7px 11px;border-bottom:1px solid var(--edge2);
+     font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--cy);white-space:nowrap;font-weight:600}
+  td{padding:6px 11px;border-bottom:1px solid var(--edge);white-space:nowrap;color:var(--txt)}
+  tr:last-child td{border-bottom:0}
+  td.null{color:var(--dim2);font-style:italic}
+  .empty{padding:14px;color:var(--dim2);font-family:var(--mono);font-size:12.5px}
+
+  .schema{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+  .tbl{background:var(--panel);border:1px solid var(--edge);border-radius:10px;overflow:hidden}
+  .tbl-h{padding:8px 11px;background:var(--panel2);border-bottom:1px solid var(--edge);font-family:var(--mono);
+         font-size:12px;color:var(--cy);display:flex;gap:8px;align-items:center}
+  .tbl-h .rows{margin-left:auto;font-size:10px;color:var(--dim2)}
+  .cols{padding:9px 11px;display:flex;flex-direction:column;gap:3px}
+  .col{font-family:var(--mono);font-size:11.5px;color:var(--dim);display:flex;gap:7px}
+  .col b{color:var(--txt);font-weight:500}
+  .col i{color:var(--dim2);font-style:normal;font-size:10px;margin-left:auto}
+
+  .foot{color:var(--dim2);font-size:12.5px;font-family:var(--mono);text-align:center;padding-top:4px}
+  .foot a{color:var(--dim)}
+
+  @media(max-width:640px){
+    .wrap{padding:14px 11px 80px;gap:12px}
+    .hero{padding:19px 15px}
+    .ex{grid-template-columns:26px 1fr auto;padding:12px 11px}
+    textarea{min-height:150px;font-size:14px}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script type="application/json" id="seed">
+{
+  "sql": "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT, budget INTEGER);\nINSERT INTO departments VALUES (1,'Engineering',900000),(2,'Data',650000),(3,'Platform',500000),(4,'Design',200000);\n\nCREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT, dept_id INTEGER, manager_id INTEGER, salary INTEGER, hire_date TEXT, city TEXT);\nINSERT INTO employees VALUES\n (1,'Asha',1,NULL,145000,'2019-03-11','Bengaluru'),\n (2,'Rohan',1,1,98000,'2020-07-01','Bengaluru'),\n (3,'Meera',2,1,120000,'2018-01-15','Hyderabad'),\n (4,'Vikram',2,3,120000,'2021-09-20','Hyderabad'),\n (5,'Sneha',2,3,76000,'2022-02-05','Pune'),\n (6,'Arjun',3,1,88000,'2020-11-30','Bengaluru'),\n (7,'Kiran',3,6,92000,'2021-06-14','Bengaluru'),\n (8,'Divya',1,2,67000,'2023-04-02','Chennai'),\n (9,'Farhan',NULL,NULL,54000,'2023-08-19','Pune'),\n (10,'Nisha',3,6,92000,'2022-12-01','Pune');\n\nCREATE TABLE projects (id INTEGER PRIMARY KEY, name TEXT, dept_id INTEGER, budget INTEGER);\nINSERT INTO projects VALUES (1,'Atlas',1,300000),(2,'Beacon',2,250000),(3,'Cobalt',3,180000),(4,'Delta',1,120000);\n\nCREATE TABLE assignments (emp_id INTEGER, project_id INTEGER, hours INTEGER);\nINSERT INTO assignments VALUES (2,1,120),(3,2,200),(4,2,160),(5,2,40),(6,3,90),(7,3,150),(8,1,60),(10,3,110),(2,4,30);\n\nCREATE TABLE logins (emp_id INTEGER, login_date TEXT);\nINSERT INTO logins VALUES (2,'2026-08-01'),(2,'2026-08-02'),(2,'2026-08-03'),(3,'2026-08-01'),(3,'2026-08-03'),(7,'2026-08-01'),(7,'2026-08-02'),(7,'2026-08-03'),(7,'2026-08-04'),(5,'2026-08-05');",
+  "tables": [
+    {"name":"employees","rows":10,"cols":[["id","int pk"],["name","text"],["dept_id","int → departments.id, 1 NULL"],["manager_id","int → employees.id"],["salary","int"],["hire_date","text YYYY-MM-DD"],["city","text"]]},
+    {"name":"departments","rows":4,"cols":[["id","int pk"],["name","text"],["budget","int"]]},
+    {"name":"projects","rows":4,"cols":[["id","int pk"],["name","text"],["dept_id","int"],["budget","int"]]},
+    {"name":"assignments","rows":9,"cols":[["emp_id","int"],["project_id","int"],["hours","int"]]},
+    {"name":"logins","rows":10,"cols":[["emp_id","int"],["login_date","text YYYY-MM-DD"]]}
+  ]
+}
+</script>
+
+<script type="application/json" id="ex">
+[
+{"id":1,"tier":1,"title":"Filter and order","task":"List the names of every employee based in Bengaluru, alphabetically.","want":"one column: name — 4 rows, ordered","ordered":true,
+ "ref":"SELECT name FROM employees WHERE city = 'Bengaluru' ORDER BY name;",
+ "hint":"WHERE narrows rows, ORDER BY sorts what survives."},
+
+{"id":2,"tier":1,"title":"Compare a number","task":"Name and salary of everyone earning more than 90000, highest paid first.","want":"two columns: name, salary — 6 rows, ordered","ordered":true,
+ "ref":"SELECT name, salary FROM employees WHERE salary > 90000 ORDER BY salary DESC;",
+ "hint":"\"More than\" is strictly greater — 90000 itself does not qualify."},
+
+{"id":3,"tier":1,"title":"Top N by date","task":"The three most recently hired employees, with their hire date.","want":"two columns: name, hire_date — 3 rows, newest first","ordered":true,
+ "ref":"SELECT name, hire_date FROM employees ORDER BY hire_date DESC LIMIT 3;",
+ "hint":"Sort descending, then cut the list short.",
+ "dialect":"LIMIT works in Postgres, MySQL and SQLite. SQL Server uses SELECT TOP 3 instead, and Oracle uses FETCH FIRST 3 ROWS ONLY. If an assessment runs on SQL Server, LIMIT is a syntax error."},
+
+{"id":4,"tier":1,"title":"Distinct values","task":"Every distinct city the company has staff in, alphabetically.","want":"one column: city — 4 rows, ordered","ordered":true,
+ "ref":"SELECT DISTINCT city FROM employees ORDER BY city;",
+ "hint":"DISTINCT applies to the whole selected row, not just one column."},
+
+{"id":5,"tier":2,"title":"Count per group","task":"How many employees are in each department? Show the department id and the count. Ignore the employee with no department.","want":"two columns: dept_id, count — 3 rows","ordered":false,
+ "ref":"SELECT dept_id, COUNT(*) AS n FROM employees WHERE dept_id IS NOT NULL GROUP BY dept_id;",
+ "hint":"GROUP BY collapses rows that share a value; COUNT(*) counts each group. NULL is not a value you can group meaningfully here — filter it out."},
+
+{"id":6,"tier":2,"title":"Aggregate with HAVING","task":"Average salary per city, but only for cities with more than one employee.","want":"two columns: city, avg salary — 3 rows","ordered":false,
+ "ref":"SELECT city, AVG(salary) AS a FROM employees GROUP BY city HAVING COUNT(*) > 1;",
+ "hint":"WHERE filters rows before grouping. HAVING filters groups after. A condition on COUNT(*) can only live in HAVING.",
+ "dialect":"This is where Postgres and MySQL genuinely differ. Postgres requires every non-aggregated column in the SELECT to appear in GROUP BY, and errors if it does not. MySQL historically allowed it and returned an arbitrary row's value. Write it Postgres-strict and it is correct everywhere."},
+
+{"id":7,"tier":2,"title":"Two aggregates, one row","task":"The highest and lowest salary in the company, as a single row.","want":"two columns: max, min — 1 row","ordered":false,
+ "ref":"SELECT MAX(salary) AS hi, MIN(salary) AS lo FROM employees;",
+ "hint":"With no GROUP BY, the whole table is one group."},
+
+{"id":8,"tier":2,"title":"Sum per group","task":"Total hours logged against each project id, biggest total first.","want":"two columns: project_id, total hours — 4 rows, ordered","ordered":true,
+ "ref":"SELECT project_id, SUM(hours) AS h FROM assignments GROUP BY project_id ORDER BY h DESC;",
+ "hint":"You can ORDER BY an aggregate, and you can order by the alias you gave it."},
+
+{"id":9,"tier":3,"title":"Inner join","task":"Each employee's name alongside their department's name.","want":"two columns: employee name, department name — 9 rows","ordered":false,
+ "ref":"SELECT e.name, d.name FROM employees e JOIN departments d ON e.dept_id = d.id;",
+ "hint":"Nine rows, not ten — an inner join silently drops the employee whose dept_id is NULL. That dropped row is the whole point of the next exercise."},
+
+{"id":10,"tier":3,"title":"Left join keeps the orphan","task":"Every employee with their department name, including the one who has no department.","want":"two columns: employee name, department name (NULL for the orphan) — 10 rows","ordered":false,
+ "ref":"SELECT e.name, d.name FROM employees e LEFT JOIN departments d ON e.dept_id = d.id;",
+ "hint":"LEFT JOIN keeps all rows from the left table and fills the right side with NULL where there is no match."},
+
+{"id":11,"tier":3,"title":"Find the empty group","task":"Departments that have no employees at all.","want":"one column: department name — 1 row","ordered":false,
+ "ref":"SELECT d.name FROM departments d LEFT JOIN employees e ON e.dept_id = d.id WHERE e.id IS NULL;",
+ "hint":"LEFT JOIN from departments, then keep only the rows where the employee side came back NULL. This anti-join pattern is asked constantly."},
+
+{"id":12,"tier":3,"title":"Self join","task":"Employees who earn more than their own manager. Show the employee's name.","want":"one column: name — 2 rows","ordered":false,
+ "ref":"SELECT e.name FROM employees e JOIN employees m ON e.manager_id = m.id WHERE e.salary > m.salary;",
+ "hint":"Join the table to itself under two different aliases — one row acting as the employee, the other as the manager. Note that equal salaries do not count as \"more\"."},
+
+{"id":13,"tier":3,"title":"Join through a bridge table","task":"Every employee-and-project pairing, showing the employee name and the project name.","want":"two columns: employee name, project name — 9 rows","ordered":false,
+ "ref":"SELECT e.name, p.name FROM assignments a JOIN employees e ON a.emp_id = e.id JOIN projects p ON a.project_id = p.id;",
+ "hint":"A many-to-many needs two joins: from the bridge table out to each side."},
+
+{"id":14,"tier":4,"title":"Subquery in WHERE","task":"Employees earning above the company average salary.","want":"two columns: name, salary — 4 rows","ordered":false,
+ "ref":"SELECT name, salary FROM employees WHERE salary > (SELECT AVG(salary) FROM employees);",
+ "hint":"A scalar subquery returns one value, so you can compare against it directly. You cannot use AVG() in WHERE without wrapping it like this."},
+
+{"id":15,"tier":4,"title":"Second highest","task":"The second highest distinct salary in the company, as a single value.","want":"one column, 1 row: 120000","ordered":false,
+ "ref":"SELECT DISTINCT salary FROM employees ORDER BY salary DESC LIMIT 1 OFFSET 1;",
+ "hint":"DISTINCT matters — two people share the top-but-one salary. Either sort distinct salaries and skip one, or take the max of everything below the max."},
+
+{"id":16,"tier":4,"title":"Subquery picks the group","task":"Everyone working in whichever department has the largest budget.","want":"one column: name — 3 rows","ordered":false,
+ "ref":"SELECT name FROM employees WHERE dept_id = (SELECT id FROM departments ORDER BY budget DESC LIMIT 1);",
+ "hint":"Resolve the inner question first — which department id has the biggest budget — then filter on it."},
+
+{"id":17,"tier":4,"title":"Anti-join with NOT EXISTS","task":"Employees not assigned to any project.","want":"one column: name — 2 rows","ordered":false,
+ "ref":"SELECT name FROM employees e WHERE NOT EXISTS (SELECT 1 FROM assignments a WHERE a.emp_id = e.id);",
+ "hint":"NOT EXISTS or a LEFT JOIN ... IS NULL both work. Prefer them over NOT IN, because NOT IN returns nothing at all if the subquery yields a single NULL."},
+
+{"id":18,"tier":5,"title":"DENSE_RANK over ties","task":"Every employee with their salary and a dense rank by salary, highest paid getting rank 1. Tied salaries must share a rank with no gap after them.","want":"three columns: name, salary, rank — 10 rows","ordered":false,
+ "ref":"SELECT name, salary, DENSE_RANK() OVER (ORDER BY salary DESC) AS r FROM employees;",
+ "hint":"RANK leaves gaps after a tie (1,2,2,4). DENSE_RANK does not (1,2,2,3). ROW_NUMBER refuses to tie at all. The wording decides which one."},
+
+{"id":19,"tier":5,"title":"Top one per group","task":"The highest paid employee in each department. Include ties. Skip the employee with no department.","want":"three columns: dept_id, name, salary — 5 rows","ordered":false,
+ "ref":"SELECT dept_id, name, salary FROM (SELECT dept_id, name, salary, RANK() OVER (PARTITION BY dept_id ORDER BY salary DESC) AS r FROM employees WHERE dept_id IS NOT NULL) t WHERE r = 1;",
+ "hint":"PARTITION BY restarts the ranking for each department. You cannot filter on a window function in WHERE directly — wrap it in a subquery and filter outside. Two departments have ties, so five rows, not three."},
+
+{"id":20,"tier":5,"title":"Running total","task":"Employees ordered by hire date, each with a running total of salary up to and including that row.","want":"three columns: name, salary, running total — 10 rows, ordered by hire_date","ordered":true,
+ "ref":"SELECT name, salary, SUM(salary) OVER (ORDER BY hire_date) AS rt FROM employees ORDER BY hire_date;",
+ "hint":"An aggregate with OVER (ORDER BY ...) accumulates instead of collapsing. The default frame is everything from the start up to the current row."},
+
+{"id":21,"tier":5,"title":"Reach into the previous row","task":"Employees ordered by hire date, each showing their own salary and the salary of the person hired immediately before them.","want":"three columns: name, salary, previous salary (NULL on the first row) — 10 rows, ordered","ordered":true,
+ "ref":"SELECT name, salary, LAG(salary) OVER (ORDER BY hire_date) AS prev FROM employees ORDER BY hire_date;",
+ "hint":"LAG looks backwards, LEAD looks forwards. The first row has nothing behind it, so it gets NULL."},
+
+{"id":22,"tier":6,"title":"Nth highest salary","task":"The third highest distinct salary. This is the single most frequently asked SQL question in assessments.","want":"one column, 1 row: 98000","ordered":false,
+ "ref":"SELECT DISTINCT salary FROM employees ORDER BY salary DESC LIMIT 1 OFFSET 2;",
+ "hint":"OFFSET skips rows before LIMIT takes them, so the Nth highest is OFFSET N-1. The window-function version uses DENSE_RANK() = N. Know both — interviewers ask for the second one after you give the first.",
+ "dialect":"In Postgres and MySQL this is LIMIT 1 OFFSET 2. In SQL Server there is no LIMIT: you use OFFSET 2 ROWS FETCH NEXT 1 ROWS ONLY, or DENSE_RANK in a subquery. The DENSE_RANK version is the one that ports everywhere."},
+
+{"id":23,"tier":6,"title":"Find the duplicates","task":"Which salary values are shared by more than one employee? Show the salary and how many people are on it.","want":"two columns: salary, count — 2 rows","ordered":false,
+ "ref":"SELECT salary, COUNT(*) AS n FROM employees GROUP BY salary HAVING COUNT(*) > 1;",
+ "hint":"Group by the thing you suspect is duplicated, then HAVING COUNT(*) > 1. Same shape as the classic duplicate-email question."},
+
+{"id":24,"tier":6,"title":"Consecutive days","task":"Which employees logged in on three or more consecutive days? Show the employee id.","want":"one column: emp_id — 2 rows","ordered":false,
+ "ref":"SELECT DISTINCT a.emp_id FROM logins a JOIN logins b ON a.emp_id = b.emp_id AND b.login_date = date(a.login_date,'+1 day') JOIN logins c ON a.emp_id = c.emp_id AND c.login_date = date(a.login_date,'+2 day');",
+ "hint":"Self-join the table to itself twice, offsetting the date by one and two days. The modern alternative is a window function: subtract ROW_NUMBER() from the date and group by the result, since a constant difference means an unbroken run.",
+ "dialect":"Date arithmetic is the least portable part of SQL. Here it is date(d,'+1 day') for SQLite; Postgres uses d + INTERVAL '1 day', MySQL uses DATE_ADD(d, INTERVAL 1 DAY). The logic is identical — only the function name changes."}
+]
+</script>
+
+<script type="application/json" id="state">
+{"rev":0,"solved":{},"drafts":{}}
+</script>
+
+<script id="code">
+(function () {
+  "use strict";
+  // Cross-tool links in this page are plain .html filenames, so opening the file straight off disk
+  // just works. Served over http(s) those relative names cannot resolve, so there each one is
+  // swapped for its hosted copy. Local is what the file actually contains; online adapts.
+  var HOSTED = {
+    "./1%20-%20Twenty%20Weeks%20to%20AC%20%28tracker%29.html": "https://claude.ai/code/artifact/32b165b3-0cee-4121-9470-b0e8d6d17c16",
+    "./2%20-%20Stdin%20Trainer%20%28drill%29.html": "https://claude.ai/code/artifact/00d12bf6-5548-4e56-b449-d0f33193a495",
+    "./3%20-%20Stdin%20Survival%20Kit%20%28manual%29.html": "https://claude.ai/code/artifact/49b64e1a-a87a-4924-b42d-2a7a614ab41a",
+    "./5%20-%20SQL%20Lab%20%28practice%29.html": "https://claude.ai/code/artifact/0f564ee0-0ae9-4f76-b0db-9cbaf04a5664",
+    "./6%20-%20CS%20Core%20Drill%20%28OS%20DBMS%20CN%20OOP%20C%29.html": "https://claude.ai/code/artifact/3a19c5c3-5b45-4744-a980-20f138d77859",
+    "./7%20-%20Aptitude%20Sprint%20%28formulas%20%2B%20practice%29.html": "https://claude.ai/code/artifact/1176c004-05c1-4ebd-bd08-041957dd07f6",
+    "./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html": "https://claude.ai/code/artifact/9c7876de-143f-4f4d-bead-a8204d0f63ad",
+    "./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html": "https://claude.ai/code/artifact/ca3214a6-ec8f-4b10-b757-9c025a98ba47",
+    "./10%20-%20Mock%20OA%20%28timed%20exam%29.html": "https://claude.ai/code/artifact/ea757a13-0226-4bad-9065-96ca4927af42"
+  };
+  function fixToolLinks() {
+    if (location.protocol === "file:") return;
+    Array.prototype.forEach.call(document.querySelectorAll("a[href]"), function (a) {
+      var u = HOSTED[a.getAttribute("href")];
+      if (u) a.setAttribute("href", u);
+    });
+  }
+  if (location.protocol !== "file:") {
+    try {
+      new MutationObserver(function () { fixToolLinks(); })
+        .observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) {}
+    fixToolLinks();
+  }
+
+
+
+  // An artifact places the authored <title>, font <link>s and <style> BELOW <head>, so reading
+  // the head alone would republish this page with no CSS at all. Collect them wherever they sit;
+  // platform-injected styles are skipped by marker, keeping this idempotent across generations.
+  function SHELL() {
+    var out = ['<meta charset="utf-8">',
+               '<meta name="viewport" content="width=device-width,initial-scale=1">'];
+    var t = document.querySelector("title");
+    if (t) out.push(t.outerHTML);
+    Array.prototype.forEach.call(document.querySelectorAll("link"), function (n) {
+      var h = n.getAttribute("href") || "";
+      if (h.indexOf("fonts.googleapis") !== -1 || h.indexOf("fonts.gstatic") !== -1) out.push(n.outerHTML);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("style"), function (n) {
+      var s = n.textContent || "";
+      if (s.indexOf("--mono:") !== -1) out.push(n.outerHTML);
+    });
+    return out.join("\n");
+  }
+
+  var SEED = JSON.parse(document.getElementById("seed").textContent);
+  var EX = JSON.parse(document.getElementById("ex").textContent);
+
+  var TIERS = [
+    { n: 1, name: "Select, filter, order" },
+    { n: 2, name: "Aggregates and GROUP BY" },
+    { n: 3, name: "Joins" },
+    { n: 4, name: "Subqueries" },
+    { n: 5, name: "Window functions" },
+    { n: 6, name: "The assessment classics" }
+  ];
+
+  var LS = "sql-lab-v1";
+  function migrate(s) {
+    if (!s || typeof s !== "object") s = {};
+    if (!s.solved) s.solved = {};
+    if (!s.drafts) s.drafts = {};
+    if (typeof s.rev !== "number") s.rev = 0;
+    return s;
+  }
+  var embedded = migrate(JSON.parse(document.getElementById("state").textContent));
+  var state = embedded, local = null;
+  try { var raw = localStorage.getItem(LS); if (raw) local = migrate(JSON.parse(raw)); } catch (e) {}
+  if (local && local.rev > embedded.rev) state = local;
+
+  var app = document.getElementById("app");
+  var api = null, saveT = null;
+  var db = null, engine = "loading";
+  var V = { screen: "home", cur: null, out: null, verdict: null, revealed: false };
+
+  function save() {
+    state.rev++;
+    try { localStorage.setItem(LS, JSON.stringify(state)); } catch (e) {}
+    if (!api) return;
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      var o = "<" + "script", c = "<" + "/" + "script>";
+      api.publish('<!doctype html>\n<html lang="en">\n<head>\n' + SHELL() + '\n</head>\n<body>\n' +
+        '<div class="wrap" id="app"></div>\n' +
+        o + ' type="application/json" id="seed">' + JSON.stringify(SEED) + c + '\n' +
+        o + ' type="application/json" id="ex">' + JSON.stringify(EX) + c + '\n' +
+        o + ' type="application/json" id="state">' + JSON.stringify(state) + c + '\n' +
+        o + ' id="code">' + document.getElementById("code").textContent + c + '\n' +
+        '</body>\n</html>').catch(function () {});
+    }, 1800);
+  }
+
+  function el(t, c, x) { var n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; }
+  function solvedCount() { var n = 0; EX.forEach(function (e) { if (state.solved[e.id]) n++; }); return n; }
+
+  /* ---------- engine ---------- */
+  function boot() {
+    var s = document.createElement("script");
+    s.src = "https://cdn.jsdelivr.net/npm/sql.js@1.14.2/dist/sql-asm.js";
+    s.onload = function () {
+      if (typeof initSqlJs !== "function") { engine = "failed"; render(); return; }
+      initSqlJs().then(function (SQL) {
+        db = new SQL.Database();
+        db.run(SEED.sql);
+        engine = "ready";
+        render();
+      }).catch(function () { engine = "failed"; render(); });
+    };
+    s.onerror = function () { engine = "failed"; render(); };
+    document.head.appendChild(s);
+  }
+
+  function runSql(sql) {
+    // exec throws on bad SQL; returns [] for statements with no result rows
+    var res = db.exec(sql);
+    if (!res.length) return { columns: [], values: [] };
+    return res[res.length - 1];
+  }
+  function fingerprint(r) {
+    return r.values.map(function (row) {
+      return row.map(function (v) {
+        if (v === null || v === undefined) return "\u0000NULL";
+        if (typeof v === "number") return String(Math.round(v * 1e6) / 1e6);
+        return String(v);
+      }).join("\u0001");
+    });
+  }
+  function compare(got, want, ordered) {
+    if (got.values.length !== want.values.length) return { ok: false, why: "row count" };
+    if (got.values.length && got.columns.length !== want.columns.length) return { ok: false, why: "column count" };
+    var a = fingerprint(got), b = fingerprint(want);
+    if (!ordered) { a = a.slice().sort(); b = b.slice().sort(); }
+    for (var i = 0; i < a.length; i++) if (a[i] !== b[i]) return { ok: false, why: ordered ? "row order or values" : "values" };
+    return { ok: true };
+  }
+
+  /* ---------- chrome ---------- */
+  function bar() {
+    var b = el("div", "bar");
+    b.appendChild(el("div", "logo", "sql_lab"));
+    var e = el("span", "engine " + (engine === "ready" ? "on" : (engine === "failed" ? "off" : "")),
+      engine === "ready" ? "sqlite live" : (engine === "failed" ? "engine offline" : "loading engine…"));
+    b.appendChild(e);
+    b.appendChild(el("div", "sp"));
+    var s = el("div", "stat ok");
+    s.appendChild(el("b", null, solvedCount() + "/" + EX.length));
+    s.appendChild(el("span", null, "solved"));
+    b.appendChild(s);
+    if (V.screen !== "home") {
+      var h = el("button", "btn ghost", "all exercises"); h.type = "button";
+      h.addEventListener("click", function () { V.screen = "home"; render(); });
+      b.appendChild(h);
+    }
+    return b;
+  }
+
+  /* ---------- home ---------- */
+  function home() {
+    var f = document.createDocumentFragment();
+
+    var hero = el("div", "hero");
+    var h1 = el("h1");
+    h1.innerHTML = 'Write the query. <em>Actually run it.</em>';
+    hero.appendChild(h1);
+    var p = el("p");
+    p.textContent = "A real SQLite database runs inside this page — five tables, seeded with data chosen to punish sloppy queries. There are ties in the salaries, an employee with no department, and a department with no employees. You type SQL, it executes, and you are graded on the result set, not on wording.";
+    hero.appendChild(p);
+    var cta = el("div", "cta");
+    var next = EX.filter(function (e) { return !state.solved[e.id]; })[0];
+    var go = el("button", "btn primary", next ? (solvedCount() ? "continue — #" + next.id : "start with #1") : "all solved");
+    go.type = "button"; go.disabled = !next;
+    go.addEventListener("click", function () { open(next.id); });
+    cta.appendChild(go);
+    var sc = el("button", "btn", "free query");
+    sc.type = "button";
+    sc.addEventListener("click", function () { open("scratch"); });
+    cta.appendChild(sc);
+    hero.appendChild(cta);
+    f.appendChild(hero);
+
+    if (engine === "failed") {
+      var w = el("div", "verdict err");
+      w.appendChild(el("b", null, "engine offline"));
+      w.appendChild(el("div", null, "The SQL engine could not load, so queries cannot run. The exercises and reference solutions still work — you just have to check yourself."));
+      f.appendChild(w);
+    }
+
+    f.appendChild(el("div", "crumb", "the schema"));
+    var sch = el("div", "schema");
+    SEED.tables.forEach(function (t) {
+      var b = el("div", "tbl");
+      var h = el("div", "tbl-h");
+      h.appendChild(el("span", null, t.name));
+      h.appendChild(el("span", "rows", t.rows + " rows"));
+      b.appendChild(h);
+      var cols = el("div", "cols");
+      t.cols.forEach(function (c) {
+        var r = el("div", "col");
+        r.appendChild(el("b", null, c[0]));
+        r.appendChild(el("i", null, c[1]));
+        cols.appendChild(r);
+      });
+      b.appendChild(cols);
+      b.style.cursor = "pointer";
+      b.addEventListener("click", function () { open("scratch", "SELECT * FROM " + t.name + ";"); });
+      b.appendChild(el("div", "empty", "click to browse"));
+      sch.appendChild(b);
+    });
+    f.appendChild(sch);
+
+    var tiers = el("div", "tiers");
+    TIERS.forEach(function (t) {
+      var list = EX.filter(function (e) { return e.tier === t.n; });
+      var done = list.filter(function (e) { return state.solved[e.id]; }).length;
+      var box = el("div", "tier");
+      var h = el("div", "tier-h");
+      h.appendChild(el("span", "n", "TIER " + t.n));
+      h.appendChild(el("h3", null, t.name));
+      h.appendChild(el("span", "c", done + " / " + list.length));
+      box.appendChild(h);
+      var ul = el("div", "exlist");
+      list.forEach(function (e) {
+        var b = el("button", "ex" + (state.solved[e.id] ? " done" : ""));
+        b.type = "button";
+        b.appendChild(el("span", "id", "#" + e.id));
+        b.appendChild(el("span", "t", e.title));
+        b.appendChild(el("span", "tick" + (state.solved[e.id] ? " on" : ""), state.solved[e.id] ? "OK" : "—"));
+        b.addEventListener("click", function () { open(e.id); });
+        ul.appendChild(b);
+      });
+      box.appendChild(ul);
+      tiers.appendChild(box);
+    });
+    f.appendChild(tiers);
+
+    var ft = el("div", "foot");
+    ft.innerHTML = 'Companion tools: <a href="./10%20-%20Mock%20OA%20%28timed%20exam%29.html" target="_blank" rel="noopener noreferrer">Mock OA</a> · <a href="./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html" target="_blank" rel="noopener noreferrer">Decoder</a> · <a href="./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html" target="_blank" rel="noopener noreferrer">Pattern Radar</a> · <a href="./2%20-%20Stdin%20Trainer%20%28drill%29.html" target="_blank" rel="noopener noreferrer">Stdin Trainer</a> · <a href="./1%20-%20Twenty%20Weeks%20to%20AC%20%28tracker%29.html" target="_blank" rel="noopener noreferrer">the 20-week plan</a>';
+    f.appendChild(ft);
+    return f;
+  }
+
+  function open(id, preset) {
+    V.screen = "ex"; V.cur = id; V.out = null; V.verdict = null; V.revealed = false;
+    if (preset) state.drafts["scratch"] = preset;
+    render();
+    var ta = document.getElementById("editor");
+    if (ta) ta.focus();
+  }
+
+  /* ---------- exercise / scratch ---------- */
+  function resultTable(r, label, note) {
+    var p = el("div", "rpanel");
+    var h = el("div", "rpanel-h");
+    h.appendChild(el("span", null, label));
+    h.appendChild(el("span", "sp"));
+    h.appendChild(el("span", null, r.values.length + (r.values.length === 1 ? " row" : " rows")));
+    p.appendChild(h);
+    if (!r.columns.length) { p.appendChild(el("div", "empty", note || "no rows returned")); return p; }
+    var sc = el("div", "tscroll");
+    var t = document.createElement("table");
+    var thead = document.createElement("thead"), tr = document.createElement("tr");
+    r.columns.forEach(function (c) { var th = document.createElement("th"); th.textContent = c; tr.appendChild(th); });
+    thead.appendChild(tr); t.appendChild(thead);
+    var tb = document.createElement("tbody");
+    r.values.slice(0, 200).forEach(function (row) {
+      var trr = document.createElement("tr");
+      row.forEach(function (v) {
+        var td = document.createElement("td");
+        if (v === null || v === undefined) { td.textContent = "NULL"; td.className = "null"; }
+        else td.textContent = String(v);
+        trr.appendChild(td);
+      });
+      tb.appendChild(trr);
+    });
+    t.appendChild(tb); sc.appendChild(t); p.appendChild(sc);
+    if (r.values.length > 200) p.appendChild(el("div", "empty", "showing first 200 rows"));
+    return p;
+  }
+
+  function exScreen() {
+    var f = document.createDocumentFragment();
+    var scratch = V.cur === "scratch";
+    var e = scratch ? null : EX.filter(function (x) { return x.id === V.cur; })[0];
+    var key = scratch ? "scratch" : String(V.cur);
+
+    var crumb = el("div", "crumb");
+    if (scratch) crumb.appendChild(el("span", "now", "free query"));
+    else {
+      crumb.appendChild(el("span", "now", "#" + e.id));
+      crumb.appendChild(el("span", null, "tier " + e.tier + " · " + TIERS[e.tier - 1].name));
+    }
+    crumb.appendChild(el("span", "sp"));
+    if (!scratch) {
+      var prev = EX.filter(function (x) { return x.id === V.cur - 1; })[0];
+      var nxt = EX.filter(function (x) { return x.id === V.cur + 1; })[0];
+      if (prev) { var pb = el("button", "btn ghost", "prev"); pb.type = "button"; pb.addEventListener("click", function () { open(prev.id); }); crumb.appendChild(pb); }
+      if (nxt) { var nb = el("button", "btn ghost", "next"); nb.type = "button"; nb.addEventListener("click", function () { open(nxt.id); }); crumb.appendChild(nb); }
+    }
+    f.appendChild(crumb);
+
+    var qb = el("div", "qbox");
+    if (scratch) {
+      qb.appendChild(el("h2", null, "Free query"));
+      qb.appendChild(el("div", "task", "Explore the database. Nothing is graded here. Try SELECT * FROM employees; to see what you are working with."));
+    } else {
+      qb.appendChild(el("h2", null, "#" + e.id + " · " + e.title));
+      qb.appendChild(el("div", "task", e.task));
+      qb.appendChild(el("div", "want", "Expected: " + e.want));
+      if (e.dialect) {
+        var d = el("div", "dialect");
+        d.appendChild(el("b", null, "dialect note"));
+        d.appendChild(el("div", null, e.dialect));
+        qb.appendChild(d);
+      }
+    }
+
+    var ta = document.createElement("textarea");
+    ta.id = "editor";
+    ta.spellcheck = false;
+    ta.placeholder = scratch ? "SELECT * FROM employees;" : "SELECT ...";
+    ta.value = state.drafts[key] || "";
+    ta.addEventListener("input", function () { state.drafts[key] = ta.value; });
+    qb.appendChild(ta);
+
+    var row = el("div", "runrow");
+    var runB = el("button", "btn primary", "run");
+    runB.type = "button"; runB.disabled = engine !== "ready";
+    runB.addEventListener("click", doRun);
+    row.appendChild(runB);
+    if (!scratch) {
+      var chk = el("button", "btn", "check answer");
+      chk.type = "button"; chk.disabled = engine !== "ready";
+      chk.addEventListener("click", doCheck);
+      row.appendChild(chk);
+    }
+    row.appendChild(el("span", "kbd", "ctrl+enter to run"));
+    row.appendChild(el("span", "sp"));
+    if (!scratch) {
+      var hb = el("button", "btn ghost", V.revealed ? "hide solution" : "reveal solution");
+      hb.type = "button";
+      hb.addEventListener("click", function () { V.revealed = !V.revealed; render(); });
+      row.appendChild(hb);
+    }
+    qb.appendChild(row);
+
+    if (V.verdict) {
+      var v = el("div", "verdict " + V.verdict.kind);
+      v.appendChild(el("b", null, V.verdict.head));
+      var body = document.createElement("div");
+      body.textContent = V.verdict.body;
+      v.appendChild(body);
+      qb.appendChild(v);
+    }
+
+    if (!scratch && V.revealed) {
+      var sol = el("div", "rpanel");
+      var sh = el("div", "rpanel-h");
+      sh.appendChild(el("span", null, "reference solution"));
+      sol.appendChild(sh);
+      var pre = el("div", "empty");
+      pre.style.whiteSpace = "pre-wrap";
+      pre.style.fontSize = "13px";
+      pre.style.color = "var(--ok)";
+      pre.textContent = e.ref;
+      sol.appendChild(pre);
+      if (e.hint) {
+        var hn = el("div", "empty");
+        hn.style.whiteSpace = "pre-wrap";
+        hn.style.borderTop = "1px solid var(--edge)";
+        hn.textContent = e.hint;
+        sol.appendChild(hn);
+      }
+      qb.appendChild(sol);
+    }
+    f.appendChild(qb);
+
+    if (V.out) f.appendChild(resultTable(V.out, "your result"));
+    return f;
+  }
+
+  function currentSql() {
+    var key = V.cur === "scratch" ? "scratch" : String(V.cur);
+    return (state.drafts[key] || "").trim();
+  }
+
+  function doRun() {
+    var sql = currentSql();
+    if (!sql) { V.verdict = { kind: "err", head: "nothing to run", body: "Type a query first." }; render(); return; }
+    try {
+      V.out = runSql(sql);
+      V.verdict = null;
+    } catch (err) {
+      V.out = null;
+      V.verdict = { kind: "err", head: "sql error", body: String(err.message || err) };
+    }
+    save(); render();
+  }
+
+  function doCheck() {
+    var e = EX.filter(function (x) { return x.id === V.cur; })[0];
+    var sql = currentSql();
+    if (!sql) { V.verdict = { kind: "err", head: "nothing to check", body: "Type a query first." }; render(); return; }
+    var got, want;
+    try { got = runSql(sql); }
+    catch (err) {
+      V.out = null;
+      V.verdict = { kind: "err", head: "sql error", body: String(err.message || err) };
+      render(); return;
+    }
+    try { want = runSql(e.ref); }
+    catch (err2) {
+      V.verdict = { kind: "err", head: "reference failed", body: "The reference query itself errored — that is my bug, not yours: " + String(err2.message || err2) };
+      render(); return;
+    }
+    V.out = got;
+    var r = compare(got, want, e.ordered);
+    if (r.ok) {
+      var first = !state.solved[e.id];
+      state.solved[e.id] = 1;
+      V.verdict = {
+        kind: "pass", head: "correct",
+        body: first ? "Matches the expected result set. " + (e.hint || "") : "Still correct. " + (e.hint || "")
+      };
+    } else {
+      V.verdict = {
+        kind: "fail", head: "not matching — " + r.why,
+        body: "Expected " + want.values.length + " row(s) with " + want.columns.length +
+              " column(s); you returned " + got.values.length + " row(s) with " + got.columns.length + " column(s)." +
+              (e.ordered ? " This one is order-sensitive, so ORDER BY matters." : " Row order does not matter here, only the values.")
+      };
+    }
+    save(); render();
+  }
+
+  document.addEventListener("keydown", function (ev) {
+    if ((ev.ctrlKey || ev.metaKey) && ev.key === "Enter" && V.screen === "ex") { doRun(); ev.preventDefault(); }
+  });
+
+  function render() {
+    var ta = document.getElementById("editor");
+    var caret = ta && document.activeElement === ta ? ta.selectionStart : null;
+    var y = window.scrollY;
+    app.textContent = "";
+    app.appendChild(bar());
+    app.appendChild(V.screen === "home" ? home() : exScreen());
+    window.scrollTo(0, y);
+    if (caret != null) {
+      var t2 = document.getElementById("editor");
+      if (t2) { t2.focus(); try { t2.setSelectionRange(caret, caret); } catch (e) {} }
+    }
+  }
+
+  render();
+  boot();
+  if (window.claude && window.claude.use) {
+    window.claude.use("artifact").then(function (a) { if (a) api = a; }).catch(function () {});
+  }
+})();
+</script>

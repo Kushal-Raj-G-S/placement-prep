@@ -1,0 +1,26 @@
+"""The recommended order through the study guide. Every topic id must appear exactly once (build_sqlstudy.py checks)."""
+
+PLAN = [
+    {"name": "Foundations and keys", "why": "The vocabulary every other topic assumes. Keys are asked in almost every interview.",
+     "ids": ["dbms-intro", "relational-keys", "er-model", "er-to-tables"]},
+    {"name": "Normalization", "why": "Functional dependencies, then 1NF to BCNF, then 4NF/5NF. Practise the closure method until it is automatic.",
+     "ids": ["functional-deps", "normal-forms", "higher-nf", "relational-algebra"]},
+    {"name": "Writing tables (DDL)", "why": "Types, every constraint, foreign-key actions, altering and dropping, auto ids.",
+     "ids": ["data-types", "create-table", "fk-actions", "alter-drop", "identity-seq"]},
+    {"name": "Scenario to tables", "why": "'Here is a system, create the tables.' Six full designs plus the design checklist.",
+     "ids": ["scenario-ddl-1", "scenario-ddl-2", "design-practices"]},
+    {"name": "Queries: the core", "why": "Everything a normal query can do. Joins and NULL handling carry most of the marks.",
+     "ids": ["select-basics", "null-case", "aggregates", "joins", "subqueries", "set-ops", "functions"]},
+    {"name": "Queries: advanced", "why": "CTEs, window functions, changing data, views and index syntax.",
+     "ids": ["cte", "window", "dml", "views", "indexes-sql"]},
+    {"name": "Interview queries", "why": "24 classic problems. After this, do the graded exercises on the practice screen.",
+     "ids": ["classics-1", "classics-2"]},
+    {"name": "Triggers and server-side code", "why": "Triggers get asked directly. Then procedures, cursors, transactions in SQL, and permissions.",
+     "ids": ["triggers-basics", "triggers-patterns", "procs-functions", "cursors-dynamic", "transactions-sql", "dcl-security"]},
+    {"name": "Transactions and internals", "why": "ACID, schedules, locking, recovery, indexing theory and how the optimizer works.",
+     "ids": ["transactions", "concurrency", "recovery", "indexing-theory", "query-processing"]},
+    {"name": "PostgreSQL and MySQL", "why": "Your stack. Know the differences cold, plus JSON, monitoring, operations and scaling.",
+     "ids": ["postgres-essentials", "mysql-essentials", "pg-vs-mysql", "json-support", "partitioning", "metadata-queries", "ops-backup-replication", "distributed-olap"]},
+    {"name": "Final pass", "why": "60 rapid-fire answers. Do this last, and again the night before.",
+     "ids": ["interview-qa"]},
+]

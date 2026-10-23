@@ -1,0 +1,1174 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Aptitude Sprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#070B11; --bg2:#0C121B; --panel:#121A26; --panel2:#182231; --edge:#1E2A3A; --edge2:#2A3A4E;
+    --txt:#E8EEF6; --dim:#8397AE; --dim2:#5B6E85;
+    --cy:#3FD9EC; --cy-dim:#12333D;
+    --ok:#4BE08B; --ok-dim:#0E2C1D;
+    --no:#FF7A6B; --no-dim:#331612;
+    --am:#FFC44D; --am-dim:#332714;
+    --vi:#B98CF0; --vi-dim:#241A38;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    --sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  button,input{font-family:inherit;color:inherit}
+  :focus-visible{outline:2px solid var(--cy);outline-offset:2px;border-radius:4px}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 90px;display:flex;flex-direction:column;gap:14px}
+
+  .bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:11px 14px;background:var(--panel);border:1px solid var(--edge);border-radius:10px}
+  .logo{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--cy)}
+  .bar .sp{flex:1 1 auto}
+  .stat{display:flex;align-items:baseline;gap:5px;font-family:var(--mono)}
+  .stat b{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
+  .stat span{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2)}
+  .stat.ok b{color:var(--ok)} .stat.warn b{color:var(--am)} .stat.bad b{color:var(--no)}
+  .clock{font-family:var(--mono);font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--cy)}
+  .clock.low{color:var(--no)}
+
+  .btn{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+       background:var(--panel2);border:1px solid var(--edge2);border-radius:7px;padding:9px 14px;cursor:pointer;
+       transition:transform .08s ease,background .15s ease,border-color .15s ease}
+  .btn:hover:not(:disabled){background:var(--edge);border-color:var(--cy)}
+  .btn:active{transform:translateY(1px)}
+  .btn.primary{background:var(--cy);border-color:var(--cy);color:#04222A}
+  .btn.primary:hover:not(:disabled){background:#5FE6F5}
+  .btn.exam{background:var(--vi);border-color:var(--vi);color:#170D26}
+  .btn.exam:hover:not(:disabled){background:#C9A3F5}
+  .btn.ghost{background:transparent}
+  .btn:disabled{opacity:.35;cursor:default}
+
+  .hero{padding:24px 20px;background:linear-gradient(160deg,var(--panel) 0%,var(--bg2) 100%);border:1px solid var(--edge);border-radius:14px;display:flex;flex-direction:column;gap:13px}
+  .hero h1{margin:0;font-family:var(--mono);font-weight:700;font-size:clamp(24px,4.8vw,35px);letter-spacing:-.02em;line-height:1.06}
+  .hero h1 em{font-style:normal;color:var(--cy)}
+  .hero p{margin:0;color:var(--dim);max-width:64ch;font-size:14.5px}
+  .cta{display:flex;gap:9px;flex-wrap:wrap;margin-top:2px;align-items:center}
+  .toggle{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim2);cursor:pointer}
+  .toggle input{accent-color:var(--no);width:15px;height:15px}
+
+  .topics{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+  .tcard{text-align:left;background:var(--panel);border:1px solid var(--edge);border-radius:11px;padding:14px;cursor:pointer;
+         display:flex;flex-direction:column;gap:8px;transition:border-color .15s ease,background .15s ease}
+  .tcard:hover{border-color:var(--cy);background:var(--panel2)}
+  .tcard .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--cy)}
+  .tcard h3{margin:0;font-size:16px}
+  .tcard .d{font-size:12.5px;color:var(--dim2);line-height:1.45}
+  .tcard .m{display:flex;align-items:center;gap:9px;margin-top:auto;font-family:var(--mono);font-size:11px;color:var(--dim2)}
+  .barline{flex:1 1 auto;height:4px;background:var(--edge2);border-radius:2px;overflow:hidden}
+  .barline i{display:block;height:100%;background:var(--ok);transition:width .3s ease}
+
+  .subs{display:flex;flex-wrap:wrap;gap:6px}
+  .sub{font-family:var(--mono);font-size:10.5px;background:var(--bg2);border:1px solid var(--edge);border-radius:5px;padding:4px 8px;color:var(--dim);cursor:pointer}
+  .sub:hover{border-color:var(--cy);color:var(--txt)}
+  .sub b{color:var(--dim2);font-weight:400}
+
+  .crumb{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);flex-wrap:wrap}
+  .crumb .now{color:var(--cy)}
+  .prog{flex:1 1 90px;height:3px;background:var(--edge);border-radius:2px;overflow:hidden;min-width:70px}
+  .prog i{display:block;height:100%;background:var(--cy);transition:width .3s ease}
+  .qtimer{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .qtimer.over{color:var(--no)}
+
+  .qbox{background:var(--panel);border:1px solid var(--edge);border-radius:11px;padding:16px;display:flex;flex-direction:column;gap:12px}
+  .tagrow{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+  .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--edge2);border-radius:5px;padding:2px 7px;color:var(--dim2)}
+  .tag.tgt{border-color:var(--am);color:var(--am)}
+  .q{font-size:16px;font-weight:500;line-height:1.55}
+  .q code{font-family:var(--mono);font-size:13.5px;background:rgba(0,0,0,.4);padding:1px 5px;border-radius:4px}
+  pre.di{margin:0;background:var(--bg);border:1px solid var(--edge2);border-radius:9px;padding:12px 14px;
+         font-family:var(--mono);font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre}
+
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .opt{display:grid;grid-template-columns:22px 1fr;gap:9px;align-items:baseline;text-align:left;
+       background:var(--bg2);border:1px solid var(--edge);border-radius:8px;padding:11px 12px;cursor:pointer;
+       font-family:var(--mono);font-size:13.5px;transition:border-color .12s ease,background .12s ease}
+  .opt:hover:not(:disabled){border-color:var(--cy);background:var(--panel2)}
+  .opt .k{font-size:10px;color:var(--dim2);border:1px solid var(--edge2);border-radius:4px;text-align:center;padding:1px 0}
+  .opt.right{border-color:var(--ok);background:var(--ok-dim)}
+  .opt.right .k{color:var(--ok);border-color:var(--ok)}
+  .opt.wrong{border-color:var(--no);background:var(--no-dim);animation:shk .3s}
+  .opt.wrong .k{color:var(--no);border-color:var(--no)}
+  .opt.picked{border-color:var(--vi)}
+  .opt:disabled{cursor:default}
+  @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  .fb{border-radius:9px;padding:12px 13px;font-size:14px;line-height:1.6;border:1px solid;display:flex;flex-direction:column;gap:7px}
+  .fb.good{background:var(--ok-dim);border-color:var(--ok)}
+  .fb.bad{background:var(--no-dim);border-color:var(--no)}
+  .fb.slow{background:var(--am-dim);border-color:var(--am)}
+  .fb b{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+  .fb.good b{color:var(--ok)} .fb.bad b{color:var(--no)} .fb.slow b{color:var(--am)}
+  .fb .sc{font-family:var(--mono);font-size:13px;color:var(--cy);background:rgba(0,0,0,.35);border-radius:6px;padding:9px 11px;white-space:pre-wrap}
+  .fbrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:3px}
+  .kbd{font-family:var(--mono);font-size:10px;color:var(--dim2);border:1px solid var(--edge2);border-radius:4px;padding:1px 5px}
+
+  .score{text-align:center;padding:28px 20px;background:linear-gradient(160deg,var(--panel) 0%,var(--bg2) 100%);
+         border:1px solid var(--edge);border-radius:14px;display:flex;flex-direction:column;gap:11px;align-items:center}
+  .score .big{font-family:var(--mono);font-size:44px;font-weight:700;line-height:1}
+  .score .big.pass{color:var(--ok)} .score .big.fail{color:var(--no)}
+  .score h2{margin:0;font-size:19px}
+  .score p{margin:0;color:var(--dim);max-width:58ch;font-size:14px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;margin-top:4px}
+  .cell{background:var(--bg);border:1px solid var(--edge);border-radius:9px;padding:11px}
+  .cell .v{font-family:var(--mono);font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+  .cell .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);margin-top:2px}
+  .review{width:100%;text-align:left;display:flex;flex-direction:column;gap:8px;margin-top:6px}
+  .ritem{background:var(--bg);border:1px solid var(--edge);border-left:3px solid var(--no);border-radius:8px;padding:11px 12px;font-size:13.5px}
+  .ritem.slowr{border-left-color:var(--am)}
+  .ritem .rq{margin-bottom:5px}
+  .ritem .ra{font-family:var(--mono);font-size:12px;color:var(--ok)}
+  .ritem .rp{font-family:var(--mono);font-size:12px;color:var(--no)}
+  .ritem .re{color:var(--dim);font-size:12.5px;margin-top:5px;white-space:pre-wrap}
+
+  .foot{color:var(--dim2);font-size:12.5px;font-family:var(--mono);text-align:center;padding-top:4px}
+  .foot a{color:var(--dim)}
+
+  /* formula & trick sheet — sits ABOVE the practice */
+  .sheet{background:var(--panel);border:1px solid var(--cy);border-radius:12px;overflow:hidden}
+  .sheet-h{padding:12px 16px;background:var(--cy-dim);border-bottom:1px solid var(--cy);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .sheet-h h2{margin:0;font-size:18px}
+  .sheet-h .badge{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--cy);border:1px solid var(--cy);border-radius:5px;padding:2px 7px}
+  .sheet-h .sp{flex:1 1 auto}
+  .sec{padding:14px 16px;border-bottom:1px solid var(--edge)}
+  .sec:last-child{border-bottom:0}
+  .sec .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim2);margin-bottom:9px}
+  .flist{display:flex;flex-direction:column;gap:7px}
+  .fitem{font-family:var(--mono);font-size:13px;line-height:1.65;color:var(--txt);background:var(--bg);border:1px solid var(--edge2);
+         border-left:3px solid var(--cy);border-radius:7px;padding:9px 12px;white-space:pre-wrap;overflow-x:auto}
+  .tlist{display:flex;flex-direction:column;gap:9px}
+  .titem{font-size:14px;line-height:1.6;color:var(--dim);padding-left:17px;position:relative;white-space:pre-wrap}
+  .titem::before{content:"→";position:absolute;left:0;color:var(--am);font-family:var(--mono)}
+  .titem b{color:var(--txt);font-weight:600}
+  .startrow{padding:14px 16px;display:flex;gap:9px;align-items:center;flex-wrap:wrap;background:var(--panel2)}
+  .allsheets{display:flex;flex-direction:column;gap:12px}
+
+  @media(max-width:620px){
+    .wrap{padding:14px 11px 80px;gap:12px}
+    .hero{padding:19px 15px}
+    .opts{grid-template-columns:1fr}
+    .opt{padding:13px 11px}
+    .grid3{grid-template-columns:1fr 1fr}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script type="application/json" id="bank">
+{
+"topics":[
+ {"k":"quant","name":"Quantitative","d":"Percentages, ratios, speed, work, counting, number system. Nine sub-areas, all of them arithmetic you can shortcut."},
+ {"k":"logic","name":"Logical reasoning","d":"Series, syllogisms, blood relations, directions, coding, cubes, clocks, calendars, ranking."}
+],
+"sheets":{
+"Percentages":{"f":[
+ "x% of y = xy/100",
+ "Successive a% then b%  →  net = a + b + ab/100   (use a minus sign for a discount)",
+ "Price falls x%, to keep spend equal consumption must rise  100x/(100 − x) %",
+ "Price rises x%, consumption must fall  100x/(100 + x) %",
+ "x% up then x% down  →  net LOSS of x²/100 %  (never zero)"],
+ "t":["Chain multipliers instead of computing rupees: 40% up then 25% off is 1.40 × 0.75 = 1.05.",
+ "Memorise the fraction table — it turns division into recall:\n1/2=50%  1/3=33.33%  1/4=25%  1/5=20%  1/6=16.67%\n1/7=14.28%  1/8=12.5%  1/9=11.11%  1/11=9.09%  1/12=8.33%  1/16=6.25%  1/20=5%",
+ "Successive percentages never simply add. If an option equals the plain sum, it is the trap."]},
+
+"Profit & loss":{"f":[
+ "Profit% = (SP − CP)/CP × 100      — always on COST price",
+ "SP = CP × (1 + p/100)   and   CP = SP / (1 + p/100)",
+ "Mark-up m then discount d:  SP = CP × (1 + m) × (1 − d)",
+ "Two articles at the SAME SP, one at +x% and one at −x%  →  always a LOSS of x²/100 %",
+ "False weight:  gain% = error/(true value − error) × 100"],
+ "t":["Percentage is on CP unless the question explicitly says otherwise. Computing it on SP is the single most common error.",
+ "For the same-SP trap, do not compute: ±20% gives 400/100 = 4% loss straight away.",
+ "When only ratios are given, assume CP = 100. Everything becomes mental arithmetic."]},
+
+"Averages":{"f":[
+ "Average = sum / count",
+ "Replacement:  new value = removed value + count × (change in average)",
+ "Adding one value v to n items shifts the average by (v − old average)/(n + 1)",
+ "Average of the first n natural numbers = (n + 1)/2"],
+ "t":["Think in deviations from the mean, not in totals. Removing a number 45 above the mean of 9 remaining items drops the mean by 45/9 = 5.",
+ "Average of an evenly spaced list is just (first + last)/2 — no addition needed.",
+ "If a question mentions 'increases by', reach for the replacement formula before writing equations."]},
+
+"Ratio":{"f":[
+ "a : b = ka : kb   — always work in 'parts'",
+ "Chain a:b and b:c by scaling b to a common value → a:b:c",
+ "Alligation:  cheaper qty / dearer qty = (dearer − mean) / (mean − cheaper)",
+ "If a:b = 3:5 and the sum is S, one part = S/8"],
+ "t":["Find the value of ONE part first, then read off whatever is asked. For a difference, it is just (5 − 3) = 2 parts — you never need either number.",
+ "For mixtures, scale both vessels to the same volume (use the LCM of the ratio sums) before adding components.",
+ "Alligation is faster than equations for any two-mixture blend question."]},
+
+"Speed & distance":{"f":[
+ "km/h → m/s  :  × 5/18        m/s → km/h  :  × 18/5",
+ "Equal distances at speeds a and b  →  average = 2ab/(a + b)   (harmonic, never the plain mean)",
+ "Train crossing a pole: covers its own length. Crossing a platform: length + platform",
+ "Relative speed — same direction: difference.  Opposite directions: sum",
+ "Boat:  downstream = b + s,  upstream = b − s,  b = (d + u)/2,  s = (d − u)/2"],
+ "t":["× 5/18 is the most used conversion in the whole section. 54 km/h = 15 m/s, 72 = 20, 36 = 10.",
+ "The arithmetic mean of two speeds is always placed as an option. It is always wrong for equal distances.",
+ "Sketch which lengths are being covered before writing anything — pole, platform or another train."]},
+
+"Time & work":{"f":[
+ "Take the LCM of the given days as total work → every rate becomes a whole number",
+ "Rates ADD:  1/A + 1/B.   Days never add",
+ "M₁ D₁ H₁ / W₁ = M₂ D₂ H₂ / W₂",
+ "If A is n times as fast as B, A takes 1/n of B's time",
+ "Pipes: filling counts positive, emptying negative"],
+ "t":["The LCM method removes fractions entirely. A in 12, B in 18 → total 36, rates 3 and 2, together 5/day → 7.2 days.",
+ "To split a combined rate between two workers, divide it in the ratio of their speeds.",
+ "Men × days is constant when the work is fixed — so 6 men in 12 days means 9 men in 72/9 = 8."]},
+
+"Permutations":{"f":[
+ "nPr = n! / (n − r)!        — order MATTERS",
+ "Arrangements of n items with repeats p, q, …  =  n! / (p! q! …)",
+ "Circular arrangements of n = (n − 1)!",
+ "Items that must stay together: glue them into one block, then × the block's internal arrangements"],
+ "t":["Repeats are the usual trap. LEVEL has L twice and E twice, so 5!/(2!2!) = 30, not 120.",
+ "'Order matters' → permutation. 'Just choose a group' → combination. Decide that first, everything else follows.",
+ "Factorials to know cold: 4!=24, 5!=120, 6!=720, 7!=5040."]},
+
+"Combinations":{"f":[
+ "nCr = n! / (r! (n − r)!)     — order does NOT matter",
+ "nCr = nC(n−r)      nC0 = nCn = 1      nC1 = n",
+ "Handshakes, lines through points, chords, matches:  nC2 = n(n − 1)/2",
+ "'At least one'  =  total − none"],
+ "t":["Compute nCr by cancelling, never by expanding factorials: C(9,3) = 9×8×7 / 3×2×1 = 84.",
+ "'At least one woman' is total minus all-men. Summing exactly-1, 2, 3 gives the same answer three times slower.",
+ "nC2 = n(n−1)/2 covers a surprising share of all counting questions."]},
+
+"Probability":{"f":[
+ "P = favourable outcomes / total outcomes",
+ "P(A or B) = P(A) + P(B) − P(A and B)      — subtract the overlap",
+ "P(not A) = 1 − P(A)",
+ "Two dice: 36 outcomes. Sum 7 is the most likely at 6/36",
+ "Cards: 52 = 4 suits × 13.  26 red, 12 face cards, 4 of each rank"],
+ "t":["Count ORDERED pairs for dice: (2,6) and (6,2) are two different outcomes.",
+ "For 'at least one', compute 1 − P(none). Almost always faster.",
+ "Forgetting the overlap in 'king OR heart' gives 17/52 — which is placed there as an option."]},
+
+"Number system":{"f":[
+ "HCF = product of the LOWEST common prime powers.  LCM = the HIGHEST",
+ "HCF × LCM = product of the two numbers",
+ "Same remainder r for every divisor  →  answer = LCM + r",
+ "Unit digit: powers cycle with length 1, 2 or 4 → take the exponent mod 4",
+ "Trailing zeros in n! = ⌊n/5⌋ + ⌊n/25⌋ + ⌊n/125⌋ + …"],
+ "t":["Divisibility rules: 3 and 9 → digit sum; 4 → last two digits; 8 → last three; 11 → alternating digit sum; 6 → both 2 and 3.",
+ "Trailing zeros come from 2×5 pairs, and 2s are always plentiful — so only count the 5s.",
+ "For unit digits, 105 mod 4 = 1, so 7¹⁰⁵ ends in the first digit of the 7,9,3,1 cycle: 7."]},
+
+"Progressions":{"f":[
+ "AP:  aₙ = a + (n − 1)d       Sₙ = n/2 [2a + (n − 1)d] = n × (first + last)/2",
+ "GP:  aₙ = a r^(n−1)          Sₙ = a(rⁿ − 1)/(r − 1)      S∞ = a/(1 − r) for |r| < 1",
+ "1 + 2 + … + n = n(n + 1)/2",
+ "Sum of squares = n(n+1)(2n+1)/6      Sum of cubes = [n(n+1)/2]²",
+ "First n odd numbers sum to exactly n².  First n even numbers sum to n(n + 1)"],
+ "t":["The (n − 1) trips people up: the first term needs no steps, so the 20th term takes 19 of them.",
+ "n² for odd numbers is the neatest identity in the section — 1+3+5+7 = 16.",
+ "For any evenly spaced list, sum = count × average = count × (first + last)/2."]},
+
+"Data interpretation":{"f":[
+ "Growth % = (change / PREVIOUS value) × 100",
+ "Share % = (part / total) × 100",
+ "Percentage point ≠ percent — a rise from 20% to 25% is 5 points but 25% growth"],
+ "t":["Compare fractions, do not compute decimals. 15/50 clearly beats 10/40 and 13/65 — no calculator needed.",
+ "Add in pairs that round nicely: (40+78) + (50+65) = 118 + 115 = 233.",
+ "Read the units and the axis labels first. Half of all DI errors are unit errors, not arithmetic."]},
+
+"Number series":{"f":[
+ "Step 1 — always take FIRST DIFFERENCES before anything clever",
+ "Constant differences → AP.  Differences are odd numbers → quadratic (n²-based)",
+ "Terms roughly double → test ×2 ± k.  Differences also double → geometric",
+ "Then test: n², n³, n(n+1), primes, factorials"],
+ "t":["n(n+1) gives 2, 6, 12, 20, 30, 42 — a very common series.",
+ "If differences look random and the numbers are small, check for primes before assuming a rule.",
+ "Alternating series: split into odd and even positions and treat each as its own series."]},
+
+"Letter series":{"f":[
+ "A=1 … Z=26.  Anchors:  E=5, J=10, O=15, T=20, Y=25",
+ "Mirror letters sum to 27:  A↔Z, B↔Y, C↔X, D↔W",
+ "Split any pair-series into two independent series"],
+ "t":["Count from the nearest anchor rather than from A — much faster and less error-prone.",
+ "AZ, BY, CX, DW works because the forward and backward series are independent.",
+ "Watch the wrap: after Z comes A again."]},
+
+"Syllogisms":{"f":[
+ "Draw Venn circles. A conclusion follows only if it holds in EVERY valid diagram",
+ "All A are B  +  All B are C  →  All A are C",
+ "Some A are B  +  All B are C  →  Some A are C",
+ "Two 'some' premises  →  nothing follows",
+ "'All A are B' NEVER gives 'All B are A'"],
+ "t":["A 'some' premise can never be upgraded to an 'all' conclusion.",
+ "If you can draw one legal diagram where the conclusion fails, it does not follow. Try to break it, not to prove it.",
+ "'Neither follows' is correct far more often than students expect — do not avoid it."]},
+
+"Blood relations":{"f":[
+ "Unwrap from the INNERMOST phrase outward",
+ "'my mother's only son' = the speaker himself (male speaker)",
+ "'my father's only daughter' = the speaker herself (female speaker)"],
+ "t":["Draw a tree. Mark gender only where the question states it, and leave it blank otherwise.",
+ "The word 'only' is the key — it forces the middle person to be the speaker.",
+ "If the relation works regardless of an unknown gender, the answer IS determinable."]},
+
+"Directions":{"f":[
+ "Right turns from north:  N → E → S → W → N",
+ "Left turns from north:  N → W → S → E → N",
+ "Opposite legs of equal length cancel completely",
+ "Net displacement = √(x² + y²) only when both perpendicular legs survive"],
+ "t":["Sketch it. Every time. Nobody tracks this reliably in their head.",
+ "Count net quarter-turns first and convert at the end: two clockwise plus one anticlockwise is one clockwise.",
+ "If one axis cancels, the answer is a single leg — no Pythagoras needed."]},
+
+"Coding–decoding":{"f":[
+ "Test the rule on the FIRST TWO letters, then apply it mechanically",
+ "Common rules: fixed shift ±n, reverse the word, alphabet position, alternating shifts",
+ "Positional value: A=1 … Z=26"],
+ "t":["Establish the pattern on the shortest part of the word, then stop thinking and just apply it.",
+ "Watch the wrap at both ends: Z + 1 = A, A − 1 = Z.",
+ "If a plain shift does not fit, check whether the letters are reversed before hunting for anything exotic."]},
+
+"Cubes":{"f":[
+ "An n×n×n painted cube cut into n³ small cubes:",
+ "  3 faces painted (corners)      = 8   — always",
+ "  2 faces painted (edges)        = 12(n − 2)",
+ "  1 face painted (face centres)  = 6(n − 2)²",
+ "  0 faces painted (interior)     = (n − 2)³"],
+ "t":["Those four counts always add to n³. Use that as a free check.",
+ "For n = 3 the numbers are 8, 12, 6, 1 — worth simply memorising.",
+ "'Corners' is 8 for every cube regardless of size, which makes it the easiest mark in the section."]},
+
+"Ranking":{"f":[
+ "rank from top + rank from bottom = total + 1",
+ "People strictly between positions p and q = |p − q| − 1",
+ "If ranks overlap by k people, total = sum of ranks − k"],
+ "t":["The +1 exists because the person is counted from both ends. Losing it is the standard mistake.",
+ "Rearrange the same formula to find the total when both ranks are given.",
+ "Sketch a short line of positions if the question mentions more than one person."]},
+
+"Clocks":{"f":[
+ "Angle between hands = |30H − 5.5M|      (if over 180, subtract from 360)",
+ "Minute hand: 6° per minute.  Hour hand: 0.5° per minute",
+ "Hands overlap every 65 5/11 minutes, so 22 times in 24 hours"],
+ "t":["The hour hand drifts. At 3:30 it is halfway to 4, which is exactly why the answer is 75° and not the 90° on offer.",
+ "|30H − 5.5M| answers almost every clock question — memorise this one formula.",
+ "H is the hour, M the minutes. At 3:30 that is |90 − 165| = 75."]},
+
+"Calendars":{"f":[
+ "An ordinary year advances the weekday by 1.  A leap year advances it by 2",
+ "Leap year: divisible by 4, except centuries which must be divisible by 400",
+ "Odd days: 100 years = 5, 200 = 3, 300 = 1, 400 = 0"],
+ "t":["366 days = 52 weeks + 2 days, which is the whole reason a leap year shifts by two.",
+ "2000 was a leap year, 1900 was not. That is the century rule being tested.",
+ "For 'same date next year', you only need to know whether the year in between is a leap year."]},
+
+"Ages":{"f":[
+ "Let the present age be x, write each condition as an equation, solve",
+ "The DIFFERENCE between two ages never changes",
+ "'n years ago' → subtract n from both.  'in n years' → add n to both"],
+ "t":["Always substitute your answer back. Father 36 and son 12 → in 12 years, 48 and 24, exactly double. Five seconds, catches every sign error.",
+ "The constant age difference often solves the problem faster than the ratio does.",
+ "Set the variable to the quantity the question asks for — it saves a final step."]},
+
+"Data sufficiency":{"f":[
+ "The only question is: does this pin the value to EXACTLY ONE possibility?",
+ "Check statement I alone, then II alone, THEN both together — in that order",
+ "An inequality or a range never fixes a single value"],
+ "t":["Learning something is not the same as being sufficient. 'Ramesh is older than 25' narrows it and still answers nothing.",
+ "Deliberately try to find two different values that satisfy the statements. If you can, it is insufficient.",
+ "Do not solve further than needed — you only have to know that a unique answer exists."]},
+
+"Statement & conclusion":{"f":[
+ "An implicit assumption is what MUST be true for the statement to make sense",
+ "A conclusion must follow from the statement alone, with no outside knowledge",
+ "Reject anything that introduces price, rivals, or the future unless stated"],
+ "t":["Test it by negation: if denying the option destroys the argument, it is the assumption.",
+ "Be suspicious of extreme words — all, never, only, everyone — unless the statement used them.",
+ "The answer is usually the dullest, most obvious option. These questions do not reward creativity."]},
+
+"Odd one out":{"f":[
+ "Test in this order: squares, cubes, primes, even/odd, digit sum, multiples"],
+ "t":["64 is both a perfect square and a perfect cube, so it is a favourite distractor.",
+ "If four items share a property and one does not, you are done — do not look for a second pattern.",
+ "For words, check the category before the spelling."]},
+
+"Seating":{"f":[
+ "Place the ANCHORED person first (an end, a fixed seat, 'sits third from left')",
+ "Build blocks from 'immediate' clues, then position the blocks",
+ "Circular, facing centre: left and right are the mirror of what you expect"],
+ "t":["Draw the seats as dashes on paper and fill them in. Nobody solves these mentally.",
+ "'Immediate' clues are the strongest — use them before any vague 'somewhere to the left of'.",
+ "If several arrangements remain valid, the answer is whatever is true in ALL of them."]}
+},
+"q":[
+{"t":"quant","s":"Profit & loss","tgt":60,"q":"A shopkeeper marks his goods up by 40% and then offers a 25% discount. What is his net profit percentage?","o":["5%","15%","10%","No profit, no loss"],"a":0,
+ "sc":"Never compute rupees. Chain the multipliers: 1.40 × 0.75 = 1.05, so +5%.\nAny mark-up/discount chain is just a product of factors — a 40% rise is ×1.4, a 25% cut is ×0.75."},
+
+{"t":"quant","s":"Percentages","tgt":60,"q":"The price of rice falls by 20%. By what percentage must consumption increase so that total expenditure stays the same?","o":["25%","20%","16.67%","22%"],"a":0,
+ "sc":"Expenditure = price × quantity, so quantity must scale by 1/0.8 = 1.25 → +25%.\nThe shortcut for 'falls by x%, consumption must rise by': 100x/(100−x). Here 2000/80 = 25."},
+
+{"t":"quant","s":"Percentages","tgt":45,"q":"Two successive discounts of 20% and 10% are equivalent to a single discount of —","o":["28%","30%","27%","25%"],"a":0,
+ "sc":"0.8 × 0.9 = 0.72, so 28% off.\nThe formula a + b − ab/100 gives 20 + 10 − 2 = 28. Successive percentages never simply add — that is the whole trap."},
+
+{"t":"quant","s":"Profit & loss","tgt":75,"q":"A trader sells two articles at ₹1200 each. On one he makes a 20% profit, on the other a 20% loss. Overall he has a —","o":["4% loss","4% profit","no loss, no profit","2% loss"],"a":0,
+ "sc":"CP₁ = 1200/1.2 = 1000, CP₂ = 1200/0.8 = 1500. Total CP 2500 vs SP 2400 → 100 loss on 2500 = 4% loss.\nShortcut worth memorising: equal selling prices at ±x% always give a loss of x²/100 percent. Here 400/100 = 4%."},
+
+{"t":"quant","s":"Averages","tgt":60,"q":"The average of 10 numbers is 50. One number, 95, is removed. What is the average of the remaining nine?","o":["45","46","44","47"],"a":0,
+ "sc":"Total 500, remove 95 → 405 over 9 = 45.\nFaster: removing a number that is 45 above the mean pulls the mean down by 45/9 = 5, so 50 − 5 = 45. Think in deviations from the average, not in totals."},
+
+{"t":"quant","s":"Averages","tgt":60,"q":"The average age of 5 people increases by 2 years when a new person replaces one aged 30. How old is the new person?","o":["40","38","42","36"],"a":0,
+ "sc":"Total rises by 5 × 2 = 10, so the newcomer is 30 + 10 = 40.\nGeneral rule: replacement age = removed age + (count × change in average). No need to know any individual age."},
+
+{"t":"quant","s":"Ratio","tgt":60,"q":"Two vessels of equal volume contain milk and water in the ratios 3:1 and 5:3. Both are emptied into one large vessel. The final milk:water ratio is —","o":["11:5","8:4","4:2","7:5"],"a":0,
+ "sc":"Take 8 units each (a common multiple of 4 and 8). Vessel 1: 6 milk, 2 water. Vessel 2: 5 milk, 3 water. Totals 11 and 5.\nAlways scale both mixtures to the same volume first — that is the only step people get wrong."},
+
+{"t":"quant","s":"Speed & distance","tgt":45,"q":"A 150 m long train running at 54 km/h crosses an electric pole. How long does it take?","o":["10 seconds","15 seconds","9 seconds","12 seconds"],"a":0,
+ "sc":"54 km/h × 5/18 = 15 m/s. 150/15 = 10 s.\nCrossing a pole means covering just the train's own length. Crossing a platform means length of train + length of platform. Memorise ×5/18 for km/h → m/s."},
+
+{"t":"quant","s":"Speed & distance","tgt":75,"q":"A person travels from A to B at 40 km/h and returns at 60 km/h. What is the average speed for the whole journey?","o":["48 km/h","50 km/h","52 km/h","45 km/h"],"a":0,
+ "sc":"Equal distances mean the harmonic mean: 2ab/(a+b) = 2×40×60/100 = 48.\nNever average the speeds arithmetically — 50 is the trap answer, and it is placed there deliberately."},
+
+{"t":"quant","s":"Speed & distance","tgt":75,"q":"A boat's speed in still water is 10 km/h and the stream flows at 2 km/h. How long does it take to go 24 km upstream?","o":["3 hours","2.4 hours","4 hours","2 hours"],"a":0,
+ "sc":"Upstream speed = 10 − 2 = 8 km/h, so 24/8 = 3 hours.\nUpstream subtracts the stream, downstream adds it. If you are given both times instead, still water speed = (down + up)/2 and stream = (down − up)/2."},
+
+{"t":"quant","s":"Time & work","tgt":60,"q":"A can finish a job in 12 days and B in 18 days. Working together, they finish it in —","o":["7.2 days","7.5 days","6 days","8 days"],"a":0,
+ "sc":"Use LCM as total work: 36 units. A does 3/day, B does 2/day, together 5/day → 36/5 = 7.2 days.\nThe LCM method beats fractions every time: pick the LCM of the given days as total work and the rates become whole numbers."},
+
+{"t":"quant","s":"Time & work","tgt":60,"q":"A and B together finish a task in 8 days. A alone takes 12 days. How long would B alone take?","o":["24 days","16 days","20 days","18 days"],"a":0,
+ "sc":"LCM 24: together 3/day, A 2/day, so B is 1/day → 24 days.\nRates subtract: 1/8 − 1/12 = 1/24. Days never subtract — that is the classic error."},
+
+{"t":"quant","s":"Time & work","tgt":45,"q":"If 6 men can build a wall in 12 days, how long will 9 men take at the same rate?","o":["8 days","9 days","6 days","10 days"],"a":0,
+ "sc":"Men × days is constant: 6 × 12 = 72, so 72/9 = 8 days.\nInverse proportion. More men, fewer days, and the product stays fixed."},
+
+{"t":"quant","s":"Time & work","tgt":75,"q":"A works twice as fast as B. Together they finish a job in 12 days. How long would A alone take?","o":["18 days","24 days","36 days","20 days"],"a":0,
+ "sc":"Rates are 2:1, so of every 3 units A does 2. Combined rate is 1/12, so A's rate is (2/3)(1/12) = 1/18 → 18 days.\nSplit the combined rate in the ratio of the speeds. B would take 36."},
+
+{"t":"quant","s":"Permutations","tgt":60,"q":"How many distinct arrangements can be made of the letters of the word LEVEL?","o":["30","60","120","20"],"a":0,
+ "sc":"5 letters with L twice and E twice: 5!/(2!×2!) = 120/4 = 30.\nDivide the factorial by the factorial of each repeat count. Ignoring repeats gives 120 — the trap answer."},
+
+{"t":"quant","s":"Combinations","tgt":75,"q":"From 5 men and 4 women, how many committees of 3 can be formed containing at least one woman?","o":["74","70","84","64"],"a":0,
+ "sc":"Total C(9,3) = 84, minus all-male C(5,3) = 10, giving 74.\n'At least one' is almost always faster as total minus none. Summing the cases of exactly 1, 2 and 3 women gives the same 74 but takes three times as long."},
+
+{"t":"quant","s":"Probability","tgt":60,"q":"Two fair dice are rolled. What is the probability that the sum is 8?","o":["5/36","1/6","6/36","4/36"],"a":0,
+ "sc":"Favourable pairs: (2,6)(3,5)(4,4)(5,3)(6,2) = 5 out of 36.\nCount ordered pairs — (2,6) and (6,2) are distinct outcomes. Sum 7 is the most likely at 6/36."},
+
+{"t":"quant","s":"Probability","tgt":60,"q":"One card is drawn from a standard 52-card pack. What is the probability that it is a king OR a heart?","o":["4/13","17/52","1/4","16/13"],"a":0,
+ "sc":"4 kings + 13 hearts − 1 king of hearts = 16, so 16/52 = 4/13.\nInclusion–exclusion: subtract the overlap or you double-count it. 17/52 is the answer you get by forgetting to."},
+
+{"t":"quant","s":"Combinations","tgt":45,"q":"In a room of 10 people, everyone shakes hands with everyone else exactly once. How many handshakes occur?","o":["45","90","100","55"],"a":0,
+ "sc":"C(10,2) = 10×9/2 = 45.\nA handshake is an unordered pair, hence the division by 2. If the question were about gifts given in both directions, it would be 90."},
+
+{"t":"quant","s":"Number system","tgt":45,"q":"What is the HCF of 24, 36 and 60?","o":["12","6","4","18"],"a":0,
+ "sc":"24 = 2³·3, 36 = 2²·3², 60 = 2²·3·5. Take the lowest power of each shared prime: 2²·3 = 12.\nHCF takes lowest common powers, LCM takes highest. That one line separates the two."},
+
+{"t":"quant","s":"Number system","tgt":45,"q":"What is the LCM of 12, 15 and 20?","o":["60","120","180","30"],"a":0,
+ "sc":"12 = 2²·3, 15 = 3·5, 20 = 2²·5. Highest power of each prime: 2²·3·5 = 60.\nCheck by division: 60 is divisible by all three, and nothing smaller is."},
+
+{"t":"quant","s":"Number system","tgt":75,"q":"What is the smallest number which, when divided by 12, 15 and 18, leaves a remainder of 5 in each case?","o":["185","180","175","190"],"a":0,
+ "sc":"LCM(12,15,18) = 180, then add the common remainder: 185.\nWhenever the remainder is the same for every divisor, the answer is LCM + remainder. When the remainders differ by a constant from the divisors, use LCM − that constant."},
+
+{"t":"quant","s":"Number system","tgt":60,"q":"What is the unit digit of 7¹⁰⁵?","o":["7","9","3","1"],"a":0,
+ "sc":"Unit digits of powers of 7 cycle 7, 9, 3, 1 with period 4. 105 mod 4 = 1, so it is the first in the cycle: 7.\nEvery digit's powers cycle with period 1, 2 or 4. Find the cycle, take the exponent mod its length, and read off."},
+
+{"t":"quant","s":"Number system","tgt":75,"q":"How many trailing zeros does 100! have?","o":["24","20","25","10"],"a":0,
+ "sc":"Count factors of 5: ⌊100/5⌋ + ⌊100/25⌋ = 20 + 4 = 24.\nTrailing zeros come from 2×5 pairs, and 2s are always plentiful, so only the 5s matter. Keep dividing by powers of 5 and add the quotients."},
+
+{"t":"quant","s":"Progressions","tgt":45,"q":"What is the sum of the first 20 even natural numbers?","o":["420","400","440","380"],"a":0,
+ "sc":"2 + 4 + ... + 40 = 2(1 + 2 + ... + 20) = 2 × 210 = 420.\nOr n(n+1) directly: 20 × 21 = 420. The sum of the first n odd numbers is the neater one to remember: exactly n²."},
+
+{"t":"quant","s":"Progressions","tgt":45,"q":"In the arithmetic progression 5, 9, 13, 17, ... what is the 20th term?","o":["81","85","77","80"],"a":0,
+ "sc":"a + (n−1)d = 5 + 19×4 = 81.\nThe (n−1) is where mistakes happen — the first term needs no steps, so the 20th term takes 19 of them."},
+
+{"t":"quant","s":"Data interpretation","tgt":90,"q":"Using the sales table below, in which year was the percentage growth over the previous year the highest?","di":"Year   Sales (₹ lakh)\n2021        40\n2022        50\n2023        65\n2024        78","o":["2023","2022","2024","2022 and 2023 equally"],"a":0,
+ "sc":"2022: 10/40 = 25%. 2023: 15/50 = 30%. 2024: 13/65 = 20%. Highest is 2023.\nIn DI, never compute all four decimals — compare the fractions. 15/50 clearly beats 10/40 and 13/65, so 2023 wins without a calculator."},
+
+{"t":"quant","s":"Data interpretation","tgt":75,"q":"From the same table, what is the average annual sales over the four years?","di":"Year   Sales (₹ lakh)\n2021        40\n2022        50\n2023        65\n2024        78","o":["₹58.25 lakh","₹57.75 lakh","₹59.5 lakh","₹58 lakh"],"a":0,
+ "sc":"40 + 50 + 65 + 78 = 233, and 233/4 = 58.25.\nAdd in pairs that round nicely: (40+78) + (50+65) = 118 + 115 = 233. Pairing beats left-to-right addition under time pressure."},
+
+{"t":"quant","s":"Percentages","tgt":45,"q":"A number is increased by 25% and the result is then decreased by 20%. The final value is —","o":["equal to the original","5% more than the original","5% less than the original","20% less than the original"],"a":0,
+ "sc":"1.25 × 0.80 = 1.00 exactly, so no change.\nThis pair cancels because 25% is 1/4 up and 20% is 1/5 down. Generally x% up then x% down leaves you at 1 − x²/10000 — always slightly below."},
+
+{"t":"quant","s":"Ratio","tgt":45,"q":"Two numbers are in the ratio 3:5 and their sum is 64. What is their difference?","o":["16","8","24","12"],"a":0,
+ "sc":"8 parts total, so 1 part = 8. The numbers are 24 and 40, difference 16 — which is 2 parts.\nWork in parts, not equations. The difference is (5−3) = 2 parts = 16 directly, no need to find either number."},
+
+{"t":"logic","s":"Number series","tgt":45,"q":"Find the next term: 2, 6, 12, 20, 30, ?","o":["42","40","36","44"],"a":0,
+ "sc":"Differences are 4, 6, 8, 10 → next is 12, so 30 + 12 = 42.\nThe terms are n(n+1): 1×2, 2×3, 3×4, 4×5, 5×6, 6×7 = 42. Always take first differences before hunting for anything clever."},
+
+{"t":"logic","s":"Number series","tgt":45,"q":"Find the next term: 3, 6, 11, 18, 27, ?","o":["38","36","40","35"],"a":0,
+ "sc":"Differences 3, 5, 7, 9 → next 11, giving 38.\nConsecutive odd differences mean the sequence is quadratic: here it is n² + 2."},
+
+{"t":"logic","s":"Number series","tgt":45,"q":"Find the next term: 5, 11, 23, 47, ?","o":["95","94","96","93"],"a":0,
+ "sc":"Each term is double the previous plus one: 47×2 + 1 = 95.\nWhen terms roughly double, test ×2±k before anything else. Differences 6, 12, 24 also double, which confirms it."},
+
+{"t":"logic","s":"Letter series","tgt":45,"q":"Complete the series: AZ, BY, CX, ?","o":["DW","DV","EW","DX"],"a":0,
+ "sc":"First letters run forward A, B, C, D. Second letters run backward Z, Y, X, W. So DW.\nSplit any letter pair series into two independent series and track each. It helps to know A=1 and Z=26, so the pair positions always sum to 27."},
+
+{"t":"logic","s":"Number series","tgt":45,"q":"Find the next term: 2, 3, 5, 7, 11, 13, ?","o":["17","15","19","16"],"a":0,
+ "sc":"These are consecutive primes, so the next is 17.\nIf differences look irregular and the numbers are small, check for primes before assuming an arithmetic rule. 15 is the trap — it is 13 + 2 but not prime."},
+
+{"t":"logic","s":"Syllogisms","tgt":75,"q":"Statements: All roses are flowers. Some flowers fade quickly. Which conclusion follows?","o":["Neither conclusion follows","Some roses fade quickly","No rose fades quickly","All flowers are roses"],"a":0,
+ "sc":"The 'some flowers' that fade need not overlap with the roses at all, so neither 'some do' nor 'none do' is forced.\nA particular premise ('some') cannot yield a definite conclusion about a specific subgroup. Draw two circles: roses inside flowers, and the fading region can sit entirely outside the rose circle."},
+
+{"t":"logic","s":"Syllogisms","tgt":60,"q":"Statements: All cats are animals. All animals need water. Which conclusion follows?","o":["All cats need water","Some animals are cats only","All water users are cats","No conclusion follows"],"a":0,
+ "sc":"Two universal affirmatives chain transitively: cats ⊆ animals ⊆ water-needers.\nA → B and B → C always gives A → C. The reverse never follows, which is what makes 'all water users are cats' wrong."},
+
+{"t":"logic","s":"Syllogisms","tgt":60,"q":"Statements: Some pens are books. All books are papers. Which conclusion follows?","o":["Some pens are papers","All pens are papers","No pen is a paper","All papers are pens"],"a":0,
+ "sc":"The pens that are books must be papers too, so 'some pens are papers' holds.\nA 'some' premise plus a universal gives a 'some' conclusion. It can never be upgraded to 'all'."},
+
+{"t":"logic","s":"Blood relations","tgt":60,"q":"A is the father of B. B is the sister of C. How is A related to C?","o":["Father","Uncle","Brother","Cannot be determined"],"a":0,
+ "sc":"B and C are siblings, so B's father is also C's father.\nSiblings share parents. C's own gender is unknown but irrelevant — 'father' works either way, which is why this is determinable."},
+
+{"t":"logic","s":"Blood relations","tgt":75,"q":"A man points at a photograph and says, \"He is the son of my mother's only son.\" How is the man in the photograph related to him?","o":["His son","His brother","His nephew","His cousin"],"a":0,
+ "sc":"His mother's only son is the speaker himself, so the photograph shows the speaker's son.\nUnwrap these from the inside out. The trick word is 'only' — it forces the middle person to be the speaker, since a brother would contradict it."},
+
+{"t":"logic","s":"Directions","tgt":60,"q":"A man walks 5 km north, turns right and walks 3 km, then turns right and walks 5 km. How far and in which direction is he from his starting point?","o":["3 km east","3 km west","8 km east","13 km north"],"a":0,
+ "sc":"North 5, east 3, then south 5. The two vertical legs cancel, leaving 3 km east.\nSketch it. Successive right turns from north go north → east → south → west, and opposite legs of equal length always cancel."},
+
+{"t":"logic","s":"Directions","tgt":60,"q":"Facing north, you turn 90° clockwise, then 90° clockwise again, then 90° anticlockwise. Which direction are you now facing?","o":["East","West","South","North"],"a":0,
+ "sc":"North → east → south, then anticlockwise back to east.\nCount in quarter turns and only convert at the end: two clockwise plus one anticlockwise is a net one clockwise, which from north is east."},
+
+{"t":"logic","s":"Coding–decoding","tgt":45,"q":"If MANGO is coded as NBOHP, then APPLE is coded as —","o":["BQQMF","BQQNF","AQQMF","BPPMF"],"a":0,
+ "sc":"Every letter shifts forward by one: A→B, P→Q, P→Q, L→M, E→F.\nCheck the shift on the first two letters, then apply mechanically. Watch the wrap: Z would become A."},
+
+{"t":"logic","s":"Coding–decoding","tgt":60,"q":"If CAT is written as 3-1-20, how is DOG written?","o":["4-15-7","4-14-7","3-15-7","4-15-8"],"a":0,
+ "sc":"Each letter maps to its alphabet position: D=4, O=15, G=7.\nWorth memorising the anchors: A=1, E=5, J=10, O=15, T=20, Y=25. Then any letter is a short count from the nearest anchor."},
+
+{"t":"logic","s":"Cubes","tgt":75,"q":"A cube painted on all six faces is cut into 27 identical smaller cubes. How many of them have exactly two faces painted?","o":["12","8","6","1"],"a":0,
+ "sc":"Exactly two painted faces means the edge positions that are not corners. A 3×3×3 cube has 12 edges with one such cube each → 12.\nThe standard set for n×n×n: corners 8 (three faces), edges 12(n−2) (two faces), face centres 6(n−2)² (one face), interior (n−2)³ (none). For n = 3 that gives 8, 12, 6 and 1 — which sums to 27."},
+
+{"t":"logic","s":"Cubes","tgt":60,"q":"From the same 27 smaller cubes, how many have no face painted at all?","o":["1","6","8","0"],"a":0,
+ "sc":"Only the single cube at the very centre, (n−2)³ = 1³ = 1.\nUnpainted cubes are the inner block you get by peeling one layer off every side."},
+
+{"t":"logic","s":"Ranking","tgt":45,"q":"In a class of 40 students, Ravi ranks 12th from the top. What is his rank from the bottom?","o":["29th","28th","30th","27th"],"a":0,
+ "sc":"40 − 12 + 1 = 29.\nThe +1 is because Ravi is counted in both directions. The reliable check: rank from top + rank from bottom = total + 1."},
+
+{"t":"logic","s":"Clocks","tgt":75,"q":"What is the angle between the hour and minute hands of a clock at 3:30?","o":["75°","90°","80°","72.5°"],"a":0,
+ "sc":"|30H − 5.5M| = |90 − 165| = 75°.\nThe hour hand does not sit on 3 at half past — it has drifted halfway to 4. That drift is exactly why the answer is not 90°, which is the trap option."},
+
+{"t":"logic","s":"Calendars","tgt":75,"q":"1 January 2024 was a Monday. What day was 1 January 2025?","o":["Wednesday","Tuesday","Thursday","Monday"],"a":0,
+ "sc":"2024 is a leap year (divisible by 4, not a century), so it has 366 days = 52 weeks + 2 odd days. Monday + 2 = Wednesday.\nAn ordinary year advances the day by 1, a leap year by 2. That single fact answers most calendar questions."},
+
+{"t":"logic","s":"Ages","tgt":75,"q":"A father is three times as old as his son. In 12 years he will be twice as old. What is the son's present age?","o":["12 years","10 years","14 years","15 years"],"a":0,
+ "sc":"Let the son be s. Then 3s + 12 = 2(s + 12) → 3s + 12 = 2s + 24 → s = 12, father 36.\nCheck it: in 12 years they are 24 and 48, exactly double. Always substitute back — it costs five seconds and catches sign errors."},
+
+{"t":"logic","s":"Data sufficiency","tgt":75,"q":"How old is Ramesh? (I) Ramesh is older than Suresh. (II) Suresh is 25 years old. Which statements are sufficient?","o":["Neither I nor II, nor both together","I alone","II alone","Both together"],"a":0,
+ "sc":"Together they only establish that Ramesh is over 25 — not a specific age. Insufficient.\nData sufficiency asks whether the value is pinned down, not whether you learned something. An inequality never fixes a single value."},
+
+{"t":"logic","s":"Data sufficiency","tgt":75,"q":"What is the two-digit number? (I) The sum of its digits is 9. (II) The difference between the number and the number formed by reversing its digits is 27. Which is sufficient?","o":["Both together","I alone","II alone","Neither"],"a":0,
+ "sc":"I alone leaves 18, 27, 36, 45, 54, 63, 72, 81, 90. II gives 9(a − b) = 27, so a − b = 3, which alone still leaves 41, 52, 63, 74, 85, 96 and more. Together: a + b = 9 and a − b = 3 → a = 6, b = 3 → 63. Unique.\nFor reversal problems, remember the number minus its reverse is always 9 times the digit difference."},
+
+{"t":"logic","s":"Statement & conclusion","tgt":75,"q":"Statement: \"Use our detergent for whiter clothes than any other brand.\" Which assumption is implicit in this advertisement?","o":["People care about how white their clothes are","Their detergent is the cheapest available","Other detergents damage clothes","Everyone reads advertisements"],"a":0,
+ "sc":"The claim only persuades if whiteness is something buyers value — that is the unstated premise the argument rests on.\nAn implicit assumption is what must be true for the statement to make sense. It is never an extra claim about price or rivals unless stated."},
+
+{"t":"logic","s":"Odd one out","tgt":45,"q":"Which number does not belong: 8, 27, 64, 100, 125?","o":["100","64","27","125"],"a":0,
+ "sc":"8, 27, 64 and 125 are 2³, 3³, 4³ and 5³. 100 is a perfect square, not a cube.\nWhen a list looks like powers, test cubes as well as squares. 64 is both a square and a cube, which is exactly why it is placed there to distract you."},
+
+{"t":"logic","s":"Seating","tgt":90,"q":"Five friends sit in a row. B is to the immediate right of A. C is at one of the ends. D is between B and E. Who is definitely NOT at an end?","o":["B","A","C","E"],"a":0,
+ "sc":"A must be immediately left of B, and D sits between B and E, so the block runs A, B, D, E in that order with C on an end. B has A on one side and D on the other, so it is boxed in.\nBuild the fixed blocks first, place the anchored person (C at an end), and only then check who has neighbours on both sides."},
+
+{"t":"logic","s":"Number series","tgt":60,"q":"Find the missing term: 1, 4, 9, 16, 25, ?","o":["36","30","35","49"],"a":0,
+ "sc":"Perfect squares: 6² = 36.\nDifferences are the odd numbers 3, 5, 7, 9, so the next difference is 11 → 25 + 11 = 36. Recognising squares instantly is worth more than deriving them."},
+
+{"t":"logic","s":"Directions","tgt":75,"q":"A walks 10 m north, then 10 m east, then 10 m south. How far is he from his starting point?","o":["10 m","20 m","0 m","14.1 m"],"a":0,
+ "sc":"The north and south legs cancel, leaving 10 m east.\nOnly resort to Pythagoras when the remaining legs are perpendicular and both non-zero. Here one axis cancels entirely, so the answer is a single leg."}
+]
+}
+</script>
+
+<script type="application/json" id="state">
+{"rev":0,"seen":{},"wrong":{},"tot":{},"ok":{},"time":{},"exams":[],"neg":false}
+</script>
+
+<script id="code">
+(function () {
+  "use strict";
+  // Cross-tool links in this page are plain .html filenames, so opening the file straight off disk
+  // just works. Served over http(s) those relative names cannot resolve, so there each one is
+  // swapped for its hosted copy. Local is what the file actually contains; online adapts.
+  var HOSTED = {
+    "./1%20-%20Twenty%20Weeks%20to%20AC%20%28tracker%29.html": "https://claude.ai/code/artifact/32b165b3-0cee-4121-9470-b0e8d6d17c16",
+    "./2%20-%20Stdin%20Trainer%20%28drill%29.html": "https://claude.ai/code/artifact/00d12bf6-5548-4e56-b449-d0f33193a495",
+    "./3%20-%20Stdin%20Survival%20Kit%20%28manual%29.html": "https://claude.ai/code/artifact/49b64e1a-a87a-4924-b42d-2a7a614ab41a",
+    "./5%20-%20SQL%20Lab%20%28practice%29.html": "https://claude.ai/code/artifact/0f564ee0-0ae9-4f76-b0db-9cbaf04a5664",
+    "./6%20-%20CS%20Core%20Drill%20%28OS%20DBMS%20CN%20OOP%20C%29.html": "https://claude.ai/code/artifact/3a19c5c3-5b45-4744-a980-20f138d77859",
+    "./7%20-%20Aptitude%20Sprint%20%28formulas%20%2B%20practice%29.html": "https://claude.ai/code/artifact/1176c004-05c1-4ebd-bd08-041957dd07f6",
+    "./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html": "https://claude.ai/code/artifact/9c7876de-143f-4f4d-bead-a8204d0f63ad",
+    "./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html": "https://claude.ai/code/artifact/ca3214a6-ec8f-4b10-b757-9c025a98ba47",
+    "./10%20-%20Mock%20OA%20%28timed%20exam%29.html": "https://claude.ai/code/artifact/ea757a13-0226-4bad-9065-96ca4927af42"
+  };
+  function fixToolLinks() {
+    if (location.protocol === "file:") return;
+    Array.prototype.forEach.call(document.querySelectorAll("a[href]"), function (a) {
+      var u = HOSTED[a.getAttribute("href")];
+      if (u) a.setAttribute("href", u);
+    });
+  }
+  if (location.protocol !== "file:") {
+    try {
+      new MutationObserver(function () { fixToolLinks(); })
+        .observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) {}
+    fixToolLinks();
+  }
+
+
+
+  // An artifact places the authored <title>, font <link>s and <style> BELOW <head>, so reading the
+  // head alone would republish this page with no CSS at all. Collect them wherever they sit;
+  // platform styles are skipped by marker, keeping this idempotent across republish generations.
+  function SHELL() {
+    var out = ['<meta charset="utf-8">',
+               '<meta name="viewport" content="width=device-width,initial-scale=1">'];
+    var t = document.querySelector("title");
+    if (t) out.push(t.outerHTML);
+    Array.prototype.forEach.call(document.querySelectorAll("link"), function (n) {
+      var h = n.getAttribute("href") || "";
+      if (h.indexOf("fonts.googleapis") !== -1 || h.indexOf("fonts.gstatic") !== -1) out.push(n.outerHTML);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("style"), function (n) {
+      var s = n.textContent || "";
+      if (s.indexOf("--mono:") !== -1) out.push(n.outerHTML);
+    });
+    return out.join("\n");
+  }
+
+  var BANK = JSON.parse(document.getElementById("bank").textContent);
+  var TOPICS = BANK.topics, Q = BANK.q, SHEETS = BANK.sheets || {};
+  Q.forEach(function (q, i) { q._i = i; });
+
+  var EXAM_N = 20, EXAM_MIN = 25;   // TCS Foundation section shape: ~20 questions, 25 minutes
+
+  var LS = "aptitude-v1";
+  function migrate(s) {
+    if (!s || typeof s !== "object") s = {};
+    ["seen", "wrong", "tot", "ok", "time"].forEach(function (k) { if (!s[k]) s[k] = {}; });
+    if (!Array.isArray(s.exams)) s.exams = [];
+    if (typeof s.rev !== "number") s.rev = 0;
+    if (typeof s.neg !== "boolean") s.neg = false;
+    return s;
+  }
+  var embedded = migrate(JSON.parse(document.getElementById("state").textContent));
+  var state = embedded, local = null;
+  try { var raw = localStorage.getItem(LS); if (raw) local = migrate(JSON.parse(raw)); } catch (e) {}
+  if (local && local.rev > embedded.rev) state = local;
+
+  var app = document.getElementById("app");
+  var api = null, saveT = null;
+  var V = { screen: "home", queue: [], at: 0, picked: null, mode: "drill", answers: [], times: [],
+            left: 0, tid: null, qStart: 0, qtid: null, qElapsed: 0 };
+
+  function save() {
+    state.rev++;
+    try { localStorage.setItem(LS, JSON.stringify(state)); } catch (e) {}
+    if (!api) return;
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      var o = "<" + "script", c = "<" + "/" + "script>";
+      api.publish('<!doctype html>\n<html lang="en">\n<head>\n' + SHELL() + '\n</head>\n<body>\n' +
+        '<div class="wrap" id="app"></div>\n' +
+        o + ' type="application/json" id="bank">' + JSON.stringify(BANK, function (k, v) { return k === "_i" ? undefined : v; }) + c + '\n' +
+        o + ' type="application/json" id="state">' + JSON.stringify(state) + c + '\n' +
+        o + ' id="code">' + document.getElementById("code").textContent + c + '\n' +
+        '</body>\n</html>').catch(function () {});
+    }, 1800);
+  }
+
+  function el(t, c, x) { var n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; }
+  function topicOf(k) { return TOPICS.filter(function (t) { return t.k === k; })[0]; }
+  function tot(k) { return state.tot[k] || 0; }
+  function okc(k) { return state.ok[k] || 0; }
+  function acc(k) { return tot(k) ? Math.round((okc(k) / tot(k)) * 100) : 0; }
+  function nQ(k) { return Q.filter(function (q) { return q.t === k; }).length; }
+  function seenIn(k) { return Q.filter(function (q) { return q.t === k && state.seen[q._i]; }).length; }
+  function wrongList() { return Q.filter(function (q) { return state.wrong[q._i]; }); }
+  function subsOf(k) {
+    var m = {};
+    Q.forEach(function (q) { if (q.t === k) m[q.s] = (m[q.s] || 0) + 1; });
+    return Object.keys(m).map(function (s) { return { s: s, n: m[s] }; });
+  }
+  function avgTime() {
+    var ks = Object.keys(state.time);
+    if (!ks.length) return null;
+    var sum = 0;
+    ks.forEach(function (k) { sum += state.time[k]; });
+    return Math.round(sum / ks.length);
+  }
+  function slowList() {
+    return Q.filter(function (q) { return state.time[q._i] && state.time[q._i] > q.tgt && !state.wrong[q._i]; });
+  }
+
+  function shuffle(a) {
+    var arr = a.slice();
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+    }
+    return arr;
+  }
+  function present(q) {
+    var idx = shuffle(q.o.map(function (_, i) { return i; }));
+    return { order: idx, correctAt: idx.indexOf(q.a) };
+  }
+  function fmt(s) { if (s < 0) s = 0; return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); }
+
+  /* ---------- chrome ---------- */
+  function bar() {
+    var b = el("div", "bar");
+    b.appendChild(el("div", "logo", "aptitude_sprint"));
+    b.appendChild(el("div", "sp"));
+    if (V.screen === "quiz" && V.mode === "exam") {
+      var c = el("div", "clock" + (V.left < 180 ? " low" : ""), fmt(V.left));
+      c.id = "clk"; b.appendChild(c);
+    }
+    var allT = TOPICS.reduce(function (s, t) { return s + tot(t.k); }, 0);
+    var allO = TOPICS.reduce(function (s, t) { return s + okc(t.k); }, 0);
+    var s1 = el("div", "stat ok");
+    s1.appendChild(el("b", null, allT ? Math.round((allO / allT) * 100) + "%" : "—"));
+    s1.appendChild(el("span", null, "accuracy"));
+    b.appendChild(s1);
+    var at = avgTime();
+    if (at != null) {
+      var s2 = el("div", "stat" + (at > 70 ? " warn" : ""));
+      s2.appendChild(el("b", null, at + "s"));
+      s2.appendChild(el("span", null, "avg/q"));
+      b.appendChild(s2);
+    }
+    if (V.screen !== "home") {
+      var h = el("button", "btn ghost", V.mode === "exam" && V.screen === "quiz" ? "abandon" : "menu");
+      h.type = "button";
+      h.addEventListener("click", function () { stopClock(); stopQ(); V.screen = "home"; V.mode = "drill"; render(); });
+      b.appendChild(h);
+    }
+    return b;
+  }
+
+  /* ---------- home ---------- */
+  function home() {
+    var f = document.createDocumentFragment();
+    var hero = el("div", "hero");
+    var h1 = el("h1");
+    h1.innerHTML = 'Right but slow<br>is still <em>wrong</em>.';
+    hero.appendChild(h1);
+    var p = el("p");
+    p.textContent = "TCS gives you 25 minutes for 25 verbal questions and 25 for 20 quant — roughly 70 seconds each, with the section auto-locking when time runs out. So this drill times every question against a target and tracks the ones you got right too slowly. " + Q.length + " questions, and every explanation is the shortcut rather than the derivation.";
+    hero.appendChild(p);
+    var cta = el("div", "cta");
+    var fs = el("button", "btn primary", "all formulas & tricks");
+    fs.type = "button";
+    fs.addEventListener("click", function () { V.screen = "all"; render(); });
+    cta.appendChild(fs);
+    var go = el("button", "btn", "drill everything");
+    go.type = "button";
+    go.addEventListener("click", function () { start(shuffle(Q), "drill"); });
+    cta.appendChild(go);
+    var ex = el("button", "btn exam", EXAM_N + " q / " + EXAM_MIN + " min exam");
+    ex.type = "button";
+    ex.addEventListener("click", function () { start(shuffle(Q).slice(0, EXAM_N), "exam"); });
+    cta.appendChild(ex);
+    var lab = el("label", "toggle");
+    var cb = document.createElement("input");
+    cb.type = "checkbox"; cb.checked = state.neg;
+    cb.addEventListener("change", function () { state.neg = cb.checked; save(); render(); });
+    lab.appendChild(cb);
+    lab.appendChild(el("span", null, "0.25 negative marking"));
+    cta.appendChild(lab);
+    hero.appendChild(cta);
+
+    var wl = wrongList(), sl = slowList();
+    if (wl.length || sl.length) {
+      var row2 = el("div", "cta");
+      if (wl.length) {
+        var rb = el("button", "btn", "redo " + wl.length + " wrong");
+        rb.type = "button";
+        rb.addEventListener("click", function () { start(shuffle(wl), "drill"); });
+        row2.appendChild(rb);
+      }
+      if (sl.length) {
+        var sb = el("button", "btn", "speed up " + sl.length + " slow");
+        sb.type = "button";
+        sb.addEventListener("click", function () { start(shuffle(sl), "drill"); });
+        row2.appendChild(sb);
+      }
+      hero.appendChild(row2);
+    }
+    f.appendChild(hero);
+
+    if (state.neg) {
+      var w = el("div", "fb bad");
+      w.appendChild(el("b", null, "negative marking on"));
+      w.appendChild(el("div", null, "Every wrong answer costs 0.25 marks; a blank costs nothing. DE Shaw and Arcesium score this way. It changes the correct behaviour: guess only when you have eliminated at least two options, otherwise skip. Use the skip button in exam mode."));
+      f.appendChild(w);
+    }
+
+    var grid = el("div", "topics");
+    TOPICS.forEach(function (t) {
+      var card = el("div", "tcard");
+      card.appendChild(el("div", "k", t.k));
+      card.appendChild(el("h3", null, t.name));
+      card.appendChild(el("div", "d", t.d));
+      var subs = el("div", "subs");
+      subsOf(t.k).forEach(function (x) {
+        var sb = el("button", "sub");
+        sb.type = "button";
+        sb.appendChild(document.createTextNode(x.s + " "));
+        sb.appendChild(el("b", null, "· " + x.n));
+        sb.addEventListener("click", function (ev) {
+          ev.stopPropagation();
+          V.sub = x.s; V.screen = "sheet"; render();
+        });
+        subs.appendChild(sb);
+      });
+      card.appendChild(subs);
+      var m = el("div", "m");
+      m.appendChild(el("span", null, seenIn(t.k) + "/" + nQ(t.k)));
+      var bl = el("div", "barline"); var fi = el("i");
+      fi.style.width = Math.round((seenIn(t.k) / nQ(t.k)) * 100) + "%";
+      bl.appendChild(fi); m.appendChild(bl);
+      m.appendChild(el("span", null, tot(t.k) ? acc(t.k) + "%" : "—"));
+      var gb = el("button", "sub");
+      gb.type = "button";
+      gb.textContent = "drill all";
+      gb.addEventListener("click", function () { start(shuffle(Q.filter(function (q) { return q.t === t.k; })), "drill"); });
+      m.appendChild(gb);
+      card.appendChild(m);
+      grid.appendChild(card);
+    });
+    f.appendChild(grid);
+
+    if (state.exams.length) {
+      var last = state.exams[state.exams.length - 1];
+      f.appendChild(el("div", "foot", "last exam: " + last.marks + " marks from " + last.n +
+        " (" + last.right + " right, " + last.wrongN + " wrong, " + last.blank + " blank) in " + fmt(last.used)));
+    }
+    var ft = el("div", "foot");
+    ft.innerHTML = 'Companion tools: <a href="./10%20-%20Mock%20OA%20%28timed%20exam%29.html" target="_blank" rel="noopener noreferrer">Mock OA</a> · <a href="./9%20-%20Decoder%20%28read%20the%20story%2C%20name%20the%20pattern%29.html" target="_blank" rel="noopener noreferrer">Decoder</a> · <a href="./8%20-%20Pattern%20Radar%20%28name%20the%20pattern%29.html" target="_blank" rel="noopener noreferrer">Pattern Radar</a> · <a href="./6%20-%20CS%20Core%20Drill%20%28OS%20DBMS%20CN%20OOP%20C%29.html" target="_blank" rel="noopener noreferrer">CS Core Drill</a> · <a href="./5%20-%20SQL%20Lab%20%28practice%29.html" target="_blank" rel="noopener noreferrer">SQL Lab</a> · <a href="./2%20-%20Stdin%20Trainer%20%28drill%29.html" target="_blank" rel="noopener noreferrer">Stdin Trainer</a> · <a href="./1%20-%20Twenty%20Weeks%20to%20AC%20%28tracker%29.html" target="_blank" rel="noopener noreferrer">the plan</a>';
+    f.appendChild(ft);
+    return f;
+  }
+
+  /* ---------- formula & trick sheet: read this, THEN drill ---------- */
+  function sheetCard(sub, withStart) {
+    var sh = SHEETS[sub];
+    var qs = Q.filter(function (q) { return q.s === sub; });
+    var box = el("div", "sheet");
+
+    var h = el("div", "sheet-h");
+    h.appendChild(el("h2", null, sub));
+    h.appendChild(el("span", "badge", "formulas & tricks"));
+    h.appendChild(el("div", "sp"));
+    h.appendChild(el("span", "badge", qs.length + " questions"));
+    box.appendChild(h);
+
+    if (!sh) {
+      box.appendChild(el("div", "sec", "No sheet for this one yet."));
+    } else {
+      if (sh.f && sh.f.length) {
+        var s1 = el("div", "sec");
+        s1.appendChild(el("div", "lab", "the formulas"));
+        var fl = el("div", "flist");
+        sh.f.forEach(function (x) { fl.appendChild(el("div", "fitem", x)); });
+        s1.appendChild(fl);
+        box.appendChild(s1);
+      }
+      if (sh.t && sh.t.length) {
+        var s2 = el("div", "sec");
+        s2.appendChild(el("div", "lab", "the tricks — this is where the time is saved"));
+        var tl = el("div", "tlist");
+        sh.t.forEach(function (x) { tl.appendChild(el("div", "titem", x)); });
+        s2.appendChild(tl);
+        box.appendChild(s2);
+      }
+    }
+
+    if (withStart && qs.length) {
+      var row = el("div", "startrow");
+      var go = el("button", "btn primary", "practise these " + qs.length);
+      go.type = "button"; go.id = "nextBtn";
+      go.addEventListener("click", function () { start(shuffle(qs), "drill"); });
+      row.appendChild(go);
+      row.appendChild(el("span", "kbd", "enter"));
+      box.appendChild(row);
+    }
+    return box;
+  }
+
+  function sheetScreen() {
+    var f = document.createDocumentFragment();
+    var crumb = el("div", "crumb");
+    crumb.appendChild(el("span", "now", "read first"));
+    crumb.appendChild(el("span", null, "then practise below"));
+    f.appendChild(crumb);
+    f.appendChild(sheetCard(V.sub, true));
+    return f;
+  }
+
+  function allSheets() {
+    var f = document.createDocumentFragment();
+    var crumb = el("div", "crumb");
+    crumb.appendChild(el("span", "now", "every formula on one page"));
+    crumb.appendChild(el("span", null, "revision sheet — skim this before an exam"));
+    f.appendChild(crumb);
+    var box = el("div", "allsheets");
+    TOPICS.forEach(function (t) {
+      subsOf(t.k).forEach(function (x) { box.appendChild(sheetCard(x.s, true)); });
+    });
+    f.appendChild(box);
+    return f;
+  }
+
+  function start(queue, mode) {
+    V.queue = queue.map(function (q) { return { q: q, p: present(q) }; });
+    V.at = 0; V.picked = null; V.mode = mode; V.answers = []; V.times = [];
+    V.screen = "quiz";
+    if (mode === "exam") { V.left = EXAM_MIN * 60; startClock(); }
+    beginQ(); render();
+  }
+  function startClock() {
+    stopClock();
+    V.tid = setInterval(function () {
+      V.left--;
+      var n = document.getElementById("clk");
+      if (n) { n.textContent = fmt(V.left); n.className = "clock" + (V.left < 180 ? " low" : ""); }
+      if (V.left <= 0) { stopClock(); finishExam(); }
+    }, 1000);
+  }
+  function stopClock() { if (V.tid) { clearInterval(V.tid); V.tid = null; } }
+  function beginQ() {
+    V.qElapsed = 0;
+    stopQ();
+    V.qtid = setInterval(function () {
+      V.qElapsed++;
+      var n = document.getElementById("qt");
+      if (n) {
+        var tgt = V.queue[V.at].q.tgt;
+        n.textContent = V.qElapsed + "s";
+        n.className = "qtimer" + (V.qElapsed > tgt ? " over" : "");
+      }
+    }, 1000);
+  }
+  function stopQ() { if (V.qtid) { clearInterval(V.qtid); V.qtid = null; } }
+
+  /* ---------- quiz ---------- */
+  function quiz() {
+    var f = document.createDocumentFragment();
+    var item = V.queue[V.at], q = item.q, p = item.p;
+
+    var crumb = el("div", "crumb");
+    crumb.appendChild(el("span", "now", (V.at + 1) + " / " + V.queue.length));
+    crumb.appendChild(el("span", null, q.s));
+    var pr = el("div", "prog"); var pf = el("i");
+    pf.style.width = Math.round((V.at / V.queue.length) * 100) + "%";
+    pr.appendChild(pf); crumb.appendChild(pr);
+    var qt = el("span", "qtimer", V.qElapsed + "s"); qt.id = "qt";
+    crumb.appendChild(qt);
+    crumb.appendChild(el("span", null, "target " + q.tgt + "s"));
+    f.appendChild(crumb);
+
+    var qb = el("div", "qbox");
+    var tr = el("div", "tagrow");
+    tr.appendChild(el("span", "tag", topicOf(q.t).name));
+    tr.appendChild(el("span", "tag tgt", q.tgt + "s target"));
+    if (state.neg) tr.appendChild(el("span", "tag", "−0.25 if wrong"));
+    qb.appendChild(tr);
+    qb.appendChild(el("div", "q", q.q));
+    if (q.di) qb.appendChild(el("pre", "di", q.di));
+
+    var opts = el("div", "opts");
+    p.order.forEach(function (origIdx, shown) {
+      var b = el("button", "opt");
+      b.type = "button";
+      b.appendChild(el("span", "k", String(shown + 1)));
+      b.appendChild(el("span", null, q.o[origIdx]));
+      if (V.picked != null) {
+        b.disabled = true;
+        if (shown === p.correctAt) b.className = "opt right";
+        else if (shown === V.picked) b.className = "opt wrong";
+      } else {
+        if (V.mode === "exam" && V.answers[V.at] === shown) b.className = "opt picked";
+        b.addEventListener("click", function () { answer(shown); });
+      }
+      opts.appendChild(b);
+    });
+    qb.appendChild(opts);
+
+    if (V.mode === "drill" && V.picked != null) {
+      var right = V.picked === p.correctAt;
+      var slow = right && V.times[V.at] > q.tgt;
+      var fb = el("div", "fb " + (right ? (slow ? "slow" : "good") : "bad"));
+      fb.appendChild(el("b", null, right ? (slow ? "correct, but " + V.times[V.at] + "s against a " + q.tgt + "s target" : "correct in " + V.times[V.at] + "s") : "wrong"));
+      if (slow) fb.appendChild(el("div", null, "In a real section this is a loss — you would run out of time before the end. The shortcut below is how to get it inside the target."));
+      fb.appendChild(el("div", "sc", q.sc));
+      var row = el("div", "fbrow");
+      var nx = el("button", "btn primary", V.at + 1 < V.queue.length ? "next" : "finish");
+      nx.type = "button"; nx.id = "nextBtn";
+      nx.addEventListener("click", next);
+      row.appendChild(nx);
+      row.appendChild(el("span", "kbd", "enter"));
+      fb.appendChild(row);
+      qb.appendChild(fb);
+    }
+
+    if (V.mode === "exam") {
+      var row2 = el("div", "fbrow");
+      if (V.at > 0) {
+        var pb = el("button", "btn ghost", "back"); pb.type = "button";
+        pb.addEventListener("click", function () { V.at--; beginQ(); render(); });
+        row2.appendChild(pb);
+      }
+      var sk = el("button", "btn", V.at + 1 < V.queue.length ? (state.neg ? "skip (no penalty)" : "skip / next") : "submit");
+      sk.type = "button"; sk.id = "nextBtn";
+      sk.addEventListener("click", function () {
+        if (V.at + 1 < V.queue.length) { V.at++; V.picked = null; beginQ(); render(); } else finishExam();
+      });
+      row2.appendChild(sk);
+      row2.appendChild(el("span", "kbd", "1-4 to answer, enter to advance"));
+      qb.appendChild(row2);
+    }
+    f.appendChild(qb);
+    return f;
+  }
+
+  function answer(shown) {
+    var item = V.queue[V.at], q = item.q, p = item.p;
+    V.times[V.at] = V.qElapsed;
+    if (V.mode === "exam") {
+      V.answers[V.at] = shown;
+      if (V.at + 1 < V.queue.length) { V.at++; V.picked = null; beginQ(); }
+      render();
+      return;
+    }
+    if (V.picked != null) return;
+    stopQ();
+    V.picked = shown;
+    var right = shown === p.correctAt;
+    state.seen[q._i] = 1;
+    state.time[q._i] = V.qElapsed;
+    state.tot[q.t] = tot(q.t) + 1;
+    if (right) { state.ok[q.t] = okc(q.t) + 1; delete state.wrong[q._i]; }
+    else state.wrong[q._i] = 1;
+    save(); render();
+  }
+
+  function next() {
+    V.picked = null;
+    if (V.at + 1 < V.queue.length) { V.at++; beginQ(); render(); }
+    else { stopQ(); V.screen = "home"; render(); }
+  }
+
+  function finishExam() {
+    stopClock(); stopQ();
+    var right = 0, wrongN = 0, blank = 0;
+    V.queue.forEach(function (item, i) {
+      var a = V.answers[i];
+      state.seen[item.q._i] = 1;
+      if (V.times[i]) state.time[item.q._i] = V.times[i];
+      state.tot[item.q.t] = tot(item.q.t) + 1;
+      if (a == null) { blank++; state.wrong[item.q._i] = 1; }
+      else if (a === item.p.correctAt) { right++; state.ok[item.q.t] = okc(item.q.t) + 1; delete state.wrong[item.q._i]; }
+      else { wrongN++; state.wrong[item.q._i] = 1; }
+    });
+    var marks = state.neg ? right - 0.25 * wrongN : right;
+    state.exams.push({ n: V.queue.length, right: right, wrongN: wrongN, blank: blank,
+                       marks: Math.round(marks * 100) / 100, used: EXAM_MIN * 60 - V.left, neg: state.neg });
+    V.res = { right: right, wrongN: wrongN, blank: blank, marks: Math.round(marks * 100) / 100 };
+    V.screen = "result";
+    save(); render();
+  }
+
+  function result() {
+    var f = document.createDocumentFragment();
+    var n = V.queue.length, r = V.res;
+    var pct = Math.round((r.marks / n) * 100);
+    var pass = pct >= 60;
+    var used = EXAM_MIN * 60 - V.left;
+    var card = el("div", "score");
+    card.appendChild(el("div", "big " + (pass ? "pass" : "fail"), r.marks + "/" + n));
+    card.appendChild(el("h2", null, pct + "%" + (state.neg ? " after negative marking" : "")));
+    card.appendChild(el("p", null, state.neg
+      ? "With 0.25 negative marking, " + r.wrongN + " wrong answers cost you " + (0.25 * r.wrongN) + " marks. Blanks cost nothing — so if you cannot eliminate two options, skipping genuinely scores better than guessing."
+      : "Aptitude cut-offs sit around 60 to 70% and the sections auto-lock, so pace matters as much as accuracy. Turn on negative marking to practise the DE Shaw and Arcesium format."));
+
+    var g = el("div", "grid3");
+    [[r.right, "right"], [r.wrongN, "wrong"], [r.blank, "blank"],
+     [fmt(used), "time used"], [Math.round(used / n) + "s", "avg per q"],
+     [Math.round((r.right / n) * 100) + "%", "raw accuracy"]].forEach(function (x) {
+      var c = el("div", "cell");
+      c.appendChild(el("div", "v", String(x[0])));
+      c.appendChild(el("div", "l", x[1]));
+      g.appendChild(c);
+    });
+    card.appendChild(g);
+
+    var missed = 0;
+    var rv = el("div", "review");
+    V.queue.forEach(function (item, i) {
+      var a = V.answers[i], q = item.q;
+      var wrong = a == null || a !== item.p.correctAt;
+      var slow = !wrong && V.times[i] > q.tgt;
+      if (!wrong && !slow) return;
+      missed++;
+      var d = el("div", "ritem" + (slow ? " slowr" : ""));
+      d.appendChild(el("div", "rq", q.s + " · " + q.q));
+      d.appendChild(el("div", "ra", "correct: " + q.o[q.a]));
+      if (a == null) d.appendChild(el("div", "rp", "left blank"));
+      else if (wrong) d.appendChild(el("div", "rp", "you: " + q.o[item.p.order[a]]));
+      else d.appendChild(el("div", "rp", "right, but took " + V.times[i] + "s against a " + q.tgt + "s target"));
+      d.appendChild(el("div", "re", q.sc));
+      rv.appendChild(d);
+    });
+    if (missed) card.appendChild(rv);
+
+    var row = el("div", "cta");
+    var again = el("button", "btn exam", "retake"); again.type = "button";
+    again.addEventListener("click", function () { start(shuffle(Q).slice(0, EXAM_N), "exam"); });
+    row.appendChild(again);
+    if (wrongList().length) {
+      var rb = el("button", "btn primary", "drill mistakes"); rb.type = "button";
+      rb.addEventListener("click", function () { start(shuffle(wrongList()), "drill"); });
+      row.appendChild(rb);
+    }
+    var hm = el("button", "btn ghost", "menu"); hm.type = "button";
+    hm.addEventListener("click", function () { V.screen = "home"; V.mode = "drill"; render(); });
+    row.appendChild(hm);
+    card.appendChild(row);
+    f.appendChild(card);
+    return f;
+  }
+
+  document.addEventListener("keydown", function (ev) {
+    if (V.screen !== "quiz") {
+      if (ev.key === "Enter") { var b = document.getElementById("nextBtn"); if (b) { b.click(); ev.preventDefault(); } }
+      return;
+    }
+    var n = parseInt(ev.key, 10);
+    if (n >= 1 && n <= 4) {
+      var btns = document.querySelectorAll(".opt");
+      if (btns[n - 1] && !btns[n - 1].disabled) { btns[n - 1].click(); ev.preventDefault(); return; }
+    }
+    if (ev.key === "Enter") { var b2 = document.getElementById("nextBtn"); if (b2) { b2.click(); ev.preventDefault(); } }
+  });
+
+  function render() {
+    var y = window.scrollY;
+    app.textContent = "";
+    app.appendChild(bar());
+    if (V.screen === "home") app.appendChild(home());
+    else if (V.screen === "sheet") app.appendChild(sheetScreen());
+    else if (V.screen === "all") app.appendChild(allSheets());
+    else if (V.screen === "quiz") app.appendChild(quiz());
+    else app.appendChild(result());
+    window.scrollTo(0, V.screen === "home" ? y : 0);
+  }
+
+  render();
+  if (window.claude && window.claude.use) {
+    window.claude.use("artifact").then(function (a) { if (a) api = a; }).catch(function () {});
+  }
+})();
+</script>
+
+</body></html>

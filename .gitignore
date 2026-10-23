@@ -1,0 +1,15 @@
+# secrets: the NVIDIA API key lives here and must never be committed
+.env
+
+# your personal progress and local state
+data/progress.json
+data/visits.json
+data/oa_records.md
+data/llm_models.json
+my notes/
+
+# caches and junk
+__pycache__/
+*.pyc
+*.tmp
+_build/.link_cache.json

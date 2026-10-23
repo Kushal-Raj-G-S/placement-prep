@@ -1,0 +1,418 @@
+
+{
+"topics":[
+ {"k":"quant","name":"Quantitative","d":"Percentages, ratios, speed, work, counting, number system. Nine sub-areas, all of them arithmetic you can shortcut."},
+ {"k":"logic","name":"Logical reasoning","d":"Series, syllogisms, blood relations, directions, coding, cubes, clocks, calendars, ranking."}
+],
+"sheets":{
+"Percentages":{"f":[
+ "x% of y = xy/100",
+ "Successive a% then b%  →  net = a + b + ab/100   (use a minus sign for a discount)",
+ "Price falls x%, to keep spend equal consumption must rise  100x/(100 − x) %",
+ "Price rises x%, consumption must fall  100x/(100 + x) %",
+ "x% up then x% down  →  net LOSS of x²/100 %  (never zero)"],
+ "t":["Chain multipliers instead of computing rupees: 40% up then 25% off is 1.40 × 0.75 = 1.05.",
+ "Memorise the fraction table — it turns division into recall:\n1/2=50%  1/3=33.33%  1/4=25%  1/5=20%  1/6=16.67%\n1/7=14.28%  1/8=12.5%  1/9=11.11%  1/11=9.09%  1/12=8.33%  1/16=6.25%  1/20=5%",
+ "Successive percentages never simply add. If an option equals the plain sum, it is the trap."]},
+
+"Profit & loss":{"f":[
+ "Profit% = (SP − CP)/CP × 100      — always on COST price",
+ "SP = CP × (1 + p/100)   and   CP = SP / (1 + p/100)",
+ "Mark-up m then discount d:  SP = CP × (1 + m) × (1 − d)",
+ "Two articles at the SAME SP, one at +x% and one at −x%  →  always a LOSS of x²/100 %",
+ "False weight:  gain% = error/(true value − error) × 100"],
+ "t":["Percentage is on CP unless the question explicitly says otherwise. Computing it on SP is the single most common error.",
+ "For the same-SP trap, do not compute: ±20% gives 400/100 = 4% loss straight away.",
+ "When only ratios are given, assume CP = 100. Everything becomes mental arithmetic."]},
+
+"Averages":{"f":[
+ "Average = sum / count",
+ "Replacement:  new value = removed value + count × (change in average)",
+ "Adding one value v to n items shifts the average by (v − old average)/(n + 1)",
+ "Average of the first n natural numbers = (n + 1)/2"],
+ "t":["Think in deviations from the mean, not in totals. Removing a number 45 above the mean of 9 remaining items drops the mean by 45/9 = 5.",
+ "Average of an evenly spaced list is just (first + last)/2 — no addition needed.",
+ "If a question mentions 'increases by', reach for the replacement formula before writing equations."]},
+
+"Ratio":{"f":[
+ "a : b = ka : kb   — always work in 'parts'",
+ "Chain a:b and b:c by scaling b to a common value → a:b:c",
+ "Alligation:  cheaper qty / dearer qty = (dearer − mean) / (mean − cheaper)",
+ "If a:b = 3:5 and the sum is S, one part = S/8"],
+ "t":["Find the value of ONE part first, then read off whatever is asked. For a difference, it is just (5 − 3) = 2 parts — you never need either number.",
+ "For mixtures, scale both vessels to the same volume (use the LCM of the ratio sums) before adding components.",
+ "Alligation is faster than equations for any two-mixture blend question."]},
+
+"Speed & distance":{"f":[
+ "km/h → m/s  :  × 5/18        m/s → km/h  :  × 18/5",
+ "Equal distances at speeds a and b  →  average = 2ab/(a + b)   (harmonic, never the plain mean)",
+ "Train crossing a pole: covers its own length. Crossing a platform: length + platform",
+ "Relative speed — same direction: difference.  Opposite directions: sum",
+ "Boat:  downstream = b + s,  upstream = b − s,  b = (d + u)/2,  s = (d − u)/2"],
+ "t":["× 5/18 is the most used conversion in the whole section. 54 km/h = 15 m/s, 72 = 20, 36 = 10.",
+ "The arithmetic mean of two speeds is always placed as an option. It is always wrong for equal distances.",
+ "Sketch which lengths are being covered before writing anything — pole, platform or another train."]},
+
+"Time & work":{"f":[
+ "Take the LCM of the given days as total work → every rate becomes a whole number",
+ "Rates ADD:  1/A + 1/B.   Days never add",
+ "M₁ D₁ H₁ / W₁ = M₂ D₂ H₂ / W₂",
+ "If A is n times as fast as B, A takes 1/n of B's time",
+ "Pipes: filling counts positive, emptying negative"],
+ "t":["The LCM method removes fractions entirely. A in 12, B in 18 → total 36, rates 3 and 2, together 5/day → 7.2 days.",
+ "To split a combined rate between two workers, divide it in the ratio of their speeds.",
+ "Men × days is constant when the work is fixed — so 6 men in 12 days means 9 men in 72/9 = 8."]},
+
+"Permutations":{"f":[
+ "nPr = n! / (n − r)!        — order MATTERS",
+ "Arrangements of n items with repeats p, q, …  =  n! / (p! q! …)",
+ "Circular arrangements of n = (n − 1)!",
+ "Items that must stay together: glue them into one block, then × the block's internal arrangements"],
+ "t":["Repeats are the usual trap. LEVEL has L twice and E twice, so 5!/(2!2!) = 30, not 120.",
+ "'Order matters' → permutation. 'Just choose a group' → combination. Decide that first, everything else follows.",
+ "Factorials to know cold: 4!=24, 5!=120, 6!=720, 7!=5040."]},
+
+"Combinations":{"f":[
+ "nCr = n! / (r! (n − r)!)     — order does NOT matter",
+ "nCr = nC(n−r)      nC0 = nCn = 1      nC1 = n",
+ "Handshakes, lines through points, chords, matches:  nC2 = n(n − 1)/2",
+ "'At least one'  =  total − none"],
+ "t":["Compute nCr by cancelling, never by expanding factorials: C(9,3) = 9×8×7 / 3×2×1 = 84.",
+ "'At least one woman' is total minus all-men. Summing exactly-1, 2, 3 gives the same answer three times slower.",
+ "nC2 = n(n−1)/2 covers a surprising share of all counting questions."]},
+
+"Probability":{"f":[
+ "P = favourable outcomes / total outcomes",
+ "P(A or B) = P(A) + P(B) − P(A and B)      — subtract the overlap",
+ "P(not A) = 1 − P(A)",
+ "Two dice: 36 outcomes. Sum 7 is the most likely at 6/36",
+ "Cards: 52 = 4 suits × 13.  26 red, 12 face cards, 4 of each rank"],
+ "t":["Count ORDERED pairs for dice: (2,6) and (6,2) are two different outcomes.",
+ "For 'at least one', compute 1 − P(none). Almost always faster.",
+ "Forgetting the overlap in 'king OR heart' gives 17/52 — which is placed there as an option."]},
+
+"Number system":{"f":[
+ "HCF = product of the LOWEST common prime powers.  LCM = the HIGHEST",
+ "HCF × LCM = product of the two numbers",
+ "Same remainder r for every divisor  →  answer = LCM + r",
+ "Unit digit: powers cycle with length 1, 2 or 4 → take the exponent mod 4",
+ "Trailing zeros in n! = ⌊n/5⌋ + ⌊n/25⌋ + ⌊n/125⌋ + …"],
+ "t":["Divisibility rules: 3 and 9 → digit sum; 4 → last two digits; 8 → last three; 11 → alternating digit sum; 6 → both 2 and 3.",
+ "Trailing zeros come from 2×5 pairs, and 2s are always plentiful — so only count the 5s.",
+ "For unit digits, 105 mod 4 = 1, so 7¹⁰⁵ ends in the first digit of the 7,9,3,1 cycle: 7."]},
+
+"Progressions":{"f":[
+ "AP:  aₙ = a + (n − 1)d       Sₙ = n/2 [2a + (n − 1)d] = n × (first + last)/2",
+ "GP:  aₙ = a r^(n−1)          Sₙ = a(rⁿ − 1)/(r − 1)      S∞ = a/(1 − r) for |r| < 1",
+ "1 + 2 + … + n = n(n + 1)/2",
+ "Sum of squares = n(n+1)(2n+1)/6      Sum of cubes = [n(n+1)/2]²",
+ "First n odd numbers sum to exactly n².  First n even numbers sum to n(n + 1)"],
+ "t":["The (n − 1) trips people up: the first term needs no steps, so the 20th term takes 19 of them.",
+ "n² for odd numbers is the neatest identity in the section — 1+3+5+7 = 16.",
+ "For any evenly spaced list, sum = count × average = count × (first + last)/2."]},
+
+"Data interpretation":{"f":[
+ "Growth % = (change / PREVIOUS value) × 100",
+ "Share % = (part / total) × 100",
+ "Percentage point ≠ percent — a rise from 20% to 25% is 5 points but 25% growth"],
+ "t":["Compare fractions, do not compute decimals. 15/50 clearly beats 10/40 and 13/65 — no calculator needed.",
+ "Add in pairs that round nicely: (40+78) + (50+65) = 118 + 115 = 233.",
+ "Read the units and the axis labels first. Half of all DI errors are unit errors, not arithmetic."]},
+
+"Number series":{"f":[
+ "Step 1 — always take FIRST DIFFERENCES before anything clever",
+ "Constant differences → AP.  Differences are odd numbers → quadratic (n²-based)",
+ "Terms roughly double → test ×2 ± k.  Differences also double → geometric",
+ "Then test: n², n³, n(n+1), primes, factorials"],
+ "t":["n(n+1) gives 2, 6, 12, 20, 30, 42 — a very common series.",
+ "If differences look random and the numbers are small, check for primes before assuming a rule.",
+ "Alternating series: split into odd and even positions and treat each as its own series."]},
+
+"Letter series":{"f":[
+ "A=1 … Z=26.  Anchors:  E=5, J=10, O=15, T=20, Y=25",
+ "Mirror letters sum to 27:  A↔Z, B↔Y, C↔X, D↔W",
+ "Split any pair-series into two independent series"],
+ "t":["Count from the nearest anchor rather than from A — much faster and less error-prone.",
+ "AZ, BY, CX, DW works because the forward and backward series are independent.",
+ "Watch the wrap: after Z comes A again."]},
+
+"Syllogisms":{"f":[
+ "Draw Venn circles. A conclusion follows only if it holds in EVERY valid diagram",
+ "All A are B  +  All B are C  →  All A are C",
+ "Some A are B  +  All B are C  →  Some A are C",
+ "Two 'some' premises  →  nothing follows",
+ "'All A are B' NEVER gives 'All B are A'"],
+ "t":["A 'some' premise can never be upgraded to an 'all' conclusion.",
+ "If you can draw one legal diagram where the conclusion fails, it does not follow. Try to break it, not to prove it.",
+ "'Neither follows' is correct far more often than students expect — do not avoid it."]},
+
+"Blood relations":{"f":[
+ "Unwrap from the INNERMOST phrase outward",
+ "'my mother's only son' = the speaker himself (male speaker)",
+ "'my father's only daughter' = the speaker herself (female speaker)"],
+ "t":["Draw a tree. Mark gender only where the question states it, and leave it blank otherwise.",
+ "The word 'only' is the key — it forces the middle person to be the speaker.",
+ "If the relation works regardless of an unknown gender, the answer IS determinable."]},
+
+"Directions":{"f":[
+ "Right turns from north:  N → E → S → W → N",
+ "Left turns from north:  N → W → S → E → N",
+ "Opposite legs of equal length cancel completely",
+ "Net displacement = √(x² + y²) only when both perpendicular legs survive"],
+ "t":["Sketch it. Every time. Nobody tracks this reliably in their head.",
+ "Count net quarter-turns first and convert at the end: two clockwise plus one anticlockwise is one clockwise.",
+ "If one axis cancels, the answer is a single leg — no Pythagoras needed."]},
+
+"Coding–decoding":{"f":[
+ "Test the rule on the FIRST TWO letters, then apply it mechanically",
+ "Common rules: fixed shift ±n, reverse the word, alphabet position, alternating shifts",
+ "Positional value: A=1 … Z=26"],
+ "t":["Establish the pattern on the shortest part of the word, then stop thinking and just apply it.",
+ "Watch the wrap at both ends: Z + 1 = A, A − 1 = Z.",
+ "If a plain shift does not fit, check whether the letters are reversed before hunting for anything exotic."]},
+
+"Cubes":{"f":[
+ "An n×n×n painted cube cut into n³ small cubes:",
+ "  3 faces painted (corners)      = 8   — always",
+ "  2 faces painted (edges)        = 12(n − 2)",
+ "  1 face painted (face centres)  = 6(n − 2)²",
+ "  0 faces painted (interior)     = (n − 2)³"],
+ "t":["Those four counts always add to n³. Use that as a free check.",
+ "For n = 3 the numbers are 8, 12, 6, 1 — worth simply memorising.",
+ "'Corners' is 8 for every cube regardless of size, which makes it the easiest mark in the section."]},
+
+"Ranking":{"f":[
+ "rank from top + rank from bottom = total + 1",
+ "People strictly between positions p and q = |p − q| − 1",
+ "If ranks overlap by k people, total = sum of ranks − k"],
+ "t":["The +1 exists because the person is counted from both ends. Losing it is the standard mistake.",
+ "Rearrange the same formula to find the total when both ranks are given.",
+ "Sketch a short line of positions if the question mentions more than one person."]},
+
+"Clocks":{"f":[
+ "Angle between hands = |30H − 5.5M|      (if over 180, subtract from 360)",
+ "Minute hand: 6° per minute.  Hour hand: 0.5° per minute",
+ "Hands overlap every 65 5/11 minutes, so 22 times in 24 hours"],
+ "t":["The hour hand drifts. At 3:30 it is halfway to 4, which is exactly why the answer is 75° and not the 90° on offer.",
+ "|30H − 5.5M| answers almost every clock question — memorise this one formula.",
+ "H is the hour, M the minutes. At 3:30 that is |90 − 165| = 75."]},
+
+"Calendars":{"f":[
+ "An ordinary year advances the weekday by 1.  A leap year advances it by 2",
+ "Leap year: divisible by 4, except centuries which must be divisible by 400",
+ "Odd days: 100 years = 5, 200 = 3, 300 = 1, 400 = 0"],
+ "t":["366 days = 52 weeks + 2 days, which is the whole reason a leap year shifts by two.",
+ "2000 was a leap year, 1900 was not. That is the century rule being tested.",
+ "For 'same date next year', you only need to know whether the year in between is a leap year."]},
+
+"Ages":{"f":[
+ "Let the present age be x, write each condition as an equation, solve",
+ "The DIFFERENCE between two ages never changes",
+ "'n years ago' → subtract n from both.  'in n years' → add n to both"],
+ "t":["Always substitute your answer back. Father 36 and son 12 → in 12 years, 48 and 24, exactly double. Five seconds, catches every sign error.",
+ "The constant age difference often solves the problem faster than the ratio does.",
+ "Set the variable to the quantity the question asks for — it saves a final step."]},
+
+"Data sufficiency":{"f":[
+ "The only question is: does this pin the value to EXACTLY ONE possibility?",
+ "Check statement I alone, then II alone, THEN both together — in that order",
+ "An inequality or a range never fixes a single value"],
+ "t":["Learning something is not the same as being sufficient. 'Ramesh is older than 25' narrows it and still answers nothing.",
+ "Deliberately try to find two different values that satisfy the statements. If you can, it is insufficient.",
+ "Do not solve further than needed — you only have to know that a unique answer exists."]},
+
+"Statement & conclusion":{"f":[
+ "An implicit assumption is what MUST be true for the statement to make sense",
+ "A conclusion must follow from the statement alone, with no outside knowledge",
+ "Reject anything that introduces price, rivals, or the future unless stated"],
+ "t":["Test it by negation: if denying the option destroys the argument, it is the assumption.",
+ "Be suspicious of extreme words — all, never, only, everyone — unless the statement used them.",
+ "The answer is usually the dullest, most obvious option. These questions do not reward creativity."]},
+
+"Odd one out":{"f":[
+ "Test in this order: squares, cubes, primes, even/odd, digit sum, multiples"],
+ "t":["64 is both a perfect square and a perfect cube, so it is a favourite distractor.",
+ "If four items share a property and one does not, you are done — do not look for a second pattern.",
+ "For words, check the category before the spelling."]},
+
+"Seating":{"f":[
+ "Place the ANCHORED person first (an end, a fixed seat, 'sits third from left')",
+ "Build blocks from 'immediate' clues, then position the blocks",
+ "Circular, facing centre: left and right are the mirror of what you expect"],
+ "t":["Draw the seats as dashes on paper and fill them in. Nobody solves these mentally.",
+ "'Immediate' clues are the strongest — use them before any vague 'somewhere to the left of'.",
+ "If several arrangements remain valid, the answer is whatever is true in ALL of them."]}
+},
+"q":[
+{"t":"quant","s":"Profit & loss","tgt":60,"q":"A shopkeeper marks his goods up by 40% and then offers a 25% discount. What is his net profit percentage?","o":["5%","15%","10%","No profit, no loss"],"a":0,
+ "sc":"Never compute rupees. Chain the multipliers: 1.40 × 0.75 = 1.05, so +5%.\nAny mark-up/discount chain is just a product of factors — a 40% rise is ×1.4, a 25% cut is ×0.75."},
+
+{"t":"quant","s":"Percentages","tgt":60,"q":"The price of rice falls by 20%. By what percentage must consumption increase so that total expenditure stays the same?","o":["25%","20%","16.67%","22%"],"a":0,
+ "sc":"Expenditure = price × quantity, so quantity must scale by 1/0.8 = 1.25 → +25%.\nThe shortcut for 'falls by x%, consumption must rise by': 100x/(100−x). Here 2000/80 = 25."},
+
+{"t":"quant","s":"Percentages","tgt":45,"q":"Two successive discounts of 20% and 10% are equivalent to a single discount of —","o":["28%","30%","27%","25%"],"a":0,
+ "sc":"0.8 × 0.9 = 0.72, so 28% off.\nThe formula a + b − ab/100 gives 20 + 10 − 2 = 28. Successive percentages never simply add — that is the whole trap."},
+
+{"t":"quant","s":"Profit & loss","tgt":75,"q":"A trader sells two articles at ₹1200 each. On one he makes a 20% profit, on the other a 20% loss. Overall he has a —","o":["4% loss","4% profit","no loss, no profit","2% loss"],"a":0,
+ "sc":"CP₁ = 1200/1.2 = 1000, CP₂ = 1200/0.8 = 1500. Total CP 2500 vs SP 2400 → 100 loss on 2500 = 4% loss.\nShortcut worth memorising: equal selling prices at ±x% always give a loss of x²/100 percent. Here 400/100 = 4%."},
+
+{"t":"quant","s":"Averages","tgt":60,"q":"The average of 10 numbers is 50. One number, 95, is removed. What is the average of the remaining nine?","o":["45","46","44","47"],"a":0,
+ "sc":"Total 500, remove 95 → 405 over 9 = 45.\nFaster: removing a number that is 45 above the mean pulls the mean down by 45/9 = 5, so 50 − 5 = 45. Think in deviations from the average, not in totals."},
+
+{"t":"quant","s":"Averages","tgt":60,"q":"The average age of 5 people increases by 2 years when a new person replaces one aged 30. How old is the new person?","o":["40","38","42","36"],"a":0,
+ "sc":"Total rises by 5 × 2 = 10, so the newcomer is 30 + 10 = 40.\nGeneral rule: replacement age = removed age + (count × change in average). No need to know any individual age."},
+
+{"t":"quant","s":"Ratio","tgt":60,"q":"Two vessels of equal volume contain milk and water in the ratios 3:1 and 5:3. Both are emptied into one large vessel. The final milk:water ratio is —","o":["11:5","8:4","4:2","7:5"],"a":0,
+ "sc":"Take 8 units each (a common multiple of 4 and 8). Vessel 1: 6 milk, 2 water. Vessel 2: 5 milk, 3 water. Totals 11 and 5.\nAlways scale both mixtures to the same volume first — that is the only step people get wrong."},
+
+{"t":"quant","s":"Speed & distance","tgt":45,"q":"A 150 m long train running at 54 km/h crosses an electric pole. How long does it take?","o":["10 seconds","15 seconds","9 seconds","12 seconds"],"a":0,
+ "sc":"54 km/h × 5/18 = 15 m/s. 150/15 = 10 s.\nCrossing a pole means covering just the train's own length. Crossing a platform means length of train + length of platform. Memorise ×5/18 for km/h → m/s."},
+
+{"t":"quant","s":"Speed & distance","tgt":75,"q":"A person travels from A to B at 40 km/h and returns at 60 km/h. What is the average speed for the whole journey?","o":["48 km/h","50 km/h","52 km/h","45 km/h"],"a":0,
+ "sc":"Equal distances mean the harmonic mean: 2ab/(a+b) = 2×40×60/100 = 48.\nNever average the speeds arithmetically — 50 is the trap answer, and it is placed there deliberately."},
+
+{"t":"quant","s":"Speed & distance","tgt":75,"q":"A boat's speed in still water is 10 km/h and the stream flows at 2 km/h. How long does it take to go 24 km upstream?","o":["3 hours","2.4 hours","4 hours","2 hours"],"a":0,
+ "sc":"Upstream speed = 10 − 2 = 8 km/h, so 24/8 = 3 hours.\nUpstream subtracts the stream, downstream adds it. If you are given both times instead, still water speed = (down + up)/2 and stream = (down − up)/2."},
+
+{"t":"quant","s":"Time & work","tgt":60,"q":"A can finish a job in 12 days and B in 18 days. Working together, they finish it in —","o":["7.2 days","7.5 days","6 days","8 days"],"a":0,
+ "sc":"Use LCM as total work: 36 units. A does 3/day, B does 2/day, together 5/day → 36/5 = 7.2 days.\nThe LCM method beats fractions every time: pick the LCM of the given days as total work and the rates become whole numbers."},
+
+{"t":"quant","s":"Time & work","tgt":60,"q":"A and B together finish a task in 8 days. A alone takes 12 days. How long would B alone take?","o":["24 days","16 days","20 days","18 days"],"a":0,
+ "sc":"LCM 24: together 3/day, A 2/day, so B is 1/day → 24 days.\nRates subtract: 1/8 − 1/12 = 1/24. Days never subtract — that is the classic error."},
+
+{"t":"quant","s":"Time & work","tgt":45,"q":"If 6 men can build a wall in 12 days, how long will 9 men take at the same rate?","o":["8 days","9 days","6 days","10 days"],"a":0,
+ "sc":"Men × days is constant: 6 × 12 = 72, so 72/9 = 8 days.\nInverse proportion. More men, fewer days, and the product stays fixed."},
+
+{"t":"quant","s":"Time & work","tgt":75,"q":"A works twice as fast as B. Together they finish a job in 12 days. How long would A alone take?","o":["18 days","24 days","36 days","20 days"],"a":0,
+ "sc":"Rates are 2:1, so of every 3 units A does 2. Combined rate is 1/12, so A's rate is (2/3)(1/12) = 1/18 → 18 days.\nSplit the combined rate in the ratio of the speeds. B would take 36."},
+
+{"t":"quant","s":"Permutations","tgt":60,"q":"How many distinct arrangements can be made of the letters of the word LEVEL?","o":["30","60","120","20"],"a":0,
+ "sc":"5 letters with L twice and E twice: 5!/(2!×2!) = 120/4 = 30.\nDivide the factorial by the factorial of each repeat count. Ignoring repeats gives 120 — the trap answer."},
+
+{"t":"quant","s":"Combinations","tgt":75,"q":"From 5 men and 4 women, how many committees of 3 can be formed containing at least one woman?","o":["74","70","84","64"],"a":0,
+ "sc":"Total C(9,3) = 84, minus all-male C(5,3) = 10, giving 74.\n'At least one' is almost always faster as total minus none. Summing the cases of exactly 1, 2 and 3 women gives the same 74 but takes three times as long."},
+
+{"t":"quant","s":"Probability","tgt":60,"q":"Two fair dice are rolled. What is the probability that the sum is 8?","o":["5/36","1/6","6/36","4/36"],"a":0,
+ "sc":"Favourable pairs: (2,6)(3,5)(4,4)(5,3)(6,2) = 5 out of 36.\nCount ordered pairs — (2,6) and (6,2) are distinct outcomes. Sum 7 is the most likely at 6/36."},
+
+{"t":"quant","s":"Probability","tgt":60,"q":"One card is drawn from a standard 52-card pack. What is the probability that it is a king OR a heart?","o":["4/13","17/52","1/4","16/13"],"a":0,
+ "sc":"4 kings + 13 hearts − 1 king of hearts = 16, so 16/52 = 4/13.\nInclusion–exclusion: subtract the overlap or you double-count it. 17/52 is the answer you get by forgetting to."},
+
+{"t":"quant","s":"Combinations","tgt":45,"q":"In a room of 10 people, everyone shakes hands with everyone else exactly once. How many handshakes occur?","o":["45","90","100","55"],"a":0,
+ "sc":"C(10,2) = 10×9/2 = 45.\nA handshake is an unordered pair, hence the division by 2. If the question were about gifts given in both directions, it would be 90."},
+
+{"t":"quant","s":"Number system","tgt":45,"q":"What is the HCF of 24, 36 and 60?","o":["12","6","4","18"],"a":0,
+ "sc":"24 = 2³·3, 36 = 2²·3², 60 = 2²·3·5. Take the lowest power of each shared prime: 2²·3 = 12.\nHCF takes lowest common powers, LCM takes highest. That one line separates the two."},
+
+{"t":"quant","s":"Number system","tgt":45,"q":"What is the LCM of 12, 15 and 20?","o":["60","120","180","30"],"a":0,
+ "sc":"12 = 2²·3, 15 = 3·5, 20 = 2²·5. Highest power of each prime: 2²·3·5 = 60.\nCheck by division: 60 is divisible by all three, and nothing smaller is."},
+
+{"t":"quant","s":"Number system","tgt":75,"q":"What is the smallest number which, when divided by 12, 15 and 18, leaves a remainder of 5 in each case?","o":["185","180","175","190"],"a":0,
+ "sc":"LCM(12,15,18) = 180, then add the common remainder: 185.\nWhenever the remainder is the same for every divisor, the answer is LCM + remainder. When the remainders differ by a constant from the divisors, use LCM − that constant."},
+
+{"t":"quant","s":"Number system","tgt":60,"q":"What is the unit digit of 7¹⁰⁵?","o":["7","9","3","1"],"a":0,
+ "sc":"Unit digits of powers of 7 cycle 7, 9, 3, 1 with period 4. 105 mod 4 = 1, so it is the first in the cycle: 7.\nEvery digit's powers cycle with period 1, 2 or 4. Find the cycle, take the exponent mod its length, and read off."},
+
+{"t":"quant","s":"Number system","tgt":75,"q":"How many trailing zeros does 100! have?","o":["24","20","25","10"],"a":0,
+ "sc":"Count factors of 5: ⌊100/5⌋ + ⌊100/25⌋ = 20 + 4 = 24.\nTrailing zeros come from 2×5 pairs, and 2s are always plentiful, so only the 5s matter. Keep dividing by powers of 5 and add the quotients."},
+
+{"t":"quant","s":"Progressions","tgt":45,"q":"What is the sum of the first 20 even natural numbers?","o":["420","400","440","380"],"a":0,
+ "sc":"2 + 4 + ... + 40 = 2(1 + 2 + ... + 20) = 2 × 210 = 420.\nOr n(n+1) directly: 20 × 21 = 420. The sum of the first n odd numbers is the neater one to remember: exactly n²."},
+
+{"t":"quant","s":"Progressions","tgt":45,"q":"In the arithmetic progression 5, 9, 13, 17, ... what is the 20th term?","o":["81","85","77","80"],"a":0,
+ "sc":"a + (n−1)d = 5 + 19×4 = 81.\nThe (n−1) is where mistakes happen — the first term needs no steps, so the 20th term takes 19 of them."},
+
+{"t":"quant","s":"Data interpretation","tgt":90,"q":"Using the sales table below, in which year was the percentage growth over the previous year the highest?","di":"Year   Sales (₹ lakh)\n2021        40\n2022        50\n2023        65\n2024        78","o":["2023","2022","2024","2022 and 2023 equally"],"a":0,
+ "sc":"2022: 10/40 = 25%. 2023: 15/50 = 30%. 2024: 13/65 = 20%. Highest is 2023.\nIn DI, never compute all four decimals — compare the fractions. 15/50 clearly beats 10/40 and 13/65, so 2023 wins without a calculator."},
+
+{"t":"quant","s":"Data interpretation","tgt":75,"q":"From the same table, what is the average annual sales over the four years?","di":"Year   Sales (₹ lakh)\n2021        40\n2022        50\n2023        65\n2024        78","o":["₹58.25 lakh","₹57.75 lakh","₹59.5 lakh","₹58 lakh"],"a":0,
+ "sc":"40 + 50 + 65 + 78 = 233, and 233/4 = 58.25.\nAdd in pairs that round nicely: (40+78) + (50+65) = 118 + 115 = 233. Pairing beats left-to-right addition under time pressure."},
+
+{"t":"quant","s":"Percentages","tgt":45,"q":"A number is increased by 25% and the result is then decreased by 20%. The final value is —","o":["equal to the original","5% more than the original","5% less than the original","20% less than the original"],"a":0,
+ "sc":"1.25 × 0.80 = 1.00 exactly, so no change.\nThis pair cancels because 25% is 1/4 up and 20% is 1/5 down. Generally x% up then x% down leaves you at 1 − x²/10000 — always slightly below."},
+
+{"t":"quant","s":"Ratio","tgt":45,"q":"Two numbers are in the ratio 3:5 and their sum is 64. What is their difference?","o":["16","8","24","12"],"a":0,
+ "sc":"8 parts total, so 1 part = 8. The numbers are 24 and 40, difference 16 — which is 2 parts.\nWork in parts, not equations. The difference is (5−3) = 2 parts = 16 directly, no need to find either number."},
+
+{"t":"logic","s":"Number series","tgt":45,"q":"Find the next term: 2, 6, 12, 20, 30, ?","o":["42","40","36","44"],"a":0,
+ "sc":"Differences are 4, 6, 8, 10 → next is 12, so 30 + 12 = 42.\nThe terms are n(n+1): 1×2, 2×3, 3×4, 4×5, 5×6, 6×7 = 42. Always take first differences before hunting for anything clever."},
+
+{"t":"logic","s":"Number series","tgt":45,"q":"Find the next term: 3, 6, 11, 18, 27, ?","o":["38","36","40","35"],"a":0,
+ "sc":"Differences 3, 5, 7, 9 → next 11, giving 38.\nConsecutive odd differences mean the sequence is quadratic: here it is n² + 2."},
+
+{"t":"logic","s":"Number series","tgt":45,"q":"Find the next term: 5, 11, 23, 47, ?","o":["95","94","96","93"],"a":0,
+ "sc":"Each term is double the previous plus one: 47×2 + 1 = 95.\nWhen terms roughly double, test ×2±k before anything else. Differences 6, 12, 24 also double, which confirms it."},
+
+{"t":"logic","s":"Letter series","tgt":45,"q":"Complete the series: AZ, BY, CX, ?","o":["DW","DV","EW","DX"],"a":0,
+ "sc":"First letters run forward A, B, C, D. Second letters run backward Z, Y, X, W. So DW.\nSplit any letter pair series into two independent series and track each. It helps to know A=1 and Z=26, so the pair positions always sum to 27."},
+
+{"t":"logic","s":"Number series","tgt":45,"q":"Find the next term: 2, 3, 5, 7, 11, 13, ?","o":["17","15","19","16"],"a":0,
+ "sc":"These are consecutive primes, so the next is 17.\nIf differences look irregular and the numbers are small, check for primes before assuming an arithmetic rule. 15 is the trap — it is 13 + 2 but not prime."},
+
+{"t":"logic","s":"Syllogisms","tgt":75,"q":"Statements: All roses are flowers. Some flowers fade quickly. Which conclusion follows?","o":["Neither conclusion follows","Some roses fade quickly","No rose fades quickly","All flowers are roses"],"a":0,
+ "sc":"The 'some flowers' that fade need not overlap with the roses at all, so neither 'some do' nor 'none do' is forced.\nA particular premise ('some') cannot yield a definite conclusion about a specific subgroup. Draw two circles: roses inside flowers, and the fading region can sit entirely outside the rose circle."},
+
+{"t":"logic","s":"Syllogisms","tgt":60,"q":"Statements: All cats are animals. All animals need water. Which conclusion follows?","o":["All cats need water","Some animals are cats only","All water users are cats","No conclusion follows"],"a":0,
+ "sc":"Two universal affirmatives chain transitively: cats ⊆ animals ⊆ water-needers.\nA → B and B → C always gives A → C. The reverse never follows, which is what makes 'all water users are cats' wrong."},
+
+{"t":"logic","s":"Syllogisms","tgt":60,"q":"Statements: Some pens are books. All books are papers. Which conclusion follows?","o":["Some pens are papers","All pens are papers","No pen is a paper","All papers are pens"],"a":0,
+ "sc":"The pens that are books must be papers too, so 'some pens are papers' holds.\nA 'some' premise plus a universal gives a 'some' conclusion. It can never be upgraded to 'all'."},
+
+{"t":"logic","s":"Blood relations","tgt":60,"q":"A is the father of B. B is the sister of C. How is A related to C?","o":["Father","Uncle","Brother","Cannot be determined"],"a":0,
+ "sc":"B and C are siblings, so B's father is also C's father.\nSiblings share parents. C's own gender is unknown but irrelevant — 'father' works either way, which is why this is determinable."},
+
+{"t":"logic","s":"Blood relations","tgt":75,"q":"A man points at a photograph and says, \"He is the son of my mother's only son.\" How is the man in the photograph related to him?","o":["His son","His brother","His nephew","His cousin"],"a":0,
+ "sc":"His mother's only son is the speaker himself, so the photograph shows the speaker's son.\nUnwrap these from the inside out. The trick word is 'only' — it forces the middle person to be the speaker, since a brother would contradict it."},
+
+{"t":"logic","s":"Directions","tgt":60,"q":"A man walks 5 km north, turns right and walks 3 km, then turns right and walks 5 km. How far and in which direction is he from his starting point?","o":["3 km east","3 km west","8 km east","13 km north"],"a":0,
+ "sc":"North 5, east 3, then south 5. The two vertical legs cancel, leaving 3 km east.\nSketch it. Successive right turns from north go north → east → south → west, and opposite legs of equal length always cancel."},
+
+{"t":"logic","s":"Directions","tgt":60,"q":"Facing north, you turn 90° clockwise, then 90° clockwise again, then 90° anticlockwise. Which direction are you now facing?","o":["East","West","South","North"],"a":0,
+ "sc":"North → east → south, then anticlockwise back to east.\nCount in quarter turns and only convert at the end: two clockwise plus one anticlockwise is a net one clockwise, which from north is east."},
+
+{"t":"logic","s":"Coding–decoding","tgt":45,"q":"If MANGO is coded as NBOHP, then APPLE is coded as —","o":["BQQMF","BQQNF","AQQMF","BPPMF"],"a":0,
+ "sc":"Every letter shifts forward by one: A→B, P→Q, P→Q, L→M, E→F.\nCheck the shift on the first two letters, then apply mechanically. Watch the wrap: Z would become A."},
+
+{"t":"logic","s":"Coding–decoding","tgt":60,"q":"If CAT is written as 3-1-20, how is DOG written?","o":["4-15-7","4-14-7","3-15-7","4-15-8"],"a":0,
+ "sc":"Each letter maps to its alphabet position: D=4, O=15, G=7.\nWorth memorising the anchors: A=1, E=5, J=10, O=15, T=20, Y=25. Then any letter is a short count from the nearest anchor."},
+
+{"t":"logic","s":"Cubes","tgt":75,"q":"A cube painted on all six faces is cut into 27 identical smaller cubes. How many of them have exactly two faces painted?","o":["12","8","6","1"],"a":0,
+ "sc":"Exactly two painted faces means the edge positions that are not corners. A 3×3×3 cube has 12 edges with one such cube each → 12.\nThe standard set for n×n×n: corners 8 (three faces), edges 12(n−2) (two faces), face centres 6(n−2)² (one face), interior (n−2)³ (none). For n = 3 that gives 8, 12, 6 and 1 — which sums to 27."},
+
+{"t":"logic","s":"Cubes","tgt":60,"q":"From the same 27 smaller cubes, how many have no face painted at all?","o":["1","6","8","0"],"a":0,
+ "sc":"Only the single cube at the very centre, (n−2)³ = 1³ = 1.\nUnpainted cubes are the inner block you get by peeling one layer off every side."},
+
+{"t":"logic","s":"Ranking","tgt":45,"q":"In a class of 40 students, Ravi ranks 12th from the top. What is his rank from the bottom?","o":["29th","28th","30th","27th"],"a":0,
+ "sc":"40 − 12 + 1 = 29.\nThe +1 is because Ravi is counted in both directions. The reliable check: rank from top + rank from bottom = total + 1."},
+
+{"t":"logic","s":"Clocks","tgt":75,"q":"What is the angle between the hour and minute hands of a clock at 3:30?","o":["75°","90°","80°","72.5°"],"a":0,
+ "sc":"|30H − 5.5M| = |90 − 165| = 75°.\nThe hour hand does not sit on 3 at half past — it has drifted halfway to 4. That drift is exactly why the answer is not 90°, which is the trap option."},
+
+{"t":"logic","s":"Calendars","tgt":75,"q":"1 January 2024 was a Monday. What day was 1 January 2025?","o":["Wednesday","Tuesday","Thursday","Monday"],"a":0,
+ "sc":"2024 is a leap year (divisible by 4, not a century), so it has 366 days = 52 weeks + 2 odd days. Monday + 2 = Wednesday.\nAn ordinary year advances the day by 1, a leap year by 2. That single fact answers most calendar questions."},
+
+{"t":"logic","s":"Ages","tgt":75,"q":"A father is three times as old as his son. In 12 years he will be twice as old. What is the son's present age?","o":["12 years","10 years","14 years","15 years"],"a":0,
+ "sc":"Let the son be s. Then 3s + 12 = 2(s + 12) → 3s + 12 = 2s + 24 → s = 12, father 36.\nCheck it: in 12 years they are 24 and 48, exactly double. Always substitute back — it costs five seconds and catches sign errors."},
+
+{"t":"logic","s":"Data sufficiency","tgt":75,"q":"How old is Ramesh? (I) Ramesh is older than Suresh. (II) Suresh is 25 years old. Which statements are sufficient?","o":["Neither I nor II, nor both together","I alone","II alone","Both together"],"a":0,
+ "sc":"Together they only establish that Ramesh is over 25 — not a specific age. Insufficient.\nData sufficiency asks whether the value is pinned down, not whether you learned something. An inequality never fixes a single value."},
+
+{"t":"logic","s":"Data sufficiency","tgt":75,"q":"What is the two-digit number? (I) The sum of its digits is 9. (II) The difference between the number and the number formed by reversing its digits is 27. Which is sufficient?","o":["Both together","I alone","II alone","Neither"],"a":0,
+ "sc":"I alone leaves 18, 27, 36, 45, 54, 63, 72, 81, 90. II gives 9(a − b) = 27, so a − b = 3, which alone still leaves 41, 52, 63, 74, 85, 96 and more. Together: a + b = 9 and a − b = 3 → a = 6, b = 3 → 63. Unique.\nFor reversal problems, remember the number minus its reverse is always 9 times the digit difference."},
+
+{"t":"logic","s":"Statement & conclusion","tgt":75,"q":"Statement: \"Use our detergent for whiter clothes than any other brand.\" Which assumption is implicit in this advertisement?","o":["People care about how white their clothes are","Their detergent is the cheapest available","Other detergents damage clothes","Everyone reads advertisements"],"a":0,
+ "sc":"The claim only persuades if whiteness is something buyers value — that is the unstated premise the argument rests on.\nAn implicit assumption is what must be true for the statement to make sense. It is never an extra claim about price or rivals unless stated."},
+
+{"t":"logic","s":"Odd one out","tgt":45,"q":"Which number does not belong: 8, 27, 64, 100, 125?","o":["100","64","27","125"],"a":0,
+ "sc":"8, 27, 64 and 125 are 2³, 3³, 4³ and 5³. 100 is a perfect square, not a cube.\nWhen a list looks like powers, test cubes as well as squares. 64 is both a square and a cube, which is exactly why it is placed there to distract you."},
+
+{"t":"logic","s":"Seating","tgt":90,"q":"Five friends sit in a row. B is to the immediate right of A. C is at one of the ends. D is between B and E. Who is definitely NOT at an end?","o":["B","A","C","E"],"a":0,
+ "sc":"A must be immediately left of B, and D sits between B and E, so the block runs A, B, D, E in that order with C on an end. B has A on one side and D on the other, so it is boxed in.\nBuild the fixed blocks first, place the anchored person (C at an end), and only then check who has neighbours on both sides."},
+
+{"t":"logic","s":"Number series","tgt":60,"q":"Find the missing term: 1, 4, 9, 16, 25, ?","o":["36","30","35","49"],"a":0,
+ "sc":"Perfect squares: 6² = 36.\nDifferences are the odd numbers 3, 5, 7, 9, so the next difference is 11 → 25 + 11 = 36. Recognising squares instantly is worth more than deriving them."},
+
+{"t":"logic","s":"Directions","tgt":75,"q":"A walks 10 m north, then 10 m east, then 10 m south. How far is he from his starting point?","o":["10 m","20 m","0 m","14.1 m"],"a":0,
+ "sc":"The north and south legs cancel, leaving 10 m east.\nOnly resort to Pythagoras when the remaining legs are perpendicular and both non-zero. Here one axis cancels entirely, so the answer is a single leg."}
+]
+}
