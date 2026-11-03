@@ -50,6 +50,7 @@ def coach():
 # ---- what shows on the home screen ----
 TOOLS = [
     # (file, group, short name, one-liner)
+    ("0 - READ ME FIRST.html", "ready", "Read Me First", "How every tool works, how Mock OA and the coach are marked, SQL practice links and the folder layout."),
     ("2 - Stdin Trainer (drill).html", "ready", "Stdin Trainer", "START HERE. 13 input shapes - pick the line that parses each. The gap that cost you Infosys."),
     ("1 - Twenty Weeks to AC (tracker).html", "ready", "Twenty Weeks Tracker", "The plan and your progress. Track 0 first, then CS fundamentals, then DSA patterns."),
     ("3 - Stdin Survival Kit (manual).html", "ready", "Stdin Survival Kit", "The written manual for reading input in Python / C++ / Java."),
@@ -59,7 +60,7 @@ TOOLS = [
     ("7 - Aptitude Sprint (formulas + practice).html", "ready", "Aptitude Sprint", "Formula sheets + timed practice, optional negative marking."),
     ("8 - Pattern Radar (name the pattern).html", "ready", "Pattern Radar", "Read a statement + constraints, name the DSA pattern in under a minute."),
     ("9 - Decoder (read the story, name the pattern).html", "ready", "Decoder", "140 wordy OA-style stories - strip the story, name the pattern, learn why not the others."),
-    ("10 - Mock OA (timed exam).html", "ready", "Mock OA (plan only)", "Timed exam with a hard lock per question. You write the plan, not the code."),
+    ("10 - Mock OA (timed exam).html", "ready", "Mock OA (scenario decoding)", "156 OA-size stories with a task line and a sample. Explain the approach in your own words; the AI coach judges it and nudges you without giving the answer."),
 ]
 
 def jload(path, default):

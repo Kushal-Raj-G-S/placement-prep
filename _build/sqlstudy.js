@@ -98,6 +98,9 @@
     var wzb = el("button", "btn", "write it"); wzb.type = "button";
     wzb.addEventListener("click", openWrite);
     cta.appendChild(wzb);
+    var chb = el("button", "btn", "syntax cheat"); chb.type = "button";
+    chb.addEventListener("click", openCheat);
+    cta.appendChild(chb);
     [["road", "roadmap"], ["all", "all topics / search"]].forEach(function (tb) {
       var on = (V.studyTab || "road") === tb[0];
       var x = el("button", "btn " + (on ? "tabon" : "ghost"), tb[1]); x.type = "button";

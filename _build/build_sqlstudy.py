@@ -68,7 +68,7 @@ for t in topics:
 if errs:
     sys.exit("\n".join(errs))
 
-import mat_quiz, mat_write_q, mat_write_d
+import mat_quiz, mat_write_q, mat_write_d, sqlcheat
 WRITE = mat_write_q.build() + mat_write_d.build()
 _wids = [t["id"] for t in WRITE]
 if len(set(_wids)) != len(_wids):
@@ -121,9 +121,11 @@ BANK = mat_quiz.build(seed)
 for q in BANK:
     if len(q["o"]) != 4 or len(set(q["o"])) != 4 or not 0 <= q["a"] < 4:
         sys.exit("bad quiz question: " + q["q"][:80])
-mat = json.dumps({"topics": topics, "plan": PLAN, "bank": BANK, "write": {"tasks": WRITE, "shopSql": mat_write_q.SHOP_SQL, "shopTables": mat_write_q.SHOP_TABLES}}, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+CHEAT_ANNOTATED, _nr, _nt = sqlcheat.annotate(seed, mat_write_q.SHOP_SQL)
+print("syntax cheat: %d runnable as written, %d with a demo version" % (_nr, _nt))
+mat = json.dumps({"topics": topics, "plan": PLAN, "bank": BANK, "cheat": CHEAT_ANNOTATED, "cheatSql": sqlcheat.EXTRA_SQL, "write": {"tasks": WRITE, "shopSql": mat_write_q.SHOP_SQL, "shopTables": mat_write_q.SHOP_TABLES}}, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 css = open(os.path.join(HERE, "sqlstudy.css"), encoding="utf8").read()
-js = open(os.path.join(HERE, "sqlstudy.js"), encoding="utf8").read() + open(os.path.join(HERE, "sqlquiz.js"), encoding="utf8").read() + open(os.path.join(HERE, "sqlwrite.js"), encoding="utf8").read()
+js = open(os.path.join(HERE, "sqlstudy.js"), encoding="utf8").read() + open(os.path.join(HERE, "sqlquiz.js"), encoding="utf8").read() + open(os.path.join(HERE, "sqlwrite.js"), encoding="utf8").read() + open(os.path.join(HERE, "sqlcheat.js"), encoding="utf8").read()
 
 
 def sub(s, old, new, count=1):
@@ -146,7 +148,7 @@ html = sub(html, '"all exercises"', '"home"')
 html = sub(html, "    f.appendChild(hero);\n\n    if (engine === \"failed\")", "    f.appendChild(hero);\n    f.appendChild(studyCard());\n\n    if (engine === \"failed\")")
 html = sub(html, "  function open(id, preset) {", js + "  function open(id, preset) {")
 html = sub(html, 'app.appendChild(V.screen === "home" ? home() : exScreen());',
-           'app.appendChild(V.screen === "home" ? home() : V.screen === "study" ? studyHome() : V.screen === "topic" ? topicScreen() : V.screen === "quiz" ? quizScreen() : V.screen === "write" ? writeHome() : V.screen === "wtask" ? wTaskScreen() : exScreen());')
+           'app.appendChild(V.screen === "home" ? home() : V.screen === "study" ? studyHome() : V.screen === "topic" ? topicScreen() : V.screen === "quiz" ? quizScreen() : V.screen === "cheat" ? cheatScreen() : V.screen === "write" ? writeHome() : V.screen === "wtask" ? wTaskScreen() : exScreen());')
 html = sub(html, "<title>SQL Lab</title>", "<title>SQL Lab</title>")
 open(PAGE, "w", encoding="utf8").write(html)
 

@@ -366,6 +366,7 @@
       f("CURDATE", function () { var t = new Date(); return t.getUTCFullYear() + "-" + pad(t.getUTCMonth() + 1) + "-" + pad(t.getUTCDate()); });
       f("NOW", function () { return new Date().toISOString().replace("T", " ").slice(0, 19); });
       f("DATEDIFF", function (a, b) { var x = dt(a), y = dt(b); return x && y ? Math.round((x - y) / 86400000) : null; });
+      f("REGEXP", function (p, s) { try { return s != null && new RegExp(p, "i").test(String(s)) ? 1 : 0; } catch (e) { return 0; } });
       f("CHAR_LENGTH", function (x) { return x == null ? null : String(x).length; });
       f("LEFT", function (x, n) { return x == null ? null : String(x).slice(0, n); });
       f("RIGHT", function (x, n) { return x == null ? null : String(x).slice(-n); });
@@ -724,6 +725,7 @@
     var caret = ta && document.activeElement === ta ? ta.selectionStart : null;
     var y = window.scrollY;
     app.textContent = "";
+    app.className = "wrap" + (V.screen === "cheat" ? " wide" : "");
     app.appendChild(bar());
     app.appendChild(V.screen === "home" ? home() : exScreen());
     window.scrollTo(0, y);
