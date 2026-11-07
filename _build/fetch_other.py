@@ -104,13 +104,50 @@ def gfg():
     return out
 
 
+HE_TAGS = ["hash maps", "hash tables", "hashing algorithm", "maps", "sets", "multiset", "sorting", "merge sort", "quick sort", "binary search", "searching",
+           "stacks", "queue", "string manipulation", "trees", "binary tree", "binary search tree", "tries", "linked list", "breadth first search",
+           "depth first search", "graphs", "matrix", "2-d array", "heaps", "priority queue", "greedy algorithms", "bit manipulation", "number theory",
+           "math", "backtracking", "recursion", "permutation and combination", "dijkstra's algorithm", "bellman ford algorithm",
+           "floyd warshall algorithm", "kruskal's algorithm", "minimum spanning tree", "shortest path algorithm", "disjoint set", "disjoint data structures",
+           "dynamic programming", "memoization", "arrays", "1-d array"]
+
+
+def hackerearth():
+    """HackerEarth practice problems from the site's own API, one tag at a time (10 per page). Difficulty is easy/medium/hard."""
+    import urllib.parse
+    rows = {}
+    def one(tag):
+        got = []
+        for pg in range(1, 13):                          # up to 120 per tag
+            d = get("https://www.hackerearth.com/api/practice/problems/?tag=%s&page=%d" % (urllib.parse.quote(tag), pg), tries=2)
+            plist = ((d or {}).get("problems") or {}).get("algorithm") or []
+            if not plist:
+                break
+            got += plist
+        return tag, got
+    with ThreadPoolExecutor(6) as ex:
+        for tag, plist in ex.map(one, HE_TAGS):
+            for p in plist:
+                u = "https://www.hackerearth.com" + p["url"]
+                r = rows.setdefault(u, {"name": p["title"], "url": u, "diff": p.get("difficulty"), "rate": p.get("success_rate", 0),
+                                        "attempted": p.get("attempted_by", 0), "tags": []})
+                r["tags"].append(tag)
+    return list(rows.values())
+
+
 if __name__ == "__main__":
     t = time.time()
+    if len(sys.argv) > 1 and sys.argv[1] == "he":
+        c = json.load(open(OUT, encoding="utf-8")); c["he"] = hackerearth()
+        json.dump(c, open(OUT, "w", encoding="utf-8"), ensure_ascii=False)
+        print("HackerEarth: %d problems (%s) in %.0fs" % (len(c["he"]), ", ".join("%s %d" % (k, sum(1 for x in c["he"] if x["diff"] == k)) for k in ("easy", "medium", "hard")), time.time() - t)); sys.exit(0)
     hr = hackerrank()
     print("HackerRank: %d challenges (%s)" % (len(hr), ", ".join("%s %d" % (k, sum(1 for x in hr if x["diff"] == k)) for k in ("Easy", "Medium", "Hard", "Advanced", "Expert"))))
     cc = codechef()
     print("CodeChef:   %d problems with tags" % len(cc))
     gf = gfg()
     print("GfG:        %d problems (%s)" % (len(gf), ", ".join("%s %d" % (k, sum(1 for x in gf if x["diff"] == k)) for k in ("Basic", "Easy", "Medium", "Hard"))))
-    json.dump({"hr": hr, "cc": cc, "gf": gf, "when": time.strftime("%Y-%m-%d")}, open(OUT, "w", encoding="utf-8"), ensure_ascii=False)
+    he = hackerearth()
+    print("HackerEarth: %d problems" % len(he))
+    json.dump({"hr": hr, "cc": cc, "gf": gf, "he": he, "when": time.strftime("%Y-%m-%d")}, open(OUT, "w", encoding="utf-8"), ensure_ascii=False)
     print("saved in %.0fs -> %s" % (time.time() - t, OUT))

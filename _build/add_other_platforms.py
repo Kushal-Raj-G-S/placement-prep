@@ -56,6 +56,17 @@ HE_MAP = {"hashing": ["a1"], "two-pointers": ["a2"], "sliding-window": ["a3"], "
           "dp-1d": ["b7", "b8"], "dp-2d": ["b9", "b10"]}
 
 
+HE_TAG_BLOCK = {
+ "a1": ["hash maps", "hash tables", "hashing algorithm", "maps", "sets", "multiset"], "a5": ["sorting", "merge sort", "quick sort"],
+ "a6": ["binary search", "searching"], "a7": ["stacks", "queue"], "a8": ["string manipulation"],
+ "b2": ["trees", "binary tree", "binary search tree", "tries"], "n1": ["linked list"],
+ "b5": ["breadth first search", "depth first search", "graphs"], "n2": ["matrix", "2-d array"], "b3": ["heaps", "priority queue"],
+ "b4": ["greedy algorithms"], "b13": ["bit manipulation", "number theory", "math"], "b1": ["backtracking", "recursion", "permutation and combination"],
+ "b6": ["dijkstra's algorithm", "bellman ford algorithm", "floyd warshall algorithm", "kruskal's algorithm", "minimum spanning tree",
+        "shortest path algorithm", "disjoint set", "disjoint data structures"],
+}
+
+
 def dp_block(name):
     n = name.lower()
     for blk, words in DP_WORDS.items():
@@ -149,12 +160,25 @@ def candidates(cache):
                 continue                    # "binary search tree" is a tree problem; keep it out of the array blocks
             add(blk, "GeeksforGeeks", x["name"], x["url"], d, x["subs"], note + comp, builder=(d == "E"))
             break
+    # HackerEarth: the tag it was listed under decides the block, its own easy/medium/hard decides the difficulty
+    for x in cache.get("he", []):
+        d = {"easy": "E", "medium": "M", "hard": "H"}.get(x["diff"])
+        if not d:
+            continue
+        tags = set(x["tags"])
+        note = "%s, %s%% success" % (x["diff"].capitalize(), int(x["rate"]))
+        if tags & {"dynamic programming", "memoization"}:
+            add(dp_block(x["name"]), "HackerEarth", x["name"], x["url"], d, x["attempted"], note, builder=(d == "E")); continue
+        for blk, words in HE_TAG_BLOCK.items():
+            if tags & set(words):
+                add(blk, "HackerEarth", x["name"], x["url"], d, x["attempted"], note, builder=(d == "E"))
+                break
     return out
 
 
 def choose(cands, have_urls):
     """Per block: Medium/Hard first by popularity, spread over the sources, plus one Easy per source as a confidence builder."""
-    quota = {"HackerRank": (3, 1), "CodeChef": (3, 1), "GeeksforGeeks": (3, 1)}      # (medium-hard, easy)
+    quota = {"HackerRank": (3, 1), "HackerEarth": (3, 1), "GeeksforGeeks": (4, 1), "CodeChef": (3, 1)}      # (medium-hard, easy)
     picked = []
     for src, (nmh, ne) in quota.items():
         mine = [c for c in cands if c["src"] == src and c["url"] not in have_urls]
@@ -171,7 +195,7 @@ def choose(cands, have_urls):
 def check_sample(items, n=24):
     """Fetch a random sample of the chosen links. HackerRank/CodeChef answer 404 for a missing page."""
     bad = []
-    pool = [i for i in items if i["src"] in ("HackerRank", "CodeChef")]
+    pool = [i for i in items if i["src"] in ("HackerRank", "CodeChef", "HackerEarth")]
     for it in random.sample(pool, min(n, len(pool))):
         try:
             req = urllib.request.Request(it["url"], headers={"User-Agent": "Mozilla/5.0"})
@@ -199,7 +223,7 @@ def main():
                 for b in blks:
                     he.setdefault(b, (pat, h["u"]))
 
-    total = {"HackerRank": 0, "CodeChef": 0, "GeeksforGeeks": 0, "HackerEarth": 0}
+    total = {"HackerRank": 0, "CodeChef": 0, "GeeksforGeeks": 0, "HackerEarth": 0, "HackerEarth topic pages": 0}
     levels = {"E": 0, "M": 0, "H": 0}
     report, allpicked = [], []
     for tr in plan["tracks"]:
@@ -224,7 +248,7 @@ def main():
                     pat, url = he[bid]
                     blk["items"].append({"t": "HackerEarth: browse the %s practice problems and filter to Medium / Hard (verified topic page)" % pat.replace("-", " "),
                                          "u": url, "d": "", "x": "other"})
-                    total["HackerEarth"] += 1
+                    total["HackerEarth topic pages"] += 1
                 report.append((bid, blk["name"][:46], sum(1 for c in picked)))
 
     n, bad = check_sample(allpicked)

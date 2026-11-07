@@ -44,25 +44,25 @@ PATTERNS += [
 # ---------------------------------------------------------------- two pointers ------
 {
  "id": "two-pointers", "group": "linear", "name": "Two pointers",
- "buys": "O(n²) over every pair → O(n), by never looking at a pair you have already ruled out",
+ "buys": "Checking every pair is O(n²). Two pointers do it in O(n) by never re-checking a pair you've already ruled out.",
  "lives": "array, string, linked list",
- "core": "Two indices walk the sequence. Each step, what you read tells you which pointer to move "
-         "— and moving it discards a whole block of pairs you now know cannot be the answer. "
-         "Both pointers together travel at most 2n steps, so the scan is O(n).",
+ "core": "Two indices walk through the sequence. At each step, what you see tells you which pointer to move — "
+         "and moving it rules out a whole block of pairs in one go. Together the two pointers take at most "
+         "2n steps total, so the whole scan is O(n).",
  "recognise": [
    {"cue": "the array is <b>already sorted</b> (or you are allowed to sort) and you want a pair / triplet",
-    "note": "sortedness is what makes 'move left or right' a decision instead of a guess"},
-   {"cue": "<b>palindrome</b>, reverse, or 'compare the two ends'", "note": "ends-inward is the whole pattern"},
+    "note": "sorted means you always know which way to move — left or right"},
+   {"cue": "<b>palindrome</b>, reverse, or 'compare the two ends'", "note": "closing in from both ends is the whole pattern"},
    {"cue": "<b>in-place</b>: remove / move / dedupe without extra memory",
     "note": "a slow write pointer and a fast read pointer"},
    {"cue": "<b>two sorted sequences</b> to merge, intersect, or diff", "note": "one pointer per sequence"},
-   {"cue": "cycle, middle, or k-th from the end of a <b>linked list</b>", "note": "slow and fast at different speeds"},
+   {"cue": "cycle, middle, or k-th from the end of a <b>linked list</b>", "note": "slow and fast pointers, different speeds"},
  ],
  "notwhen": [
-   "Unsorted and you only need existence of a pair → <b>hashmap</b> in one pass beats sorting.",
-   "You need the <b>count</b> of subarrays, not a pair → prefix sum + hashmap.",
-   "The window must stay contiguous and you track an aggregate inside it → that is a <b>sliding window</b> "
-   "(same two indices, different job: a window keeps a running state, two pointers just compare).",
+   "Unsorted, and you only need to know a pair exists → a <b>hashmap</b> in one pass beats sorting.",
+   "You need the <b>count</b> of subarrays, not one pair → use prefix sum + hashmap instead.",
+   "The window must stay contiguous and you're tracking a running total inside it → that's a <b>sliding window</b>, "
+   "not two pointers. A window keeps running state; two pointers just compare.",
  ],
  "pick": [
    {"if": "sorted, and you want a pair / triplet hitting a target", "then": "tp-ends"},
