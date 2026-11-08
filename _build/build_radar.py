@@ -1038,7 +1038,7 @@ def main():
     engine = chr(10).join(open(os.path.join(HERE, f), encoding="utf-8").read()
                           for f in ("viz_engine.js", "viz_engine_b.js",
                                     "viz_engine_c.js", "viz_engine_d.js", "viz_engine_e.js",
-                                    "viz_engine_f.js", "viz_engine_g.js"))
+                                    "viz_engine_f.js", "viz_engine_g.js", "viz_engine_h.js", "viz_engine_i.js"))
     print("fuzz-testing the trace generators ...")
     try:
         proc = subprocess.run(["node", os.path.join(HERE, "viz_test.js")], cwd=HERE,

@@ -15,6 +15,8 @@ require("./viz_engine_d.js");
 require("./viz_engine_e.js");
 require("./viz_engine_f.js");          // each batch registers onto the same object
 require("./viz_engine_g.js");
+require("./viz_engine_h.js");
+try { require("./viz_engine_i.js"); } catch (e) { if (e.code !== "MODULE_NOT_FOUND") throw e; }
 
 var PARSE = G.__helpers.parse;   // the SAME parsers the page uses
 
@@ -32,6 +34,7 @@ var rnd = (function () {            /* deterministic, so a failure is reproducib
 })();
 
 function randomInput(id, spec) {
+  if (G[id].gen) return G[id].gen(rnd);          /* a generator that knows what valid input looks like supplies its own */
   var v = {};
   spec.forEach(function (f) {
     if (f.type === "ints") {
