@@ -2287,3 +2287,6 @@ import lib_list_tree, lib_graph, lib_dp_search
 PATTERNS += lib_list_tree.PATTERNS
 PATTERNS += lib_graph.PATTERNS
 PATTERNS += lib_dp_search.PATTERNS
+
+import lib_additions
+lib_additions.apply(PATTERNS, GROUPS)     # the audit's additions, and the question keywords for every variant

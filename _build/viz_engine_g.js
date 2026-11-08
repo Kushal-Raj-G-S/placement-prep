@@ -406,7 +406,7 @@
                  { ptr: { at: K(bot, left) }, mark: merge(mark) });
           bot--;
         }
-        if (left <= right) {
+        if (top <= bot && left <= right) {
           for (var r2 = bot; r2 >= top; r2--) { out.push(g[r2][left]); mark[K(r2, left)] = "pick"; }
           t.snap(4, "walked the left column (col " + left + "). left becomes " + (left + 1) + ".",
                  { ptr: { at: K(top, left) }, mark: merge(mark) });

@@ -574,3 +574,18 @@ EXTRA.update({
    {"n": "Set matrix zeroes", "p": "GfG", "u": "https://www.geeksforgeeks.org/a-boolean-matrix-question/"},
  ],
 })
+
+
+# added with the audit. GeeksforGeeks urls below came from GfG's own problem API, and verify_links.py still fetches them.
+PLATFORM.update({
+ "math": {"cf": "number theory"},
+ "sort-dc": {"cf": "divide and conquer"},
+ "graph-walk": {"cf": "dfs and similar"},
+})
+EXTRA.update({
+ "gw-scc": [{"n": "Strongly Connected Components", "p": "GfG", "u": "https://www.geeksforgeeks.org/problems/strongly-connected-component-tarjanss-algo-1587115621/1"},
+            {"n": "Count Strongly Connected Components", "p": "GfG", "u": "https://www.geeksforgeeks.org/problems/strongly-connected-components-kosarajus-algo/1"}],
+ "gw-bridges": [{"n": "Articulation Point", "p": "GfG", "u": "https://www.geeksforgeeks.org/problems/articulation-point2616/1"}],
+ "gw-euler": [{"n": "Euler Circuit and Path", "p": "GfG", "u": "https://www.geeksforgeeks.org/problems/euler-circuit-and-path/1"}],
+ "dc-mergecount": [{"n": "Count Inversions", "p": "GfG", "u": "https://www.geeksforgeeks.org/problems/inversion-of-array-1587115620/1"}],
+})

@@ -26,29 +26,31 @@ VNAME = {v["id"]: v["name"] for p in PL.PATTERNS for v in p["variants"]}
 
 # block -> the variants worth experiencing, and the ones left out on purpose (rare, or very hard for a first pass)
 PLAN = {
- "a1": (["hs-seen", "hs-freq", "hs-index", "hs-group"], []),
- "a2": (["tp-ends", "tp-write", "tp-merge", "tp-partition"], []),
- "a3": (["sw-fixed", "sw-longest", "sw-shortest"], ["sw-exact", "sw-deque"]),
+ "a1": (["hs-seen", "hs-freq", "hs-index", "hs-group", "hs-moore"], []),
+ "a2": (["tp-ends", "tp-write", "tp-merge", "tp-partition", "tp-centre"], []),
+ "a3": (["sw-fixed", "sw-longest", "sw-shortest", "sw-complement"], ["sw-exact", "sw-deque"]),
  "a4": (["ps-range", "ps-count", "ps-longest", "ps-diff", "ps-suffix"], ["ps-2d"]),
- "a5": (["iv-merge", "iv-insert", "iv-greedy", "iv-sweep", "iv-sortkey"], []),
+ "a5": (["iv-merge", "iv-insert", "iv-greedy", "iv-sweep", "iv-sortkey", "dc-mergecount", "dc-quickselect", "dc-bucket"], ["dc-split"]),
  "a6": (["bs-exact", "bs-bound", "bs-answer", "bs-rotated"], ["bs-partition"]),
- "a7": (["ms-match", "ms-next", "ms-greedy"], ["ms-hist"]),
- "b2": (["td-up", "td-down", "td-bst", "td-lca", "tb-levels"], ["tr-basic", "tr-search"]),
- "n1": (["ll-fastslow", "ll-reverse", "ll-dummy", "ll-merge"], []),
- "b5": (["gr-flood", "gr-bfs", "gr-multi"], []),
- "b3": (["hp-topk", "hp-merge", "hp-two", "hp-greedy"], []),
- "b7": (["dp-linear", "dp-kadane"], []),
+ "a7": (["ms-match", "ms-next", "ms-greedy", "ms-contrib"], ["ms-hist"]),
+ "b2": (["td-up", "td-down", "td-bst", "td-lca", "tb-levels", "td-global", "td-state", "td-build", "td-parent", "tb-index"], ["tr-basic", "tr-search", "tr-xor", "td-reroot", "td-lift"]),
+ "n1": (["ll-fastslow", "ll-reverse", "ll-dummy", "ll-merge", "ll-gap", "ll-hash"], []),
+ "n4": (["ds-lru", "ds-aux", "ds-queue", "ds-random", "ds-timekey"], ["ds-iter"]),
+ "b5": (["gr-flood", "gr-bfs", "gr-multi", "gr-border", "gw-components", "gw-bipartite", "gw-state"], []),
+ "b3": (["hp-topk", "hp-merge", "hp-two", "hp-greedy", "hp-sorted"], []),
+ "b7": (["dp-linear", "dp-kadane", "dp-partition"], []),
  "b8": (["dp-knapsack", "dp-coin"], []),
  "b9": (["dp-grid"], []),
- "b10": (["dp-twostring"], ["dp-interval"]),
+ "b10": (["dp-twostring"], ["dp-interval", "dp-digit"]),
  "b11": (["dp-lis"], []),
- "b4": (["gr-reach", "gr-pair", "gr-local"], []),
- "b13": (["bt-xor", "bt-tricks"], ["bt-subsets", "bt-dp"]),
- "b1": (["bk-subsets", "bk-perms"], ["bk-board"]),
- "b6": (["to-kahn", "sp-dijkstra", "dsu-connect", "dsu-cycle", "dsu-kruskal"], ["to-dfs", "sp-bellman", "sp-floyd"]),
+ "b12": (["dp-state"], []),
+ "b4": (["gr-reach", "gr-pair", "gr-local", "gr-twopass", "gr-balance"], []),
+ "b13": (["bt-xor", "bt-tricks", "bt-perbit", "ma-gcd", "ma-sieve", "ma-modpow", "ma-ncr", "ma-digits", "ma-game"], ["bt-subsets", "bt-dp", "ma-geom"]),
+ "b1": (["bk-subsets", "bk-perms", "bk-partition", "bk-build", "bk-bucket"], ["bk-board"]),
+ "b6": (["to-kahn", "sp-dijkstra", "sp-01bfs", "sp-mod", "dsu-connect", "dsu-cycle", "dsu-kruskal", "dsu-prim", "gw-functional"], ["to-dfs", "sp-bellman", "sp-floyd", "gw-bridges", "gw-scc", "gw-euler"]),
  "n3": (["hs-cyclic"], []),
- "n2": (["sim-spiral", "sim-rotate", "sim-marking"], []),
- "a8": ([], []), "b12": ([], []),         # no variant list in the library: the block's own problems, easier to harder
+ "n2": (["sim-spiral", "sim-rotate", "sim-marking", "sim-rules"], []),
+ "a8": ([], []),                          # no variant list of its own: the block's own problems, easier to harder
 }
 MAIN = {"hs-freq", "hs-index", "tp-ends", "tp-write", "sw-longest", "ps-count", "bs-answer", "bs-exact", "ms-next", "hp-topk", "iv-merge",
         "ll-fastslow", "ll-reverse", "td-up", "td-down", "gr-flood", "gr-bfs", "dp-linear", "dp-knapsack", "dp-grid", "dp-twostring", "dp-lis",
@@ -100,6 +102,15 @@ def main():
     head, rest = html.split('<script type="application/json" id="plan">', 1)
     body, tail = rest.split("</script>", 1)
     plan = json.loads(body)
+
+    # blocks that exist only because a pattern was added later (new ids, so no existing tick moves)
+    for tr in plan["tracks"]:
+        if tr["id"] == "td":
+            for ph in tr["phases"]:
+                if ph["id"] == "p2" and not any(b["id"] == "n4" for b in ph["blocks"]):
+                    at = next(i for i, b in enumerate(ph["blocks"]) if b["id"] == "n1") + 1
+                    ph["blocks"].insert(at, {"id": "n4", "name": "Design a data structure", "core": True, "isNew": True,
+                                             "why": "A class with methods and a required speed. Asked often in interviews, and it needs a hashmap joined to a list, stack or array.", "items": []})
 
     report = []
     remap = {}

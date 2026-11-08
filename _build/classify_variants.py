@@ -43,14 +43,14 @@ def ask(cfg, model, variants, batch):
     payload = {"model": model, "temperature": 0.0, "max_tokens": 1500,
                "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user}]}
     payload.update(llm_config.options_for(model))
-    for attempt in range(3):
+    for attempt in range(6):
         try:
             out = call(cfg, "/chat/completions", payload, timeout=90)
             txt = (out["choices"][0]["message"].get("content") or "")
             m = re.search(r"\{.*\}", txt, re.S)
             return json.loads(m.group(0)) if m else {}
         except Exception:
-            time.sleep(2 * (attempt + 1))
+            time.sleep(8 * (attempt + 1))
     return {}
 
 
@@ -90,13 +90,15 @@ def main():
     def run(job):
         bid, variants, batch = job
         ans = ask(cfg, model, variants, batch)
+        if not ans:
+            return {}                     # the call failed (rate limit, timeout): do NOT record "none", so a re-run tries again
         res = {}
         for i, c in enumerate(batch):
             v = ans.get(str(i))
             res[c["url"]] = {"block": bid, "v": v if v in variants else "none", "name": c["name"], "src": c["src"]}
         return res
     kept = 0
-    with ThreadPoolExecutor(6) as ex:
+    with ThreadPoolExecutor(2) as ex:
         for res in ex.map(run, jobs):
             done.update(res)
             kept += sum(1 for r in res.values() if r["v"] != "none")

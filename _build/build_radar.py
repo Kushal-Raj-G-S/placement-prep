@@ -103,6 +103,11 @@ CSS = r"""
            font-family:var(--mono);font-size:12.5px;line-height:1.62;color:var(--txt);white-space:pre;tab-size:4}
   pre.code .cm{color:var(--dim2)}
 
+  .kq{width:100%;box-sizing:border-box;margin:14px 0;padding:11px 14px;border-radius:9px;border:1px solid var(--edge);background:transparent;color:var(--txt);font-size:15px}
+  .kgrid{columns:3 380px;column-gap:18px}.kblock{break-inside:avoid;margin:0 0 18px}.kblock[hidden],.krow[hidden]{display:none}.kblock h3{margin:0 0 6px;font-size:15px}
+  .krow{display:block;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--edge);padding:8px 2px;color:var(--txt);cursor:pointer;font:inherit}.krow:hover .kname{color:var(--cy)}
+  .kname{display:block;font-weight:600;font-size:13.5px;margin-bottom:5px}.kchips{display:flex;flex-wrap:wrap;gap:5px}.kchip{font-size:12px;line-height:1.3;padding:2px 7px;border-radius:5px;border:1px solid var(--edge);color:var(--dim)}
+  .rarebadge{font-size:10px;margin-left:7px;padding:1px 6px;border-radius:4px;border:1px solid var(--edge);color:var(--dim);font-weight:400}.knone{color:var(--dim);padding:12px 0}.knone[hidden]{display:none}
   .asks{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0;counter-reset:a}
   .asks li{display:grid;grid-template-columns:24px 1fr;gap:9px;padding:6px 0;border-bottom:1px solid var(--edge);
            font-size:13.5px;color:var(--txt);line-height:1.5}
@@ -653,6 +658,53 @@ JS = r"""
     return box;
   }
 
+  /* ---------- the keyword sheet: every variant by the words in the question ---------- */
+  function keysScreen() {
+    var f = document.createDocumentFragment();
+    var bk = el("button", "back", "← all patterns"); bk.type = "button";
+    bk.addEventListener("click", function () { V.screen = "learn"; render(); });
+    f.appendChild(bk);
+    var hero = el("div", "hero");
+    hero.appendChild(el("h1", null, "Keyword sheet"));
+    hero.appendChild(rich("p", "lead", "Type a word from the question, and see which variant it points to. Words are clues, not proof: confirm with the constraints and the <b>when</b> line of the variant."));
+    f.appendChild(hero);
+    var box = el("input", "kq"); box.type = "search"; box.placeholder = "e.g. modulo, at most k, cooldown, k-th from the end";
+    f.appendChild(box);
+    var none = el("div", "knone", "No variant has that word. Read the constraints: n decides the speed you need, and the speed narrows the pattern.");
+    none.hidden = true;
+    var rows = [], blocks = [];
+    LIB.groups.forEach(function (g) {
+      LIB.patterns.filter(function (p) { return p.group === g.id; }).forEach(function (p) {
+        var b = el("section", "kblock");
+        b.appendChild(el("h3", null, p.name));
+        p.variants.forEach(function (v) {
+          var r = el("button", "krow"); r.type = "button";
+          var nm = el("span", "kname", v.name);
+          if (v.rare) nm.appendChild(el("span", "rarebadge", "rare"));
+          r.appendChild(nm);
+          var ch = el("span", "kchips");
+          (v.keys || []).forEach(function (k) { ch.appendChild(el("span", "kchip", k)); });
+          r.appendChild(ch);
+          r.addEventListener("click", function () { V.pat = p.id; V.focusV = v.id; V.screen = "pattern"; render(); });
+          b.appendChild(r);
+          rows.push({ r: r, b: b, t: (p.name + " " + v.name + " " + (v.keys || []).join(" | ")).toLowerCase() });
+        });
+        blocks.push(b);
+      });
+    });
+    var grid = el("div", "kgrid");
+    blocks.forEach(function (b) { grid.appendChild(b); });
+    f.appendChild(none);
+    f.appendChild(grid);
+    box.addEventListener("input", function () {
+      var q = box.value.trim().toLowerCase(), any = false;
+      rows.forEach(function (x) { x.r.hidden = !!q && x.t.indexOf(q) < 0; if (!x.r.hidden) any = true; });
+      blocks.forEach(function (b) { b.hidden = !b.querySelector(".krow:not([hidden])"); });
+      none.hidden = any;
+    });
+    return f;
+  }
+
   /* ---------- learn: the index ---------- */
   function learnScreen() {
     var f = document.createDocumentFragment();
@@ -676,6 +728,9 @@ JS = r"""
         c.appendChild(d);
       });
     hero.appendChild(c);
+    var kb = el("button", "btn primary", "open the keyword sheet"); kb.type = "button";
+    kb.addEventListener("click", function () { V.screen = "keys"; render(); });
+    hero.appendChild(kb);
     f.appendChild(hero);
 
     LIB.groups.forEach(function (g) {
@@ -829,6 +884,7 @@ JS = r"""
       var s = document.createElement("summary");
       s.appendChild(el("span", "tw", "▶"));
       s.appendChild(el("span", "vname", v.name));
+      if (v.rare) s.appendChild(el("span", "rarebadge", "rare"));
       if (VIZGEN[v.id]) s.appendChild(el("span", "trace", "▶ trace"));
       s.appendChild(el("span", "vwhen", v.when));
       var tick = el("button", "tick" + (state.known[v.id] ? " on" : ""),
@@ -845,6 +901,12 @@ JS = r"""
       d.appendChild(s);
 
       var body = el("div", "vbody");
+      if (v.keys && v.keys.length) {
+        body.appendChild(el("div", "lab", "words in the question that point here"));
+        var kc = el("div", "kchips");
+        v.keys.forEach(function (k) { kc.appendChild(el("span", "kchip", k)); });
+        body.appendChild(kc);
+      }
       var facts = el("div", "facts");
       [["tool", v.tool], ["invariant", v.invariant], ["complexity", v.cx]].forEach(function (pair) {
         if (!pair[1] || pair[1] === "—") return;
@@ -855,8 +917,6 @@ JS = r"""
       });
       body.appendChild(facts);
       if (VIZGEN[v.id]) body.appendChild(vizPlayer(v.id));
-      else if (VIZ_PENDING[v.id]) body.appendChild(rich("div", "vpending",
-        "<b>No trace yet.</b> " + VIZ_PENDING[v.id]));
       body.appendChild(el("div", "lab", "the full template"));
       body.appendChild(codeBlock(v.code));
 
@@ -933,6 +993,7 @@ RENDER_NEW = '''    stopAllViz();            /* the DOM is about to be replaced;
     app.appendChild(bar());
     if (V.screen === "home") app.appendChild(home());
     else if (V.screen === "learn") app.appendChild(learnScreen());
+    else if (V.screen === "keys") app.appendChild(keysScreen());
     else if (V.screen === "pattern") { app.appendChild(patternScreen()); applyFilter(); focusVar(); }
     else if (V.screen === "sheet") app.appendChild(sheetScreen());'''
 
@@ -977,7 +1038,7 @@ def main():
     engine = chr(10).join(open(os.path.join(HERE, f), encoding="utf-8").read()
                           for f in ("viz_engine.js", "viz_engine_b.js",
                                     "viz_engine_c.js", "viz_engine_d.js", "viz_engine_e.js",
-                                    "viz_engine_f.js"))
+                                    "viz_engine_f.js", "viz_engine_g.js"))
     print("fuzz-testing the trace generators ...")
     try:
         proc = subprocess.run(["node", os.path.join(HERE, "viz_test.js")], cwd=HERE,

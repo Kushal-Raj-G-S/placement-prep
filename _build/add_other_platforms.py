@@ -36,6 +36,7 @@ B = {
  "b4":  dict(cc=["greedy"], gf=["greedy"], hr=[], hrsub=["greedy"]),
  "n2":  dict(cc=["2d arrays"], gf=["matrix"], hr=[], hrsub=[]),
  "n3":  dict(cc=[], gf=["cyclic"], hr=[], hrsub=[]),
+ "n4":  dict(cc=["design"], gf=["design", "lru"], hr=[], hrsub=[]),
  "b13": dict(cc=["bitwise", "bit manipulation", "bitmask", "number theory", "gcd", "modular", "sieve", "prime"], gf=["bit", "number-theory", "gcd", "prime", "modular"], hr=[], hrsub=["number-theory", "fundamentals"]),
  "b1":  dict(cc=["brute force", "permutations"], gf=["backtracking", "recursion", "permutation"], hr=[], hrsub=["recursion"]),
  "b6":  dict(cc=["disjoint", "shortest", "dijkstra", "topological", "minimum spanning"], gf=["topological", "dijkstra", "shortest", "union", "disjoint", "spanning"], hr=[], hrsub=["disjoint-set"]),

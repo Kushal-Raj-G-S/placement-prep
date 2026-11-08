@@ -74,15 +74,16 @@ def main():
     lc_by_id = {}
     if not offline:
         print("fetching the LeetCode problem index ...")
-        data = json.loads(get(LC_INDEX).decode("utf-8"))
-        for row in data["stat_status_pairs"]:
-            s = row["stat"]
-            lc_by_id[int(s["frontend_question_id"])] = {
-                "title": s["question__title"],
-                "slug": s["question__title_slug"],
-                "paid": bool(row.get("paid_only")),
-                "level": row.get("difficulty", {}).get("level"),
-            }
+        q = "query($c:String!,$l:Int,$s:Int){problemsetQuestionList:questionList(categorySlug:$c,limit:$l,skip:$s,filters:{}){questions:data{frontendQuestionId:questionFrontendId title titleSlug paidOnly:isPaidOnly difficulty}}}"
+        for skip in range(0, 4500, 100):
+            req = urllib.request.Request("https://leetcode.com/graphql", data=json.dumps({"query": q, "variables": {"c": "", "l": 100, "s": skip}}).encode(),
+                                         headers={"Content-Type": "application/json", "User-Agent": UA, "Referer": "https://leetcode.com/problemset/"})
+            rows = json.loads(urllib.request.urlopen(req, timeout=45).read().decode())["data"]["problemsetQuestionList"]["questions"]
+            if not rows:
+                break
+            for r in rows:
+                lc_by_id[int(r["frontendQuestionId"])] = {"title": r["title"], "slug": r["titleSlug"], "paid": bool(r["paidOnly"]),
+                                                          "level": {"Easy": 1, "Medium": 2, "Hard": 3}[r["difficulty"]]}
         cache["lc"] = lc_by_id
         print("  %d problems indexed" % len(lc_by_id))
     else:
