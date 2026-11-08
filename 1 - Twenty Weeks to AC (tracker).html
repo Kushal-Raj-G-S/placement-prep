@@ -49,7 +49,7 @@
 
   * { box-sizing:border-box; }
   body { margin:0; background:var(--ground); color:var(--ink); font-family:var(--f-body); font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased; }
-  .wrap { max-width:1080px; margin:0 auto; padding:32px 22px 96px; display:flex; flex-direction:column; gap:32px; }
+  .wrap { max-width:min(1800px,96vw); margin:0 auto; padding:32px 22px 96px; display:flex; flex-direction:column; gap:32px; }
   a { color:var(--accent); }
   :focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
   button { font-family:inherit; }
@@ -129,7 +129,7 @@
   .phase-hd h3 { font-family:var(--f-display); font-weight:600; font-size:18px; margin:0; }
   .phase-hd .wk { font-family:var(--f-mono); font-size:11.5px; color:var(--ink-dim); }
   .phase-hd .tally { margin-left:auto; font-family:var(--f-mono); font-size:11.5px; font-variant-numeric:tabular-nums; color:var(--ink-dim); }
-  .phase-note { padding:10px 16px; color:var(--ink-mid); font-size:13.5px; border-bottom:1px solid var(--line-soft); max-width:78ch; }
+  .phase-note { padding:10px 16px; color:var(--ink-mid); font-size:13.5px; border-bottom:1px solid var(--line-soft); max-width:none; }
 
   .block { border-bottom:1px solid var(--line-soft); }
   .block:last-child { border-bottom:0; }
@@ -148,7 +148,7 @@
   .block-count { font-family:var(--f-mono); font-size:11.5px; font-variant-numeric:tabular-nums; color:var(--ink-dim); min-width:42px; text-align:right; }
   .items { display:none; padding:0 16px 14px 41px; }
   .block.open .items { display:block; }
-  .block-why { color:var(--ink-dim); font-size:13.5px; max-width:74ch; padding:2px 0 10px; }
+  .block-why { color:var(--ink-dim); font-size:13.5px; max-width:none; padding:2px 0 10px; }
 
   .item { display:grid; grid-template-columns:40px 1fr auto; gap:10px; align-items:center; padding:5px 0; border-bottom:1px solid var(--line-soft); }
   .item:last-child { border-bottom:0; }
@@ -4784,8 +4784,8 @@
     var row = el("div", "item" + (s === "ac" ? " ac" : ""));
     row.appendChild(markBtn(b, i));
     row.appendChild(it.u ? link(it.u, it.t) : el("span", "plain", it.t));
-    if (it.th && it.v) row.appendChild(el("span", "vtag", it.v));
     var right = el("div", "right");
+    if (it.th && it.v) right.appendChild(el("span", "vtag", it.v));
     var ds = daysSince(state.d[k]);
     right.appendChild(el("span", "ago" + (s === "ac" && ds != null && ds >= STALE_DAYS ? " stale" : ""),
       s === "ac" && ds != null ? (ds === 0 ? "today" : ds + "d") : ""));
