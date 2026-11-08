@@ -6,12 +6,12 @@ PATTERNS = [
 # ------------------------------------------------------------------- DP 1-D -------
 {
  "id": "dp-1d", "group": "dp", "name": "1-D dynamic programming",
- "buys": "O(2ⁿ) exponential recursion → O(n) or O(n·k), by never solving the same subproblem twice",
+ "buys": "Plain recursion explores O(2ⁿ) paths. DP solves each subproblem once, getting it to O(n) or O(n·k).",
  "lives": "a sequence, where the answer at i depends on a few earlier answers",
- "core": "Two questions, in order. First: WHAT IS THE STATE — what does dp[i] actually mean, said as a full "
-         "English sentence? Second: what CHOICE do you make at i, and which earlier states does it read? "
-         "If you cannot say the sentence, you do not have a DP yet, and writing code will not rescue you. "
-         "Start from the recursion, add memoisation, then flatten it to a loop if you want.",
+ "core": "Answer two questions, in order. First: WHAT IS THE STATE — what does dp[i] actually mean, as a "
+         "full English sentence? Second: what CHOICE do you make at i, and which earlier states does it "
+         "need? If you can't say that sentence, you don't have a DP yet, and writing code won't save you. "
+         "Start from the plain recursion, add memoisation, then flatten it into a loop if you want.",
  "recognise": [
    {"cue": "<b>maximum / minimum / count the ways</b>, over a sequence of choices", "note": "the DP trio"},
    {"cue": "<b>take it or skip it</b> at each position", "note": "dp[i] = best(take, skip)"},
@@ -21,9 +21,9 @@ PATTERNS = [
    {"cue": "overlapping subproblems you can SEE when you draw the recursion tree", "note": "memoise it"},
  ],
  "notwhen": [
-   "A local choice is provably safe at every step → <b>greedy</b>, which is O(n log n) and much shorter.",
-   "The window is contiguous and you track an aggregate → sliding window, not DP.",
-   "Each step depends on ALL previous states, not a few → you probably need a different state, or a tree / segment structure.",
+   "A local choice is provably safe at every step → use <b>greedy</b> instead, O(n log n) and much shorter.",
+   "The window is contiguous and you're tracking a running total → sliding window, not DP.",
+   "Each step depends on ALL previous states, not just a few → you probably need a different state, or a tree / segment structure.",
  ],
  "pick": [
    {"if": "take-or-skip along a line, with an adjacency rule", "then": "dp-linear"},
@@ -216,12 +216,12 @@ def lis_fast(a):
 # ------------------------------------------------------------------- DP 2-D -------
 {
  "id": "dp-2d", "group": "dp", "name": "2-D dynamic programming",
- "buys": "exponential branching → O(n·m), filling a table once",
+ "buys": "Branching recursion is exponential. Filling the table once instead gets it to O(n·m).",
  "lives": "a grid, two sequences compared, or an item list against a budget",
- "core": "The second dimension appears for one of three reasons: you are moving on an actual grid, you are "
-         "comparing TWO sequences (one index each), or you are tracking a BUDGET alongside your position. "
-         "Name both axes in a sentence before you write anything — dp[i][j] = ... — and the transitions "
-         "usually write themselves from the samples.",
+ "core": "The second dimension shows up for one of three reasons: you're moving on an actual grid, you're "
+         "comparing TWO sequences (one index each), or you're tracking a BUDGET alongside your position. "
+         "Name both axes in a sentence before writing anything — dp[i][j] = ... — and the transitions "
+         "usually write themselves once you've done that.",
  "recognise": [
    {"cue": "<b>grid</b>, and 'how many paths' or 'cheapest path'", "note": "dp[r][c] from the top and the left"},
    {"cue": "<b>two strings</b> compared, matched or transformed", "note": "dp[i][j] over the two prefixes"},
@@ -230,8 +230,8 @@ def lis_fast(a):
    {"cue": "'the answer for a RANGE, built from smaller ranges'", "note": "interval DP — loop by length"},
  ],
  "notwhen": [
-   "Only one index really matters → you are carrying a dimension you do not need; shrink the state.",
-   "n·m exceeds about 10⁸ → the table will not fit in the time budget; look for a greedy or a different state.",
+   "Only one index really matters → you're carrying a dimension you don't need; shrink the state.",
+   "n·m is bigger than about 10⁸ → the table won't fit in the time budget; look for a greedy or a different state.",
  ],
  "pick": [
    {"if": "movement on a grid", "then": "dp-grid"},
@@ -424,11 +424,11 @@ def can_partition(nums):                  # equal-sum halves
 # -------------------------------------------------------------- backtracking ------
 {
  "id": "backtracking", "group": "search", "name": "Backtracking (try, recurse, undo)",
- "buys": "nothing asymptotically — it IS the exponential. What it buys is PRUNING, and a clean way to enumerate",
+ "buys": "Nothing asymptotically — it IS the exponential blow-up. What it buys you is PRUNING and a clean way to enumerate.",
  "lives": "subsets, permutations, combinations, board puzzles; n is always small",
- "core": "One shape, three lines: choose, recurse, un-choose. The template never changes; what changes is the "
-         "loop bounds and the pruning test. The constraint is the giveaway — n ≤ 10 means permutations are "
-         "fine, n ≤ 20 means subsets are fine, and anything larger means this is the wrong pattern and you "
+ "core": "One shape, three lines: choose, recurse, un-choose. The template never changes — only the loop "
+         "bounds and the pruning test do. The constraint is the giveaway: n ≤ 10 means permutations are "
+         "fine, n ≤ 20 means subsets are fine, and anything larger means this is the wrong pattern — you "
          "want DP or greedy instead.",
  "recognise": [
    {"cue": "<b>all</b> subsets / permutations / combinations, print THEM not just the count", "note": "you must enumerate"},
@@ -438,8 +438,8 @@ def can_partition(nums):                  # equal-sum halves
    {"cue": "<b>palindrome partitioning</b>, 'all ways to split'", "note": "cut, recurse on the rest"},
  ],
  "notwhen": [
-   "You only need the COUNT or the BEST, not the list → that is usually DP, and vastly faster.",
-   "n is large → 2ⁿ will not finish. Re-read the constraints; you have the wrong pattern.",
+   "You only need the COUNT or the BEST, not the full list → that's usually DP, and much faster.",
+   "n is large → 2ⁿ won't finish in time. Re-read the constraints; you have the wrong pattern.",
  ],
  "pick": [
    {"if": "subsets or combinations (order does not matter)", "then": "bk-subsets"},
@@ -575,12 +575,13 @@ def can_partition(nums):                  # equal-sum halves
 # -------------------------------------------------------------------- greedy ------
 {
  "id": "greedy", "group": "search", "name": "Greedy (one pass, locally best)",
- "buys": "O(2ⁿ) search or an O(n²) DP → O(n log n), usually just a sort and a loop",
+ "buys": "Replaces an O(2ⁿ) search or an O(n²) DP with O(n log n) — usually just a sort and one pass.",
  "lives": "anything where a local choice provably cannot hurt the future",
- "core": "Greedy is the cheapest pattern to code and the easiest to get silently wrong. The whole game is the "
-         "JUSTIFICATION: you must be able to say, in one sentence, why taking the best thing now never costs you "
-         "later (the exchange argument). If you cannot say that sentence, write the DP instead — a greedy that "
-         "passes the samples and fails the hidden tests is the most expensive mistake in an OA.",
+ "core": "Greedy is the cheapest pattern to code, and the easiest to get silently wrong. The whole game is "
+         "the JUSTIFICATION: you must be able to say, in one sentence, why taking the best thing right now "
+         "never costs you later (the exchange argument). If you can't say that sentence, write the DP "
+         "instead — a greedy that passes the samples but fails the hidden tests is the costliest mistake "
+         "you can make in an OA.",
  "recognise": [
    {"cue": "<b>sort first</b>, then one pass, and the choice is obvious", "note": "the classic shape"},
    {"cue": "<b>maximum number of non-overlapping</b> / fewest removals", "note": "sort by END time"},
@@ -589,10 +590,10 @@ def can_partition(nums):                  # equal-sum halves
    {"cue": "<b>two ends</b>, pair the biggest with the smallest", "note": "sort + two pointers"},
  ],
  "notwhen": [
-   "A choice now can make a LATER choice impossible in a way you cannot bound → DP.",
+   "A choice now can make a LATER choice impossible in a way you can't bound → use DP.",
    "Coin change with arbitrary denominations — the classic greedy TRAP. Taking the biggest coin first "
    "fails on coins [1, 3, 4] with amount 6 (greedy gives 4+1+1 = 3 coins, optimal is 3+3 = 2). Use DP.",
-   "You need the count of ways, not one best answer → DP.",
+   "You need the count of ways, not just one best answer → use DP.",
  ],
  "pick": [
    {"if": "'can I get to the end' / reachability", "then": "gr-reach"},

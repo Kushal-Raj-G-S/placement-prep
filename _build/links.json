@@ -2017,6 +2017,211 @@
     "s": ""
    }
   ],
+  "sm-kmp": [
+   {
+    "n": "Find the Index of the First Occurrence in a String",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/",
+    "s": "LC 28",
+    "note": ""
+   },
+   {
+    "n": "Shortest Palindrome",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/shortest-palindrome/",
+    "s": "LC 214",
+    "note": ""
+   },
+   {
+    "n": "Longest Happy Prefix",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-happy-prefix/",
+    "s": "LC 1392",
+    "note": ""
+   },
+   {
+    "n": "Repeated Substring Pattern",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/repeated-substring-pattern/",
+    "s": "LC 459",
+    "note": ""
+   },
+   {
+    "n": "KMP algorithm for pattern searching",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/",
+    "s": ""
+   }
+  ],
+  "sm-rabinkarp": [
+   {
+    "n": "Longest Duplicate Substring",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/longest-duplicate-substring/",
+    "s": "LC 1044",
+    "note": ""
+   },
+   {
+    "n": "Repeated Substring Pattern",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/repeated-substring-pattern/",
+    "s": "LC 459",
+    "note": ""
+   },
+   {
+    "n": "Rabin-Karp algorithm for pattern searching",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/",
+    "s": ""
+   }
+  ],
+  "sm-z": [
+   {
+    "n": "Z algorithm (linear time pattern searching)",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/",
+    "s": ""
+   }
+  ],
+  "st-range": [
+   {
+    "n": "Range Sum Query - Mutable",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/range-sum-query-mutable/",
+    "s": "LC 307",
+    "note": ""
+   },
+   {
+    "n": "Range Sum Query 2D - Mutable",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/range-sum-query-2d-mutable/",
+    "s": "LC 308  · premium",
+    "note": ""
+   },
+   {
+    "n": "Count of Range Sum",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/count-of-range-sum/",
+    "s": "LC 327",
+    "note": ""
+   },
+   {
+    "n": "Segment tree — range minimum query",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/",
+    "s": ""
+   }
+  ],
+  "st-fenwick": [
+   {
+    "n": "Range Sum Query - Mutable",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/range-sum-query-mutable/",
+    "s": "LC 307",
+    "note": ""
+   },
+   {
+    "n": "Count of Smaller Numbers After Self",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/count-of-smaller-numbers-after-self/",
+    "s": "LC 315",
+    "note": ""
+   },
+   {
+    "n": "Binary Indexed Tree (Fenwick tree)",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/binary-indexed-tree-or-fenwick-tree-2/",
+    "s": ""
+   }
+  ],
+  "st-lazy": [
+   {
+    "n": "Falling Squares",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/falling-squares/",
+    "s": "LC 699",
+    "note": ""
+   },
+   {
+    "n": "Lazy propagation in segment tree",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/lazy-propagation-in-segment-tree/",
+    "s": ""
+   }
+  ],
+  "sim-spiral": [
+   {
+    "n": "Spiral Matrix",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/spiral-matrix/",
+    "s": "LC 54",
+    "note": ""
+   },
+   {
+    "n": "Spiral Matrix II",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/spiral-matrix-ii/",
+    "s": "LC 59",
+    "note": ""
+   },
+   {
+    "n": "Diagonal Traverse",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/diagonal-traverse/",
+    "s": "LC 498",
+    "note": ""
+   },
+   {
+    "n": "Print a matrix in spiral form",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/print-a-given-matrix-in-spiral-form/",
+    "s": ""
+   }
+  ],
+  "sim-rotate": [
+   {
+    "n": "Rotate Image",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/rotate-image/",
+    "s": "LC 48",
+    "note": ""
+   },
+   {
+    "n": "Rotate Array",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/rotate-array/",
+    "s": "LC 189",
+    "note": ""
+   },
+   {
+    "n": "Game of Life",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/game-of-life/",
+    "s": "LC 289",
+    "note": ""
+   },
+   {
+    "n": "Rotate a matrix by 90 degrees in place",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/rotate-a-matrix-by-90-degree-in-clockwise-direction-without-using-any-extra-space/",
+    "s": ""
+   }
+  ],
+  "sim-marking": [
+   {
+    "n": "Set Matrix Zeroes",
+    "p": "LeetCode",
+    "u": "https://leetcode.com/problems/set-matrix-zeroes/",
+    "s": "LC 73",
+    "note": ""
+   },
+   {
+    "n": "Set matrix zeroes",
+    "p": "GeeksforGeeks",
+    "u": "https://www.geeksforgeeks.org/a-boolean-matrix-question/",
+    "s": ""
+   }
+  ],
   "ll-fastslow": [
    {
     "n": "Linked List Cycle",
@@ -4569,6 +4774,204 @@
      "p": "Codeforces",
      "u": "https://codeforces.com/problemset/problem/467/B",
      "s": "CF 467B  · 1100"
+    }
+   ]
+  },
+  "string-match": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/algorithms/string-algorithm/basics-of-string-manipulation/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/domains/algorithms?filters%5Bsubdomains%5D%5B%5D=string-algorithms"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/strings"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/topics/strings/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=strings"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Way Too Long Words",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/71/A",
+     "s": "CF 71A  · 800"
+    },
+    {
+     "n": "Petya and Strings",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/112/A",
+     "s": "CF 112A  · 800"
+    },
+    {
+     "n": "Boy or Girl",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/236/A",
+     "s": "CF 236A  · 800"
+    },
+    {
+     "n": "Helpful Maths",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/339/A",
+     "s": "CF 339A  · 800"
+    },
+    {
+     "n": "Word Capitalization",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/281/A",
+     "s": "CF 281A  · 800"
+    },
+    {
+     "n": "Word",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/59/A",
+     "s": "CF 59A  · 800"
+    }
+   ]
+  },
+  "segment-tree": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/data-structures/advanced-data-structures/segment-trees/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/domains/data-structures"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/segment-tree-data-structure/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/trees/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=data+structures"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Registration System",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/4/C",
+     "s": "CF 4C  · 1300"
+    },
+    {
+     "n": "Same Differences",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1520/D",
+     "s": "CF 1520D  · 1200"
+    },
+    {
+     "n": "ICPC Balloons",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1703/B",
+     "s": "CF 1703B  · 800"
+    },
+    {
+     "n": "Odd Queries",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1807/D",
+     "s": "CF 1807D  · 900"
+    },
+    {
+     "n": "Sereja and Suffixes",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/368/B",
+     "s": "CF 368B  · 1100"
+    },
+    {
+     "n": "Advantage",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/1760/C",
+     "s": "CF 1760C  · 800"
+    }
+   ]
+  },
+  "simulation": {
+   "hubs": [
+    {
+     "p": "HackerEarth",
+     "u": "https://www.hackerearth.com/practice/data-structures/arrays/multi-dimensional/practice-problems/"
+    },
+    {
+     "p": "HackerRank",
+     "u": "https://www.hackerrank.com/interview/interview-preparation-kit/arrays/"
+    },
+    {
+     "p": "GeeksforGeeks",
+     "u": "https://www.geeksforgeeks.org/print-a-given-matrix-in-spiral-form/"
+    },
+    {
+     "p": "CodeChef",
+     "u": "https://www.codechef.com/practice/arrays"
+    },
+    {
+     "p": "InterviewBit",
+     "u": "https://www.interviewbit.com/courses/programming/arrays/"
+    },
+    {
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset?tags=implementation"
+    }
+   ],
+   "cf": [
+    {
+     "n": "Bit++",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/282/A",
+     "s": "CF 282A  · 800"
+    },
+    {
+     "n": "Next Round",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/158/A",
+     "s": "CF 158A  · 800"
+    },
+    {
+     "n": "Beautiful Matrix",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/263/A",
+     "s": "CF 263A  · 800"
+    },
+    {
+     "n": "Petya and Strings",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/112/A",
+     "s": "CF 112A  · 800"
+    },
+    {
+     "n": "Boy or Girl",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/236/A",
+     "s": "CF 236A  · 800"
+    },
+    {
+     "n": "Helpful Maths",
+     "p": "Codeforces",
+     "u": "https://codeforces.com/problemset/problem/339/A",
+     "s": "CF 339A  · 800"
     }
    ]
   },

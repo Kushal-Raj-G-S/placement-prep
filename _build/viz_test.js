@@ -14,6 +14,7 @@ require("./viz_engine_c.js");
 require("./viz_engine_d.js");
 require("./viz_engine_e.js");
 require("./viz_engine_f.js");          // each batch registers onto the same object
+require("./viz_engine_g.js");
 
 var PARSE = G.__helpers.parse;   // the SAME parsers the page uses
 
@@ -274,6 +275,31 @@ function randomInput(id, spec) {
     v.a = v.a.slice().sort(function (p, q) { return p - q; });
     var cut = rnd(v.a.length);
     v.a = v.a.slice(cut).concat(v.a.slice(0, cut));
+  }
+  if ((id === "sm-kmp" || id === "sm-rabinkarp") && v.text && v.pat) {
+    if (v.pat.length > v.text.length) { var tmp3 = v.pat; v.pat = v.text; v.text = tmp3; }
+    if (rnd(2) && v.text.length >= v.pat.length) {       /* half the time, make it a REAL match */
+      var start = rnd(v.text.length - v.pat.length + 1);
+      v.pat = v.text.substr(start, v.pat.length);
+    }
+  }
+  if ((id === "st-range" || id === "st-fenwick" || id === "st-lazy") && v.a) {
+    var nn = v.a.length;
+    v.idx = rnd(nn);
+    v.val = 1 + rnd(9);
+    v.delta = rnd(13) - 6;
+    v.l = rnd(nn);
+    v.r = v.l + 1 + rnd(nn - v.l);
+    v.l2 = rnd(nn);
+    v.r2 = v.l2 + 1 + rnd(nn - v.l2);
+  }
+  if (id === "sim-rotate" && v.g) {               /* truncate to a square so check() doesn't reject it */
+    var szr = Math.min(v.g.length, v.g[0].length);
+    v.g = v.g.slice(0, szr).map(function (row) { return row.slice(0, szr); });
+  }
+  if (id === "sim-marking" && v.g) {              /* force at least one real zero to exercise the marking */
+    var mr = rnd(v.g.length), mc = rnd(v.g[0].length);
+    v.g[mr][mc] = 0;
   }
   return v;
 }

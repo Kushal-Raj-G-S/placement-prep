@@ -16,3 +16,4 @@ _build/.link_cache.json
 
 # regenerable problem-list cache from fetch_other.py
 _build/.other_cache.json
+data/leetcode_solved.json

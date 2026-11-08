@@ -6,11 +6,11 @@ PATTERNS = [
 # ------------------------------------------------------------------ grids ---------
 {
  "id": "grid", "group": "graph", "name": "Grid traversal (a grid IS a graph)",
- "buys": "the brute-force 'try every path' blow-up → O(rows · cols), each cell visited once",
+ "buys": "Trying every path blows up exponentially. Treating the grid as a graph visits each cell once — O(rows · cols).",
  "lives": "2-D grid of cells, where neighbours are up/down/left/right (sometimes the 8 diagonals too)",
  "core": "Stop seeing a matrix and start seeing a graph: each cell is a node, each legal move is an edge. "
-         "Then the only question left is which traversal. DFS or BFS both label connected regions; BFS alone "
-         "gives you SHORTEST, because it finishes a whole distance ring before starting the next one.",
+         "The only question left is which traversal to use. DFS or BFS both label connected regions, but "
+         "only BFS gives you SHORTEST — it finishes a whole distance ring before starting the next one.",
  "recognise": [
    {"cue": "<b>islands</b>, regions, connected blobs, flood fill, 'how many groups'", "note": "DFS or BFS, either works"},
    {"cue": "<b>fewest steps</b> / shortest path / minimum moves on a grid", "note": "BFS — and only BFS"},
@@ -19,9 +19,9 @@ PATTERNS = [
    {"cue": "'can I reach the edge', 'surrounded regions'", "note": "flood fill INWARD from the border"},
  ],
  "notwhen": [
-   "Moves have different COSTS → plain BFS is wrong; use Dijkstra (or 0-1 BFS with a deque).",
-   "You may revisit cells with a different budget → the state is (cell, budget), not just the cell.",
-   "The answer is a count of paths rather than a reachability → that is grid DP.",
+   "Moves have different COSTS → plain BFS gives a wrong answer; use Dijkstra (or 0-1 BFS with a deque).",
+   "You might revisit a cell with a different budget → the state is (cell, budget), not just the cell alone.",
+   "The answer is a count of paths, not reachability → that's grid DP.",
  ],
  "pick": [
    {"if": "label or count connected regions", "then": "gr-flood"},
@@ -171,12 +171,13 @@ def nearest_zero(mat):
 # ----------------------------------------------------------- topological sort ------
 {
  "id": "toposort", "group": "graph", "name": "Topological sort (ordering & cycles)",
- "buys": "a valid order over n tasks in O(V + E), instead of guessing permutations",
+ "buys": "Gives a valid order over n tasks in O(V + E), instead of guessing permutations.",
  "lives": "directed graph of dependencies (a DAG, if the input is sane)",
- "core": "Whenever the statement says 'before', 'requires', 'prerequisite' or 'depends on', you have a directed "
-         "graph and you want an order where every arrow points forward. Kahn's method is the one to memorise: "
-         "repeatedly take anything with no remaining prerequisites. If you finish having emitted fewer than n "
-         "nodes, the leftovers form a cycle — so the SAME algorithm answers 'is this even possible'.",
+ "core": "Whenever the statement says 'before', 'requires', 'prerequisite' or 'depends on', you have a "
+         "directed graph and you want an order where every arrow points forward. Kahn's method is the one "
+         "to memorise: repeatedly take anything with no remaining prerequisites. If you finish having "
+         "emitted fewer than n nodes, the leftovers form a cycle — so the SAME algorithm also tells you "
+         "whether it's even possible.",
  "recognise": [
    {"cue": "<b>prerequisites</b>, 'must come before', dependencies, build order", "note": "the definition"},
    {"cue": "<b>is it possible</b> to finish / 'is there a cycle' in a DIRECTED graph", "note": "count what you emit"},
@@ -185,7 +186,7 @@ def nearest_zero(mat):
  ],
  "notwhen": [
    "The graph is UNDIRECTED → cycle detection there is union-find or DFS with a parent check, not topo sort.",
-   "You need the shortest path with weights → Dijkstra (unless it is a DAG, where topo order + DP is faster).",
+   "You need the shortest path with weights → use Dijkstra (unless it's a DAG, where topo order + DP is faster).",
  ],
  "pick": [
    {"if": "produce an order, or detect a cycle, iteratively", "then": "to-kahn"},
@@ -283,11 +284,12 @@ def topo(n, edges):                  # edges = [(a, b)] meaning a must come befo
 # -------------------------------------------------------------- shortest path ------
 {
  "id": "shortest-path", "group": "graph", "name": "Weighted shortest paths",
- "buys": "exploring every route → O(E log V), by always settling the nearest unfinished node first",
+ "buys": "Exploring every possible route is exponential. Always settling the nearest unfinished node first gets it to O(E log V).",
  "lives": "weighted graph — roads with distances, flights with prices, edges with risk",
- "core": "Pick by the weights, and nothing else. All edges equal → BFS. Non-negative weights → Dijkstra, "
-         "which is BFS with a priority queue instead of a plain one. Negative edges, or a cap on the number of "
-         "edges used → Bellman-Ford. Every pair, with n small → Floyd-Warshall, three nested loops.",
+ "core": "Pick the algorithm by the weights, nothing else. All edges equal → BFS. Non-negative weights → "
+         "Dijkstra, which is just BFS with a priority queue instead of a plain one. Negative edges, or a cap "
+         "on the number of edges used → Bellman-Ford. Every pair, with n small → Floyd-Warshall, three "
+         "nested loops.",
  "recognise": [
    {"cue": "edges carry a <b>cost / distance / time / price</b>, and all are non-negative", "note": "Dijkstra"},
    {"cue": "<b>cheapest</b> / fastest / minimum total, on a weighted graph", "note": "Dijkstra"},
@@ -297,8 +299,8 @@ def topo(n, edges):                  # edges = [(a, b)] meaning a must come befo
    {"cue": "'maximise the <b>minimum</b> edge on the path' (signal, capacity)", "note": "modified Dijkstra, or binary search + BFS"},
  ],
  "notwhen": [
-   "All edges cost the same → plain BFS; a heap is pure overhead.",
-   "You want to connect everything as cheaply as possible, not to travel → that is an MST (Kruskal / Prim), not a shortest path.",
+   "All edges cost the same → use plain BFS; a heap here is pure overhead.",
+   "You want to connect everything as cheaply as possible, not travel between two points → that's an MST (Kruskal / Prim), not a shortest path.",
  ],
  "pick": [
    {"if": "non-negative weights, one source", "then": "sp-dijkstra"},
@@ -418,11 +420,11 @@ def dijkstra(n, adj, src):            # adj[u] = [(v, weight), ...]
 # ------------------------------------------------------------------ union-find -----
 {
  "id": "dsu", "group": "graph", "name": "Union-Find (disjoint set union)",
- "buys": "O(V + E) per connectivity query → effectively O(1), and it works as the graph GROWS",
+ "buys": "A DFS re-run per query is O(V + E) each time. Union-Find answers 'are these connected' in effectively O(1), even as the graph keeps growing.",
  "lives": "undirected connectivity: friends, networks, merged accounts, equivalent items",
- "core": "Each group keeps one representative. find(x) walks to it, union(a,b) hangs one representative under "
-         "the other. The reason it beats DFS is that it answers 'are these two connected' while edges are "
-         "STILL ARRIVING — DFS would have to re-run from scratch after every new edge. "
+ "core": "Each group keeps one representative node. find(x) walks to it; union(a,b) hangs one group's "
+         "representative under the other's. It beats DFS because it can answer 'are these two connected' "
+         "while edges are STILL ARRIVING — DFS would have to start over from scratch after every new edge. "
          "This is the one that ambushed you in a real OA.",
  "recognise": [
    {"cue": "<b>merging groups</b> incrementally, 'join these two'", "note": "the definition"},
@@ -433,9 +435,9 @@ def dijkstra(n, adj, src):            # adj[u] = [(v, weight), ...]
    {"cue": "<b>accounts / emails / items to merge</b> transitively", "note": "union by a shared key"},
  ],
  "notwhen": [
-   "The graph is DIRECTED and you care about direction → union-find ignores direction entirely.",
-   "You must UNDO a union → plain DSU cannot; that needs a rollback variant.",
-   "The whole graph is given up front and you only need the components once → a DFS sweep is just as good.",
+   "The graph is DIRECTED and direction matters → union-find ignores direction entirely.",
+   "You need to UNDO a union → plain DSU can't do that; you'd need a rollback variant.",
+   "The whole graph is given up front and you only need the components once → a DFS sweep works just as well.",
  ],
  "pick": [
    {"if": "count components, or test connectivity as edges arrive", "then": "dsu-connect"},

@@ -20,17 +20,17 @@ That injects the library into the HTML (which stays self-contained and works off
 
 GROUPS = [
     {"id": "linear", "name": "Arrays & strings",
-     "note": "One index moving left to right. Nine patterns cover almost every OA question that is not a graph or a DP."},
+     "note": "An index (or a few) moving through the data. These patterns cover almost every OA question that isn't a graph or a DP."},
     {"id": "list", "name": "Linked lists",
-     "note": "Pointer surgery. Small, fixed, and heavily asked in interviews."},
+     "note": "Pointer surgery. A small, fixed set of tricks, heavily asked in interviews."},
     {"id": "tree", "name": "Trees",
-     "note": "Recursion with a shape. Almost everything is one of two traversals."},
+     "note": "Recursion with a shape. Almost everything comes down to one of two traversals."},
     {"id": "graph", "name": "Graphs & grids",
-     "note": "A grid is a graph. Pick the traversal from the edge weights."},
+     "note": "A grid is just a graph. Pick the traversal based on the edge weights."},
     {"id": "dp", "name": "Dynamic programming",
-     "note": "A choice at every step, with overlapping subproblems. The state is the whole battle."},
+     "note": "A choice at every step, and subproblems that repeat. Getting the state right is the whole battle."},
     {"id": "search", "name": "Search & greedy",
-     "note": "When you must try everything, and when one pass of local choices is provably enough."},
+     "note": "When you have to try everything, versus when one pass of local choices is provably enough."},
 ]
 
 PATTERNS = []
@@ -218,11 +218,11 @@ PATTERNS += [
 # --------------------------------------------------------------- sliding window -----
 {
  "id": "sliding-window", "group": "linear", "name": "Sliding window",
- "buys": "O(n²) over every subarray → O(n), by never rebuilding a window from scratch",
+ "buys": "Checking every subarray is O(n²). A sliding window does it in O(n) by never rebuilding from scratch.",
  "lives": "array, string — always CONTIGUOUS",
- "core": "A window [l, r] carries a running state (a sum, a count map, a deque). r always moves forward; "
-         "l only moves forward too. Because neither pointer ever goes back, every index enters once and "
-         "leaves once — 2n moves total, O(n), no matter how clever the condition inside is.",
+ "core": "A window [l, r] carries a running state — a sum, a count map, a deque. r only ever moves forward; "
+         "l only ever moves forward too. Since neither pointer goes back, every index enters the window once "
+         "and leaves once. That's 2n moves total, so it's O(n) no matter how clever the condition inside is.",
  "recognise": [
    {"cue": "<b>contiguous</b> subarray or substring", "note": "the one non-negotiable tell"},
    {"cue": "<b>longest / shortest / maximum / minimum</b> such that a rule holds", "note": "variable size"},
@@ -231,10 +231,10 @@ PATTERNS += [
    {"cue": "<b>anagram / permutation</b> of a pattern inside a string", "note": "fixed size = len(pattern), compare count maps"},
  ],
  "notwhen": [
-   "<b>Subsequence</b> (order kept, gaps allowed) — a window cannot skip. That is DP.",
-   "The array has <b>negatives</b> and you want a sum equal to K — shrinking no longer makes the sum smaller, "
-   "so the window logic collapses. Use <b>prefix sum + hashmap</b>.",
-   "You may <b>reorder</b> the elements → sort / greedy / counting, not a window.",
+   "<b>Subsequence</b> (order kept, gaps allowed) — a window can't skip elements. That's DP.",
+   "The array has <b>negatives</b> and you want a sum equal to K. Shrinking no longer always makes the sum "
+   "smaller, so the window logic breaks. Use <b>prefix sum + hashmap</b> instead.",
+   "You're allowed to <b>reorder</b> the elements → that's sort / greedy / counting, not a window.",
  ],
  "pick": [
    {"if": "the length k is given to you", "then": "sw-fixed"},
@@ -444,23 +444,23 @@ def max_sliding_window(a, k):
 # ------------------------------------------------------------------- prefix sum -----
 {
  "id": "prefix-sum", "group": "linear", "name": "Prefix sum",
- "buys": "O(n) per range query → O(1), after one O(n) precomputation",
+ "buys": "Each range-sum query is O(n). After one O(n) setup pass, every query is O(1).",
  "lives": "array (numbers), and any string you can turn into ±1 or a bitmask",
- "core": "pre[i] = the total of everything BEFORE i. Then any range sum is one subtraction: "
-         "sum(l..r) = pre[r+1] - pre[l]. The leap is the next step: if you want 'how many ranges sum to K', "
-         "rearrange it to pre[r+1] - K = pre[l] and ask a HASHMAP how many earlier prefixes had that value.",
+ "core": "pre[i] = the total of everything BEFORE index i. So any range sum is one subtraction: "
+         "sum(l..r) = pre[r+1] - pre[l]. The big leap: if you want 'how many ranges sum to K', rearrange "
+         "that to pre[r+1] - K = pre[l], then ask a HASHMAP how many earlier prefixes had that value.",
  "recognise": [
    {"cue": "<b>repeated range-sum queries</b> on a fixed array", "note": "plain prefix array"},
    {"cue": "contiguous + <b>sum equals K</b> + negatives allowed", "note": "prefix + hashmap — the signature combination"},
    {"cue": "<b>divisible by K</b>, 'multiple of k'", "note": "hash the remainder, not the sum"},
-   {"cue": "<b>equal number of</b> two things", "note": "map one to +1 and the other to −1, then it is sum = 0"},
+   {"cue": "<b>equal number of</b> two things", "note": "map one to +1 and the other to −1, then you just need sum = 0"},
    {"cue": "<b>range updates</b>, many of them, queried only at the end", "note": "difference array"},
    {"cue": "product / min / max over a prefix, or 'everything except me'", "note": "prefix-and-suffix pass"},
  ],
  "notwhen": [
-   "All values are positive and you want the LONGEST or SHORTEST range → a <b>sliding window</b> is simpler and O(1) space.",
-   "The array changes between queries → you need a Fenwick / segment tree, not a static prefix.",
-   "You want the max subarray sum → that is <b>Kadane</b> (or prefix minus running-min, same thing).",
+   "All values are positive and you want the LONGEST or SHORTEST range → a <b>sliding window</b> is simpler, O(1) space.",
+   "The array changes between queries → you need a Fenwick tree / segment tree, not a static prefix.",
+   "You want the max subarray sum → that's <b>Kadane</b> (or prefix minus running-min, same idea).",
  ],
  "pick": [
    {"if": "just answer range sums fast", "then": "ps-range"},
@@ -688,23 +688,23 @@ PATTERNS += [
 # ---------------------------------------------------------------- binary search ----
 {
  "id": "binary-search", "group": "linear", "name": "Binary search",
- "buys": "O(n) scan → O(log n); and for 'search the answer', O(huge) → O(n log(range))",
+ "buys": "A linear scan is O(n). Binary search is O(log n); for 'search the answer', a huge range becomes O(n log(range)).",
  "lives": "any ORDERED search space — a sorted array, or the range of possible answers",
- "core": "You do not need a sorted array. You need a space where one check can throw away half of it. "
-         "That means a monotonic predicate: a line of FALSE FALSE FALSE TRUE TRUE TRUE, and you are hunting "
-         "the boundary. Ask yourself only this: 'if X works, does every larger X also work?' If yes, binary search.",
+ "core": "You don't need a sorted array — you need a space where one check throws away half of it. That means "
+         "a monotonic predicate: a line that reads FALSE FALSE FALSE TRUE TRUE TRUE, and you're hunting the "
+         "boundary. Just ask: 'if X works, does every larger X also work?' If yes, binary search applies.",
  "recognise": [
    {"cue": "<b>sorted</b> array, find / first / last / insert position", "note": "the classic form"},
    {"cue": "<b>minimum X such that</b> … / maximum X such that …", "note": "binary search on the answer"},
    {"cue": "<b>minimum capacity / speed / time / largest minimum / smallest maximum</b>",
     "note": "the five words that give it away every time"},
    {"cue": "constraints are <b>huge</b> (10⁹, 10¹⁴) but the CHECK is cheap and O(n)",
-    "note": "you cannot enumerate answers, so you search them"},
+    "note": "you can't enumerate every answer, so you search for it instead"},
    {"cue": "<b>rotated</b> sorted array, or a mountain / peak", "note": "still enough order to halve"},
  ],
  "notwhen": [
-   "The predicate is not monotonic (works at 5, fails at 6, works at 7) — halving is then simply wrong.",
-   "n is small enough that a linear scan fits the budget — do not add bug surface for nothing.",
+   "The predicate isn't monotonic (true at 5, false at 6, true at 7) — halving simply gives a wrong answer.",
+   "n is small enough that a linear scan fits the time budget — don't add bug surface for nothing.",
    "You want the k-th smallest in a stream → heap, not binary search.",
  ],
  "pick": [
@@ -916,11 +916,11 @@ def min_speed(piles, h):
 # --------------------------------------------------------------------- hashing -----
 {
  "id": "hashing", "group": "linear", "name": "Hashing (map & set)",
- "buys": "O(n) search per element → O(1); so O(n²) → O(n)",
+ "buys": "Searching for an element is O(n). A hashmap does it in O(1), turning O(n²) into O(n).",
  "lives": "anything you can use as a dict key — numbers, characters, tuples, frozensets, sorted strings",
- "core": "Trade memory for time. Walk once, and at each element ask the dict a question about the PAST: "
-         "have I seen this, how many times, where was it. The whole art is choosing the key — the value, "
-         "the remainder, the sorted letters, the (row, col) pair, the normalised shape.",
+ "core": "Trade memory for time. Walk through once, and at each element ask the dict a question about the "
+         "PAST: have I seen this, how many times, where was it. The whole skill is picking the right key — "
+         "the value itself, a remainder, the sorted letters, a (row, col) pair, some normalised shape.",
  "recognise": [
    {"cue": "<b>have I seen this before</b> / is there a duplicate", "note": "set"},
    {"cue": "<b>how many times</b> does each thing appear", "note": "Counter / frequency map"},
@@ -929,10 +929,10 @@ def min_speed(piles, h):
    {"cue": "<b>unsorted</b> input and the question is about existence", "note": "sorting would waste your O(n) budget"},
  ],
  "notwhen": [
-   "Values are a small dense range 1..n → an ARRAY is a faster hashmap; and if you may mutate the input, "
-   "<b>cyclic sort / index-as-hash</b> solves it in O(1) space.",
-   "Input is already sorted and you want a pair → two pointers, O(1) space.",
-   "You need an ORDER (smallest, k-th) → heap or sorting; a hashmap has no order.",
+   "Values are a small dense range 1..n → an ARRAY works as a faster hashmap, and if you can mutate the "
+   "input, <b>cyclic sort / index-as-hash</b> does it in O(1) space.",
+   "Input is already sorted and you want a pair → use two pointers instead, O(1) space.",
+   "You need an ORDER (smallest, k-th) → use a heap or sorting; a hashmap has no order.",
  ],
  "pick": [
    {"if": "existence or duplicate detection only", "then": "hs-seen"},
@@ -1113,24 +1113,24 @@ def group_anagrams(words):
 # -------------------------------------------------------------- monotonic stack ----
 {
  "id": "monotonic-stack", "group": "linear", "name": "Stack & monotonic stack",
- "buys": "O(n²) 'scan right until I find a bigger one' → O(n)",
+ "buys": "'Scan right until I find a bigger one' is O(n²). A monotonic stack does it in O(n).",
  "lives": "array (next-greater family), string (matching / parsing)",
- "core": "A plain stack remembers what is still OPEN — unmatched brackets, unfinished frames. "
-         "A MONOTONIC stack goes further: it keeps only the candidates that can still win. "
-         "The moment a new element arrives that beats one on the stack, that stacked element's answer is "
-         "decided — so you pop it and resolve it. Every index is pushed once and popped once: O(n).",
+ "core": "A plain stack remembers what is still OPEN — unmatched brackets, unfinished frames. A MONOTONIC "
+         "stack goes further: it only keeps candidates that can still win. The moment a new element beats "
+         "one sitting on the stack, that stacked element's answer is decided, so you pop it and resolve it. "
+         "Every index gets pushed once and popped once, so it's O(n).",
  "recognise": [
    {"cue": "<b>next greater</b> / next smaller / previous greater / previous smaller", "note": "textbook monotonic stack"},
-   {"cue": "<b>span</b>, 'days until warmer', 'how far until'", "note": "the same thing, reported as a distance"},
+   {"cue": "<b>span</b>, 'days until warmer', 'how far until'", "note": "the same idea, reported as a distance"},
    {"cue": "<b>histogram</b>, largest rectangle, maximal area", "note": "previous-smaller and next-smaller on each bar"},
    {"cue": "<b>brackets</b>, nesting, 'valid parentheses', decode a nested string", "note": "plain stack"},
    {"cue": "<b>remove k digits</b> / smallest number after removals / lexicographically smallest",
     "note": "greedy + monotonic stack"},
  ],
  "notwhen": [
-   "You need the max of a fixed WINDOW → monotonic <b>deque</b>, because elements also expire from the front.",
-   "You need the k largest overall → heap.",
-   "The relation is recursive over a tree → plain DFS.",
+   "You need the max of a fixed WINDOW → use a monotonic <b>deque</b> instead, since elements also expire from the front.",
+   "You need the k largest overall → use a heap.",
+   "The relation is recursive over a tree → use plain DFS.",
  ],
  "pick": [
    {"if": "'next/previous greater or smaller' or a distance to it", "then": "ms-next"},
@@ -1288,22 +1288,22 @@ def group_anagrams(words):
 # ----------------------------------------------------------------- heap / top-k ----
 {
  "id": "heap", "group": "linear", "name": "Heap (priority queue)",
- "buys": "O(n log n) full sort → O(n log k) when you only need the extremes",
+ "buys": "A full sort is O(n log n). If you only need the extremes, a heap gets it in O(n log k).",
  "lives": "any stream or collection where you repeatedly need the current best",
- "core": "A heap gives you the smallest (or largest) item in O(1) and lets you replace it in O(log n). "
-         "You reach for it when the answer needs 'the best remaining' over and over — and crucially when "
-         "the collection keeps CHANGING, which is exactly when sorting once is not enough.",
+ "core": "A heap hands you the smallest (or largest) item in O(1), and lets you swap it out in O(log n). "
+         "Reach for it when you need 'the best remaining' over and over again — especially when the "
+         "collection keeps CHANGING, which is exactly when sorting once isn't enough.",
  "recognise": [
    {"cue": "<b>K largest / K smallest / K closest / K most frequent</b>", "note": "a heap of size K"},
-   {"cue": "<b>streaming</b>, 'at any time', 'as numbers arrive'", "note": "you cannot re-sort per query"},
+   {"cue": "<b>streaming</b>, 'at any time', 'as numbers arrive'", "note": "you can't re-sort on every query"},
    {"cue": "<b>merge K sorted</b> lists or arrays", "note": "heap of the k current heads"},
    {"cue": "<b>median</b> of a stream", "note": "two heaps, balanced"},
    {"cue": "repeatedly 'take the biggest / cheapest and then update it'", "note": "greedy driven by a heap"},
  ],
  "notwhen": [
-   "You need the k-th element ONCE from a static array → quickselect is O(n) average.",
+   "You need the k-th element ONCE from a static array → quickselect is O(n) on average.",
    "Counts are small integers → bucket sort by count is O(n), beating O(n log k).",
-   "You need arbitrary-position lookups or ordered traversal → a balanced BST / sorted list, not a heap.",
+   "You need lookups at arbitrary positions, or ordered traversal → use a balanced BST / sorted list, not a heap.",
  ],
  "pick": [
    {"if": "'K largest / smallest / closest / most frequent'", "then": "hp-topk"},
@@ -1464,11 +1464,11 @@ def min_meeting_rooms(intervals):
 # ---------------------------------------------------------- sorting & intervals ----
 {
  "id": "intervals", "group": "linear", "name": "Sorting, intervals & sweep line",
- "buys": "O(n²) all-pairs overlap checks → O(n log n)",
+ "buys": "Checking every pair of intervals for overlap is O(n²). Sorting first gets it to O(n log n).",
  "lives": "lists of intervals, events, or anything with a natural order you can impose",
- "core": "Sorting is not the answer — it is what makes the answer a single pass. Once intervals are in order, "
-         "each one only ever has to be compared with the PREVIOUS one, and 'do these overlap' collapses to "
-         "<code>start ≤ previous_end</code>. Choosing what to sort BY is the entire decision.",
+ "core": "Sorting isn't the answer itself — it's what turns the answer into a single pass. Once intervals "
+         "are in order, each one only needs comparing with the PREVIOUS one, so 'do these overlap' becomes "
+         "just <code>start ≤ previous_end</code>. The real decision is what to sort BY.",
  "recognise": [
    {"cue": "input is a list of <b>[start, end]</b> pairs", "note": "almost certainly this family"},
    {"cue": "<b>merge / overlap / conflict / double-booked</b>", "note": "sort by start"},
@@ -1478,9 +1478,9 @@ def min_meeting_rooms(intervals):
     "note": "sort by one, then handle the other with a heap or insertion"},
  ],
  "notwhen": [
-   "Order is already given and must be PRESERVED → sorting destroys the answer (then it is a stack or a window).",
-   "You need the k best only → heap, O(n log k) beats a full sort.",
-   "Values are a small dense range → counting sort is O(n).",
+   "The order is already given and must be PRESERVED → sorting would wreck the answer; use a stack or a window instead.",
+   "You only need the k best → a heap at O(n log k) beats a full sort.",
+   "Values are a small dense range → counting sort does it in O(n).",
  ],
  "pick": [
    {"if": "combine overlapping ranges into blocks", "then": "iv-merge"},
@@ -1664,10 +1664,10 @@ def reconstruct_queue(people):
 # --------------------------------------------------------------------- bit ops -----
 {
  "id": "bits", "group": "linear", "name": "Bit manipulation",
- "buys": "O(n) extra space → O(1); and subset enumeration becomes a simple counter",
+ "buys": "Trades O(n) extra space for O(1), and turns subset enumeration into a simple counter.",
  "lives": "integers, and any set of at most ~20–25 items",
- "core": "Two completely separate uses. One: XOR cancels duplicates (x ^ x = 0, x ^ 0 = x), which solves "
-         "'find the odd one out' in O(1) space. Two: an integer IS a subset — bit i means 'item i is in' — "
+ "core": "Two separate tricks live here. One: XOR cancels duplicates (x ^ x = 0, x ^ 0 = x), which finds "
+         "'the odd one out' in O(1) space. Two: an integer CAN BE a subset — bit i means 'item i is in' — "
          "which is why <code>n ≤ 20</code> in the constraints is a bitmask signal.",
  "recognise": [
    {"cue": "<b>every element appears twice except one</b>", "note": "XOR the whole array"},
@@ -1677,8 +1677,8 @@ def reconstruct_queue(people):
    {"cue": "<b>maximum XOR pair</b>, 'two numbers with the largest xor'", "note": "binary trie"},
  ],
  "notwhen": [
-   "n is large and you need subsets → 2ⁿ explodes; it is a DP or a greedy.",
-   "The duplicate count is 3 (not 2) → plain XOR fails; count bits per position mod 3.",
+   "n is large and you need all subsets → 2ⁿ explodes; this is a DP or greedy problem instead.",
+   "The duplicate count is 3, not 2 → plain XOR fails; count bits per position mod 3 instead.",
  ],
  "pick": [
    {"if": "find the unique / missing element with O(1) space", "then": "bt-xor"},
@@ -1840,6 +1840,441 @@ x ^ y              # differing bits; a ^ b ^ b == a
      "mask with <code>&amp; 0xFFFFFFFF</code> when a problem assumes 32 bits.",
      "Shifting a negative number right in Python keeps the sign forever; loop on a masked copy.",
      "<code>x &amp; (x-1)</code> counting is O(set bits), faster than looping 32 times.",
+   ]},
+ ]},
+]
+
+# =====================================================================================
+#  BATCH 3 -- advanced array / string techniques
+# =====================================================================================
+
+PATTERNS += [
+
+# ------------------------------------------------------------------ string match ----
+{
+ "id": "string-match", "group": "linear", "name": "String matching",
+ "buys": "Naive search re-checks every position from scratch — O(n·m). KMP / Rabin-Karp do it in O(n+m).",
+ "lives": "strings — the classic 'find text inside text' problem",
+ "core": "The naive approach restarts the comparison from zero every time it slides the pattern over by one "
+         "character. These algorithms reuse work instead: KMP precomputes how much of the pattern's own "
+         "prefix repeats as a suffix, so a mismatch jumps forward instead of restarting. Rabin-Karp instead "
+         "compares cheap rolling hashes and only checks character-by-character when two hashes collide.",
+ "recognise": [
+   {"cue": "find every position where a <b>pattern</b> occurs inside a <b>text</b>, text up to 10⁵–10⁶ long",
+    "note": "naive O(n·m) search is too slow at that size"},
+   {"cue": "'<b>longest prefix that is also a suffix</b>'", "note": "that's literally the KMP failure array"},
+   {"cue": "<b>multiple patterns</b> at once, or a plagiarism / duplicate-substring style question",
+    "note": "rolling hash (Rabin-Karp) compares cheaply"},
+   {"cue": "'how many times does the string repeat', 'shortest block this is built from'",
+    "note": "the failure array's last value encodes the period"},
+ ],
+ "notwhen": [
+   "n and m are both small (a few thousand or less) → a brute-force double loop is simpler and fast enough.",
+   "You need substrings SORTED, or the k-th distinct substring → that needs a suffix array / suffix automaton, well past OA scope.",
+   "You just need one membership check → Python's own <code>in</code> / <code>str.find</code> already runs a fast search.",
+ ],
+ "pick": [
+   {"if": "straightforward 'find pattern in text', or you want the failure array itself", "then": "sm-kmp"},
+   {"if": "match many patterns, or a cheap collision-based check is enough", "then": "sm-rabinkarp"},
+   {"if": "you need the longest match with the prefix at EVERY position, not just one", "then": "sm-z"},
+ ],
+ "variants": [
+  {"id": "sm-kmp", "name": "KMP — the failure (LPS) array",
+   "when": "Find every occurrence of a pattern inside a text, in guaranteed O(n+m).",
+   "tool": "lps[i] = length of the longest prefix of the pattern that is also a suffix of pattern[0..i]",
+   "invariant": "on a mismatch you fall back using lps instead of restarting — the text pointer never moves backward",
+   "cx": "O(n + m) time, O(m) space",
+   "code": """def kmp_search(text, pat):
+    if not pat:
+        return list(range(len(text) + 1))
+    lps = [0] * len(pat)
+    k = 0
+    for i in range(1, len(pat)):              # build the failure array from the pattern alone
+        while k and pat[i] != pat[k]:
+            k = lps[k - 1]
+        if pat[i] == pat[k]:
+            k += 1
+        lps[i] = k
+    res, k = [], 0
+    for i, ch in enumerate(text):
+        while k and ch != pat[k]:
+            k = lps[k - 1]                     # fall back, don't restart
+        if ch == pat[k]:
+            k += 1
+        if k == len(pat):
+            res.append(i - k + 1)
+            k = lps[k - 1]                     # keep going for overlapping matches
+    return res""",
+   "asks": [
+     "implement strstr / find the first (or every) occurrence of a pattern in a string",
+     "shortest palindrome you can make by adding characters only at the front",
+     "longest happy prefix (longest proper prefix that is also a suffix) — that's just lps[-1]",
+     "check if the string is built by repeating a shorter block",
+   ],
+   "examples": [
+     {"n": "Find the Index of the First Occurrence in a String", "s": "LC 28"},
+     {"n": "Shortest Palindrome", "s": "LC 214"},
+     {"n": "Longest Happy Prefix", "s": "LC 1392"},
+     {"n": "Repeated Substring Pattern", "s": "LC 459"},
+   ],
+   "traps": [
+     "Build the <code>lps</code> array from the PATTERN alone — it never looks at the text.",
+     "After a full match, fall back with <code>k = lps[k-1]</code> instead of resetting <code>k = 0</code>, or you miss overlapping matches.",
+     "An empty pattern matches at every position including one past the end — handle it before the main loop.",
+   ]},
+
+  {"id": "sm-rabinkarp", "name": "Rabin-Karp — rolling hash",
+   "when": "Search for one or many patterns using a cheap, incrementally-updated hash instead of KMP's bookkeeping.",
+   "tool": "a polynomial hash of the current window, updated in O(1) as the window slides by one character",
+   "invariant": "the hash always equals the hash of exactly the m characters currently under the window",
+   "cx": "O(n + m) average, O(n·m) worst case (hash collisions) — use a large prime modulus to make that rare",
+   "code": """def rabin_karp(text, pat, base=131, mod=10**9 + 7):
+    n, m = len(text), len(pat)
+    if m > n:
+        return []
+    h_pat = h_txt = 0
+    p_pow = pow(base, m - 1, mod)
+    for i in range(m):
+        h_pat = (h_pat * base + ord(pat[i])) % mod
+        h_txt = (h_txt * base + ord(text[i])) % mod
+    res = []
+    for i in range(n - m + 1):
+        if h_pat == h_txt and text[i:i + m] == pat:   # verify on a hash collision
+            res.append(i)
+        if i + m < n:
+            h_txt = ((h_txt - ord(text[i]) * p_pow) * base + ord(text[i + m])) % mod
+    return res""",
+   "asks": [
+     "find all occurrences of a pattern in a text using a rolling hash",
+     "longest duplicate substring (binary search the length + rolling hash to check it)",
+     "repeated substring pattern — check via hashing instead of KMP",
+     "detect plagiarism / near-duplicate chunks across many documents",
+   ],
+   "examples": [
+     {"n": "Longest Duplicate Substring", "s": "LC 1044"},
+     {"n": "Repeated Substring Pattern", "s": "LC 459"},
+   ],
+   "traps": [
+     "Always VERIFY on a hash match (<code>text[i:i+m] == pat</code>) — a collision is rare but not impossible, and graders include adversarial cases.",
+     "Use a large prime modulus and recompute <code>p_pow</code> from <code>m</code>, not a hardcoded constant, or longer patterns break.",
+     "The rolling update is <code>(h - ord(out) * p_pow) * base + ord(in)</code> — drop the leaving character before adding the entering one.",
+   ]},
+
+  {"id": "sm-z", "name": "Z-function — every prefix match at once",
+   "when": "You need, for EVERY position, how far the string matches its own prefix — not just one pattern search.",
+   "tool": "z[i] = length of the longest substring starting at i that matches a prefix of the string",
+   "invariant": "the window [l, r) is the rightmost prefix-match found so far, reused to shortcut new positions inside it",
+   "cx": "O(n) time, O(n) space",
+   "code": """def z_function(s):
+    n = len(s)
+    z = [0] * n
+    l = r = 0
+    for i in range(1, n):
+        if i < r:
+            z[i] = min(r - i, z[i - l])        # reuse the previous match window
+        while i + z[i] < n and s[z[i]] == s[i + z[i]]:
+            z[i] += 1
+        if i + z[i] > r:
+            l, r = i, i + z[i]
+    return z
+
+# pattern search: run z_function(pattern + SEP + text); any i with z[i] == len(pattern) is a match""",
+   "asks": [
+     "pattern search via z[i] == len(pattern) on pattern + separator + text",
+     "longest prefix that also occurs elsewhere in the string",
+     "count how many positions the string matches its own prefix (self-similarity questions)",
+   ],
+   "examples": [],
+   "traps": [
+     "Pick a separator character that cannot appear in either string, or the z-values leak across the boundary.",
+     "The window update <code>l, r = i, i + z[i]</code> only happens when the new match EXTENDS past the current window — don't do it unconditionally.",
+   ]},
+ ]},
+
+# ----------------------------------------------------------------- segment tree -----
+{
+ "id": "segment-tree", "group": "linear", "name": "Segment tree & Fenwick (BIT)",
+ "buys": "A naive range query or update re-scans O(n) elements every time. These structures do both in O(log n).",
+ "lives": "array that needs REPEATED range queries, where the array itself also changes between queries",
+ "core": "A plain prefix sum breaks the moment the array changes, because updating one element shifts every "
+         "prefix after it. A segment tree instead stores one aggregate per node of a binary tree built over "
+         "the array, so a point update or a range query only ever touches O(log n) nodes going up or down "
+         "that tree. A Fenwick tree (Binary Indexed Tree) is the same idea for sums, compressed into one "
+         "flat array using each index's lowest set bit.",
+ "recognise": [
+   {"cue": "range sum / min / max query, AND the array gets <b>updated</b> between queries",
+    "note": "prefix sum alone can't handle updates — that's the signal"},
+   {"cue": "<b>point update, range query</b> (or the reverse: range update, point query)",
+    "note": "Fenwick if it's a sum; segment tree for min/max or anything more general"},
+   {"cue": "'<b>count of smaller elements after self</b>', counting inversions",
+    "note": "Fenwick tree over the coordinate-compressed value range"},
+   {"cue": "<b>range update AND range query</b>, both repeated many times", "note": "segment tree with lazy propagation"},
+ ],
+ "notwhen": [
+   "The array never changes between queries → a plain prefix sum array is simpler and O(1) per query.",
+   "n is small (a few thousand or less) and there are few queries → a direct O(n) scan per query is simpler and fast enough.",
+   "You only ever append and need a running total → a prefix sum updated on the fly is enough.",
+ ],
+ "pick": [
+   {"if": "point updates, range sum / min / max queries", "then": "st-range"},
+   {"if": "it's specifically a SUM and you want the shortest code", "then": "st-fenwick"},
+   {"if": "both the updates AND the queries are over ranges", "then": "st-lazy"},
+ ],
+ "variants": [
+  {"id": "st-range", "name": "Segment tree — range query, point update",
+   "when": "Repeated range sum / min / max queries, with single-element updates in between.",
+   "tool": "a binary tree stored flat in an array; each node holds the combined value of its range",
+   "invariant": "a node's value always equals combine() of its two children's values",
+   "cx": "O(log n) per update and per query, O(n) to build",
+   "code": """class SegTree:                      # iterative, 0-indexed, sum version
+    def __init__(self, a):
+        self.n = len(a)
+        self.t = [0] * (2 * self.n)
+        self.t[self.n:] = a
+        for i in range(self.n - 1, 0, -1):
+            self.t[i] = self.t[2 * i] + self.t[2 * i + 1]
+
+    def update(self, i, v):
+        i += self.n
+        self.t[i] = v
+        while i > 1:
+            i //= 2
+            self.t[i] = self.t[2 * i] + self.t[2 * i + 1]
+
+    def query(self, l, r):              # sum of the half-open range [l, r)
+        res = 0
+        l += self.n; r += self.n
+        while l < r:
+            if l & 1: res += self.t[l]; l += 1
+            if r & 1: r -= 1; res += self.t[r]
+            l //= 2; r //= 2
+        return res""",
+   "asks": [
+     "range sum query — mutable (and its 2-D version)",
+     "range minimum / maximum query with point updates — swap the combine function",
+     "count of range sum",
+   ],
+   "examples": [
+     {"n": "Range Sum Query - Mutable", "s": "LC 307"},
+     {"n": "Range Sum Query 2D - Mutable", "s": "LC 308"},
+     {"n": "Count of Range Sum", "s": "LC 327"},
+   ],
+   "traps": [
+     "This implementation's query range is HALF-OPEN <code>[l, r)</code> — an off-by-one on the right edge is the classic bug.",
+     "For min/max, change both <code>combine()</code> and the identity value used when a side is empty (use +inf / -inf, not 0).",
+   ]},
+
+  {"id": "st-fenwick", "name": "Fenwick tree (BIT) — point update, prefix query",
+   "when": "Specifically a SUM — point update, prefix or range sum query. Shorter to write than a segment tree.",
+   "tool": "a 1-indexed array where index i is responsible for a range decided by i's lowest set bit",
+   "invariant": "tree[i] holds the sum of the (i & -i) elements ending at index i",
+   "cx": "O(log n) per update and per query",
+   "code": """class Fenwick:
+    def __init__(self, n):
+        self.t = [0] * (n + 1)              # 1-indexed; index 0 is never used
+
+    def add(self, i, delta):
+        while i < len(self.t):
+            self.t[i] += delta
+            i += i & (-i)                   # move to the next responsible index
+
+    def prefix(self, i):                    # sum of [1, i]
+        s = 0
+        while i > 0:
+            s += self.t[i]
+            i -= i & (-i)
+        return s
+
+    def range_sum(self, l, r):              # sum of [l, r], 1-indexed inclusive
+        return self.prefix(r) - self.prefix(l - 1)""",
+   "asks": [
+     "range sum query — mutable, Fenwick as the usual go-to over a segment tree",
+     "count of smaller numbers after self — Fenwick over coordinate-compressed values",
+     "count of range sum, reverse pairs — Fenwick over compressed values",
+   ],
+   "examples": [
+     {"n": "Range Sum Query - Mutable", "s": "LC 307"},
+     {"n": "Count of Smaller Numbers After Self", "s": "LC 315"},
+   ],
+   "traps": [
+     "<code>i & -i</code> isolates the lowest set bit — memorise it rather than re-deriving it under pressure.",
+     "Fenwick is naturally 1-indexed; translating a 0-indexed array means adding 1 to every index you touch.",
+     "'Count smaller after self' needs the values coordinate-compressed first, or the tree size explodes.",
+   ]},
+
+  {"id": "st-lazy", "name": "Segment tree with lazy propagation — range update, range query",
+   "when": "BOTH the updates and the queries are over ranges, and both happen many times.",
+   "tool": "each node also stores a pending (lazy) value; push it down to children only when you actually descend into them",
+   "invariant": "a node's stored aggregate already reflects its own pending lazy value, even before the children are updated",
+   "cx": "O(log n) per update and per query",
+   "code": """class LazySegTree:                   # range-add, range-sum
+    def __init__(self, a):
+        self.n = len(a)
+        self.sum = [0] * (4 * self.n)
+        self.lazy = [0] * (4 * self.n)
+        self._build(a, 1, 0, self.n - 1)
+
+    def _build(self, a, node, l, r):
+        if l == r:
+            self.sum[node] = a[l]; return
+        m = (l + r) // 2
+        self._build(a, 2 * node, l, m); self._build(a, 2 * node + 1, m + 1, r)
+        self.sum[node] = self.sum[2 * node] + self.sum[2 * node + 1]
+
+    def _push(self, node, l, r):
+        if self.lazy[node]:
+            m = (l + r) // 2
+            for c, cl, cr in ((2 * node, l, m), (2 * node + 1, m + 1, r)):
+                self.lazy[c] += self.lazy[node]
+                self.sum[c] += self.lazy[node] * (cr - cl + 1)
+            self.lazy[node] = 0
+
+    def update(self, node, l, r, ql, qr, v):    # add v to every element in [ql, qr]
+        if qr < l or r < ql: return
+        if ql <= l and r <= qr:
+            self.sum[node] += v * (r - l + 1); self.lazy[node] += v; return
+        self._push(node, l, r)
+        m = (l + r) // 2
+        self.update(2 * node, l, m, ql, qr, v); self.update(2 * node + 1, m + 1, r, ql, qr, v)
+        self.sum[node] = self.sum[2 * node] + self.sum[2 * node + 1]
+
+    def query(self, node, l, r, ql, qr):
+        if qr < l or r < ql: return 0
+        if ql <= l and r <= qr: return self.sum[node]
+        self._push(node, l, r)
+        m = (l + r) // 2
+        return self.query(2 * node, l, m, ql, qr) + self.query(2 * node + 1, m + 1, r, ql, qr)""",
+   "asks": [
+     "range add, range sum query (both repeated many times)",
+     "falling squares — lazy max-update over ranges",
+     "my calendar III — track the maximum overlap via range add / query",
+   ],
+   "examples": [
+     {"n": "Falling Squares", "s": "LC 699"},
+   ],
+   "traps": [
+     "Push the lazy value down BEFORE recursing into children, or a child's own aggregate goes stale.",
+     "ADD into <code>lazy[node]</code> rather than overwrite it — two range-updates on the same node must stack.",
+   ]},
+ ]},
+
+# -------------------------------------------------------------------- simulation ----
+{
+ "id": "simulation", "group": "linear", "name": "Simulation & matrix manipulation",
+ "buys": "No asymptotic trick here — it's O(rows · cols) either way. What you gain is fewer off-by-one bugs.",
+ "lives": "2-D matrix / grid, walked or transformed in a specific geometric order",
+ "core": "This is not about complexity — it's about HOW to walk or transform the grid correctly. Keep four "
+         "shrinking boundaries (top, bottom, left, right) for a spiral. Swap, then reverse, for an in-place "
+         "rotation. Mark what needs to change in one pass, then apply the change in a second pass. Get the "
+         "bookkeeping right and the rest is mechanical.",
+ "recognise": [
+   {"cue": "<b>spiral</b> order, 'walk the boundary and peel inward'", "note": "four shrinking boundaries, turn when you hit one"},
+   {"cue": "<b>rotate</b> the matrix / image 90°, in place", "note": "transpose, then reverse each row"},
+   {"cue": "set a whole <b>row and column</b> based on a condition found while scanning",
+    "note": "mark first, mutate second — never mutate while still reading"},
+   {"cue": "the word '<b>simulate</b>' is in the statement — follow these exact rules, step by step",
+    "note": "no shortcut; implement the rules carefully and test the edges"},
+ ],
+ "notwhen": [
+   "The question is really about reachability or shortest distance on the grid → that's <b>grid traversal (BFS/DFS)</b>, not simulation.",
+   "You're counting PATHS or costs with a choice at each cell → that's grid DP.",
+   "The transformation has an exploitable shortcut (pure index arithmetic solves it) → simulating it step by step is correct but slower than it needs to be.",
+ ],
+ "pick": [
+   {"if": "walk the matrix in a spiral or peel it layer by layer", "then": "sim-spiral"},
+   {"if": "rotate or transpose the matrix in place", "then": "sim-rotate"},
+   {"if": "mark cells while scanning, then apply the change in a second pass", "then": "sim-marking"},
+ ],
+ "variants": [
+  {"id": "sim-spiral", "name": "Spiral / boundary traversal",
+   "when": "Walk (or fill) a matrix in spiral order, or peel it layer by layer.",
+   "tool": "four boundaries — top, bottom, left, right — each shrinks by one once its side is done",
+   "invariant": "everything outside the current [top,bottom] x [left,right] box has already been visited exactly once",
+   "cx": "O(rows · cols)",
+   "code": """def spiral_order(g):
+    out = []
+    top, bot, left, right = 0, len(g) - 1, 0, len(g[0]) - 1
+    while top <= bot and left <= right:
+        out += [g[top][c] for c in range(left, right + 1)]; top += 1
+        out += [g[r][right] for r in range(top, bot + 1)]; right -= 1
+        if top <= bot:
+            out += [g[bot][c] for c in range(right, left - 1, -1)]; bot -= 1
+        if left <= right:
+            out += [g[r][left] for r in range(bot, top - 1, -1)]; left += 1
+    return out""",
+   "asks": [
+     "spiral matrix (read it out) / spiral matrix II (generate, fill with 1..n²)",
+     "diagonal traverse",
+     "print or walk a matrix in a specific boundary order",
+   ],
+   "examples": [
+     {"n": "Spiral Matrix", "s": "LC 54"},
+     {"n": "Spiral Matrix II", "s": "LC 59"},
+     {"n": "Diagonal Traverse", "s": "LC 498"},
+   ],
+   "traps": [
+     "Re-check <code>top &lt;= bot</code> and <code>left &lt;= right</code> before the bottom row and left column, or a single row/column gets walked twice.",
+     "A non-square matrix needs rows and columns tracked separately — don't assume they're equal.",
+   ]},
+
+  {"id": "sim-rotate", "name": "Rotate / transpose in place",
+   "when": "Rotate a square matrix 90° (or 180°), in place, with O(1) extra space.",
+   "tool": "transpose (swap a[i][j] with a[j][i]), then reverse each row — two simple passes",
+   "invariant": "after the transpose, a[i][j] holds what belongs at the mirrored position; reversing each row finishes the rotation",
+   "cx": "O(n²) time, O(1) extra space",
+   "code": """def rotate_90(a):
+    n = len(a)
+    for i in range(n):                   # transpose: upper triangle only
+        for j in range(i + 1, n):
+            a[i][j], a[j][i] = a[j][i], a[i][j]
+    for row in a:                        # then mirror each row left-right
+        row.reverse()""",
+   "asks": [
+     "rotate image 90 degrees, in place",
+     "rotate a 1-D array by k — the same reverse-reverse-reverse trick, three reversals instead of two",
+     "game of life — apply every update 'simultaneously' using in-place encoded state",
+   ],
+   "examples": [
+     {"n": "Rotate Image", "s": "LC 48"},
+     {"n": "Rotate Array", "s": "LC 189"},
+     {"n": "Game of Life", "s": "LC 289"},
+   ],
+   "traps": [
+     "Transpose only the upper triangle (<code>j in range(i+1, n)</code>) — transposing the whole matrix undoes itself.",
+     "180° rotation is just two row/column reversals with no transpose at all — don't over-complicate it.",
+     "Game of Life needs every cell's OLD state while writing the NEW one — encode both in one int instead of allocating a second grid.",
+   ]},
+
+  {"id": "sim-marking", "name": "Mark first, mutate second",
+   "when": "A condition found anywhere in the grid must change a whole row and column — but mutating while you scan corrupts the condition you're still checking.",
+   "tool": "two passes — first RECORD which rows/cols qualify, then apply the mutation",
+   "invariant": "the recording pass never writes a value that the still-running condition check could misread",
+   "cx": "O(rows · cols) time; O(1) extra space by reusing the matrix's own first row/column as markers",
+   "code": """def set_zeroes(m):
+    R, C = len(m), len(m[0])
+    first_row = any(m[0][c] == 0 for c in range(C))
+    first_col = any(m[r][0] == 0 for r in range(R))
+    for r in range(1, R):                # row 0 / col 0 double as the markers
+        for c in range(1, C):
+            if m[r][c] == 0:
+                m[r][0] = m[0][c] = 0
+    for r in range(1, R):
+        for c in range(1, C):
+            if m[r][0] == 0 or m[0][c] == 0:
+                m[r][c] = 0
+    if first_row: m[0] = [0] * C
+    if first_col:
+        for r in range(R): m[r][0] = 0""",
+   "asks": [
+     "set matrix zeroes, with the O(1) extra space constraint",
+     "any grid problem where mutating a cell in place would change what a LATER read of it sees",
+   ],
+   "examples": [
+     {"n": "Set Matrix Zeroes", "s": "LC 73"},
+   ],
+   "traps": [
+     "Check whether row 0 / column 0 themselves need zeroing BEFORE you start reusing them as markers, or that information is lost.",
+     "Never zero a cell during the first (scanning) pass — only record it, or you cascade false positives into later reads.",
    ]},
  ]},
 ]

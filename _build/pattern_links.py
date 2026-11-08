@@ -91,6 +91,30 @@ PLATFORM = {
    "cc": "https://www.codechef.com/practice/bit-manipulation",
    "ib": "https://www.interviewbit.com/courses/programming/bit-manipulation/",
  },
+ "string-match": {
+   "cf": "strings",
+   "he": "https://www.hackerearth.com/practice/algorithms/string-algorithm/basics-of-string-manipulation/practice-problems/",
+   "hr": "https://www.hackerrank.com/domains/algorithms?filters%5Bsubdomains%5D%5B%5D=string-algorithms",
+   "gfg": "https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/",
+   "cc": "https://www.codechef.com/practice/strings",
+   "ib": "https://www.interviewbit.com/courses/programming/topics/strings/",
+ },
+ "segment-tree": {
+   "cf": "data structures",
+   "he": "https://www.hackerearth.com/practice/data-structures/advanced-data-structures/segment-trees/practice-problems/",
+   "hr": "https://www.hackerrank.com/domains/data-structures",
+   "gfg": "https://www.geeksforgeeks.org/segment-tree-data-structure/",
+   "cc": "https://www.codechef.com/practice",
+   "ib": "https://www.interviewbit.com/courses/programming/trees/",
+ },
+ "simulation": {
+   "cf": "implementation",
+   "he": "https://www.hackerearth.com/practice/data-structures/arrays/multi-dimensional/practice-problems/",
+   "hr": "https://www.hackerrank.com/interview/interview-preparation-kit/arrays/",
+   "gfg": "https://www.geeksforgeeks.org/print-a-given-matrix-in-spiral-form/",
+   "cc": "https://www.codechef.com/practice/arrays",
+   "ib": "https://www.interviewbit.com/courses/programming/arrays/",
+ },
 }
 
 EXTRA = {
@@ -518,5 +542,35 @@ EXTRA.update({
    {"n": "Activity selection problem", "p": "GfG", "u": "https://www.geeksforgeeks.org/activity-selection-problem-greedy-algo-1/"},
    {"n": "Job sequencing problem", "p": "GfG", "u": "https://www.geeksforgeeks.org/job-sequencing-problem/"},
    {"n": "Greedy Florist", "p": "HackerRank", "u": "https://www.hackerrank.com/challenges/greedy-florist/problem"},
+ ],
+})
+
+EXTRA.update({
+ "sm-kmp": [
+   {"n": "KMP algorithm for pattern searching", "p": "GfG", "u": "https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/"},
+ ],
+ "sm-rabinkarp": [
+   {"n": "Rabin-Karp algorithm for pattern searching", "p": "GfG", "u": "https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/"},
+ ],
+ "sm-z": [
+   {"n": "Z algorithm (linear time pattern searching)", "p": "GfG", "u": "https://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/"},
+ ],
+ "st-range": [
+   {"n": "Segment tree — range minimum query", "p": "GfG", "u": "https://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/"},
+ ],
+ "st-fenwick": [
+   {"n": "Binary Indexed Tree (Fenwick tree)", "p": "GfG", "u": "https://www.geeksforgeeks.org/binary-indexed-tree-or-fenwick-tree-2/"},
+ ],
+ "st-lazy": [
+   {"n": "Lazy propagation in segment tree", "p": "GfG", "u": "https://www.geeksforgeeks.org/lazy-propagation-in-segment-tree/"},
+ ],
+ "sim-spiral": [
+   {"n": "Print a matrix in spiral form", "p": "GfG", "u": "https://www.geeksforgeeks.org/print-a-given-matrix-in-spiral-form/"},
+ ],
+ "sim-rotate": [
+   {"n": "Rotate a matrix by 90 degrees in place", "p": "GfG", "u": "https://www.geeksforgeeks.org/rotate-a-matrix-by-90-degree-in-clockwise-direction-without-using-any-extra-space/"},
+ ],
+ "sim-marking": [
+   {"n": "Set matrix zeroes", "p": "GfG", "u": "https://www.geeksforgeeks.org/a-boolean-matrix-question/"},
  ],
 })

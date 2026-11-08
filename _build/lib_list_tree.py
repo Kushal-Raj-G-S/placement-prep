@@ -6,23 +6,23 @@ PATTERNS = [
 # --------------------------------------------------------------- linked lists ------
 {
  "id": "linked-list", "group": "list", "name": "Linked list surgery",
- "buys": "O(n) extra space for an array copy → O(1), by rewiring pointers in place",
+ "buys": "Copying to an array uses O(n) extra space. Rewiring pointers in place does it with O(1).",
  "lives": "singly linked list (and doubly, for LRU-style caches)",
- "core": "You cannot index a linked list, so every classic trick manufactures the index you need out of "
-         "pointers: two pointers at different speeds find the middle and the cycle, a pointer k ahead finds "
-         "the k-th from the end, and a dummy head removes every 'what if it is the first node' branch. "
-         "Draw three nodes on paper before you write any of it.",
+ "core": "You can't index into a linked list, so every classic trick builds the index you need out of "
+         "pointers instead: two pointers moving at different speeds find the middle and the cycle, a pointer "
+         "sent k steps ahead finds the k-th node from the end, and a dummy head removes every 'what if it's "
+         "the first node' special case. Draw three nodes on paper before you write any of this.",
  "recognise": [
    {"cue": "<b>cycle</b>, 'does it loop', 'where does the loop start'", "note": "fast and slow pointers"},
-   {"cue": "<b>middle</b> node, or the <b>k-th from the end</b>", "note": "you cannot index, so stagger two pointers"},
+   {"cue": "<b>middle</b> node, or the <b>k-th from the end</b>", "note": "can't index, so stagger two pointers instead"},
    {"cue": "<b>reverse</b> the list, part of it, or in groups of k", "note": "the three-pointer rewire"},
    {"cue": "<b>delete / insert</b> and the head itself might change", "note": "dummy head"},
    {"cue": "<b>merge</b> two or k sorted lists", "note": "dummy head + one pointer per list"},
  ],
  "notwhen": [
-   "You may use O(n) memory and the problem is really about values → copy to an array and solve it there; "
-   "say so out loud in an interview, then do the in-place version.",
-   "You need random access or sorting by index → wrong data structure for the job.",
+   "You're allowed O(n) memory and the problem is really about the values → copy to an array and solve it "
+   "there. Say so out loud in an interview, then show the in-place version too.",
+   "You need random access or sorting by index → this is the wrong data structure for that.",
  ],
  "pick": [
    {"if": "find a position you cannot index (middle, k-th from end, cycle)", "then": "ll-fastslow"},
@@ -185,12 +185,12 @@ def has_cycle(head):
 # --------------------------------------------------------------------- trees -------
 {
  "id": "tree-dfs", "group": "tree", "name": "Tree DFS (recursion with a shape)",
- "buys": "every node visited exactly once — O(n), with the recursion stack doing the bookkeeping",
+ "buys": "Visits every node exactly once — O(n) — and lets the recursion stack do the bookkeeping for you.",
  "lives": "binary tree, n-ary tree, BST",
  "core": "Almost every tree question is one of two shapes. Either information flows UP — each node asks its "
-         "children for a value and combines them (height, sum, diameter) — or information flows DOWN, the "
-         "parent handing the child context (the path so far, a valid range). Decide which direction you need "
-         "before writing a line, because it decides your function's signature.",
+         "children for a value and combines them (height, sum, diameter) — or information flows DOWN, with "
+         "the parent passing context to the child (the path so far, a valid range). Decide which direction "
+         "you need before writing a line, since it decides your function's signature.",
  "recognise": [
    {"cue": "<b>height, depth, diameter, balanced, sum</b> of the tree", "note": "value flows UP — post-order"},
    {"cue": "<b>path from the root</b>, 'path sum equals target', 'good nodes'", "note": "value flows DOWN"},
@@ -199,9 +199,9 @@ def has_cycle(head):
    {"cue": "'the best path <b>through</b> any node'", "note": "return one branch upward, record both branches locally"},
  ],
  "notwhen": [
-   "You need everything at depth d together → that is <b>BFS</b>, not DFS.",
-   "The structure has cycles → it is a graph; you need a visited set.",
-   "Depth can reach 10⁵ → Python's recursion limit will blow; convert to an explicit stack.",
+   "You need everything at depth d together → that's <b>BFS</b>, not DFS.",
+   "The structure has cycles → it's a graph, so you need a visited set.",
+   "Depth can reach 10⁵ → Python's recursion limit will blow up; convert to an explicit stack.",
  ],
  "pick": [
    {"if": "the answer is built from the children's answers", "then": "td-up"},
@@ -367,11 +367,11 @@ def gain(node):
 
 {
  "id": "tree-bfs", "group": "tree", "name": "Tree BFS (level order)",
- "buys": "the shallowest answer first — and whole levels as units, which DFS cannot give you",
+ "buys": "Finds the shallowest answer first, and gives you whole levels as units — something DFS can't do.",
  "lives": "binary tree, n-ary tree",
- "core": "A queue, and the one move that matters: before each round, record how many nodes are in the queue. "
-         "That count IS the current level, so you process exactly one level per iteration. Everything "
-         "'per level' falls out of that single line.",
+ "core": "Just a queue, and one move that matters: before each round, record how many nodes are currently "
+         "in the queue. That count IS the current level, so each iteration processes exactly one level. "
+         "Everything 'per level' falls out of that single line.",
  "recognise": [
    {"cue": "<b>level order</b>, 'level by level', 'each row'", "note": "the definition"},
    {"cue": "<b>right side view</b>, largest value per level, average per level", "note": "last / best of each level"},
@@ -381,7 +381,7 @@ def gain(node):
  ],
  "notwhen": [
    "The answer is about a root-to-leaf path or a subtree → DFS carries that context naturally.",
-   "You need the deepest thing — DFS is usually simpler there.",
+   "You need the deepest thing → DFS is usually simpler there.",
  ],
  "pick": [
    {"if": "anything phrased per level", "then": "tb-levels"},
@@ -435,11 +435,11 @@ def level_order(root):
 
 {
  "id": "trie", "group": "tree", "name": "Trie (prefix tree)",
- "buys": "O(words · L) scanning everything → O(L) per query, independent of how many words you stored",
+ "buys": "Scanning every word costs O(words · length). A trie answers each query in O(length), no matter how many words you stored.",
  "lives": "strings sharing prefixes; also bits, for XOR problems",
- "core": "One node per character position, children keyed by the next character. Walking down spells a word, "
-         "so 'does any stored word start with this prefix' costs the length of the prefix and nothing else. "
-         "The same structure over BITS (children 0 and 1) answers maximum-XOR questions.",
+ "core": "One node per character position, with children keyed by the next character. Walking down the "
+         "tree spells out a word, so 'does any stored word start with this prefix' only costs the length "
+         "of the prefix. The same structure built over BITS (children 0 and 1) answers maximum-XOR questions.",
  "recognise": [
    {"cue": "<b>prefix</b>, autocomplete, 'words starting with'", "note": "the definition"},
    {"cue": "<b>a dictionary of many words</b> queried repeatedly", "note": "build once, query cheaply"},
@@ -447,8 +447,8 @@ def level_order(root):
    {"cue": "<b>maximum XOR</b> pair, 'two numbers with the biggest xor'", "note": "binary trie, greedy from the top bit"},
  ],
  "notwhen": [
-   "There is one word, or a handful → a set or direct comparison is simpler.",
-   "You need suffixes or substring search → that is a suffix structure, or KMP / Z-algorithm.",
+   "There's only one word, or a handful → a set or direct comparison is simpler.",
+   "You need suffixes or substring search → that's a suffix structure, or KMP / Z-algorithm.",
  ],
  "pick": [
    {"if": "insert, search, and prefix queries", "then": "tr-basic"},
