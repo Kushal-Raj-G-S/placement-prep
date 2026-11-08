@@ -1,4 +1,10 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}.pill.th{background:#10283a;color:#6fd3ff;border:1px solid #1f5f86}.pill.th.ok{background:#0e2c1d;color:#4be08b;border-color:#1f6b45}
+.th-head{display:flex;flex-direction:column;gap:2px;margin:6px 0 4px;padding:9px 12px;background:#0d2230;border:1px solid #1f5f86;border-radius:8px;font-size:13px;color:#cfe6f5}
+.th-head.ok{background:#0b2a1b;border-color:#1f6b45}.th-head b{color:#6fd3ff}.th-head.ok b{color:#4be08b}.th-head span{color:#8fb3c8;font-size:12.5px}
+.th-note{margin:6px 0 2px;padding:6px 12px;font-size:12px;color:#9aa9b8;border-left:2px solid #33475b}
+.ex-head{margin:14px 0 4px;padding:6px 2px;font-family:ui-monospace,Consolas,monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#6b7d92;border-top:1px solid #1e2a3a}
+.vtag{font-size:11px;color:#8fb3c8;background:#0d2230;border:1px solid #1f5f86;border-radius:5px;padding:1px 7px;margin-left:8px;white-space:nowrap}
+</style></head><body>
 <title>Twenty Weeks to AC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1322,17 +1328,26 @@
                 {
                   "t": "Two Sum",
                   "u": "https://leetcode.com/problems/two-sum/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Value → index map",
+                  "to": 3
                 },
                 {
                   "t": "Valid Anagram",
                   "u": "https://leetcode.com/problems/valid-anagram/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Frequency map",
+                  "to": 1
                 },
                 {
                   "t": "Contains Duplicate",
                   "u": "https://leetcode.com/problems/contains-duplicate/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Seen-before set",
+                  "to": 0
                 },
                 {
                   "t": "Ransom Note",
@@ -1342,12 +1357,18 @@
                 {
                   "t": "Isomorphic Strings",
                   "u": "https://leetcode.com/problems/isomorphic-strings/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Value → index map",
+                  "to": 4
                 },
                 {
                   "t": "Group Anagrams",
                   "u": "https://leetcode.com/problems/group-anagrams/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Frequency map",
+                  "to": 2
                 },
                 {
                   "t": "Top K Frequent Elements",
@@ -1373,7 +1394,10 @@
                   "t": "CodeChef: Chef and Dolls  (rated 1300, solved by 124,504)",
                   "u": "https://www.codechef.com/problems/MISSP",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 8
                 },
                 {
                   "t": "CodeChef: Cleaning Up  (rated 1309, solved by 32,934)",
@@ -1385,7 +1409,10 @@
                   "t": "GeeksforGeeks: Longest Subarray with Sum K  (Medium, accuracy 24% - asked at Amazon)",
                   "u": "https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 6
                 },
                 {
                   "t": "GeeksforGeeks: Largest Subarray with 0 Sum  (Medium, accuracy 41% - asked at Amazon, Microsoft, MakeMyTrip)",
@@ -1403,7 +1430,10 @@
                   "t": "HackerEarth: Superior Substring  (Medium, 79% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/superior-substring-dec-circuits-e51b3c27/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 7
                 },
                 {
                   "t": "HackerEarth: Pairs of elements  (Medium, 86% success)",
@@ -1452,6 +1482,14 @@
                   "u": "https://www.hackerearth.com/practice/data-structures/hash-tables/basics-of-hash-tables/practice-problems/",
                   "d": "",
                   "x": "other"
+                },
+                {
+                  "t": "Group Shifted Strings  (library: Group by a derived key)",
+                  "u": "https://leetcode.com/problems/group-shifted-strings/",
+                  "d": "M",
+                  "th": 1,
+                  "v": "Group by a derived key",
+                  "to": 5
                 }
               ]
             },
@@ -1464,7 +1502,10 @@
                 {
                   "t": "Two Sum II - Input Array Is Sorted",
                   "u": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Opposite ends, closing in",
+                  "to": 0
                 },
                 {
                   "t": "Valid Palindrome II",
@@ -1474,7 +1515,10 @@
                 {
                   "t": "3Sum",
                   "u": "https://leetcode.com/problems/3sum/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Opposite ends, closing in",
+                  "to": 1
                 },
                 {
                   "t": "3Sum Closest",
@@ -1494,12 +1538,18 @@
                 {
                   "t": "Sort Colors",
                   "u": "https://leetcode.com/problems/sort-colors/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Three-way partition (Dutch flag)",
+                  "to": 5
                 },
                 {
                   "t": "Remove Duplicates from Sorted Array II",
                   "u": "https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Same direction — read fast, write slow",
+                  "to": 2
                 },
                 {
                   "t": "Boats to Save People",
@@ -1515,7 +1565,10 @@
                   "t": "CodeChef: Chef and Rainbow Array  (rated 1467, solved by 38,566)",
                   "u": "https://www.codechef.com/problems/RAINBOWA",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 7
                 },
                 {
                   "t": "CodeChef: Palindrome by Splitting  (rated 1540, solved by 25,519)",
@@ -1527,7 +1580,10 @@
                   "t": "GeeksforGeeks: Union of 2 Sorted Arrays  (Medium, accuracy 31% - asked at Amazon)",
                   "u": "https://www.geeksforgeeks.org/problems/union-of-two-sorted-arrays-1587115621/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 6
                 },
                 {
                   "t": "GeeksforGeeks: Remove Cycle in Linked List  (Medium, accuracy 27% - asked at VMWare, Morgan Stanley, Amazon)",
@@ -1570,6 +1626,22 @@
                   "u": "https://www.hackerearth.com/practice/data-structures/arrays/1-d/practice-problems/",
                   "d": "",
                   "x": "other"
+                },
+                {
+                  "t": "Remove Duplicates from Sorted Array  (library: Same direction — read fast, write slow)",
+                  "u": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
+                  "d": "E",
+                  "th": 1,
+                  "v": "Same direction — read fast, write slow",
+                  "to": 3
+                },
+                {
+                  "t": "Merge Two Sorted Lists  (library: One pointer per sequence)",
+                  "u": "https://leetcode.com/problems/merge-two-sorted-lists/",
+                  "d": "E",
+                  "th": 1,
+                  "v": "One pointer per sequence",
+                  "to": 4
                 }
               ]
             },
@@ -1582,7 +1654,10 @@
                 {
                   "t": "Maximum Average Subarray I",
                   "u": "https://leetcode.com/problems/maximum-average-subarray-i/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Fixed size k",
+                  "to": 0
                 },
                 {
                   "t": "Maximum Points You Can Obtain from Cards",
@@ -1592,12 +1667,18 @@
                 {
                   "t": "Longest Substring Without Repeating Characters",
                   "u": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Variable size — longest valid",
+                  "to": 1
                 },
                 {
                   "t": "Longest Repeating Character Replacement",
                   "u": "https://leetcode.com/problems/longest-repeating-character-replacement/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Variable size — longest valid",
+                  "to": 2
                 },
                 {
                   "t": "Permutation in String",
@@ -1607,7 +1688,10 @@
                 {
                   "t": "Minimum Size Subarray Sum",
                   "u": "https://leetcode.com/problems/minimum-size-subarray-sum/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Variable size — shortest valid",
+                  "to": 3
                 },
                 {
                   "t": "Max Consecutive Ones III",
@@ -1658,7 +1742,10 @@
                   "t": "GeeksforGeeks: Indexes of Subarray Sum  (Medium, accuracy 16% - asked at Amazon, Facebook, Google)",
                   "u": "https://www.geeksforgeeks.org/problems/subarray-with-given-sum-1587115621/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 4
                 },
                 {
                   "t": "GeeksforGeeks: K Sized Subarray Maximum  (Medium, accuracy 26% - asked at Flipkart, Amazon, Microsoft)",
@@ -1696,7 +1783,8 @@
                   "d": "",
                   "x": "other"
                 }
-              ]
+              ],
+              "thNote": "Left out of the threshold on purpose (rare, or very hard for a first pass): Exactly K — atMost(K) − atMost(K−1), Monotonic deque inside the window. They are in the extra practice below."
             },
             {
               "id": "a4",
@@ -1723,17 +1811,26 @@
                 {
                   "t": "Range Sum Query - Immutable",
                   "u": "https://leetcode.com/problems/range-sum-query-immutable/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Plain prefix array (range sums)",
+                  "to": 0
                 },
                 {
                   "t": "Product of Array Except Self",
                   "u": "https://leetcode.com/problems/product-of-array-except-self/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Prefix AND suffix pass",
+                  "to": 5
                 },
                 {
                   "t": "Subarray Sum Equals K",
                   "u": "https://leetcode.com/problems/subarray-sum-equals-k/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Prefix + hashmap — COUNT the subarrays",
+                  "to": 1
                 },
                 {
                   "t": "Continuous Subarray Sum",
@@ -1743,12 +1840,18 @@
                 {
                   "t": "Subarray Sums Divisible by K",
                   "u": "https://leetcode.com/problems/subarray-sums-divisible-by-k/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Prefix + hashmap — COUNT the subarrays",
+                  "to": 2
                 },
                 {
                   "t": "Contiguous Array",
                   "u": "https://leetcode.com/problems/contiguous-array/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Prefix + hashmap — LONGEST / shortest subarray",
+                  "to": 3
                 },
                 {
                   "t": "Range Sum Query 2D - Immutable",
@@ -1759,7 +1862,10 @@
                   "t": "CodeChef: Parallel Processing  (rated 1425, solved by 21,877)",
                   "u": "https://www.codechef.com/problems/PLPROCESS",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 7
                 },
                 {
                   "t": "CodeChef: Copy and Paste  (rated 1745, solved by 13,034)",
@@ -1771,7 +1877,10 @@
                   "t": "GeeksforGeeks: Minimize Max Min Diff with Subarray Removal  (Medium, accuracy 54%)",
                   "u": "https://www.geeksforgeeks.org/problems/minimize-the-difference/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 6
                 },
                 {
                   "t": "GeeksforGeeks: Split Array in Three Equal Sum Subarrays  (Medium, accuracy 52%)",
@@ -1814,8 +1923,17 @@
                   "u": "https://www.hackerearth.com/practice/data-structures/arrays/1-d/practice-problems/",
                   "d": "",
                   "x": "other"
+                },
+                {
+                  "t": "Corporate Flight Bookings  (library: Difference array (range updates))",
+                  "u": "https://leetcode.com/problems/corporate-flight-bookings/",
+                  "d": "M",
+                  "th": 1,
+                  "v": "Difference array (range updates)",
+                  "to": 4
                 }
-              ]
+              ],
+              "thNote": "Left out of the threshold on purpose (rare, or very hard for a first pass): 2-D prefix sum (integral image). They are in the extra practice below."
             },
             {
               "id": "a5",
@@ -1826,22 +1944,34 @@
                 {
                   "t": "Merge Intervals",
                   "u": "https://leetcode.com/problems/merge-intervals/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Merge overlapping intervals",
+                  "to": 0
                 },
                 {
                   "t": "Insert Interval",
                   "u": "https://leetcode.com/problems/insert-interval/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Insert into a disjoint sorted list",
+                  "to": 2
                 },
                 {
                   "t": "Interval List Intersections",
                   "u": "https://leetcode.com/problems/interval-list-intersections/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Merge overlapping intervals",
+                  "to": 1
                 },
                 {
                   "t": "Non-overlapping Intervals",
                   "u": "https://leetcode.com/problems/non-overlapping-intervals/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Sort by END — maximum non-overlapping",
+                  "to": 3
                 },
                 {
                   "t": "Minimum Number of Arrows to Burst Balloons",
@@ -1851,7 +1981,10 @@
                 {
                   "t": "Car Pooling",
                   "u": "https://leetcode.com/problems/car-pooling/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Sweep line (+1 / −1 events)",
+                  "to": 4
                 },
                 {
                   "t": "Meeting Rooms III style — Task Scheduler",
@@ -1861,7 +1994,10 @@
                 {
                   "t": "Largest Number",
                   "u": "https://leetcode.com/problems/largest-number/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Sort by the right key, then one pass",
+                  "to": 5
                 },
                 {
                   "t": "Sort Characters By Frequency",
@@ -1882,7 +2018,10 @@
                   "t": "CodeChef: The Wave  (rated 1518, solved by 33,350)",
                   "u": "https://www.codechef.com/problems/WAV2",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 9
                 },
                 {
                   "t": "CodeChef: Chef and easy problem  (rated 1408, solved by 25,729)",
@@ -1894,7 +2033,10 @@
                   "t": "GeeksforGeeks: Sort 0s, 1s and 2s  (Medium, accuracy 50% - asked at Paytm, Flipkart, Morgan Stanley)",
                   "u": "https://www.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s4231/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 6
                 },
                 {
                   "t": "GeeksforGeeks: Kth Smallest  (Medium, accuracy 35% - asked at VMWare, Accolite, Amazon)",
@@ -1912,7 +2054,10 @@
                   "t": "HackerEarth: Noor and his pond  (Medium, 82% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/noor-and-his-pond-760eabe0/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 8
                 },
                 {
                   "t": "HackerEarth: Select the subset  (Medium, 74% success)",
@@ -1924,7 +2069,10 @@
                   "t": "HackerRank: Fraudulent Activity Notifications  (Medium, solved by 67,636)",
                   "u": "https://www.hackerrank.com/challenges/fraudulent-activity-notifications/problem",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerRank)",
+                  "to": 7
                 },
                 {
                   "t": "HackerRank: Lily's Homework  (Medium, solved by 30,372)",
@@ -1998,7 +2146,10 @@
                 {
                   "t": "Binary Search",
                   "u": "https://leetcode.com/problems/binary-search/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Classic — find the value",
+                  "to": 0
                 },
                 {
                   "t": "Search Insert Position",
@@ -2013,12 +2164,18 @@
                 {
                   "t": "Find First and Last Position of Element in Sorted Array",
                   "u": "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Lower / upper bound (the boundary)",
+                  "to": 2
                 },
                 {
                   "t": "Search a 2D Matrix",
                   "u": "https://leetcode.com/problems/search-a-2d-matrix/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Classic — find the value",
+                  "to": 1
                 },
                 {
                   "t": "Find Peak Element",
@@ -2033,7 +2190,10 @@
                 {
                   "t": "Search in Rotated Sorted Array",
                   "u": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Rotated / mountain — locally ordered",
+                  "to": 5
                 },
                 {
                   "t": "Search in Rotated Sorted Array II",
@@ -2043,12 +2203,18 @@
                 {
                   "t": "Koko Eating Bananas",
                   "u": "https://leetcode.com/problems/koko-eating-bananas/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Binary search ON THE ANSWER",
+                  "to": 3
                 },
                 {
                   "t": "Capacity To Ship Packages Within D Days",
                   "u": "https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Binary search ON THE ANSWER",
+                  "to": 4
                 },
                 {
                   "t": "Minimum Number of Days to Make m Bouquets",
@@ -2074,7 +2240,10 @@
                   "t": "CodeChef: Chef Product  (rated 1658, solved by 9,107)",
                   "u": "https://www.codechef.com/problems/CHEFPRODUCT",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 9
                 },
                 {
                   "t": "CodeChef: The Prize Ladder  (rated 1424, solved by 7,982)",
@@ -2086,7 +2255,10 @@
                   "t": "GeeksforGeeks: Peak in Array  (Medium, accuracy 38% - asked at Accolite, Amazon, Visa)",
                   "u": "https://www.geeksforgeeks.org/problems/peak-element/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 6
                 },
                 {
                   "t": "GeeksforGeeks: K-th of Two Sorted Arrays  (Medium, accuracy 37% - asked at Flipkart, Microsoft, NPCI)",
@@ -2104,7 +2276,10 @@
                   "t": "HackerEarth: Text Wrap  (Medium, 88% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/minimum-width-3ae6ed73/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 8
                 },
                 {
                   "t": "HackerEarth: Turn Off Lights  (Medium, 85% success)",
@@ -2116,7 +2291,10 @@
                   "t": "HackerRank: Pairs  (Medium, solved by 137,897)",
                   "u": "https://www.hackerrank.com/challenges/pairs/problem",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerRank)",
+                  "to": 7
                 },
                 {
                   "t": "HackerRank: Minimum Loss  (Medium, solved by 33,569)",
@@ -2178,7 +2356,8 @@
                   "d": "",
                   "x": "other"
                 }
-              ]
+              ],
+              "thNote": "Left out of the threshold on purpose (rare, or very hard for a first pass): Binary search the PARTITION. They are in the extra practice below."
             },
             {
               "id": "a7",
@@ -2189,7 +2368,10 @@
                 {
                   "t": "Valid Parentheses",
                   "u": "https://leetcode.com/problems/valid-parentheses/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Plain stack — matching, nesting, parsing",
+                  "to": 0
                 },
                 {
                   "t": "Remove All Adjacent Duplicates In String",
@@ -2209,12 +2391,18 @@
                 {
                   "t": "Next Greater Element II",
                   "u": "https://leetcode.com/problems/next-greater-element-ii/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Next greater / smaller element",
+                  "to": 2
                 },
                 {
                   "t": "Daily Temperatures",
                   "u": "https://leetcode.com/problems/daily-temperatures/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Next greater / smaller element",
+                  "to": 1
                 },
                 {
                   "t": "Asteroid Collision",
@@ -2224,7 +2412,10 @@
                 {
                   "t": "Remove K Digits",
                   "u": "https://leetcode.com/problems/remove-k-digits/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Monotonic stack as a greedy builder",
+                  "to": 3
                 },
                 {
                   "t": "Sum of Subarray Minimums",
@@ -2240,7 +2431,10 @@
                   "t": "CodeChef: Compilers and Parsers  (rated 1588, solved by 45,793)",
                   "u": "https://www.codechef.com/problems/COMPILER",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 6
                 },
                 {
                   "t": "CodeChef: Self-Destructing Strings  (rated 1648, solved by 23,256)",
@@ -2252,7 +2446,10 @@
                   "t": "GeeksforGeeks: Next Greater Element  (Medium, accuracy 32% - asked at Flipkart, Amazon, Microsoft)",
                   "u": "https://www.geeksforgeeks.org/problems/next-larger-element-1587115620/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 4
                 },
                 {
                   "t": "GeeksforGeeks: Get Min from Stack  (Medium, accuracy 22% - asked at Flipkart, Amazon, Microsoft)",
@@ -2270,7 +2467,10 @@
                   "t": "HackerEarth: Minimum indexes  (Medium, 89% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/yassers-conditions-6cc26a09/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 5
                 },
                 {
                   "t": "HackerEarth: Alice's library  (Medium, 72% success)",
@@ -2314,7 +2514,8 @@
                   "d": "",
                   "x": "other"
                 }
-              ]
+              ],
+              "thNote": "Left out of the threshold on purpose (rare, or very hard for a first pass): Histogram / area between bars. They are in the extra practice below."
             },
             {
               "id": "a8",
@@ -2340,12 +2541,18 @@
                 {
                   "t": "Reverse Words in a String",
                   "u": "https://leetcode.com/problems/reverse-words-in-a-string/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "core practice",
+                  "to": 4
                 },
                 {
                   "t": "String to Integer (atoi)",
                   "u": "https://leetcode.com/problems/string-to-integer-atoi/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "core practice",
+                  "to": 5
                 },
                 {
                   "t": "Integer to Roman",
@@ -2376,7 +2583,10 @@
                   "t": "CodeChef: Another Good String   (rated 1314, solved by 22,461)",
                   "u": "https://www.codechef.com/problems/ADVITIYA4",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 3
                 },
                 {
                   "t": "CodeChef: Minimum distance between 1s  (rated 1335, solved by 20,760)",
@@ -2388,7 +2598,10 @@
                   "t": "GeeksforGeeks: String Rotation Check  (Medium, accuracy 43% - asked at Oracle, Adobe, NPCI)",
                   "u": "https://www.geeksforgeeks.org/problems/check-if-strings-are-rotations-of-each-other-or-not-1587115620/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 0
                 },
                 {
                   "t": "GeeksforGeeks: Implement Atoi  (Medium, accuracy 32% - asked at Morgan Stanley, Amazon, Microsoft)",
@@ -2406,7 +2619,10 @@
                   "t": "HackerEarth: A beauty factor  (Medium, 93% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/beauty-factor-bab8f334/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 2
                 },
                 {
                   "t": "HackerEarth: Replace the strings  (Medium, 92% success)",
@@ -2418,7 +2634,10 @@
                   "t": "HackerRank: Extra Long Factorials  (Medium, solved by 345,940)",
                   "u": "https://www.hackerrank.com/challenges/extra-long-factorials/problem",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerRank)",
+                  "to": 1
                 },
                 {
                   "t": "HackerRank: Forming a Magic Square  (Medium, solved by 183,164)",
@@ -2503,7 +2722,10 @@
                 {
                   "t": "Maximum Depth of Binary Tree",
                   "u": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Post-order — return a value up",
+                  "to": 0
                 },
                 {
                   "t": "Invert Binary Tree",
@@ -2523,12 +2745,18 @@
                 {
                   "t": "Diameter of Binary Tree",
                   "u": "https://leetcode.com/problems/diameter-of-binary-tree/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Post-order — return a value up",
+                  "to": 1
                 },
                 {
                   "t": "Binary Tree Level Order Traversal",
                   "u": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Queue, one level per round",
+                  "to": 6
                 },
                 {
                   "t": "Binary Tree Zigzag Level Order Traversal",
@@ -2543,7 +2771,10 @@
                 {
                   "t": "Path Sum II",
                   "u": "https://leetcode.com/problems/path-sum-ii/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Top-down — carry context into the children",
+                  "to": 2
                 },
                 {
                   "t": "Path Sum III",
@@ -2553,12 +2784,18 @@
                 {
                   "t": "Lowest Common Ancestor of a Binary Tree",
                   "u": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Lowest common ancestor",
+                  "to": 5
                 },
                 {
                   "t": "Validate Binary Search Tree",
                   "u": "https://leetcode.com/problems/validate-binary-search-tree/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "BST — in-order is sorted",
+                  "to": 4
                 },
                 {
                   "t": "Kth Smallest Element in a BST",
@@ -2579,7 +2816,10 @@
                   "t": "CodeChef: Domination  (rated 1579, solved by 6,910)",
                   "u": "https://www.codechef.com/problems/DOM3",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 10
                 },
                 {
                   "t": "CodeChef: Johnny and the Beanstalk  (rated 1616, solved by 6,597)",
@@ -2591,7 +2831,10 @@
                   "t": "GeeksforGeeks: Check for BST  (Medium, accuracy 25% - asked at VMWare, Flipkart, Accolite)",
                   "u": "https://www.geeksforgeeks.org/problems/check-for-bst/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 7
                 },
                 {
                   "t": "GeeksforGeeks: Tree Boundary Traversal  (Medium, accuracy 23% - asked at Flipkart, Morgan Stanley, Accolite)",
@@ -2609,7 +2852,10 @@
                   "t": "HackerEarth: Infinite K-tree  (Medium, 87% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/infinite-k-tree-e6841f51/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 9
                 },
                 {
                   "t": "HackerEarth: Micro's House  (Medium, 85% success)",
@@ -2621,7 +2867,10 @@
                   "t": "HackerRank: Tree: Huffman Decoding   (Medium, solved by 111,094)",
                   "u": "https://www.hackerrank.com/challenges/tree-huffman-decoding/problem",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerRank)",
+                  "to": 8
                 },
                 {
                   "t": "HackerRank: Is This a Binary Search Tree?  (Medium, solved by 85,545)",
@@ -2676,8 +2925,17 @@
                   "u": "https://www.hackerearth.com/practice/data-structures/trees/binary-search-tree/practice-problems/",
                   "d": "",
                   "x": "other"
+                },
+                {
+                  "t": "Path Sum  (library: Top-down — carry context into the children)",
+                  "u": "https://leetcode.com/problems/path-sum/",
+                  "d": "E",
+                  "th": 1,
+                  "v": "Top-down — carry context into the children",
+                  "to": 3
                 }
-              ]
+              ],
+              "thNote": "Left out of the threshold on purpose (rare, or very hard for a first pass): Insert / search / startsWith, Trie as a search pruner. They are in the extra practice below."
             },
             {
               "id": "n1",
@@ -2689,22 +2947,34 @@
                 {
                   "t": "Reverse Linked List",
                   "u": "https://leetcode.com/problems/reverse-linked-list/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Reverse by rewiring",
+                  "to": 2
                 },
                 {
                   "t": "Middle of the Linked List",
                   "u": "https://leetcode.com/problems/middle-of-the-linked-list/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Fast and slow pointers",
+                  "to": 1
                 },
                 {
                   "t": "Linked List Cycle",
                   "u": "https://leetcode.com/problems/linked-list-cycle/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Fast and slow pointers",
+                  "to": 0
                 },
                 {
                   "t": "Merge Two Sorted Lists",
                   "u": "https://leetcode.com/problems/merge-two-sorted-lists/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Merge sorted lists",
+                  "to": 5
                 },
                 {
                   "t": "Remove Nth Node From End of List",
@@ -2735,7 +3005,10 @@
                   "t": "GeeksforGeeks: Palindrome Linked List  (Medium, accuracy 41% - asked at Accolite, Amazon, Microsoft)",
                   "u": "https://www.geeksforgeeks.org/problems/check-if-linked-list-is-pallindrome/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 6
                 },
                 {
                   "t": "GeeksforGeeks: Add 1 to a Linked List Number  (Medium, accuracy 31% - asked at Amazon)",
@@ -2753,7 +3026,10 @@
                   "t": "HackerRank: Cycle Detection  (Medium, solved by 240,664)",
                   "u": "https://www.hackerrank.com/challenges/detect-whether-a-linked-list-contains-a-cycle/problem",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerRank)",
+                  "to": 7
                 },
                 {
                   "t": "GeeksforGeeks: LRU Cache  (Hard, accuracy 18% - asked at Paytm, Zoho, Flipkart)",
@@ -2784,6 +3060,22 @@
                   "u": "https://www.hackerearth.com/practice/data-structures/linked-list/singly-linked-list/practice-problems/",
                   "d": "",
                   "x": "other"
+                },
+                {
+                  "t": "Reverse Linked List II  (library: Reverse by rewiring)",
+                  "u": "https://leetcode.com/problems/reverse-linked-list-ii/",
+                  "d": "M",
+                  "th": 1,
+                  "v": "Reverse by rewiring",
+                  "to": 3
+                },
+                {
+                  "t": "Remove Linked List Elements  (library: Dummy head)",
+                  "u": "https://leetcode.com/problems/remove-linked-list-elements/",
+                  "d": "E",
+                  "th": 1,
+                  "v": "Dummy head",
+                  "to": 4
                 }
               ]
             },
@@ -2802,17 +3094,26 @@
                 {
                   "t": "Number of Islands",
                   "u": "https://leetcode.com/problems/number-of-islands/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Flood fill / connected components",
+                  "to": 0
                 },
                 {
                   "t": "Max Area of Island",
                   "u": "https://leetcode.com/problems/max-area-of-island/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Flood fill / connected components",
+                  "to": 1
                 },
                 {
                   "t": "Rotting Oranges",
                   "u": "https://leetcode.com/problems/rotting-oranges/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Multi-source BFS",
+                  "to": 4
                 },
                 {
                   "t": "01 Matrix",
@@ -2837,7 +3138,10 @@
                 {
                   "t": "Shortest Path in Binary Matrix",
                   "u": "https://leetcode.com/problems/shortest-path-in-binary-matrix/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "BFS — fewest moves from one start",
+                  "to": 2
                 },
                 {
                   "t": "Clone Graph",
@@ -2862,7 +3166,10 @@
                 {
                   "t": "Open the Lock",
                   "u": "https://leetcode.com/problems/open-the-lock/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "BFS — fewest moves from one start",
+                  "to": 3
                 },
                 {
                   "t": "Word Ladder",
@@ -2873,7 +3180,10 @@
                   "t": "CodeChef: Tic Tac Toe  (rated 1610, solved by 20,526)",
                   "u": "https://www.codechef.com/problems/TCTCTOE",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 8
                 },
                 {
                   "t": "CodeChef: Just a Graph  (rated 1659, solved by 14,038)",
@@ -2885,7 +3195,10 @@
                   "t": "GeeksforGeeks: Undirected Graph Cycle  (Medium, accuracy 30% - asked at Flipkart, Amazon, Microsoft)",
                   "u": "https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 5
                 },
                 {
                   "t": "GeeksforGeeks: Directed Graph Cycle  (Medium, accuracy 27% - asked at Flipkart, Amazon, Microsoft)",
@@ -2903,7 +3216,10 @@
                   "t": "HackerEarth: Escape from grid  (Medium, 92% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/escape-from-grid-google-ff752cb1/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 7
                 },
                 {
                   "t": "HackerEarth: Delete and Cut Game  (Medium, 72% success)",
@@ -2915,7 +3231,10 @@
                   "t": "HackerRank: Connected Cells in a Grid  (Medium, solved by 40,690)",
                   "u": "https://www.hackerrank.com/challenges/connected-cell-in-a-grid/problem",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerRank)",
+                  "to": 6
                 },
                 {
                   "t": "HackerRank: Castle on the Grid  (Medium, solved by 28,739)",
@@ -2986,7 +3305,10 @@
                 {
                   "t": "Kth Largest Element in an Array",
                   "u": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Heap of size K",
+                  "to": 0
                 },
                 {
                   "t": "Top K Frequent Words",
@@ -2996,7 +3318,10 @@
                 {
                   "t": "K Closest Points to Origin",
                   "u": "https://leetcode.com/problems/k-closest-points-to-origin/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Heap of size K",
+                  "to": 1
                 },
                 {
                   "t": "Reorganize String",
@@ -3022,7 +3347,10 @@
                   "t": "CodeChef: Positive array  (rated 1620, solved by 11,248)",
                   "u": "https://www.codechef.com/problems/CIREQ",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 6
                 },
                 {
                   "t": "CodeChef: The Catering Challenge  (rated 1500, solved by 1,797)",
@@ -3034,7 +3362,10 @@
                   "t": "GeeksforGeeks: Activity Selection  (Medium, accuracy 36% - asked at Flipkart, Morgan Stanley, Facebook)",
                   "u": "https://www.geeksforgeeks.org/problems/activity-selection-1587115620/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 4
                 },
                 {
                   "t": "GeeksforGeeks: Min Cost to Connect Ropes  (Medium, accuracy 42% - asked at Amazon, Microsoft, OYO Rooms)",
@@ -3052,7 +3383,10 @@
                   "t": "HackerEarth: Monk and the Magical Candy Bags  (Medium, 69% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/monk-and-the-magical-candy-bags/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 5
                 },
                 {
                   "t": "HackerEarth: Help..!!  (Medium, 91% success)",
@@ -3101,6 +3435,22 @@
                   "u": "https://www.hackerearth.com/practice/data-structures/trees/heapspriority-queues/practice-problems/",
                   "d": "",
                   "x": "other"
+                },
+                {
+                  "t": "Find K Pairs with Smallest Sums  (library: Merge K sorted sequences)",
+                  "u": "https://leetcode.com/problems/find-k-pairs-with-smallest-sums/",
+                  "d": "M",
+                  "th": 1,
+                  "v": "Merge K sorted sequences",
+                  "to": 2
+                },
+                {
+                  "t": "Meeting Rooms II  (library: Heap-driven greedy / simulation)",
+                  "u": "https://leetcode.com/problems/meeting-rooms-ii/",
+                  "d": "M",
+                  "th": 1,
+                  "v": "Heap-driven greedy / simulation",
+                  "to": 3
                 }
               ]
             },
@@ -3119,12 +3469,18 @@
                 {
                   "t": "Climbing Stairs",
                   "u": "https://leetcode.com/problems/climbing-stairs/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Linear take-or-skip",
+                  "to": 0
                 },
                 {
                   "t": "Min Cost Climbing Stairs",
                   "u": "https://leetcode.com/problems/min-cost-climbing-stairs/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Linear take-or-skip",
+                  "to": 1
                 },
                 {
                   "t": "House Robber",
@@ -3149,13 +3505,19 @@
                 {
                   "t": "Maximum Product Subarray",
                   "u": "https://leetcode.com/problems/maximum-product-subarray/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Kadane — best contiguous run",
+                  "to": 2
                 },
                 {
                   "t": "CodeChef: Alternating subarray prefix  (rated 1408, solved by 39,143)",
                   "u": "https://www.codechef.com/problems/ALTARAY",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 7
                 },
                 {
                   "t": "CodeChef: Fit to Play  (rated 1419, solved by 28,232)",
@@ -3167,7 +3529,10 @@
                   "t": "GeeksforGeeks: Kadane's Algorithm  (Medium, accuracy 36% - asked at Zoho, Flipkart, Morgan Stanley)",
                   "u": "https://www.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 4
                 },
                 {
                   "t": "GeeksforGeeks: Maximum Product Subarray  (Medium, accuracy 18% - asked at Morgan Stanley, Amazon, Microsoft)",
@@ -3185,7 +3550,10 @@
                   "t": "HackerEarth: Prefix GCD Maximization  (Medium, 87% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/prefix-gcd-maximization-932aa648/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 6
                 },
                 {
                   "t": "HackerEarth: Panda and Numbers  (Medium, 51% success)",
@@ -3197,7 +3565,10 @@
                   "t": "HackerRank: Bricks Game  (Medium, solved by 9,644)",
                   "u": "https://www.hackerrank.com/challenges/play-game/problem",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerRank)",
+                  "to": 5
                 },
                 {
                   "t": "HackerRank: The Indian Job  (Medium, solved by 3,471)",
@@ -3240,6 +3611,14 @@
                   "u": "https://www.hackerearth.com/practice/algorithms/dynamic-programming/introduction-to-dynamic-programming-1/practice-problems/",
                   "d": "",
                   "x": "other"
+                },
+                {
+                  "t": "Maximum Subarray  (library: Kadane — best contiguous run)",
+                  "u": "https://leetcode.com/problems/maximum-subarray/",
+                  "d": "M",
+                  "th": 1,
+                  "v": "Kadane — best contiguous run",
+                  "to": 3
                 }
               ]
             },
@@ -3253,12 +3632,18 @@
                 {
                   "t": "Partition Equal Subset Sum",
                   "u": "https://leetcode.com/problems/partition-equal-subset-sum/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "0/1 knapsack & subset sum",
+                  "to": 0
                 },
                 {
                   "t": "Target Sum",
                   "u": "https://leetcode.com/problems/target-sum/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "0/1 knapsack & subset sum",
+                  "to": 1
                 },
                 {
                   "t": "Last Stone Weight II",
@@ -3268,12 +3653,18 @@
                 {
                   "t": "Coin Change",
                   "u": "https://leetcode.com/problems/coin-change/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Unbounded knapsack (coins, cuts, steps)",
+                  "to": 2
                 },
                 {
                   "t": "Coin Change II",
                   "u": "https://leetcode.com/problems/coin-change-ii/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Unbounded knapsack (coins, cuts, steps)",
+                  "to": 3
                 },
                 {
                   "t": "Combination Sum IV",
@@ -3304,7 +3695,10 @@
                   "t": "CodeChef: Bytelandian gold coins  (rated 1620, solved by 45,315)",
                   "u": "https://www.codechef.com/problems/COINS",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 6
                 },
                 {
                   "t": "CodeChef: Shopping and Coins  (rated 1620, solved by 1,343)",
@@ -3316,7 +3710,10 @@
                   "t": "GeeksforGeeks: Count Subsets with Sum  (Medium, accuracy 20% - asked at Amazon, Microsoft, Tesco)",
                   "u": "https://www.geeksforgeeks.org/problems/perfect-sum-problem5633/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 4
                 },
                 {
                   "t": "GeeksforGeeks: 0 - 1 Knapsack Problem  (Medium, accuracy 31% - asked at Flipkart, Morgan Stanley, Amazon)",
@@ -3334,7 +3731,10 @@
                   "t": "HackerRank: Coin on the Table  (Medium, solved by 4,669)",
                   "u": "https://www.hackerrank.com/challenges/coin-on-the-table/problem",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerRank)",
+                  "to": 5
                 },
                 {
                   "t": "CodeChef: Adjacent Sums  (rated 1920, solved by 2,890)",
@@ -3371,7 +3771,10 @@
                 {
                   "t": "Assign Cookies",
                   "u": "https://leetcode.com/problems/assign-cookies/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Sort, then pair from the ends",
+                  "to": 1
                 },
                 {
                   "t": "Lemonade Change",
@@ -3391,7 +3794,10 @@
                 {
                   "t": "Jump Game",
                   "u": "https://leetcode.com/problems/jump-game/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Furthest reach",
+                  "to": 0
                 },
                 {
                   "t": "Jump Game II",
@@ -3442,7 +3848,10 @@
                   "t": "CodeChef: Maximise Function  (rated 1301, solved by 37,895)",
                   "u": "https://www.codechef.com/problems/MAXFUN",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 7
                 },
                 {
                   "t": "CodeChef: Sell All the Cars  (rated 1380, solved by 29,504)",
@@ -3454,7 +3863,10 @@
                   "t": "GeeksforGeeks: Minimum Jumps  (Medium, accuracy 11% - asked at Moonfrog Labs, Flipkart, Amazon)",
                   "u": "https://www.geeksforgeeks.org/problems/minimum-number-of-jumps-1587115620/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 4
                 },
                 {
                   "t": "GeeksforGeeks: Minimize the Heights  (Medium, accuracy 15% - asked at Microsoft, Adobe)",
@@ -3472,7 +3884,10 @@
                   "t": "HackerEarth: Equal Arrays  (Medium, 71% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/equal-arrays-b4f49bc1/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 6
                 },
                 {
                   "t": "HackerEarth: OrOasis  (Medium, 77% success)",
@@ -3484,7 +3899,10 @@
                   "t": "HackerRank: Max Min  (Medium, solved by 113,447)",
                   "u": "https://www.hackerrank.com/challenges/angry-children/problem",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerRank)",
+                  "to": 5
                 },
                 {
                   "t": "HackerRank: Greedy Florist  (Medium, solved by 105,335)",
@@ -3545,6 +3963,22 @@
                   "u": "https://www.hackerearth.com/practice/algorithms/greedy/basics-of-greedy-algorithms/practice-problems/",
                   "d": "",
                   "x": "other"
+                },
+                {
+                  "t": "Maximum Number of Events That Can Be Attended  (library: Spend the budget on the best thing now)",
+                  "u": "https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/",
+                  "d": "M",
+                  "th": 1,
+                  "v": "Spend the budget on the best thing now",
+                  "to": 2
+                },
+                {
+                  "t": "Task Scheduler  (library: Spend the budget on the best thing now)",
+                  "u": "https://leetcode.com/problems/task-scheduler/",
+                  "d": "M",
+                  "th": 1,
+                  "v": "Spend the budget on the best thing now",
+                  "to": 3
                 }
               ]
             },
@@ -3563,12 +3997,18 @@
                 {
                   "t": "Spiral Matrix",
                   "u": "https://leetcode.com/problems/spiral-matrix/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "core practice",
+                  "to": 4
                 },
                 {
                   "t": "Spiral Matrix II",
                   "u": "https://leetcode.com/problems/spiral-matrix-ii/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "core practice",
+                  "to": 5
                 },
                 {
                   "t": "Rotate Image",
@@ -3599,7 +4039,10 @@
                   "t": "CodeChef: Even Matrix  (rated 1376, solved by 25,033)",
                   "u": "https://www.codechef.com/problems/EVENM",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 3
                 },
                 {
                   "t": "CodeChef: Spoon in Matrix  (rated 1303, solved by 19,308)",
@@ -3611,7 +4054,10 @@
                   "t": "GeeksforGeeks: Row with Max 1s in Rowwise Sorted  (Medium, accuracy 33% - asked at Swiggy)",
                   "u": "https://www.geeksforgeeks.org/problems/row-with-max-1s0023/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 0
                 },
                 {
                   "t": "GeeksforGeeks: Spirally Traversing Matrix  (Medium, accuracy 35% - asked at Paytm, Flipkart, Morgan Stanley)",
@@ -3629,7 +4075,10 @@
                   "t": "HackerEarth: Turtle's Path  (Medium, 85% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/turtles-path-4/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 2
                 },
                 {
                   "t": "HackerEarth: Laser Tanks  (Medium, 90% success)",
@@ -3641,7 +4090,10 @@
                   "t": "HackerRank: Climbing the Leaderboard  (Medium, solved by 202,327)",
                   "u": "https://www.hackerrank.com/challenges/climbing-the-leaderboard/problem",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerRank)",
+                  "to": 1
                 },
                 {
                   "t": "HackerRank: Queen's Attack II  (Medium, solved by 83,182)",
@@ -3691,12 +4143,18 @@
                 {
                   "t": "Missing Number",
                   "u": "https://leetcode.com/problems/missing-number/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Cyclic sort / index-as-hash",
+                  "to": 0
                 },
                 {
                   "t": "Find All Numbers Disappeared in an Array",
                   "u": "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "Cyclic sort / index-as-hash",
+                  "to": 1
                 },
                 {
                   "t": "Set Mismatch",
@@ -3706,7 +4164,10 @@
                 {
                   "t": "Find All Duplicates in an Array",
                   "u": "https://leetcode.com/problems/find-all-duplicates-in-an-array/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Cyclic sort / index-as-hash",
+                  "to": 2
                 },
                 {
                   "t": "Find the Duplicate Number",
@@ -3729,12 +4190,18 @@
                 {
                   "t": "Number of 1 Bits",
                   "u": "https://leetcode.com/problems/number-of-1-bits/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "The bit tricks worth memorising",
+                  "to": 3
                 },
                 {
                   "t": "Counting Bits",
                   "u": "https://leetcode.com/problems/counting-bits/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "The bit tricks worth memorising",
+                  "to": 4
                 },
                 {
                   "t": "Reverse Bits",
@@ -3744,7 +4211,10 @@
                 {
                   "t": "Single Number",
                   "u": "https://leetcode.com/problems/single-number/",
-                  "d": "E"
+                  "d": "E",
+                  "th": 1,
+                  "v": "XOR cancellation",
+                  "to": 0
                 },
                 {
                   "t": "Power of Two",
@@ -3754,12 +4224,18 @@
                 {
                   "t": "Single Number II",
                   "u": "https://leetcode.com/problems/single-number-ii/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "XOR cancellation",
+                  "to": 1
                 },
                 {
                   "t": "Single Number III",
                   "u": "https://leetcode.com/problems/single-number-iii/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "XOR cancellation",
+                  "to": 2
                 },
                 {
                   "t": "Bitwise AND of Numbers Range",
@@ -3780,7 +4256,10 @@
                   "t": "CodeChef: Prime Generator  (rated 1620, solved by 43,099)",
                   "u": "https://www.codechef.com/problems/PRIME1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 8
                 },
                 {
                   "t": "CodeChef: Farmer And His Plot  (rated 1300, solved by 36,811)",
@@ -3792,7 +4271,10 @@
                   "t": "GeeksforGeeks: Count Set Bits in 1 to n  (Medium, accuracy 35%)",
                   "u": "https://www.geeksforgeeks.org/problems/count-total-set-bits-1587115620/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 5
                 },
                 {
                   "t": "GeeksforGeeks: Two Unique Among Pairs  (Medium, accuracy 36% - asked at Accolite, Amazon, Microsoft)",
@@ -3816,7 +4298,10 @@
                   "t": "HackerEarth: Hidden treasure  (Medium, 57% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/count-valid-pairs-2-da02a8f2/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 7
                 },
                 {
                   "t": "HackerEarth: Prime Query  (Medium, 74% success)",
@@ -3828,7 +4313,10 @@
                   "t": "HackerRank: Summing the N series   (Medium, solved by 46,176)",
                   "u": "https://www.hackerrank.com/challenges/summing-the-n-series/problem",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerRank)",
+                  "to": 6
                 },
                 {
                   "t": "HackerRank: Is Fibo  (Medium, solved by 35,885)",
@@ -3884,7 +4372,8 @@
                   "d": "",
                   "x": "other"
                 }
-              ]
+              ],
+              "thNote": "Left out of the threshold on purpose (rare, or very hard for a first pass): Bitmask = subset enumeration, Bitmask DP (state = which items are used). They are in the extra practice below."
             },
             {
               "id": "b1",
@@ -3895,22 +4384,34 @@
                 {
                   "t": "Subsets",
                   "u": "https://leetcode.com/problems/subsets/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Subsets & combinations",
+                  "to": 0
                 },
                 {
                   "t": "Subsets II",
                   "u": "https://leetcode.com/problems/subsets-ii/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Subsets & combinations",
+                  "to": 1
                 },
                 {
                   "t": "Permutations",
                   "u": "https://leetcode.com/problems/permutations/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Permutations",
+                  "to": 3
                 },
                 {
                   "t": "Combination Sum",
                   "u": "https://leetcode.com/problems/combination-sum/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Subsets & combinations",
+                  "to": 2
                 },
                 {
                   "t": "Letter Combinations of a Phone Number",
@@ -3936,7 +4437,10 @@
                   "t": "CodeChef: Pintu and Fruits  (rated 1313, solved by 23,880)",
                   "u": "https://www.codechef.com/problems/CHPINTU",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 7
                 },
                 {
                   "t": "CodeChef: Cache Hits  (rated 1320, solved by 16,402)",
@@ -3948,7 +4452,10 @@
                   "t": "GeeksforGeeks: Rat in Maze  (Medium, accuracy 35% - asked at Amazon, Microsoft)",
                   "u": "https://www.geeksforgeeks.org/problems/rat-in-a-maze-problem/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 5
                 },
                 {
                   "t": "GeeksforGeeks: Raise to Power of Its Own Reverse  (Medium, accuracy 20% - asked at MakeMyTrip, Walmart)",
@@ -3966,7 +4473,10 @@
                   "t": "HackerEarth: Number of divisors  (Medium, 69% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/k-excess-1-be669e5a/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 6
                 },
                 {
                   "t": "HackerEarth: A binary palindrome  (Medium, 50% success)",
@@ -4021,8 +4531,17 @@
                   "u": "https://www.hackerearth.com/practice/basic-programming/recursion/recursion-and-backtracking/practice-problems/",
                   "d": "",
                   "x": "other"
+                },
+                {
+                  "t": "Permutations II  (library: Permutations)",
+                  "u": "https://leetcode.com/problems/permutations-ii/",
+                  "d": "M",
+                  "th": 1,
+                  "v": "Permutations",
+                  "to": 4
                 }
-              ]
+              ],
+              "thNote": "Left out of the threshold on purpose (rare, or very hard for a first pass): Board / grid filling. They are in the extra practice below."
             }
           ]
         },
@@ -4046,12 +4565,18 @@
                 {
                   "t": "Course Schedule",
                   "u": "https://leetcode.com/problems/course-schedule/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Kahn's algorithm (BFS on indegree)",
+                  "to": 0
                 },
                 {
                   "t": "Course Schedule II",
                   "u": "https://leetcode.com/problems/course-schedule-ii/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Kahn's algorithm (BFS on indegree)",
+                  "to": 1
                 },
                 {
                   "t": "Find Eventual Safe States",
@@ -4066,7 +4591,10 @@
                 {
                   "t": "Network Delay Time",
                   "u": "https://leetcode.com/problems/network-delay-time/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Dijkstra (non-negative weights)",
+                  "to": 2
                 },
                 {
                   "t": "Cheapest Flights Within K Stops",
@@ -4076,7 +4604,10 @@
                 {
                   "t": "Path with Maximum Probability",
                   "u": "https://leetcode.com/problems/path-with-maximum-probability/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Dijkstra (non-negative weights)",
+                  "to": 3
                 },
                 {
                   "t": "Path With Minimum Effort",
@@ -4086,7 +4617,10 @@
                 {
                   "t": "Redundant Connection",
                   "u": "https://leetcode.com/problems/redundant-connection/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Cycle / redundancy detection",
+                  "to": 6
                 },
                 {
                   "t": "Number of Operations to Make Network Connected",
@@ -4096,7 +4630,10 @@
                 {
                   "t": "Accounts Merge",
                   "u": "https://leetcode.com/problems/accounts-merge/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "The structure itself",
+                  "to": 4
                 },
                 {
                   "t": "Most Stones Removed with Same Row or Column",
@@ -4106,12 +4643,18 @@
                 {
                   "t": "Satisfiability of Equality Equations",
                   "u": "https://leetcode.com/problems/satisfiability-of-equality-equations/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "The structure itself",
+                  "to": 5
                 },
                 {
                   "t": "Min Cost to Connect All Points",
                   "u": "https://leetcode.com/problems/min-cost-to-connect-all-points/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Kruskal — minimum spanning tree",
+                  "to": 7
                 },
                 {
                   "t": "Swim in Rising Water",
@@ -4122,7 +4665,10 @@
                   "t": "CodeChef: Fire Escape Routes  (rated 1671, solved by 15,772)",
                   "u": "https://www.codechef.com/problems/FIRESC",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 11
                 },
                 {
                   "t": "CodeChef: Group Formation  (rated 1671, solved by 1,179)",
@@ -4134,7 +4680,10 @@
                   "t": "GeeksforGeeks: Design Disjoint Set  (Medium, accuracy 40% - asked at Samsung)",
                   "u": "https://www.geeksforgeeks.org/problems/disjoint-set-union-find/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 8
                 },
                 {
                   "t": "GeeksforGeeks: Count Islands After Every Operation  (Medium, accuracy 60%)",
@@ -4152,7 +4701,10 @@
                   "t": "HackerEarth: Mr. President  (Medium, 90% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/mr-president/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 10
                 },
                 {
                   "t": "HackerEarth: Shortest Path Revisited  (Medium, 87% success)",
@@ -4164,7 +4716,10 @@
                   "t": "HackerRank: Components in a graph  (Medium, solved by 31,547)",
                   "u": "https://www.hackerrank.com/challenges/components-in-graph/problem",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerRank)",
+                  "to": 9
                 },
                 {
                   "t": "CodeChef: Dish Owner  (rated 1848, solved by 6,934)",
@@ -4196,7 +4751,8 @@
                   "d": "",
                   "x": "other"
                 }
-              ]
+              ],
+              "thNote": "Left out of the threshold on purpose (rare, or very hard for a first pass): DFS post-order + three-colour cycle check, Bellman-Ford (negatives, or a k-edge cap), Floyd-Warshall (all pairs). They are in the extra practice below."
             },
             {
               "id": "b9",
@@ -4207,17 +4763,26 @@
                 {
                   "t": "Unique Paths",
                   "u": "https://leetcode.com/problems/unique-paths/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Grid paths & costs",
+                  "to": 0
                 },
                 {
                   "t": "Unique Paths II",
                   "u": "https://leetcode.com/problems/unique-paths-ii/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Grid paths & costs",
+                  "to": 1
                 },
                 {
                   "t": "Minimum Path Sum",
                   "u": "https://leetcode.com/problems/minimum-path-sum/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Grid paths & costs",
+                  "to": 2
                 },
                 {
                   "t": "Triangle",
@@ -4248,7 +4813,10 @@
                   "t": "CodeChef: Sherlock and the Grid  (rated 1693, solved by 10,625)",
                   "u": "https://www.codechef.com/problems/GRID",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 4
                 },
                 {
                   "t": "CodeChef: Two Paths  (rated 1796, solved by 3,494)",
@@ -4260,7 +4828,10 @@
                   "t": "GeeksforGeeks: Count Paths from Top Left to Bottom Right  (Medium, accuracy 67% - asked at Zoho, Amazon, Microsoft)",
                   "u": "https://www.geeksforgeeks.org/problems/number-of-paths0926/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 3
                 },
                 {
                   "t": "GeeksforGeeks: Largest Square of 1s in Matrix  (Medium, accuracy 36% - asked at Amazon, Samsung, Google)",
@@ -4309,7 +4880,10 @@
                 {
                   "t": "Longest Common Subsequence",
                   "u": "https://leetcode.com/problems/longest-common-subsequence/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Two sequences (LCS / edit distance)",
+                  "to": 0
                 },
                 {
                   "t": "Longest Palindromic Substring",
@@ -4339,12 +4913,18 @@
                 {
                   "t": "Interleaving String",
                   "u": "https://leetcode.com/problems/interleaving-string/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Two sequences (LCS / edit distance)",
+                  "to": 2
                 },
                 {
                   "t": "Edit Distance",
                   "u": "https://leetcode.com/problems/edit-distance/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Two sequences (LCS / edit distance)",
+                  "to": 1
                 },
                 {
                   "t": "Distinct Subsequences",
@@ -4360,7 +4940,10 @@
                   "t": "CodeChef: Chef and String  (rated 1751, solved by 9,011)",
                   "u": "https://www.codechef.com/problems/CHRL2",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (CodeChef)",
+                  "to": 6
                 },
                 {
                   "t": "CodeChef: Subsequence 1  (rated 1749, solved by 4,219)",
@@ -4372,7 +4955,10 @@
                   "t": "GeeksforGeeks: Longest Increasing Subsequence  (Medium, accuracy 32% - asked at Paytm, Amazon, Microsoft)",
                   "u": "https://www.geeksforgeeks.org/problems/longest-increasing-subsequence-1587115620/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 3
                 },
                 {
                   "t": "GeeksforGeeks: Longest Common Substring  (Medium, accuracy 42% - asked at Morgan Stanley, Amazon, Microsoft)",
@@ -4390,7 +4976,10 @@
                   "t": "HackerEarth: Equal Strings  (Medium, 59% success)",
                   "u": "https://www.hackerearth.com/problem/algorithm/equal-strings-79789662-4dbd707c/",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerEarth)",
+                  "to": 5
                 },
                 {
                   "t": "HackerEarth: Count Coprime Subsequences  (Medium, 67% success)",
@@ -4402,7 +4991,10 @@
                   "t": "HackerRank: The Longest Common Subsequence  (Medium, solved by 19,065)",
                   "u": "https://www.hackerrank.com/challenges/dynamic-programming-classics-the-longest-common-subsequence/problem",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (HackerRank)",
+                  "to": 4
                 },
                 {
                   "t": "HackerRank: Play with words  (Medium, solved by 4,939)",
@@ -4434,7 +5026,8 @@
                   "d": "",
                   "x": "other"
                 }
-              ]
+              ],
+              "thNote": "Left out of the threshold on purpose (rare, or very hard for a first pass): Interval DP (build ranges from sub-ranges). They are in the extra practice below."
             },
             {
               "id": "b12",
@@ -4450,12 +5043,18 @@
                 {
                   "t": "Best Time to Buy and Sell Stock with Cooldown",
                   "u": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "core practice",
+                  "to": 1
                 },
                 {
                   "t": "Best Time to Buy and Sell Stock with Transaction Fee",
                   "u": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "core practice",
+                  "to": 2
                 },
                 {
                   "t": "Best Time to Buy and Sell Stock III",
@@ -4476,7 +5075,10 @@
                   "t": "GeeksforGeeks: Stock Buy and Sell  (Medium, accuracy 29% - asked at Paytm, Flipkart, Accolite)",
                   "u": "https://www.geeksforgeeks.org/problems/stock-buy-and-sell-1587115621/1",
                   "d": "M",
-                  "x": "other"
+                  "x": "other",
+                  "th": 1,
+                  "v": "mixed practice (GeeksforGeeks)",
+                  "to": 0
                 },
                 {
                   "t": "GeeksforGeeks: Buy Stock with Transaction Fee  (Medium, accuracy 57%)",
@@ -4524,12 +5126,18 @@
                 {
                   "t": "Longest Increasing Subsequence",
                   "u": "https://leetcode.com/problems/longest-increasing-subsequence/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Longest increasing subsequence",
+                  "to": 0
                 },
                 {
                   "t": "Number of Longest Increasing Subsequence",
                   "u": "https://leetcode.com/problems/number-of-longest-increasing-subsequence/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Longest increasing subsequence",
+                  "to": 1
                 },
                 {
                   "t": "Largest Divisible Subset",
@@ -4539,7 +5147,10 @@
                 {
                   "t": "Longest String Chain",
                   "u": "https://leetcode.com/problems/longest-string-chain/",
-                  "d": "M"
+                  "d": "M",
+                  "th": 1,
+                  "v": "Longest increasing subsequence",
+                  "to": 2
                 },
                 {
                   "t": "Best Team With No Conflicts",
@@ -4766,11 +5377,26 @@
     out.sort(function (x, y) { return y.age - x.age; });
     return out;
   }
+  /*TH*/
+  function thItems(b) {                       // threshold item indexes, in teaching order
+    var out = [];
+    b.items.forEach(function (it, i) { if (it.th) out.push(i); });
+    out.sort(function (x, y) { return b.items[x].to - b.items[y].to; });
+    return out;
+  }
+  function thStats(b) {
+    var ix = thItems(b), done = 0;
+    ix.forEach(function (i) { if (st(key(b, i)) === "ac") done++; });
+    return { done: done, total: ix.length };
+  }
   function nextUp() {
-    for (var i = 0; i < BLOCKS.length; i++) {
-      var b = BLOCKS[i];
-      if (ui.coreOnly && !b.core) continue;
-      for (var j = 0; j < b.items.length; j++) if (st(key(b, j)) !== "ac") return { b: b, i: j, it: b.items[j], k: key(b, j) };
+    for (var pass = 0; pass < 2; pass++) {    // pass 0: threshold problems only, in plan order. pass 1: everything else.
+      for (var i = 0; i < BLOCKS.length; i++) {
+        var b = BLOCKS[i];
+        if (ui.coreOnly && !b.core) continue;
+        var order = pass === 0 ? thItems(b) : b.items.map(function (_, j) { return j; });
+        for (var q = 0; q < order.length; q++) { var j = order[q]; if (st(key(b, j)) !== "ac") return { b: b, i: j, it: b.items[j], k: key(b, j), th: pass === 0 }; }
+      }
     }
     return null;
   }
@@ -5051,6 +5677,7 @@
     var row = el("div", "item" + (s === "ac" ? " ac" : ""));
     row.appendChild(markBtn(b, i));
     row.appendChild(it.u ? link(it.u, it.t) : el("span", "plain", it.t));
+    if (it.th && it.v) row.appendChild(el("span", "vtag", it.v));
     var right = el("div", "right");
     var ds = daysSince(state.d[k]);
     right.appendChild(el("span", "ago" + (s === "ac" && ds != null && ds >= STALE_DAYS ? " stale" : ""),
@@ -5077,6 +5704,8 @@
     if (b.star) nm.appendChild(el("span", "pill star", "highest return"));
     if (b.isNew) nm.appendChild(el("span", "pill new", "added by audit"));
     if (!b.core) nm.appendChild(el("span", "pill opt", "optional"));
+    var ts = thStats(b);
+    if (ts.total) nm.appendChild(el("span", "pill th" + (ts.done === ts.total ? " ok" : ""), ts.done === ts.total ? "threshold done \u2713" : "threshold " + ts.done + "/" + ts.total));
     hd.appendChild(nm);
     var meta = el("div", "block-meta");
     var bar = el("div", "minibar"); var fill = el("i");
@@ -5093,7 +5722,20 @@
 
     var box = el("div", "items");
     box.appendChild(el("div", "block-why", b.why));
-    visible.forEach(function (i) { box.appendChild(itemRow(b, i)); });
+    var thVis = thItems(b).filter(function (i) { return visible.indexOf(i) >= 0; });
+    var exVis = visible.filter(function (i) { return !b.items[i].th; });
+    if (ts.total) {
+      var thh = el("div", "th-head" + (ts.done === ts.total ? " ok" : ""));
+      thh.appendChild(el("b", null, "Threshold set  " + ts.done + "/" + ts.total));
+      thh.appendChild(el("span", null, ts.done === ts.total
+        ? "You have met every common variant of this pattern. Move on to the next one."
+        : "One or more problems for every common variant. Finish these, then move to the next pattern."));
+      box.appendChild(thh);
+      thVis.forEach(function (i) { box.appendChild(itemRow(b, i)); });
+      if (b.thNote) box.appendChild(el("div", "th-note", b.thNote));
+      if (exVis.length) box.appendChild(el("div", "ex-head", "Extra practice (after the threshold)"));
+    }
+    (ts.total ? exVis : visible).forEach(function (i) { box.appendChild(itemRow(b, i)); });
     node.appendChild(box);
     return node;
   }
