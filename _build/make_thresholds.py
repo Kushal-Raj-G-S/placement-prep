@@ -2,16 +2,16 @@
 """
 Build the THRESHOLD SET for every pattern block in the Twenty Weeks tracker.
 
-Idea: a pattern has several variants (Pattern Radar). The threshold set is the smallest set of problems that gives you real
-experience of every variant you could realistically be asked, so you can move to the next pattern with confidence. It is
-sized by the variants, not by a fixed number. Rare or very hard variants are left out on purpose (listed on the block) and
-live in the extra practice instead.
+A pattern has variants (Pattern Radar). The threshold set is the set of problems that gives you real experience of every
+variant you could realistically be asked, so finishing it is your signal to move to the next pattern. It is sized by the
+variants, not by a fixed number. Rare or very hard variants are left out on purpose (listed on the block).
 
-    python _build/make_thresholds.py        (safe to re-run: it rebuilds its own flags)
+    python _build/classify_variants.py      # once: which variant does each GfG / HackerRank / HackerEarth / CodeChef problem teach
+    python _build/make_thresholds.py        # build the sets (safe to re-run: it rebuilds its own flags)
 
-What it writes into each block's items:  th=1 (in the threshold), to=order, v=the variant it teaches.
-It may append a few library problems to a block when the block has none for a variant. Existing items never move,
-so tick marks stay where they are.
+Per common variant:  2 LeetCode problems from the verified library (a classic first, then a second one), plus problems from the
+other platforms that were matched to THAT variant. Main variants (asked most) get more. Nothing here is matched by topic alone.
+Flags written into each block's items:  th=1, to=order, v=the variant that problem teaches. Existing items never move.
 """
 import json, os, re, sys, urllib.request
 from concurrent.futures import ThreadPoolExecutor
@@ -47,14 +47,16 @@ PLAN = {
  "b1": (["bk-subsets", "bk-perms"], ["bk-board"]),
  "b6": (["to-kahn", "sp-dijkstra", "dsu-connect", "dsu-cycle", "dsu-kruskal"], ["to-dfs", "sp-bellman", "sp-floyd"]),
  "n3": (["hs-cyclic"], []),
- "a8": ([], []), "n2": ([], []), "b12": ([], []),        # no variant list in the library: platform picks + the block's own mediums
+ "n2": (["sim-spiral", "sim-rotate", "sim-marking"], []),
+ "a8": ([], []), "b12": ([], []),         # no variant list in the library: the block's own problems, easier to harder
 }
-# variants asked most often get two problems, so one problem never has to carry a whole variant
 MAIN = {"hs-freq", "hs-index", "tp-ends", "tp-write", "sw-longest", "ps-count", "bs-answer", "bs-exact", "ms-next", "hp-topk", "iv-merge",
         "ll-fastslow", "ll-reverse", "td-up", "td-down", "gr-flood", "gr-bfs", "dp-linear", "dp-knapsack", "dp-grid", "dp-twostring", "dp-lis",
         "gr-local", "bk-subsets", "sp-dijkstra", "dsu-connect", "to-kahn", "bt-xor", "dp-kadane", "dp-coin", "hs-cyclic"}
-MIN_BLOCK = 4                                           # a block with fewer variants than this gets deeper on the main ones
-PLATFORMS = ("GeeksforGeeks", "HackerRank", "HackerEarth", "CodeChef")
+LC_PER_VARIANT = 2                       # a classic, then a second one
+OTHER_MAIN, OTHER_MINOR = 2, 1           # problems from the other platforms matched to this exact variant
+TARGET_MAIN, TARGET_MINOR = 4, 3         # if another platform has too few for a variant, more LeetCode fills the gap up to this
+THIN_BLOCK = 8                           # a pattern with very few variants still has to give enough experience
 
 
 def slug(u):
@@ -63,7 +65,6 @@ def slug(u):
 
 
 def lc_difficulty():
-    """slug -> E/M/H for every LeetCode problem (public list, paged)."""
     q = "query($c:String!,$l:Int,$s:Int){problemsetQuestionList:questionList(categorySlug:$c,limit:$l,skip:$s,filters:{}){questions:data{titleSlug difficulty}}}"
     def page(s):
         for _ in range(3):
@@ -80,87 +81,174 @@ def lc_difficulty():
 
 
 def main():
+    import add_other_platforms as AOP
     lib = json.load(open(os.path.join(HERE, "links.json"), encoding="utf-8"))["variants"]
+    cache = json.load(open(os.path.join(HERE, ".other_cache.json"), encoding="utf-8"))
+    vc_path = os.path.join(HERE, ".variant_cache.json")
+    vc = json.load(open(vc_path, encoding="utf-8")) if os.path.exists(vc_path) else {}
+    pool = {}                                                         # url -> candidate dict (src, name, url, d, pop, note)
+    for lst in AOP.candidates(cache).values():
+        for c in lst:
+            pool.setdefault(c["url"], c)
+    by_variant = {}                                                   # variant -> other-platform problems matched to it
+    for url, r in vc.items():
+        if r["v"] != "none" and url in pool:
+            by_variant.setdefault(r["v"], []).append(pool[url])
     diff = lc_difficulty()
+
     html = open(TRACKER, encoding="utf-8").read()
     head, rest = html.split('<script type="application/json" id="plan">', 1)
     body, tail = rest.split("</script>", 1)
     plan = json.loads(body)
 
     report = []
+    remap = {}
     for tr in plan["tracks"]:
         if tr["id"] != "td":
             continue
         for ph in tr["phases"]:
             for blk in ph["blocks"]:
                 bid = blk["id"]
-                for it in blk["items"]:                         # rebuild from scratch each run
+                for it in blk["items"]:
                     for k in ("th", "to", "v"):
                         it.pop(k, None)
                 blk.pop("thNote", None)
                 if bid not in PLAN:
                     continue
                 keep, skip = PLAN[bid]
+                by_url = {it.get("u"): i for i, it in enumerate(blk["items"]) if it.get("u")}
                 by_slug = {slug(it.get("u")): i for i, it in enumerate(blk["items"]) if slug(it.get("u"))}
-                used, order = set(), []
+                used, groups = set(), []                              # groups: [(variant label, [item indexes])]
 
-                def add_flag(idx, label):
+                def flag(idx, label, group):
                     blk["items"][idx]["th"] = 1
                     blk["items"][idx]["v"] = label
-                    order.append(idx)
                     used.add(idx)
+                    group.append(idx)
 
-                per_variant = {v: 2 if v in MAIN else 1 for v in keep}
-                if keep and sum(per_variant.values()) < MIN_BLOCK:                 # thin block (few variants): go deeper on the main ones
-                    for v in keep:
-                        per_variant[v] = 3 if v in MAIN else 2
+                def other_item(c):                                    # make sure an other-platform problem exists in the block
+                    if c["url"] in by_url:
+                        return by_url[c["url"]]
+                    blk["items"].append({"t": "%s: %s  (%s)" % (c["src"], c["name"], c["note"]), "u": c["url"], "d": c["d"], "x": "other"})
+                    by_url[c["url"]] = len(blk["items"]) - 1
+                    return by_url[c["url"]]
+
+                def lc_item(x, v):
+                    s = slug(x["u"])
+                    if s in by_slug:
+                        return by_slug[s]
+                    blk["items"].append({"t": "%s  (%s)" % (x["n"], VNAME[v]), "u": x["u"], "d": diff.get(s, "M")})
+                    by_slug[s] = len(blk["items"]) - 1
+                    return by_slug[s]
+
+                thin = len(keep) * (LC_PER_VARIANT + 1) < THIN_BLOCK
                 for v in keep:
-                    cands = [x for x in lib.get(v, []) if x["p"] == "LeetCode" and diff.get(slug(x["u"]), "M") != "H"]
-                    got = 0
-                    for x in cands:                                                   # canonical first (library order); prefer ones already in the block
-                        if got >= per_variant[v]:
+                    group = []
+                    label = VNAME[v]
+                    main = v in MAIN
+                    want_other = (OTHER_MAIN if main else OTHER_MINOR) + (1 if thin else 0)
+                    target = (TARGET_MAIN if main else TARGET_MINOR) + (1 if thin else 0)
+                    # (1) other platforms, matched to this variant: Medium first, easy ones as builders, different platforms before the same one twice
+                    oth = sorted([c for c in by_variant.get(v, []) if c["d"] in ("M", "E")], key=lambda c: ({"M": 0, "E": 1}[c["d"]], -c["pop"]))
+                    chosen, srcs = [], set()
+                    for c in oth:
+                        if len(chosen) >= want_other:
                             break
-                        s = slug(x["u"])
-                        if s in by_slug and by_slug[s] not in used:
-                            add_flag(by_slug[s], VNAME[v]); got += 1
-                    for x in cands:                                                   # not enough in the block: append verified library problems
-                        if got >= per_variant[v]:
+                        if c["src"] in srcs and len(set(x["src"] for x in oth)) > len(srcs):
+                            continue
+                        chosen.append(c); srcs.add(c["src"])
+                    for c in oth:
+                        if len(chosen) >= want_other:
                             break
-                        s = slug(x["u"])
-                        if s in by_slug:
-                            continue
-                        blk["items"].append({"t": "%s  (library: %s)" % (x["n"], VNAME[v]), "u": x["u"], "d": diff.get(s, "M")})
-                        by_slug[s] = len(blk["items"]) - 1
-                        add_flag(by_slug[s], VNAME[v]); got += 1
-                # one from each other platform: Medium first (the block is already ordered Medium/Hard/Easy by popularity)
-                for src in PLATFORMS:
-                    pick = None
-                    for i, it in enumerate(blk["items"]):
-                        if i in used or it.get("x") != "other" or not it["t"].startswith(src + ":") or it.get("d") not in ("M", "E"):
-                            continue
-                        if it["d"] == "M":
-                            pick = i; break
-                    if pick is not None:
-                        add_flag(pick, "mixed practice (" + src + ")")
-                if not keep:                                                           # variant-less blocks: add two of the block's own mediums
-                    n = 0
-                    for i, it in enumerate(blk["items"]):
-                        if i not in used and it.get("d") == "M" and not it.get("x"):
-                            add_flag(i, "core practice"); n += 1
-                            if n == 2:
-                                break
-                for rank, idx in enumerate(order):
-                    blk["items"][idx]["to"] = rank
+                        if c not in chosen:
+                            chosen.append(c)
+                    # (2) LeetCode from the verified library: a classic first, then more until the variant has enough experience
+                    lc_all = [x for x in lib.get(v, []) if x["p"] == "LeetCode"]
+                    lc = [x for x in lc_all if diff.get(slug(x["u"]), "M") != "H"]
+                    if len(lc) < LC_PER_VARIANT:                                       # a variant must never be empty: fall back to a Hard one
+                        lc += [x for x in lc_all if x not in lc][:LC_PER_VARIANT - len(lc)]
+                    need_lc = max(LC_PER_VARIANT, target - len(chosen))
+                    lcs = []
+                    for x in lc:                                                       # ones already in the block first, so ticks carry over
+                        if len(lcs) >= need_lc:
+                            break
+                        if slug(x["u"]) in by_slug and by_slug[slug(x["u"])] not in used:
+                            lcs.append(x)
+                    for x in lc:
+                        if len(lcs) >= need_lc:
+                            break
+                        if x not in lcs and not (slug(x["u"]) in by_slug and by_slug[slug(x["u"])] in used):
+                            lcs.append(x)
+                    for x in lcs:
+                        i = lc_item(x, v)
+                        if i not in used:
+                            flag(i, label, group)
+                    for c in chosen:
+                        i = other_item(c)
+                        if i not in used:
+                            flag(i, label, group)
+                    # easier first inside the variant, so it reads as a ramp
+                    group.sort(key=lambda i: ({"E": 0, "M": 1, "H": 2}.get(blk["items"][i].get("d"), 1)))
+                    groups.append((label, group))
+
+                if not keep:                                                           # variant-less blocks: their own problems, easier to harder
+                    group = []
+                    pool_b = [i for i, it in enumerate(blk["items"]) if it.get("d") in ("E", "M")]
+                    if bid == "b12":
+                        pool_b = [i for i in pool_b if re.search(r"stock|buy|sell|cooldown|fee", blk["items"][i]["t"], re.I)] or pool_b
+                    pool_b.sort(key=lambda i: ({"E": 0, "M": 1}[blk["items"][i]["d"]], 0 if not blk["items"][i].get("x") else 1))
+                    for i in pool_b[:6]:
+                        flag(i, "core practice", group)
+                    groups.append(("core practice", group))
+
+                rank = 0
+                for _, g in groups:
+                    for idx in g:
+                        blk["items"][idx]["to"] = rank
+                        rank += 1
                 if skip:
                     blk["thNote"] = "Left out of the threshold on purpose (rare, or very hard for a first pass): " + ", ".join(VNAME[v] for v in skip) + ". They are in the extra practice below."
-                report.append((bid, blk["name"][:44], len(keep), len(order), len(blk["items"])))
+                # The other platforms' problems (and library additions) belong in the threshold set only, never in the normal practice list.
+                def removable(it):
+                    return not it.get("th") and (it.get("x") == "other" or "(library" in it.get("t", ""))
+                kept_ix = [i for i, it in enumerate(blk["items"]) if not removable(it)]
+                remap[bid] = {old: new for new, old in enumerate(kept_ix)}
+                blk["items"] = [blk["items"][i] for i in kept_ix]
+                report.append((bid, blk["name"][:42], len(keep), rank, sum(1 for it in blk["items"] if it.get("th") and it.get("x") == "other"), len(blk["items"])))
 
+    # tick marks are stored as "blockId:index", so when an item moves its tick must move with it
+    pp = os.path.join(ROOT, "data", "progress.json")
+    if os.path.exists(pp):
+        kv = json.load(open(pp, encoding="utf-8"))
+        raw = kv.get("oa-tracker-state-v3")
+        stt = json.loads(raw) if isinstance(raw, str) and raw else None
+        if stt:
+            import shutil
+            shutil.copy(pp, pp + ".bak")
+            moved = lost = 0
+            for field in ("s", "d"):
+                new = {}
+                for k, val in stt.get(field, {}).items():
+                    bid, _, idx = k.rpartition(":")
+                    m = remap.get(bid)
+                    if m is None:
+                        new[k] = val
+                    elif int(idx) in m:
+                        new["%s:%d" % (bid, m[int(idx)])] = val
+                        moved += (m[int(idx)] != int(idx))
+                    else:
+                        lost += 1
+                stt[field] = new
+            stt["rev"] = int(stt.get("rev", 0)) + 1
+            kv["oa-tracker-state-v3"] = json.dumps(stt, separators=(",", ":"))
+            json.dump(kv, open(pp, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
+            print("ticks carried to their new positions: %d moved, %d belonged to removed items" % (moved, lost // 2))
     new_body = json.dumps(plan, ensure_ascii=False, indent=2)
     open(TRACKER, "w", encoding="utf-8", newline="\n").write(head + '<script type="application/json" id="plan">' + new_body + "</script>" + tail)
-    print("block  name                                          variants  threshold  (block total)")
+    print("block  name                                        variants  threshold  (from other platforms)  block total")
     for r in report:
-        print("  %-4s %-44s %5d %9d   (%d)" % r)
-    print("threshold problems in total:", sum(r[3] for r in report))
+        print("  %-4s %-42s %5d %9d %14d %17d" % r)
+    print("threshold problems in total:", sum(r[3] for r in report), "| from other platforms:", sum(r[4] for r in report))
 
 
 if __name__ == "__main__":
