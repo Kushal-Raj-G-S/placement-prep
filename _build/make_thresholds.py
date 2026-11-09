@@ -114,6 +114,12 @@ def main():
 
     report = []
     remap = {}
+    for tr in plan["tracks"]:                                  # variant names are not shown on problems (the user finds the variant)
+        for ph in tr.get("phases", []):
+            for blk in ph.get("blocks", []):
+                for it in blk.get("items", []):
+                    if it.get("x") != "other" and "  (" in it.get("t", ""):
+                        it["t"] = it["t"].split("  (")[0]
     for tr in plan["tracks"]:
         if tr["id"] != "td":
             continue
@@ -148,7 +154,7 @@ def main():
                     s = slug(x["u"])
                     if s in by_slug:
                         return by_slug[s]
-                    blk["items"].append({"t": "%s  (%s)" % (x["n"], VNAME[v]), "u": x["u"], "d": diff.get(s, "M")})
+                    blk["items"].append({"t": x["n"], "u": x["u"], "d": diff.get(s, "M")})
                     by_slug[s] = len(blk["items"]) - 1
                     return by_slug[s]
 
@@ -254,6 +260,12 @@ def main():
             kv["oa-tracker-state-v3"] = json.dumps(stt, separators=(",", ":"))
             json.dump(kv, open(pp, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
             print("ticks carried to their new positions: %d moved, %d belonged to removed items" % (moved, lost // 2))
+    for tr in plan["tracks"]:                                  # variant names are not shown on problems
+        for ph in tr.get("phases", []):
+            for blk in ph.get("blocks", []):
+                for it in blk.get("items", []):
+                    if it.get("x") != "other" and "  (" in it.get("t", ""):
+                        it["t"] = it["t"].split("  (")[0]
     new_body = json.dumps(plan, ensure_ascii=False, indent=2)
     open(TRACKER, "w", encoding="utf-8", newline="\n").write(head + '<script type="application/json" id="plan">' + new_body + "</script>" + tail)
     print("block  name                                        variants  threshold  (from other platforms)  block total")
