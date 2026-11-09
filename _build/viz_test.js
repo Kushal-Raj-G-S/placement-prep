@@ -17,6 +17,7 @@ require("./viz_engine_f.js");          // each batch registers onto the same obj
 require("./viz_engine_g.js");
 require("./viz_engine_h.js");
 try { require("./viz_engine_i.js"); } catch (e) { if (e.code !== "MODULE_NOT_FOUND") throw e; }
+try { require("./viz_engine_j.js"); } catch (e) { if (e.code !== "MODULE_NOT_FOUND") throw e; }
 
 var PARSE = G.__helpers.parse;   // the SAME parsers the page uses
 

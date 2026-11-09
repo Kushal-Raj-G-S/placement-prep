@@ -488,4 +488,7 @@
       return { trace: t, answer: ans };
     }
   };
+
+  H.I = { ri: ri, J: J, aux: aux, copy: copy, buildTree: buildTree, treeTrace: treeTrace, TF: TF, checkTree: checkTree, genTree: genTree, adj: adj,
+          graphTrace: graphTrace, edgeCheck: edgeCheck, neighbours: neighbours, genEdges: genEdges };
 })();
