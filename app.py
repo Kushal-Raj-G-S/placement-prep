@@ -50,6 +50,7 @@ def coach():
 # ---- what shows on the home screen ----
 TOOLS = [
     # (file, group, short name, one-liner)
+    ("12 - Infosys Drive (test + interview).html", "ready", "Infosys Drive (13-14 Nov)", "Test plan, pseudocode drill (answers computed), puzzles, verbal, technical + HR interview prep."),
     ("0 - READ ME FIRST.html", "ready", "Read Me First", "How every tool works, how Mock OA and the coach are marked, SQL practice links and the folder layout."),
     ("2 - Stdin Trainer (drill).html", "ready", "Stdin Trainer", "START HERE. 13 input shapes - pick the line that parses each. The gap that cost you Infosys."),
     ("1 - Twenty Weeks to AC (tracker).html", "ready", "Twenty Weeks Tracker", "The plan and your progress. Track 0 first, then CS fundamentals, then DSA patterns."),
